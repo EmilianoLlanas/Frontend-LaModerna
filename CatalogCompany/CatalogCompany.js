@@ -76,6 +76,13 @@ var demo = new Vue({
   methods:{
     signUpCompany(){
         //there will be a method here to establish connection with backend and sign up the companies' id and name, some day....
+        this.cId='';
+        this.cName='';
+    },
+    signDownCompany(){
+        //there will be a method here to establish connection with backend and sign down the companies' id and name, some day....
+        this.cId='';
+        this.cName='';
     }
   }
 })
