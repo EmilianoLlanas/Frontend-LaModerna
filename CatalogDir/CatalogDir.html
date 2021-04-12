@@ -37,13 +37,13 @@
 
   <!-- demo root element -->
   <div id="demo">
-    <input v-model="cName" placeholder="Compañía">
-    <input v-model="clientName" placeholder="Cliente">
-    <input v-model="cp" placeholder="CódigoPostal">
-    <input v-model="pais" placeholder="País">
-    <input v-model="rfc" placeholder="RFC">
+    <input v-model="direccion.cName" placeholder="Compañía">
+    <input v-model="direccion.clientName" placeholder="Cliente">
+    <input v-model="direccion.cp" placeholder="CódigoPostal">
+    <input v-model="direccion.pais" placeholder="País">
+    <input v-model="direccion.rfc" placeholder="RFC">
     <br>
-    <button @click="signUpCompany"> Agregar </button>
+    <button @click="signUpDir"> Agregar </button>
     <form id="search">
       Buscar <input name="query" v-model="searchQuery">
     </form>

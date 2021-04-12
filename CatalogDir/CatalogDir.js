@@ -57,11 +57,12 @@ Vue.component('demo-grid', {
 var demo = new Vue({
   el: '#demo',
   data: {
-    cName:'',
-    clientName:'',
-    cp:'',
-    pais:'',
-    rfc:'',
+    direccion:{
+      cName:'',
+      clientName:'',
+      cp:'',
+      pais:'',
+      rfc:''},
     searchQuery: '',
     gridColumns: ['Compañía', 'Cliente', 'CódigoPostal', 'País', 'RFC'],
     gridData: [
@@ -71,8 +72,14 @@ var demo = new Vue({
     ]
   },
   methods:{
-    signUpCompany(){
+
+    signUpDir(){
         //da de alta con conexión a backend
+        /*
+        axios.post('AQUI-VA-LA-URL', this.direccion)
+                         .then(response=> console.log(response))
+                         .then(error=> console.log(error))*/
+        alert('Guardado');
     }
   }
 })
