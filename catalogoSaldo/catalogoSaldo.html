@@ -1,0 +1,63 @@
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content= "width= device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title> Catálogo - Saldos </title>
+  <style>
+  @import 'catalogoSaldo.css';
+</style>
+</head>
+
+<body>
+  <h1> Catálogo de Saldos</h1>
+  <script type="text/x-template" id="grid-template">
+    <table>
+      <thead>
+        <tr>
+          <th v-for="key in columns"
+            @click="sortBy(key)"
+            :class="{ active: sortKey == key }">
+            {{ key | capitalize }}
+            <span class="arrow" :class="sortOrders[key] > 0 ? 'asc' : 'dsc'">
+            </span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>  
+        <tr v-for="entry in filteredData">
+          <td v-for="key in columns">
+            {{entry[key]}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </script>
+
+  <!-- demo root element -->
+  <div id="demo">
+    <input v-model="saldo.orden" placeholder="Orden">
+    <input v-model="saldo.cliente" placeholder="Cliente">
+    <input v-model="saldo.numFactura" placeholder="NumeroFactura">
+    <input v-model="saldo.saldoOrden" placeholder="SaldoOrden">
+    <input v-model="saldo.saldoFactura" placeholder="SaldoFactura">
+    <br>
+    <button @click="addSaldo"> Agregar </button>
+    <button @click="deleteSaldo"> Eliminar </button>
+    <button @click="updateSaldo"> Actualizar </button>
+    <button @click="reportSaldo"> Generar Reporte </button>
+    <form id="search">
+      Buscar <input name="query" v-model="searchQuery">
+    </form>
+    <demo-grid
+      :data="gridData"
+      :columns="gridColumns"
+      :filter-key="searchQuery">
+    </demo-grid>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+  <script src= "catalogoSaldo.js"></script>
+</body>
+
+</html>
