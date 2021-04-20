@@ -3,7 +3,7 @@
       <router-view/>
       <h1> Login </h1>
       <button @click="navCatalogArticles"> Ir al catálogo de Articulos </button>
-
+      <button @click="navCatalogCompanies"> Ir al catálogo de Compañías </button>
     </div>
 
 </template>
@@ -15,8 +15,10 @@ export default {
   methods: {
       navCatalogArticles () {
       this.$router.push({ name:'CatalogArticles' });
+    },
+      navCatalogCompanies () {
+      this.$router.push({ name:'CatalogCompanies' });
     }
-
     }
   }
 

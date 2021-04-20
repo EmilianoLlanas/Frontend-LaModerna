@@ -1,25 +1,22 @@
 <template>
     <div>
-    <h1> Catálogo de Artículos </h1>
+    <h1> Catálogo de Compañías </h1>
     <div class="inputForm">
     <form>
       <label>ID</label>
       <br>
-      <input v-model="aId" placeholder="Identificador del artículo">
+      <input v-model="aId" placeholder="Identificador de la Compañía">
       <br>
       <label>Nombre</label>
       <br>
-      <input v-model="aName" placeholder="Nombre del artículo">
-      <br>
-      <label>Descripción</label>
-      <br>
-      <textarea v-model="aDescription" placeholder="Descripción del artículo"></textarea>
+      <input v-model="aName" placeholder="Nombre de la Compañía">
+
    </form>
   </div>
    <br>
-   <button @click="signUpArticle"> Dar de alta </button>
-   <button @click="signDownArticle"> Dar de baja </button>
-   <button @click="loadArticles">Actualizar </button>
+   <button @click="signUpCompany"> Dar de alta </button>
+   <button @click="signDownCompany"> Dar de baja </button>
+   <button @click="loadCompanies"> Actualizar </button>
    <div style="width: 80%" >
   <vue-table-dynamic :params="params"
       @select="onSelect"
@@ -41,12 +38,12 @@ export default {
       aDescription:'',
       params: {
         data: [
-          ['ID', 'Nombre','Descripción'],
-          [1, 'b3ba90', 'aab418'],
-          [2, 'ec0b78', 'ba045d'],
-          [3, 'a8c325', 'aab418'],
-          [4, 'a8c325', 'aab418'],
-          [5, 'a8c325', 'aab418'],
+          ['ID', 'Nombre'],
+          [1, 'b3ba90'],
+          [2, 'ec0b78'],
+          [3, 'a8c325'],
+          [4, 'a8c325'],
+          [5, 'a8c325']
 
         ],
         header: 'row',
@@ -68,24 +65,24 @@ export default {
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
     },
-    signUpArticle(){
-        //there will be a method here to establish connection with backend and sign up the articles' id and name, some day....
+    signUpCompany(){
+        //there will be a method here to establish connection with backend and sign up the companies' id and name, some day....
         this.aId='';
         this.aName='';
         this.aDescription='';
     },
-    signDownArticle(){
-        //there will be a method here to establish connection with backend and sign down the articles' id and name, some day....
+    signDownCompany(){
+        //there will be a method here to establish connection with backend and sign down the companies' id and name, some day....
         this.aId='';
         this.aName='';
         this.aDescription='';
     },
-    loadArticles(){
-        //there will be a method here to establish connection with backend and update the table, some day....
+    loadCompanies(){
+        //there will be a method here to establish connection with backend and load the companies' id and name, some day....
         this.aId='';
         this.aName='';
         this.aDescription='';
-    }
+    },
   },
   components: { VueTableDynamic }
 }
