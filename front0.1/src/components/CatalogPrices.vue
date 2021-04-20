@@ -49,7 +49,7 @@
    <button @click="signUpPrice"> Dar de alta </button>
    <button @click="signDownPrice"> Dar de baja </button>
    <button @click="loadPrices">Actualizar </button>
-   <button @click="generateReport">Reporte </button>
+   <button @click="generateReport">Reportes </button>
    <div style="width: 80%" >
   <vue-table-dynamic :params="params"
       @select="onSelect"
@@ -79,9 +79,12 @@ export default {
       params: {
         data: [
           ['Compañia','Lista de precios','Articulo','Nivel de Descuento','Cantidad','Precio','Descuento','Descripción','Fecha de inicio','Fecha de caducidad'],
-          ['ejemplo0','lista0','123','0%','100','12.3','1%','Descripcion 0','12/12/20','12/12/21'],
-          ['ejemplo1','lista0','123','0%','111','13.3','2%','Descripcion 1','12/11/20','12/11/21'],
-          ['ejemplo2','lista1','124','2%','123','32.3','1%','Descripcion 2','12/12/20','12/12/21']
+          //['ejemplo0','lista0','123','0','100','12.3','1','Descripcion 0','12/12/20','12/12/21'],
+          //['ejemplo1','lista0','123','0','111','13.3','2','Descripcion 1','12/11/20','12/11/21'],
+          //['ejemplo2','lista1','124','2','123','32.3','1','Descripcion 2','12/12/20','12/12/21'],
+          [0,1,2,3,4,5,6,7,8,9],
+          [0,1,2,3,4,5,6,7,8,9],
+          [0,1,2,3,4,5,6,7,8,9]
         ],
         header: 'row',
         border: true,
@@ -140,6 +143,9 @@ export default {
         this.aDescripcion='';
         this.aFechaInicio='';
         this.aFechaCaducidad='';
+    },
+    generateReport(){
+      //aqui se mandara a llamar la pagina de reportes
     }
   },
   components: { VueTableDynamic }
