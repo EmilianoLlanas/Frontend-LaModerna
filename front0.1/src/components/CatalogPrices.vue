@@ -3,23 +3,53 @@
     <h1> Catálogo de Precios </h1>
     <div class="inputForm">
     <form>
-      <label>ID</label>
+      <label>Compañia</label>
       <br>
-      <input v-model="aId" placeholder="Identificador del artículo">
+      <input v-model="aCompania" placeholder="Compañia">
       <br>
-      <label>Nombre</label>
+      <label>lista de Precios</label>
       <br>
-      <input v-model="aName" placeholder="Nombre del artículo">
+      <input v-model="aLista" placeholder="Lista de precios">
       <br>
-      <label>Descripción</label>
+      <label>Articulo</label>
       <br>
-      <textarea v-model="aDescription" placeholder="Descripción del artículo"></textarea>
+      <input v-model="aArticulo" placeholder="Articulo">
+      <br>
+      <label>Nivel de Descuento</label>
+      <br>
+      <input v-model="aNivDescuento" placeholder="0%">
+      <label>Cantidad</label>
+      <br>
+      <input v-model="aCantidad" placeholder="Cantidad">
+      <br>
+      <label>Precio</label>
+      <br>
+      <input v-model="aPrecio" placeholder="Precio">
+      <br>
+      <label>Descuento</label>
+      <br>
+      <input v-model="aDescuento" placeholder="0%">
+      <br>
+      <label>Descripcion</label>
+      <br>
+      <input v-model="aDescripcion" placeholder="Descripcion del producto">
+      <br>
+      <label>Fecha de inicio</label>
+      <br>
+      <input v-model="aFechaInicio" placeholder="dd/mm/aa">
+      <br>
+      <label>Fecha de caducidad</label>
+      <br>
+      <input v-model="aFechaCaducidad" placeholder="dd/mm/aa">
+      <br>
+      <br>
    </form>
   </div>
    <br>
-   <button @click="signUpArticle"> Dar de alta </button>
-   <button @click="signDownArticle"> Dar de baja </button>
-   <button @click="loadArticles">Actualizar </button>
+   <button @click="signUpPrice"> Dar de alta </button>
+   <button @click="signDownPrice"> Dar de baja </button>
+   <button @click="loadPrices">Actualizar </button>
+   <button @click="generateReport">Reporte </button>
    <div style="width: 80%" >
   <vue-table-dynamic :params="params"
       @select="onSelect"
@@ -33,21 +63,25 @@
 <script>
 import VueTableDynamic from 'vue-table-dynamic'
 export default {
-  name: 'CatalogArticles',
+  name: 'CatalogPrices',
   data() {
     return {
-      aId:'',
-      aName:'',
-      aDescription:'',
+      aCompania:'',
+      aLista:'',
+      aArticulo:'',
+      aNivDescuento:'',
+      aCantidad:'',
+      aPrecio:'',
+      aDescuento:'',
+      aDescripcion:'',
+      aFechaInicio:'',
+      aFechaCaducidad:'',
       params: {
         data: [
-          ['ID', 'Nombre','Descripción'],
-          [1, 'b3ba90', 'aab418'],
-          [2, 'ec0b78', 'ba045d'],
-          [3, 'a8c325', 'aab418'],
-          [4, 'a8c325', 'aab418'],
-          [5, 'a8c325', 'aab418'],
-
+          ['Compañia','Lista de precios','Articulo','Nivel de Descuento','Cantidad','Precio','Descuento','Descripción','Fecha de inicio','Fecha de caducidad'],
+          ['ejemplo0','lista0','123','0%','100','12.3','1%','Descripcion 0','12/12/20','12/12/21'],
+          ['ejemplo1','lista0','123','0%','111','13.3','2%','Descripcion 1','12/11/20','12/11/21'],
+          ['ejemplo2','lista1','124','2%','123','32.3','1%','Descripcion 2','12/12/20','12/12/21']
         ],
         header: 'row',
         border: true,
@@ -68,23 +102,44 @@ export default {
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
     },
-    signUpArticle(){
+    signUpPrice(){
         //there will be a method here to establish connection with backend and sign up the articles' id and name, some day....
-        this.aId='';
-        this.aName='';
-        this.aDescription='';
+        this.aCompania='';
+        this.aLista='';
+        this.aArticulo='';
+        this.aNivDescuento='';
+        this.aCantidad='';
+        this.aPrecio='';
+        this.aDescuento='';
+        this.aDescripcion='';
+        this.aFechaInicio='';
+        this.aFechaCaducidad='';
     },
-    signDownArticle(){
+    signDownPrice(){
         //there will be a method here to establish connection with backend and sign down the articles' id and name, some day....
-        this.aId='';
-        this.aName='';
-        this.aDescription='';
+        this.aCompania='';
+        this.aLista='';
+        this.aArticulo='';
+        this.aNivDescuento='';
+        this.aCantidad='';
+        this.aPrecio='';
+        this.aDescuento='';
+        this.aDescripcion='';
+        this.aFechaInicio='';
+        this.aFechaCaducidad='';
     },
-    loadArticles(){
+    loadPrices(){
         //there will be a method here to establish connection with backend and update the table, some day....
-        this.aId='';
-        this.aName='';
-        this.aDescription='';
+        this.aCompania='';
+        this.aLista='';
+        this.aArticulo='';
+        this.aNivDescuento='';
+        this.aCantidad='';
+        this.aPrecio='';
+        this.aDescuento='';
+        this.aDescripcion='';
+        this.aFechaInicio='';
+        this.aFechaCaducidad='';
     }
   },
   components: { VueTableDynamic }
