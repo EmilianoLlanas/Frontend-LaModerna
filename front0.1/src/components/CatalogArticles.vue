@@ -1,6 +1,4 @@
 <template>
-
-
     <div>
     <h1> Catálogo de Artículos </h1>
     <div class="inputForm">
@@ -21,7 +19,8 @@
    <br>
    <button @click="signUpCompany"> Dar de alta </button>
    <button @click="signDownCompany"> Dar de baja </button>
-   <div style="width: 800px">
+   <button> Actualizar </button>
+   <div style="width: 80%" >
   <vue-table-dynamic :params="params"
       @select="onSelect"
       @selection-change="onSelectionChange"
@@ -42,26 +41,20 @@ export default {
       aDescription:'',
       params: {
         data: [
-          ['Index', 'Data1', 'Data2', 'Data3'],
-          [1, 'b3ba90', '7c95f7', '9a3853'],
-          [2, 'ec0b78', 'ba045d', 'ecf03c'],
-          [3, '63788d', 'a8c325', 'aab418'],
-          [4, '63788d', 'a8c325', 'aab418'],
-          [5, '63788d', 'a8c325', 'aab418'],
-          [6, '63788d', 'a8c325', 'aab418'],
-          [7, '63788d', 'a8c325', 'aab418'],
-          [8, '63788d', 'a8c325', 'aab418'],
-          [9, '63788d', 'a8c325', 'aab418'],
-          [10, '63788d', 'a8c325', 'aab418'],
-          [11, '63788d', 'a8c325', 'aab418'],
-          [12, '63788d', 'a8c325', 'aab418'],
+          ['ID', 'Nombre','Descripción'],
+          [1, 'b3ba90', 'aab418'],
+          [2, 'ec0b78', 'ba045d'],
+          [3, 'a8c325', 'aab418'],
+          [4, 'a8c325', 'aab418'],
+          [5, 'a8c325', 'aab418'],
+
         ],
         header: 'row',
         border: true,
         stripe: true,
         showCheck: true,
         enableSearch: true,
-        sort: [0, 1,2,3],
+        sort: [0, 1,2],
         pagination: true,
         pageSize: 10,
       }
@@ -94,6 +87,7 @@ export default {
 
 <style scoped>
 .inputForm {
+
   width: 300px;
   clear: both;
 }
