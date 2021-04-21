@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import CatalogArticles from '@/components/CatalogArticles'
 import CatalogCompanies from '@/components/CatalogCompanies'
 import CatalogPrices from '@/components/CatalogPrices'
+import CatalogClients from '@/components/CatalogClients'
 import LogIn from '@/components/LogIn'
 Vue.use(Router)
 
@@ -33,6 +34,11 @@ export default new Router({
       path: '/CatalogPrices',
       name: 'CatalogPrices',
       component: CatalogPrices
+    },
+    {
+      path: '/CatalogClients',
+      name: 'CatalogClients',
+      component: CatalogClients
     }
   ]
 })

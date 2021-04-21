@@ -5,6 +5,7 @@
       <button @click="navCatalogArticles"> Ir al catálogo de Articulos </button>
       <button @click="navCatalogCompanies"> Ir al catálogo de Compañías </button>
       <button @click="navCatalogPrices"> Ir al catálogo de Precios </button>
+      <button @click="navCatalogClients"> Ir al catálogo de Clientes </button>
     </div>
 
 </template>
@@ -22,6 +23,9 @@ export default {
     },
     navCatalogPrices () {
       this.$router.push({name:'CatalogPrices'});
+    },
+    navCatalogClients() {
+    this.$router.push({name:'CatalogClients'})
     }
     }
   }
