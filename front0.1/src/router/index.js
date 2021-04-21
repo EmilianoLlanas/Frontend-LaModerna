@@ -4,6 +4,7 @@ import CatalogArticles from '@/components/CatalogArticles'
 import CatalogCompanies from '@/components/CatalogCompanies'
 import CatalogPrices from '@/components/CatalogPrices'
 import CatalogClients from '@/components/CatalogClients'
+import CaptureOrder from '@/components/CaptureOrder'
 import LogIn from '@/components/LogIn'
 Vue.use(Router)
 
@@ -39,6 +40,11 @@ export default new Router({
       path: '/CatalogClients',
       name: 'CatalogClients',
       component: CatalogClients
+    },
+    {
+      path: '/CaptureOrder',
+      name: 'CaptureOrder',
+      component: CaptureOrder
     }
   ]
 })
