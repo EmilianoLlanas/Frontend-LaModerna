@@ -30,9 +30,7 @@
       <label>Observaciones</label>
       <br>
   </div>
-  <md-field>
-      <input md-textarea v-model="aObservaciones" md-autogrow></md-textarea>
-    </md-field>
+  <textarea v-model="aObservaciones" placeholder="Observaciones de la orden" rows="10" cols="250"></textarea>  
   <br>
   <button @click="save"> Guardar </button>
   <button @click="cancel"> Cancelar </button>
