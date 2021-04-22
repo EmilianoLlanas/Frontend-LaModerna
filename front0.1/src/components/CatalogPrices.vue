@@ -79,9 +79,9 @@ export default {
       params: {
         data: [
           ['Compañia','Lista de precios','Articulo','Nivel de Descuento','Cantidad','Precio','Descuento','Descripción','Fecha de inicio','Fecha de caducidad'],
-          //['ejemplo0','lista0','123','0','100','12.3','1','Descripcion 0','12/12/20','12/12/21'],
-          //['ejemplo1','lista0','123','0','111','13.3','2','Descripcion 1','12/11/20','12/11/21'],
-          //['ejemplo2','lista1','124','2','123','32.3','1','Descripcion 2','12/12/20','12/12/21'],
+          ['ejemplo0','lista0','123','0','100','12.3','1','Descripcion 0','12/12/20','12/12/21'],
+          ['ejemplo1','lista0','123','0','111','13.3','2','Descripcion 1','12/11/20','12/11/21'],
+          ['ejemplo2','lista1','124','2','123','32.3','1','Descripcion 2','12/12/20','12/12/21'],
         ],
         header: 'row',
         border: true,
