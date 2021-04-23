@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import OrdersInProcess from '@/components/OrdersInProcess'
 import CatalogArticles from '@/components/CatalogArticles'
 import CatalogCompanies from '@/components/CatalogCompanies'
 import CatalogPrices from '@/components/CatalogPrices'
@@ -45,6 +46,11 @@ export default new Router({
       path: '/CaptureOrder',
       name: 'CaptureOrder',
       component: CaptureOrder
-    }
+    },
+    {
+    path: '/OrdersInProcess',
+    name: 'OrdersInProcess',
+    component: OrdersInProcess
+  }
   ]
 })

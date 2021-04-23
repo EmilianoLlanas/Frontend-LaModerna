@@ -2,11 +2,12 @@
     <div>
       <router-view/>
       <h1> Login </h1>
-      <button @click="navCatalogArticles"> Ir al catálogo de Articulos </button>
+      <button @click="navCatalogArticles"> Ir al catálogo de Artículos </button>
       <button @click="navCatalogCompanies"> Ir al catálogo de Compañías </button>
       <button @click="navCatalogPrices"> Ir al catálogo de Precios </button>
       <button @click="navCatalogClients"> Ir al catálogo de Clientes </button>
-      <button @click="navCaptureOrder"> Ir a la captura de ordenes </button>
+      <button @click="navCaptureOrder"> Ir a la captura de Órdenes </button>
+      <button @click="navCaptureOrder"> Ir a la Consulta de Órdenes en proceso </button>
     </div>
 
 </template>
@@ -30,6 +31,9 @@ export default {
     },
     navCaptureOrder() {
       this.$router.push({name: 'CaptureOrder'})
+    },
+    navCaptureOrder() {
+      this.$router.push({name: 'OrdersInProcess'})
     }
     }
   }
