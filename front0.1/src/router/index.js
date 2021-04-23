@@ -7,6 +7,8 @@ import CatalogPrices from '@/components/CatalogPrices'
 import CatalogClients from '@/components/CatalogClients'
 import CaptureOrder from '@/components/CaptureOrder'
 import LogIn from '@/components/LogIn'
+import LogInPrincipal from '@/components/LogInPrincipal'
+
 Vue.use(Router)
 
 export default new Router({
@@ -22,6 +24,11 @@ export default new Router({
       name: 'LogIn',
       component: LogIn
        },
+       {
+         path: '/LogInPrincipal',
+         name: 'LogInPrincipal',
+         component: LogInPrincipal
+          },
     {
       path: '/CatalogArticles',
       name: 'CatalogArticles',
