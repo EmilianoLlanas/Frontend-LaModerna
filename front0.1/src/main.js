@@ -5,6 +5,7 @@ import Vuelidate from 'vuelidate'
 import App from './App'
 import router from './router'
 import VueTableDynamic from 'vue-table-dynamic'
+import store from './store'
 
 
 Vue.use(Vuelidate)
@@ -16,5 +17,6 @@ new Vue({
   el: '#app',
   router,
   components: { App },
+  store,
   template: '<App/>'
 })
