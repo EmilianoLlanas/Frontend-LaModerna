@@ -12,6 +12,9 @@ import CatalogDelivered from '@/components/CatalogDelivered'
 import CatalogFacturas from '@/components/CatalogFacturas'
 import CatalogSaldo from '@/components/CatalogSaldo'
 import CatalogWarehouse from '@/components/CatalogWarehouse'
+import LogInPrincipal from '@/components/LogInPrincipal'
+
+
 Vue.use(Router)
 
 export default new Router({
@@ -27,6 +30,11 @@ export default new Router({
       name: 'LogIn',
       component: LogIn
        },
+      {
+         path: '/LogInPrincipal',
+         name: 'LogInPrincipal',
+         component: LogInPrincipal
+          },
     {
       path: '/CatalogArticles',
       name: 'CatalogArticles',

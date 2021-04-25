@@ -5,14 +5,17 @@
 </template>
 
 <script>
-
+import VuelidateForm from "./components/LogInPrincipal";
 export default {
   name: 'App',
-  
+  components: {
+    // VeeValidateForm,
+    VuelidateForm
   }
+};
 
 </script>
 
-<style scoped>
+<style scoped >
 
 </style>
