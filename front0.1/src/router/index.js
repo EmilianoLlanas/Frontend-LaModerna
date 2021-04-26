@@ -12,6 +12,7 @@ import CatalogDelivered from '@/components/CatalogDelivered'
 import CatalogFacturas from '@/components/CatalogFacturas'
 import CatalogSaldo from '@/components/CatalogSaldo'
 import CatalogWarehouse from '@/components/CatalogWarehouse'
+import RoleAssign from '@/components/RoleAssign'
 import LogInPrincipal from '@/components/LogInPrincipal'
 
 
@@ -84,6 +85,11 @@ export default new Router({
       path: '/CatalogSaldo',
       name: 'CatalogSaldo',
       component: CatalogSaldo
+    },
+    {
+      path: '/RoleAssign',
+      name: 'RoleAssign',
+      component: RoleAssign
     },
     {
       path: '/CatalogWarehouse',
