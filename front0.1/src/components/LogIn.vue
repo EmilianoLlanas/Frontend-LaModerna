@@ -1,5 +1,6 @@
 <template>
-    <div>
+
+    <div id="test">
       <router-view/>
       <h1> Login </h1>
       <button @click="navCatalogArticles"> Ir al catálogo de Artículos </button>
@@ -40,6 +41,11 @@ export default {
 
 </script>
 
-<style scoped>
+<style>
+
+#test {
+  background-color: gray;
+
+}
 
 </style>
