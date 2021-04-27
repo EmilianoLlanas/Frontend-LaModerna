@@ -99,7 +99,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .inputForm {
   width: 400px;
   clear: both;
