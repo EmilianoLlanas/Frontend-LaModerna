@@ -76,7 +76,8 @@ export default
   data:()=>({
     user:'',
     password:'',
-    token:'',
+    token:'Bearer ',
+    auth:'',
     error:false
   }),
   validations:{
@@ -95,9 +96,11 @@ export default
       this.$v.$touch();
       if(!this.$v.$invalid){
         try {
-        this.token= ((await auth.login(this.user, this.password)).data.token);
+        this.token+= ((await auth.login(this.user, this.password)).data.token);
         console.log(this.token)
-          this.$router.push("/")
+        this.auth=((await auth.authToken(this.token)).data);
+        console.log(this.auth)
+        this.$router.push("/")
         } catch (error) {
           this.error=true;
           console.log(error);

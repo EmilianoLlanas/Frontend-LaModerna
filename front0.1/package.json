@@ -10,6 +10,7 @@
     "start": "npm run dev"
   },
   "dependencies": {
+    "es6-promise": "^4.2.8",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
     "vue-table-dynamic": "^0.4.4",
