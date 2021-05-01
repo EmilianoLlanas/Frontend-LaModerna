@@ -7,7 +7,14 @@ import CatalogPrices from '@/components/CatalogPrices'
 import CatalogClients from '@/components/CatalogClients'
 import CaptureOrder from '@/components/CaptureOrder'
 import LogIn from '@/components/LogIn'
+import CatalogAgents from '@/components/CatalogAgents'
+import CatalogDelivered from '@/components/CatalogDelivered'
+import CatalogFacturas from '@/components/CatalogFacturas'
+import CatalogSaldo from '@/components/CatalogSaldo'
+import CatalogWarehouse from '@/components/CatalogWarehouse'
+import RoleAssign from '@/components/RoleAssign'
 import LogInPrincipal from '@/components/LogInPrincipal'
+
 
 Vue.use(Router)
 
@@ -58,6 +65,36 @@ export default new Router({
     path: '/OrdersInProcess',
     name: 'OrdersInProcess',
     component: OrdersInProcess
-  }
+    },
+    {
+      path: '/CatalogAgents',
+      name: 'CatalogAgents',
+      component: CatalogAgents
+    },
+    {
+      path: '/CatalogDelivered',
+      name: 'CatalogDelivered',
+      component: CatalogDelivered
+    },
+    {
+      path: '/CatalogFacturas',
+      name: 'CatalogFacturas',
+      component: CatalogFacturas
+    },
+    {
+      path: '/CatalogSaldo',
+      name: 'CatalogSaldo',
+      component: CatalogSaldo
+    },
+    {
+      path: '/RoleAssign',
+      name: 'RoleAssign',
+      component: RoleAssign
+    },
+    {
+      path: '/CatalogWarehouse',
+      name: 'CatalogWarehouse',
+      component: CatalogWarehouse
+    },
   ]
 })
