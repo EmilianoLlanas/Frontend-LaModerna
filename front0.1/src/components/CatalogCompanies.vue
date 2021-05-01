@@ -10,10 +10,8 @@
       <label>Nombre</label>
       <br>
       <input v-model="aName" placeholder="Nombre de la Compañía">
-
-   </form>
-  </div>
-   <br>
+    </form>
+    </div>
    <button @click="signUpCompany"> Dar de alta </button>
    <button @click="signDownCompany"> Dar de baja </button>
    <button @click="loadCompanies"> Actualizar </button>
