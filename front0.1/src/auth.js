@@ -8,5 +8,16 @@ export default {
       email:email,
       password:password };
     return axios.post(ENDPOINT_PATH + "api/auth", user);
+  },
+  authToken(tokn)
+  {
+    const headers = {
+      'headers':{
+        'Authorization': tokn
+      }
+    }
+
+    return axios.get(ENDPOINT_PATH + "api/me", headers);
+
   }
     };
