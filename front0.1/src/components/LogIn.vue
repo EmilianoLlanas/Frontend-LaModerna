@@ -14,6 +14,7 @@
       <button @click="navCatalogFacturas"> Ir al catálogo de Facturas </button>
       <button @click="navCatalogSaldo"> Ir al catálogo de Saldos </button>
       <button @click="navCatalogWarehouse"> Ir al catálogo de Almacenes </button>
+      <button @click="navCatalogDeliveryAddresses"> Ir al catálogo de Direcciones de entrega </button>
     </div>
 
 </template>
@@ -56,6 +57,10 @@ export default {
     navCatalogWarehouse() {
       this.$router.push({name: 'CatalogWarehouse'})
     },
+
+    navCatalogDeliveryAddresses() {
+      this.$router.push({name: 'CatalogDeliveryAddresses'})
+    }
     }
   }
 

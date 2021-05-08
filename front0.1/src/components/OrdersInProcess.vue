@@ -1,10 +1,10 @@
 <template>
-    <div>
+    <div id="test">
     <h1> Órdenes de venta en proceso </h1>
 
    <button @click="loadOrders">Actualizar </button>
    <button @click="orderReport"> Reporte de órdenes </button>
-   <div style="width: 100%" >
+   <div id="table" >
   <vue-table-dynamic :params="params"
       @select="onSelect"
       @selection-change="onSelectionChange"
@@ -80,4 +80,65 @@ export default {
 </script>
 
 <style scoped>
+.inputForm {
+  width: 400px;
+  clear: both;
+  color: #213485;
+  margin: 3%;
+}
+
+.inputForm  input {
+  width: 100%;
+  clear: both;
+  margin-top: 2%;
+  margin-bottom: 5%;
+  font-family: "GOTY0", "GOTY1", "GOTY2", verdana;
+  opacity: 50%;
+  border-radius: 6px;
+  border: transparent;
+}
+
+.inputForm  textarea {
+  width: 150%;
+  height: 90px;
+  color: #213485;
+  margin-top: 2%;
+  margin-bottom: 0%;
+  font-family: "GOTY0", "GOTY1", "GOTY2", verdana;
+  opacity: 50%;
+  border-radius: 6px;
+  border: transparent;
+}
+
+#test{
+  background-color: rgba(33,52,133,0.20);
+  margin: 1%;
+  color: #3B0EA4;
+  font-family: "GOTY0", "GOTY1", "GOTY2", verdana;
+}
+
+#table{
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 2%;
+}
+
+button{
+  margin-top: 0%;
+  margin-left: 3%;
+  color: #0E2CA4;
+  opacity: 70%;
+  font-family: "GOTY0", "GOTY1", "GOTY2", verdana;
+  text-shadow: 1px 1px rgba(14,44,164,0.50);
+  background-color: transparent;
+  padding: 5px;
+  font-weight: 700;
+  font-size: 12px;
+  border-radius: 6px;
+  border: transparent;
+}
+
+button:hover{
+  background-color: rgba(14,44,164,0.30) ;
+}
 </style>

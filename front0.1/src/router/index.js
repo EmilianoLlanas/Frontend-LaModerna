@@ -13,8 +13,10 @@ import CatalogDelivered from '@/components/CatalogDelivered'
 import CatalogFacturas from '@/components/CatalogFacturas'
 import CatalogSaldo from '@/components/CatalogSaldo'
 import CatalogWarehouse from '@/components/CatalogWarehouse'
+import CatalogSharedArticles from '@/components/CatalogSharedArticles'
 import RoleAssign from '@/components/RoleAssign'
 import LogInPrincipal from '@/components/LogInPrincipal'
+import CatalogDeliveryAddresses from '@/components/CatalogDeliveryAddresses'
 
 
 Vue.use(Router)
@@ -92,15 +94,29 @@ export default new Router({
       name: 'RoleAssign',
       component: RoleAssign
     },
+
     {
       path: '/CatalogWarehouse',
       name: 'CatalogWarehouse',
       component: CatalogWarehouse
     },
+
+    {
+      path: '/CatalogSharedArticles',
+      name: 'CatalogSharedArticles',
+      component: CatalogSharedArticles
+    },
+
+    {
+      path: '/CatalogDeliveryAddresses',
+      name: 'CatalogDeliveryAddresses',
+      component: CatalogDeliveryAddresses
+    }
     {
       path: '/OrderDetails',
       name: 'OrderDetails',
       component: OrderDetails
     },
   ]
+
 })

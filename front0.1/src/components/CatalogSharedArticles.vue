@@ -1,26 +1,40 @@
 <template>
-    <div id="test">
-    <h1> Catálogo de Compañías </h1>
+  <div id="test">
+    <h1 id="header1"> Catálogo de Artículos Compartidos </h1>
     <div class="inputForm">
-    <form>
-      <label>ID</label>
-      <br>
-      <input v-model="aId" placeholder="Identificador de la Compañía">
-      <br>
-      <label>Nombre</label>
-      <br>
-      <input v-model="aName" placeholder="Nombre de la Compañía">
+      <form>
+        <label>Compañía Origen</label>
+        <br>
+        <input v-model="aCompOrig" placeholder="Identificador de la compañía">
+        <br>
+        <label>Cliente Origen</label>
+        <br>
+        <input v-model="aClieOrig" placeholder="Nombre del cliente">
+        <br>
+        <label>Artículo</label>
+        <br>
+        <input v-model="aArticulo" placeholder="Identificador de la compañía">
+        <br>
+        <label>Compañia Destino</label>
+        <br>
+        <input v-model="aCompDest" placeholder="Nombre de la compañia">
+        <br>
+        <label>Cliente Destino</label>
+        <br>
+        <input v-model="aClieDest" placeholder="Nombre del cliente">
+
+
     </form>
-    </div>
-   <button @click="signUpCompany"> Dar de alta </button>
-   <button @click="signDownCompany"> Dar de baja </button>
-   <button @click="loadCompanies"> Actualizar </button>
-   <div id="table" >
-  <vue-table-dynamic :params="params"
+  </div>
+   <br>
+   <button @click="sendData"> Enviar Datos </button>
+
+  <div id="table">
+    <vue-table-dynamic :params="params"
       @select="onSelect"
       @selection-change="onSelectionChange"
-      ref="table"></vue-table-dynamic>
-
+      ref="table">
+    </vue-table-dynamic>
   </div>
   </div>
 </template>
@@ -28,20 +42,22 @@
 <script>
 import VueTableDynamic from 'vue-table-dynamic'
 export default {
-  name: 'CatalogArticles',
+  name: 'CatalogSharedArticles',
   data() {
     return {
-      aId:'',
-      aName:'',
-      aDescription:'',
+      aCompOrig:'',
+      aClieOrig:'',
+      aArticulo:'',
+      aCompDest:'',
+      aClieDest:'',
       params: {
         data: [
-          ['ID', 'Nombre'],
-          [1, 'b3ba90'],
-          [2, 'ec0b78'],
-          [3, 'a8c325'],
-          [4, 'a8c325'],
-          [5, 'a8c325']
+          ['Compañia Origen', 'Cliente Origen','Artículo','Compañia Destino','Cliente Destino'],
+          [1, 'b3ba90', 'aab418', 101, 'aab418'],
+          [2, 'ec0b78', 'ba045d', 102, 'cab415'],
+          [3, 'a8c325', 'aab418', 103, 'dab417'],
+          [4, 'a8c325', 'aab418', 104, 'lab316'],
+          [5, 'a8c325', 'aab418', 105, 'dgb115'],
 
         ],
         header: 'row',
@@ -63,24 +79,10 @@ export default {
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
     },
-    signUpCompany(){
-        //there will be a method here to establish connection with backend and sign up the companies' id and name, some day....
-        this.aId='';
-        this.aName='';
-        this.aDescription='';
-    },
-    signDownCompany(){
-        //there will be a method here to establish connection with backend and sign down the companies' id and name, some day....
-        this.aId='';
-        this.aName='';
-        this.aDescription='';
-    },
-    loadCompanies(){
-        //there will be a method here to establish connection with backend and load the companies' id and name, some day....
-        this.aId='';
-        this.aName='';
-        this.aDescription='';
-    },
+    sendData(){
+        //there will be a method here to establish connection with backend and sign up the articles' id and name, some day....
+
+    }
   },
   components: { VueTableDynamic }
 }
@@ -143,9 +145,15 @@ button:hover{
   font-family: "GOTY0", "GOTY1", "GOTY2", verdana;
 }
 
+#header1{
+  margin: 2%;
+  font-size: 30px;
+}
+
 #table{
   width: 80%;
   margin-left: 10%;
   margin-top: 2%;
 }
+
 </style>
