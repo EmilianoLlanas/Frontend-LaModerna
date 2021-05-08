@@ -4,31 +4,48 @@
 
    <button @click="loadOrders">Actualizar </button>
    <button @click="orderReport"> Reporte de órdenes </button>
-   <div style="width: 80%" >
+   <div style="width: 100%" >
   <vue-table-dynamic :params="params"
       @select="onSelect"
       @selection-change="onSelectionChange"
       ref="table"></vue-table-dynamic>
-
+      <OrderDetails :Orders="testOrder"></OrderDetails>
   </div>
   </div>
 </template>
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic'
+import SaleOrder from "@/classes/SaleOrder.js";
+import OrderDetails from '@/components/OrderDetails.vue'
+
+testOrder: {sId: 1;
+  sClient: 'Bimbo';
+  sName: 'Venta de papeles Suavecitos';
+  sOrderDate: '2021-03-17';
+  sArticle:'papeles suavecitos';
+  sDescription: 'es papel que esta suave, saludos';
+  sQuantity: 500;
+  sPrice:1300;
+  sSolicitedDate:'2021-03-18';
+  factStatus:false;
+  cxcStatus:false;
+  preciosStatus:true;
+  ingStatus:false;
+  planStatus:true;
+
+}
+
 export default {
   name: 'OrdersInProcess',
+
   data() {
 
     return {
       params: {
         data: [
-          ['ID', 'Nombre','Descripción'],
-          [1, 'b3ba90', 'aab418'],
-          [2, 'ec0b78', 'ba045d'],
-          [3, 'a8c325', 'aab418'],
-          [4, 'a8c325', 'aab418'],
-          [5, 'a8c325', 'aab418'],
+          ['ID','Cliente' ,'Nombre','Fecha Orden','Artículo','Cantidad','Precio'],
+          [testOrder.sId, testOrder.sClient, testOrder.sName,testOrder.sOrderDate,testOrder.sArticle,testOrder.sQuantity,testOrder.sPrice]
         ],
         header: 'row',
         border: true,
@@ -51,12 +68,14 @@ export default {
     },
     orderReport(){
         //there will be a method here to establish connection with backend and sign up the articles' id and name, some day....
+        let routeData = this.$router.resolve({name: 'OrderDetails', query: {data: "test"}});
+        window.open(routeData.href, '_blank');
     },
     loadOrders(){
         //there will be a method here to establish connection with backend and update the table, some day....
     }
   },
-  components: { VueTableDynamic }
+  components: { VueTableDynamic,OrderDetails }
 }
 </script>
 

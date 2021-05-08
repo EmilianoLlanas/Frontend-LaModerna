@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import OrderDetails from '@/components/OrderDetails'
 import OrdersInProcess from '@/components/OrdersInProcess'
 import CatalogArticles from '@/components/CatalogArticles'
 import CatalogCompanies from '@/components/CatalogCompanies'
@@ -95,6 +96,11 @@ export default new Router({
       path: '/CatalogWarehouse',
       name: 'CatalogWarehouse',
       component: CatalogWarehouse
+    },
+    {
+      path: '/OrderDetails',
+      name: 'OrderDetails',
+      component: OrderDetails
     },
   ]
 })
