@@ -16,7 +16,6 @@
         <textarea v-model="aDescription" placeholder="Descripción del artículo"></textarea>
     </form>
   </div>
-   <br>
    <button @click="signUpArticle"> Dar de alta </button>
    <button @click="signDownArticle"> Dar de baja </button>
    <button @click="loadArticles">Actualizar </button>

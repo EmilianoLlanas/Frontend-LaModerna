@@ -22,11 +22,8 @@
       <label>Estatus</label>
       <br>
       <input v-model="aEstatus" placeholder="Estatus">
-      <br>
-      <br>
    </form>
   </div>
-   <br>
    <button @click="signUpClient"> Dar de alta </button>
    <button @click="signDownClient"> Dar de baja </button>
    <button @click="loadClient">Actualizar </button>
