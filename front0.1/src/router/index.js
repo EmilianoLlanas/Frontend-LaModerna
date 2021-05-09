@@ -12,7 +12,7 @@ import CatalogDelivered from '@/components/CatalogDelivered'
 import CatalogFacturas from '@/components/CatalogFacturas'
 import CatalogSaldo from '@/components/CatalogSaldo'
 import CatalogWarehouse from '@/components/CatalogWarehouse'
-import CatalogSharedItems from '@/components/CatalogSharedItems'
+import CatalogSharedArticles from '@/components/CatalogSharedArticles'
 import RoleAssign from '@/components/RoleAssign'
 import LogInPrincipal from '@/components/LogInPrincipal'
 import CatalogDeliveryAddresses from '@/components/CatalogDeliveryAddresses'
@@ -102,9 +102,9 @@ export default new Router({
     },
 
     {
-      path: '/CatalogSharedItems',
-      name: 'CatalogSharedItems',
-      component: CatalogSharedItems
+      path: '/CatalogSharedArticles',
+      name: 'CatalogSharedArticles',
+      component: CatalogSharedArticles
     },
 
     {

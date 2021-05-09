@@ -60,7 +60,7 @@
 <script>
 import VueTableDynamic from 'vue-table-dynamic'
 export default {
-  name: 'CatalogSharedItems',
+  name: 'CatalogSharedArticles',
   data:() =>({
       aCompOrig:'',
       aClieOrig:'',
