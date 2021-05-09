@@ -16,7 +16,7 @@ import CatalogSharedArticles from '@/components/CatalogSharedArticles'
 import RoleAssign from '@/components/RoleAssign'
 import LogInPrincipal from '@/components/LogInPrincipal'
 import CatalogDeliveryAddresses from '@/components/CatalogDeliveryAddresses'
-
+import CatalogInventory from '@/components/CatalogInventory'
 
 
 Vue.use(Router)
@@ -112,6 +112,11 @@ export default new Router({
       name: 'CatalogDeliveryAddresses',
       component: CatalogDeliveryAddresses
     },
+    {
+      path: '/CatalogInventory',
+      name: 'CatalogInventory',
+      component: CatalogInventory
+    }
   ]
 
 })
