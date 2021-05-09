@@ -18,8 +18,8 @@ import RoleAssign from '@/components/RoleAssign'
 import LogInPrincipal from '@/components/LogInPrincipal'
 import CatalogDeliveryAddresses from '@/components/CatalogDeliveryAddresses'
 import CatalogInventory from '@/components/CatalogInventory'
-
-
+import ProcessedOrders from '@/components/ProcessedOrders'
+import OrderStatus from '@/components/OrderStatus'
 Vue.use(Router)
 
 export default new Router({
@@ -123,6 +123,16 @@ export default new Router({
       name: 'OrderDetails',
       component: OrderDetails
     },
+    {
+      path: '/ProcessedOrders',
+      name: 'ProcessedOrders',
+      component: ProcessedOrders
+    },
+    {
+    path: '/OrderStatus',
+    name: 'OrderStatus',
+    component: OrderStatus
+  },
   ]
 
 })

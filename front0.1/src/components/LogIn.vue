@@ -16,6 +16,8 @@
       <button @click="navCatalogWarehouse"> Ir al catálogo de Almacenes </button>
       <button @click="navCatalogDeliveryAddresses"> Ir al catálogo de Direcciones de entrega </button>
       <button @click="navCatalogInventory"> Ir al catálogo de Inventario </button>
+      <button @click="navProcessedOrders"> Ir a la Consulta de Órdenes Procesadas </button>
+      <button @click="navOrderStatus"> Ir a la Consulta de Estatus de Órdenes </button>
     </div>
 
 </template>
@@ -64,6 +66,12 @@ export default {
     },
     navCatalogInventory() {
       this.$router.push({name: 'CatalogInventory'})
+    },
+    navProcessedOrders() {
+      this.$router.push({name: 'ProcessedOrders'})
+    },
+    navOrderStatus() {
+      this.$router.push({name: 'OrderStatus'})
     }
     }
   }
