@@ -28,6 +28,7 @@
    <button @click="signUpSaldo"> Dar de alta </button>
    <button @click="signDownSaldo"> Dar de baja </button>
    <button @click="loadSaldo">Actualizar </button>
+   <button @click="reportSaldo">Generar Reporte</button>
    <div style="width: 80%" >
   <vue-table-dynamic :params="params"
       @select="onSelect"
@@ -41,7 +42,7 @@
 <script>
 import VueTableDynamic from 'vue-table-dynamic'
 export default {
-  name: 'CatalogFacturas',
+  name: 'CatalogSaldo',
   data() {
     return {
       ordId:'',
@@ -76,15 +77,16 @@ export default {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
     },
     signUpFactura(){
-        //there will be a method here to establish connection with backend and sign up some day....
-        this.ordId='';
-        this.salCli='';
-        this.salIdFac='';
-        this.salOrd='';
-        this.salFac='';
+        if(this.ordId==''||this.salCli==''||this.salIdFac==''||this.salOrd==''||this.salFac=='')
+        {
+          alert('Por favor, llene todos los campos para registrar el saldo');
+        }
+        else
+        {
+          this.params.data.push([this.ordId, this.salCli,this.salIdFac,this.salOrd,this.salFac]);
+        }
     },
     signDownFactura(){
-        //there will be a method here to establish connection with backend and sign down some day....
         this.ordId='';
         this.salCli='';
         this.salIdFac='';
@@ -92,7 +94,6 @@ export default {
         this.salFac='';
     },
     loadFactura(){
-        //there will be a method here to establish connection with backend and update the table, some day....
         this.ordId='';
         this.salCli='';
         this.salIdFac='';

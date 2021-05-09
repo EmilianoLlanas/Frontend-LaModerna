@@ -28,6 +28,7 @@
    <button @click="signUpFactura"> Dar de alta </button>
    <button @click="signDownFactura"> Dar de baja </button>
    <button @click="loadFactura">Actualizar </button>
+   <button @click="reportFactura">Generar Reporte</button>
    <div style="width: 80%" >
   <vue-table-dynamic :params="params"
       @select="onSelect"
@@ -46,7 +47,7 @@ export default {
     return {
       facDate:'',
       facId:'',
-      facDate:'',
+      facCli:'',
       facOrd:'',
       facEst:'',
       params: {
@@ -76,15 +77,16 @@ export default {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
     },
     signUpFactura(){
-        //there will be a method here to establish connection with backend and sign up the deliveries' company and ldate, some day....
-        this.facDate='';
-        this.facId='';
-        this.facDate='';
-        this.facOrd='';
-        this.facEst='';
+      if(this.facDate==''||this.facId==''||this.facCli==''||this.facOrd==''||this.facEst=='')
+      {
+        alert('Por favor, llene todos los campos para registrar la Factura')
+      }
+      else
+      {
+        this.params.data.push([this.facDate, this.facId, this.facCli,this.facOrd,this.facEst]);
+      }
     },
     signDownFactura(){
-        //there will be a method here to establish connection with backend and sign down the deliveries' company and date, some day....
         this.facDate='';
         this.facId='';
         this.facDate='';
@@ -92,7 +94,6 @@ export default {
         this.facEst='';
     },
     loadFactura(){
-        //there will be a method here to establish connection with backend and update the table, some day....
         this.facDate='';
         this.facId='';
         this.facDate='';
