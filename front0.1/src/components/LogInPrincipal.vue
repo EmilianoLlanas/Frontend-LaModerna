@@ -44,8 +44,8 @@
           style="width: 100%;"
           >
           <span v-if="!$v.password.required && $v.user.$dirty" class="text-danger" style="color:#d42828"> Se requiere la contraseña</span>
-          <span v-if="error" class="error" style="color:#d42828">La contraseña y/o correo son invalidos</span<
-        </p>
+          <span v-if="error" class="error" style="color:#d42828">La contraseña y/o correo son invalidos</span>
+          </p>
         <p>
         <input
         type="submit"
@@ -58,7 +58,7 @@
     </div>
     <div id="bottom">
        Papeles Corrugados S.A. de C.V. Vialidad Toluca Tenango Km 6 San Lorenzo Coacalco, Metepec, Estado de México. C.P. 52140.    Una empresa del Grupo
-       <img :src="require('@/assets/moderna.png')"style="height: min-content; height: min-content; width: min-content; margin-left: 10px;">
+       <img :src="require('@/assets/moderna.png')" style="height: min-content; height: min-content; width: min-content; margin-left: 10px;">
     </div>
   </div>
 
