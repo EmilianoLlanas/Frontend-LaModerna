@@ -112,12 +112,12 @@ export default new Router({
       path: '/CatalogDeliveryAddresses',
       name: 'CatalogDeliveryAddresses',
       component: CatalogDeliveryAddresses
-    }, 
+    },
     {
       path: '/CatalogInventory',
       name: 'CatalogInventory',
       component: CatalogInventory
-    }
+    },
     {
       path: '/OrderDetails',
       name: 'OrderDetails',

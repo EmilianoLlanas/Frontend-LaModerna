@@ -15,6 +15,7 @@
       <button @click="navCatalogSaldo"> Ir al catálogo de Saldos </button>
       <button @click="navCatalogWarehouse"> Ir al catálogo de Almacenes </button>
       <button @click="navCatalogDeliveryAddresses"> Ir al catálogo de Direcciones de entrega </button>
+      <button @click="navCatalogInventory"> Ir al catálogo de Inventario </button>
     </div>
 
 </template>
@@ -60,6 +61,9 @@ export default {
 
     navCatalogDeliveryAddresses() {
       this.$router.push({name: 'CatalogDeliveryAddresses'})
+    },
+    navCatalogInventory() {
+      this.$router.push({name: 'CatalogInventory'})
     }
     }
   }
