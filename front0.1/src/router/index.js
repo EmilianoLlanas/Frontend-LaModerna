@@ -12,10 +12,11 @@ import CatalogDelivered from '@/components/CatalogDelivered'
 import CatalogFacturas from '@/components/CatalogFacturas'
 import CatalogSaldo from '@/components/CatalogSaldo'
 import CatalogWarehouse from '@/components/CatalogWarehouse'
-import CatalogSharedArticles from '@/components/CatalogSharedArticles'
+import CatalogSharedItems from '@/components/CatalogSharedItems'
 import RoleAssign from '@/components/RoleAssign'
 import LogInPrincipal from '@/components/LogInPrincipal'
 import CatalogDeliveryAddresses from '@/components/CatalogDeliveryAddresses'
+
 
 
 Vue.use(Router)
@@ -101,16 +102,16 @@ export default new Router({
     },
 
     {
-      path: '/CatalogSharedArticles',
-      name: 'CatalogSharedArticles',
-      component: CatalogSharedArticles
+      path: '/CatalogSharedItems',
+      name: 'CatalogSharedItems',
+      component: CatalogSharedItems
     },
-    
+
     {
       path: '/CatalogDeliveryAddresses',
       name: 'CatalogDeliveryAddresses',
       component: CatalogDeliveryAddresses
-    }
+    },
   ]
 
 })
