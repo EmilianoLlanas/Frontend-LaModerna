@@ -4,14 +4,20 @@
     <div class="inputForm">
     <form>
       <label>Compañia</label>
-      <br>
       <input v-model="addressCom" placeholder="Compañía"> 
+      <label>Cliente</label>
       <input v-model="addressClient" placeholder="Cliente">
+      <label>Dirección Entrega</label>
       <input v-model="addressDelivery" placeholder="Dirección Entrega">
+      <label>Nombre</label>
       <input v-model="addressName" placeholder="Nombre">
-      <input v-model="addressPostCode" placeholder="CódigoPostal">
-      <input v-model="addressRouteCode" placeholder="CódigoRuta">
+      <label>Código Postal</label>
+      <input v-model="addressPostCode" placeholder="Código Postal">
+      <label>Código Ruta</label>
+      <input v-model="addressRouteCode" placeholder="Código Ruta">
+      <label>País</label>
       <input v-model="addressCountry" placeholder="País">
+      <label>RFC</label>
       <input v-model="addressRFC" placeholder="RFC">
    </form>
   </div>
