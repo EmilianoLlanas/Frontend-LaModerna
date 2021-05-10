@@ -24,7 +24,6 @@
       <input v-model="salFac" placeholder="Saldo Factura">
    </form>
   </div>
-   <br>
    <button @click="signUpSaldo"> Dar de alta </button>
    <button @click="signDownSaldo"> Dar de baja </button>
    <button @click="loadSaldo">Actualizar </button>
