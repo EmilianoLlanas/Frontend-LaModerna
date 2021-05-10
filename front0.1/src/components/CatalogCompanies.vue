@@ -83,7 +83,7 @@ export default {
         //there will be a method here to establish connection with backend and sign down the companies' id and name, some day....
         this.aId='';
         this.aName='';
-        console.log(this.params.deleteData.length)
+        
         for (var i = this.params.deleteData.length-1; i>0 ; i--) {
           this.params.data.splice(this.params.deleteData[i], 1)
         }
@@ -96,7 +96,7 @@ export default {
         //there will be a method here to establish connection with backend and load the companies' id and name, some day....
         this.aId='';
         this.aName='';
-
+        alert('Actualizando tabla con Base de datos')
     },
   },
   components: { VueTableDynamic }
