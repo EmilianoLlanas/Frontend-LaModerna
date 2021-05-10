@@ -130,7 +130,7 @@ table {
   border: 3px solid purple;
 }
 th, td {
-  padding: 8px;
+  padding: 5px;
 }
 tbody td {
   text-align: center;
