@@ -21,7 +21,7 @@
       <br>
       <label>Entrega</label>
       <br>
-      <input v-model="facEst" placeholder="Estatus de entrega">
+      <input v-model="facEst" placeholder="Estatus de Entrega">
    </form>
   </div>
    <button @click="signUpFactura"> Dar de alta </button>
