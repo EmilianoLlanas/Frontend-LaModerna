@@ -16,7 +16,6 @@
    <button @click="signUpWare"> Dar de alta </button>
    <button @click="signDownWare"> Dar de baja </button>
    <button @click="loadWare">Actualizar </button>
-   <button @click="reportWare">Generar Reporte</button>
    <div style="width: 80%" >
   <vue-table-dynamic :params="params"
       @select="onSelect"
@@ -42,6 +41,7 @@ export default {
           ['Barcel', '244 sur'],
           ['Totis', '930 este'],
         ],
+        deleteDate:[],
         header: 'row',
         border: true,
         stripe: true,
@@ -60,6 +60,7 @@ export default {
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
+      this.params.deleteDate=checkedIndexs
     },
     signUpWarehouse(){
         if(this.wareCom==''||this.wareUbi=='')
@@ -74,10 +75,15 @@ export default {
     signDownWarehouse(){
         this.wareCom='';
         this.wareUbi='';
+        console.log(this.params.deleteData.length)
+        for (var i = this.params.deleteData.length-1; i>0 ; i--) {
+        this.params.data.splice(this.params.deleteData[i], 1)
+      }
     },
     loadWarehouse(){
         this.wareCom='';
         this.wareUbi='';
+        alert("Actualizando informacion...");
     }
   },
   components: { VueTableDynamic }

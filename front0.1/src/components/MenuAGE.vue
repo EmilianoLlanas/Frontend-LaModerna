@@ -21,6 +21,7 @@
 </template>
 
 <script>
+
 export default {
   name: 'MenuAGE',
   methods: {
@@ -28,6 +29,7 @@ export default {
       alert('aqui ira una conexion con backend para subir un csv')
     },
     report(){
+
     },
     consultStatus(){
     },consultOrder(){
@@ -45,4 +47,33 @@ export default {
 #test {
   background-color: gray;
 }
+
+
+    },
+    consultStatus(){
+
+    },consultOrder(){
+
+    },modifyOrder(){
+
+    },
+    captureOrder(){
+
+    },
+    searchOrder(){
+
+    }
+    }
+  }
+
+</script>
+
+<style scoped>
+
+#test {
+  background-color: gray;
+
+}
+
+
 </style>

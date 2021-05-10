@@ -28,13 +28,11 @@
    <button @click="signUpFactura"> Dar de alta </button>
    <button @click="signDownFactura"> Dar de baja </button>
    <button @click="loadFactura">Actualizar </button>
-   <button @click="reportFactura">Generar Reporte</button>
    <div style="width: 80%" >
   <vue-table-dynamic :params="params"
       @select="onSelect"
       @selection-change="onSelectionChange"
       ref="table"></vue-table-dynamic>
-
   </div>
   </div>
 </template>
@@ -57,6 +55,7 @@ export default {
           ['31/12/20', '4486', 'Barcel', '9021', 'ok'],
           ['10/01/21', '6548', 'Totis', '2312', 'ok'],
         ],
+        deleteDate:[],
         header: 'row',
         border: true,
         stripe: true,
@@ -75,6 +74,7 @@ export default {
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
+      this.params.deleteData=checkedIndexs
     },
     signUpFactura(){
       if(this.facDate==''||this.facId==''||this.facCli==''||this.facOrd==''||this.facEst=='')
@@ -92,6 +92,10 @@ export default {
         this.facDate='';
         this.facOrd='';
         this.facEst='';
+        console.log(this.params.deleteData.length)
+        for (var i = this.params.deleteData.length-1; i>0 ; i--) {
+        this.params.data.splice(this.params.deleteData[i], 1)
+      }
     },
     loadFactura(){
         this.facDate='';
@@ -99,6 +103,7 @@ export default {
         this.facDate='';
         this.facOrd='';
         this.facEst='';
+        alert("Actualizando informacion...");
     }
   },
   components: { VueTableDynamic }
