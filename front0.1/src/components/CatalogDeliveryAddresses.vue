@@ -55,6 +55,7 @@ export default {
           ['Toyota', 'José Luis Pérez' ,'52200', 'México', 'MAPA630726BI8'],
           ['Totis', 'Gabriel Lozano' ,'53200', 'México', 'MAPA630726BI8'],
         ],
+        deleteDate:[],
         header: 'row',
         border: true,
         stripe: true,
@@ -75,6 +76,7 @@ export default {
 
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
+      this.params.deleteDate=checkedIndexs
     },
 
     signUpAddress(){
@@ -90,15 +92,15 @@ export default {
     },
 
     signDownAddress(){
-        //there will be a method here to establish connection with backend and sign down the address' data, some day....
-        if(this.addressPostCode=='')
-        {
-          alert('Por favor, llene el campo de Código Postal para eliminar una dirección')
-        }
-        else{
-          alert('Eliminando dirección de código postal: '+this.addressPostCode);
-        }
-        
+        this.addressCom='';
+        this.addressClient='';
+        this.addressPostCode='';
+        this.addressCountry='';
+        this.addressRFC='';
+        console.log(this.params.deleteData.length)
+        for (var i = this.params.deleteData.length-1; i>0 ; i--) {
+        this.params.data.splice(this.params.deleteData[i], 1)
+      }
     },
     loadAddress(){
         //there will be a method here to establish connection with backend and update the table, some day....

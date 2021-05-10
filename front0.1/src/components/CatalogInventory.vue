@@ -16,7 +16,6 @@
    <button @click="signUpInv"> Agregar </button>
    <button @click="signDownInv"> Eliminar </button>
    <button @click="loadInv">Actualizar </button>
-   <button @click="reportInv">Generar reporte </button>
    <div id="table">
   <vue-table-dynamic :params="params"
       @select="onSelect"
@@ -44,6 +43,7 @@ export default {
           ['Barcel', 'Avenida Eduardo Monroy Cárdenas 2000 San Antonio Buenavista, 50110 Toluca de Lerdo, Méx.' ,'200167 CORR. UNIVERSAL GRANEL ', '40.0'],
           ['Totis', 'Delegación San Buenaventura, 50110 Toluca de Lerdo, Méx.' ,'LAMINA CARTON CH-1 ', '2000.0' ],
         ],
+        deleteDate:[],
         header: 'row',
         border: true,
         stripe: true,
@@ -63,6 +63,7 @@ export default {
 
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
+      this.params.deleteDate=checkedIndexs
     },
 
     signUpInv(){
@@ -79,24 +80,21 @@ export default {
 
     signDownInv(){
         //there will be a method here to establish connection with backend and sign down the address' data, some day....
-        if(this.invCom==''||this.invArticle==''||this.invWarehouse=='')
-        {
-          alert('Por favor, llene los campos Compañía, Artículo y Almacén para eliminar un artículo '+
-          this.invArticle+' '+this.invCom+' '+this.invWarehouse)
-        }
-        else{
-          alert('Eliminando artículo'+this.invArticle+' de '+this.invCom+', almacén'+this.invWarehouse);
-        }
+        this.invCom='';
+        this.invWarehouse='';
+        this.invArticle='';
+        this.invStock='';
+        console.log(this.params.deleteData.length)
+        for (var i = this.params.deleteData.length-1; i>0 ; i--) {
+        this.params.data.splice(this.params.deleteData[i], 1)
+      }
         
     },
     loadInv(){
         //there will be a method here to establish connection with backend and update the table, some day....
         alert('Cargando catálogo, espere un momento por favor')
     },
-    reportInv(){
-        //there will be a method here to establish connection with backend and update the table, some day....
-        alert('Generando reporte, espere un momento por favor')
-    }
+    
   },
   components: { VueTableDynamic }
 }
