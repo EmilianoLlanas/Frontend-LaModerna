@@ -1,25 +1,33 @@
 <template>
-    <div>
-    <h1> Catálogo de Direcciones de entrega </h1>
+    <div id="test">
+    <h1 id="header1"> Catálogo de Direcciones de entrega </h1>
     <div class="inputForm">
     <form>
       <label>Compañia</label>
       <br>
       <input v-model="addressCom" placeholder="Compañía"> 
+      <br>
+      <label>Cliente</label>
+      <br>
       <input v-model="addressClient" placeholder="Cliente">
-      <input v-model="addressDelivery" placeholder="Dirección Entrega">
-      <input v-model="addressName" placeholder="Nombre">
-      <input v-model="addressPostCode" placeholder="CódigoPostal">
-      <input v-model="addressRouteCode" placeholder="CódigoRuta">
+      <br>
+      <label>Codigo Postal</label>
+      <br>
+      <input v-model="addressPostCode" placeholder="Codigo Postal">
+      <br>
+      <label>Pais</label>
+      <br>
       <input v-model="addressCountry" placeholder="País">
+      <br>
+      <label>RFC</label>
+      <br>
       <input v-model="addressRFC" placeholder="RFC">
    </form>
   </div>
-   <br>
    <button @click="signUpAddress"> Dar de alta </button>
    <button @click="signDownAddress"> Dar de baja </button>
    <button @click="loadAddress">Actualizar </button>
-   <div style="width: 80%" >
+   <div id="table">
   <vue-table-dynamic :params="params"
       @select="onSelect"
       @selection-change="onSelectionChange"
@@ -37,18 +45,15 @@ export default {
     return {
       addressCom:'',
       addressClient:'',
-      addressDelivery:'',
-      addressName:'',
       addressPostCode:'',
-      addressRouteCode:'',
       addressCountry:'',
       addressRFC:'',
       params: {
         data: [
-          ['Compañía', 'Cliente','Dirección entrega','Nombre',  'CódigoPostal', 'CódigoRuta','País', 'RFC'],
-          ['224', '00320' ,'003', 'Dimex', '52315', '15024',  'MEX', 'MAPA630726BI8'],
-          ['315', '00462' ,'001', 'Tuny','52600','16024','MEX', 'MAPA630726BI8'],
-          ['425', '00730' ,'002', 'Plásticos de México','52856','15035','MEX', 'MAPA630726BI8'],
+          ['Compañía', 'Cliente', 'CódigoPostal', 'País', 'RFC'],
+          ['Zara', 'José Luis Ramírez' ,'52165', 'México', 'MAPA630726BI8'],
+          ['Toyota', 'José Luis Pérez' ,'52200', 'México', 'MAPA630726BI8'],
+          ['Totis', 'Gabriel Lozano' ,'53200', 'México', 'MAPA630726BI8'],
         ],
         header: 'row',
         border: true,
@@ -74,13 +79,13 @@ export default {
 
     signUpAddress(){
         //there will be a method here to establish connection with backend and sign up the address' data, some day....
-        if(this.addressCom==''||this.addressClient==''||this.addressPostCode==''||this.addressCountry==''||this.addressRFC==''||this.addressDelivery==''||this.addressName==''||this.addressRouteCode=='')
+        if(this.addressCom==''||this.addressClient==''||this.addressPostCode==''||this.addressCountry==''||this.addressRFC=='')
         {
           alert('Por favor, llene todos los campos para registrar una dirección')
         }
         else
         {
-          this.params.data.push([this.addressCom, this.addressClient,this.addressDelivery,this.addressName, this.addressPostCode,this.addressRouteCode, this.addressCountry, this.addressRFC]);
+          this.params.data.push([this.addressCom, this.addressClient, this.addressPostCode, this.addressCountry, this.addressRFC]);
         }
     },
 
