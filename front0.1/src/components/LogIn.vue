@@ -19,6 +19,8 @@
       <button @click="navProcessedOrders"> Ir a la Consulta de Órdenes Procesadas </button>
       <button @click="navOrderStatus"> Ir a la Consulta de Estatus de Órdenes </button>
       <button @click="navAuthorizeDates"> Ir a la autorizacion de fechas de entrega </button>
+      <button @click="backup"> Generar respaldo del sistema </button>
+      <button @click="restore"> Restaurar sistema </button>
       <button @click="navMenuAge"> ir a menu principal de AGE </button>
     </div>
 
@@ -28,6 +30,11 @@
 
 export default {
   name: 'Login',
+  data: function() {
+        return {
+            dateS: ""
+        }
+    },
   methods: {
       navCatalogArticles () {
       this.$router.push({ name:'CatalogArticles' });
@@ -80,6 +87,14 @@ export default {
     },
     navMenuAge(){
       this.$router.push({name:'MenuAGE'})
+    },
+    backup(){
+      var date = new Date();
+      this.dateS = date.toISOString().substring(0,19);
+      alert("Generando respaldo del sistema");
+    },
+    restore(){
+      alert("Sistema restaurado desde el respaldo hecho el: "+this.dateS)
     }
     }
   }
