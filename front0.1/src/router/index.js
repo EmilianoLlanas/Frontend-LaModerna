@@ -134,7 +134,7 @@ export default new Router({
     path: '/OrderStatus',
     name: 'OrderStatus',
     component: OrderStatus
-  },
+  },{
       path: '/AuthorizeDates',
       name: 'AuthorizeDates',
       component: AuthorizeDates

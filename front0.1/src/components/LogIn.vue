@@ -73,6 +73,7 @@ export default {
     },
     navOrderStatus() {
       this.$router.push({name: 'OrderStatus'})
+    },
     navAuthorizeDates(){
       this.$router.push({name:'AuthorizeDates'})
 
