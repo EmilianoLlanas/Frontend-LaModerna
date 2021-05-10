@@ -1,34 +1,32 @@
-
 <template>
-    <div id="test">
-    <h1 id="header1"> Catálogo de Direcciones de entrega </h1>
+    <div>
+    <h1> Catálogo de Direcciones de entrega </h1>
     <div class="inputForm">
     <form>
       <label>Compañia</label>
       <br>
       <input v-model="addressCom" placeholder="Compañía"> 
       <br>
-      <label>Cliente</label>
-      <br>
       <input v-model="addressClient" placeholder="Cliente">
       <br>
-      <label>Codigo Postal</label>
+      <input v-model="addressDelivery" placeholder="Dirección Entrega">
       <br>
-      <input v-model="addressPostCode" placeholder="Codigo Postal">
+      <input v-model="addressName" placeholder="Nombre">
       <br>
-      <label>Pais</label>
+      <input v-model="addressPostCode" placeholder="CódigoPostal">
+      <br>
+      <input v-model="addressRouteCode" placeholder="CódigoRuta">
       <br>
       <input v-model="addressCountry" placeholder="País">
-      <br>
-      <label>RFC</label>
       <br>
       <input v-model="addressRFC" placeholder="RFC">
    </form>
   </div>
+   <br>
    <button @click="signUpAddress"> Dar de alta </button>
    <button @click="signDownAddress"> Dar de baja </button>
    <button @click="loadAddress">Actualizar </button>
-   <div id="table">
+   <div style="width: 80%" >
   <vue-table-dynamic :params="params"
       @select="onSelect"
       @selection-change="onSelectionChange"
@@ -46,23 +44,26 @@ export default {
     return {
       addressCom:'',
       addressClient:'',
+      addressDelivery:'',
+      addressName:'',
       addressPostCode:'',
+      addressRouteCode:'',
       addressCountry:'',
       addressRFC:'',
       params: {
         data: [
-          ['Compañía', 'Cliente', 'CódigoPostal', 'País', 'RFC'],
-          ['Zara', 'José Luis Ramírez' ,'52165', 'México', 'MAPA630726BI8'],
-          ['Toyota', 'José Luis Pérez' ,'52200', 'México', 'MAPA630726BI8'],
-          ['Totis', 'Gabriel Lozano' ,'53200', 'México', 'MAPA630726BI8'],
+          ['Compañía', 'Cliente','Dirección entrega','Nombre',  'CódigoPostal', 'CódigoRuta','País', 'RFC'],
+          ['224', '00320' ,'003', 'Dimex', '52315', '15024',  'MEX', 'MAPA630726BI8'],
+          ['315', '00462' ,'001', 'Tuny','52600','16024','MEX', 'MAPA630726BI8'],
+          ['425', '00730' ,'002', 'Plásticos de México','52856','15035','MEX', 'MAPA630726BI8'],
         ],
-        deleteDate:[],
+        deleteData:[],
         header: 'row',
         border: true,
         stripe: true,
         showCheck: true,
         enableSearch: true,
-        sort: [0, 1],
+        sort: [0, 1],/* Maybe this should change */
         pagination: true,
         pageSize: 10,
         //newAddress:[addressCom, addressClient, addressPostCode, addressCountry, addressRFC]
@@ -77,31 +78,44 @@ export default {
 
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
-      this.params.deleteDate=checkedIndexs
+      this.params.deleteData=checkedIndexs
     },
 
     signUpAddress(){
         //there will be a method here to establish connection with backend and sign up the address' data, some day....
-        if(this.addressCom==''||this.addressClient==''||this.addressPostCode==''||this.addressCountry==''||this.addressRFC=='')
+        if(this.addressCom==''||this.addressClient==''||this.addressPostCode==''||this.addressCountry==''||this.addressRFC==''||this.addressDelivery==''||this.addressName==''||this.addressRouteCode=='')
         {
           alert('Por favor, llene todos los campos para registrar una dirección')
         }
         else
         {
-          this.params.data.push([this.addressCom, this.addressClient, this.addressPostCode, this.addressCountry, this.addressRFC]);
+          this.params.data.push([this.addressCom, this.addressClient,this.addressDelivery,this.addressName, this.addressPostCode,this.addressRouteCode, this.addressCountry, this.addressRFC]);
         }
+        this.addressCom='';
+          this.addressClient='';
+          this.addressDelivery='';
+          this.addressName='';
+          this.addressPostCode='';
+          this.addressRouteCode='';
+          this.addressCountry='';
+          this.addressRFC='';
     },
 
     signDownAddress(){
-        this.addressCom='';
-        this.addressClient='';
-        this.addressPostCode='';
-        this.addressCountry='';
-        this.addressRFC='';
-        console.log(this.params.deleteData.length)
-        for (var i = this.params.deleteData.length-1; i>0 ; i--) {
-        this.params.data.splice(this.params.deleteData[i], 1)
-      }
+        //there will be a method here to establish connection with backend and sign down the address' data, some day....
+          this.addressCom='';
+          this.addressClient='';
+          this.addressDelivery='';
+          this.addressName='';
+          this.addressPostCode='';
+          this.addressRouteCode='';
+          this.addressCountry='';
+          this.addressRFC='';
+          
+          console.log(this.params.deleteData.length)
+          for (var i = this.params.deleteData.length-1; i>0 ; i--) {
+          this.params.data.splice(this.params.deleteData[i], 1)
+          }        
     },
     loadAddress(){
         //there will be a method here to establish connection with backend and update the table, some day....
