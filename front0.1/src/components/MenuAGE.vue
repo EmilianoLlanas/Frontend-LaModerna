@@ -32,6 +32,25 @@ export default {
 
     },
     consultStatus(){
+    },consultOrder(){
+    },modifyOrder(){
+    },
+    captureOrder(){
+    },
+    searchOrder(){
+    }
+    }
+  }
+</script>
+
+<style scoped>
+#test {
+  background-color: gray;
+}
+
+
+    },
+    consultStatus(){
 
     },consultOrder(){
 
@@ -55,5 +74,6 @@ export default {
   background-color: gray;
 
 }
+
 
 </style>
