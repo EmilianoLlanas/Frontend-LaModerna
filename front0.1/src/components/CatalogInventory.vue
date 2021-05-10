@@ -39,9 +39,9 @@ export default {
       params: {
         data: [
           ['Compañía', 'Almacén', 'Artículo', 'Stock'],
-          ['Plásticos de México', '1024' ,'200109 CORR. MARQUETA 5KG', '4320.0'],
-          ['Barcel', '1024' ,'200167 CORR. UNIVERSAL GRANEL ', '40.0'],
-          ['Totis', '2410' ,'LAMINA CARTON CH-1 ', '2000.0' ],
+          ['Plásticos de México', 'Blvd. Solidaridad las Torres S/N, San Salvador Tizatlali, 52172 Metepec, Méx.' ,'200109 CORR. MARQUETA 5KG', '4320.0'],
+          ['Barcel', 'Avenida Eduardo Monroy Cárdenas 2000 San Antonio Buenavista, 50110 Toluca de Lerdo, Méx.' ,'200167 CORR. UNIVERSAL GRANEL ', '40.0'],
+          ['Totis', 'Delegación San Buenaventura, 50110 Toluca de Lerdo, Méx.' ,'LAMINA CARTON CH-1 ', '2000.0' ],
         ],
         header: 'row',
         border: true,
