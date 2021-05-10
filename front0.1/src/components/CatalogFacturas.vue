@@ -7,7 +7,7 @@
       <br>
       <input v-model="facDate" placeholder="Fecha">
       <br>
-      <label>NumeroFactura</label>
+      <label>Numero Factura</label>
       <br>
       <input v-model="facId" placeholder="Numero de Factura">
       <br>
@@ -21,7 +21,7 @@
       <br>
       <label>Entrega</label>
       <br>
-      <input v-model="facEst" placeholder="Estatus de entrega">
+      <input v-model="facEst" placeholder="Estatus de Entrega">
    </form>
   </div>
    <button @click="signUpFactura"> Dar de alta </button>
