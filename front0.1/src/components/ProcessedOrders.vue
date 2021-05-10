@@ -1,49 +1,41 @@
 <template>
     <div id="test">
-    <h1> Catálogo de Compañías </h1>
-    <div class="inputForm">
-    <form>
-      <label>ID</label>
-      <br>
-      <input v-model="aId" placeholder="Identificador de la Compañía">
-      <br>
-      <label>Nombre</label>
-      <br>
-      <input v-model="aName" placeholder="Nombre de la Compañía">
-    </form>
-    </div>
-   <button @click="signUpCompany"> Dar de alta </button>
-   <button @click="signDownCompany"> Dar de baja </button>
-   <button @click="loadCompanies"> Actualizar </button>
+    <h1> Órdenes de venta Procesadas </h1>
+
+   <button @click="loadOrders">Actualizar</button>
    <div id="table" >
+
   <vue-table-dynamic :params="params"
       @select="onSelect"
       @selection-change="onSelectionChange"
       ref="table"></vue-table-dynamic>
-
+    <ProcessedOrdersDetails :id="params.id"></ProcessedOrdersDetails>
   </div>
+
   </div>
 </template>
 
 <script>
-import VueTableDynamic from 'vue-table-dynamic'
-export default {
-  name: 'CatalogArticles',
-  data() {
-    return {
-      aId:'',
-      aName:'',
-      aDescription:'',
-      params: {
-        data: [
-          ['ID', 'Nombre'],
-          [1, 'b3ba90'],
-          [2, 'ec0b78'],
-          [3, 'a8c325'],
-          [4, 'a8c325'],
-          [5, 'a8c325']
+import VueTableDynamic from 'vue-table-dynamic';
+import ProcessedOrdersDetails from '@/components/ProcessedOrdersDetails.vue';
 
+export default {
+  name: 'ProcessedOrders',
+
+  data() {
+
+    return {
+
+      params: {
+
+        data: [
+          ['ID','Cliente' ,'Nombre','Fecha Orden','Artículo','Cantidad','Precio'],
+          ["1", "BIMBO", "PAPELITO-SUAVE-500 ","2021-03-21","PAPELITO SUAVE","500","$50250.00"],
+          ["2", "BARCEL", "PAPELITO-DURO-800 ","2021-02-1","PAPELITO DURO","800","$63250.00"],
+          ["3", "TIA ROSA", "ALUMINIO-ARRUGADO-100 ","2021-04-2","ALUMINIO ARRUGADO","100","$5050.00"],
+          ["4", "MOLINOS JORGE", "EMPAQUE-AWITADO-1500 ","2020-12-26","EMPAQUE AWITADO","1500","$70950.00"],
         ],
+        id:[],
         header: 'row',
         border: true,
         stripe: true,
@@ -52,37 +44,27 @@ export default {
         sort: [0, 1,2],
         pagination: true,
         pageSize: 10,
-      }
+      },
+
     }
   },
   methods: {
     onSelect (isChecked, index, data) {
       console.log('onSelect: ', isChecked, index, data)
       console.log('Checked Data:', this.$refs.table.getCheckedRowDatas(true))
+
+
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
+      this.params.id=checkedIndexs
     },
-    signUpCompany(){
-        //there will be a method here to establish connection with backend and sign up the companies' id and name, some day....
-        this.aId='';
-        this.aName='';
-        this.aDescription='';
+    loadOrders(){
+        alert('Actualizando tablas con ERP')
     },
-    signDownCompany(){
-        //there will be a method here to establish connection with backend and sign down the companies' id and name, some day....
-        this.aId='';
-        this.aName='';
-        this.aDescription='';
-    },
-    loadCompanies(){
-        //there will be a method here to establish connection with backend and load the companies' id and name, some day....
-        this.aId='';
-        this.aName='';
-        this.aDescription='';
-    },
+
   },
-  components: { VueTableDynamic }
+  components: { VueTableDynamic,ProcessedOrdersDetails }
 }
 </script>
 
@@ -117,6 +99,19 @@ export default {
   border: transparent;
 }
 
+#test{
+  background-color: rgba(33,52,133,0.20);
+  margin: 1%;
+  color: #3B0EA4;
+  font-family: "GOTY0", "GOTY1", "GOTY2", verdana;
+}
+
+#table{
+  width: 90%;
+  margin-left: 3%;
+  margin-top: 2%;
+}
+
 button{
   margin-top: 0%;
   margin-left: 3%;
@@ -134,18 +129,5 @@ button{
 
 button:hover{
   background-color: rgba(14,44,164,0.30) ;
-}
-
-#test{
-  background-color: rgba(33,52,133,0.20);
-  margin: 1%;
-  color: #3B0EA4;
-  font-family: "GOTY0", "GOTY1", "GOTY2", verdana;
-}
-
-#table{
-  width: 80%;
-  margin-left: 10%;
-  margin-top: 2%;
 }
 </style>

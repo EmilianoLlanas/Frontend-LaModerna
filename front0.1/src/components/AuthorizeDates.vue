@@ -1,26 +1,18 @@
 <template>
-    <div id="test">
-    <h1> Catálogo de Compañías </h1>
+  <div id="test">
+    <h1 id="header1"> Autorizacion de fechas </h1>
     <div class="inputForm">
-    <form>
-      <label>ID</label>
-      <br>
-      <input v-model="aId" placeholder="Identificador de la Compañía">
-      <br>
-      <label>Nombre</label>
-      <br>
-      <input v-model="aName" placeholder="Nombre de la Compañía">
-    </form>
-    </div>
-   <button @click="signUpCompany"> Dar de alta </button>
-   <button @click="signDownCompany"> Dar de baja </button>
-   <button @click="loadCompanies"> Actualizar </button>
-   <div id="table" >
-  <vue-table-dynamic :params="params"
+
+  </div>
+   <button @click="authOrder"> Autorizar entrega </button>
+   <button @click="authDate"> Autorizar Fecha </button>
+   <button @click="update">Actualizar </button>
+  <div id="table">
+    <vue-table-dynamic :params="params"
       @select="onSelect"
       @selection-change="onSelectionChange"
-      ref="table"></vue-table-dynamic>
-
+      ref="table">
+    </vue-table-dynamic>
   </div>
   </div>
 </template>
@@ -28,21 +20,15 @@
 <script>
 import VueTableDynamic from 'vue-table-dynamic'
 export default {
-  name: 'CatalogArticles',
+  name: 'AuthorizeDates',
   data() {
     return {
-      aId:'',
-      aName:'',
-      aDescription:'',
       params: {
         data: [
-          ['ID', 'Nombre'],
-          [1, 'b3ba90'],
-          [2, 'ec0b78'],
-          [3, 'a8c325'],
-          [4, 'a8c325'],
-          [5, 'a8c325']
-
+          ['ID','Cliente','Fecha','Fecha Autorizada','Entrega Autorizada'],
+          [1, 'Zara', '1/12/2021','NO','NO'],
+          [2, 'WalMart', '1/12/2021','SI','NO'],
+          [3, 'Soriana', '1/12/2021','NO','SI'],
         ],
         header: 'row',
         border: true,
@@ -63,24 +49,18 @@ export default {
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
     },
-    signUpCompany(){
-        //there will be a method here to establish connection with backend and sign up the companies' id and name, some day....
-        this.aId='';
-        this.aName='';
-        this.aDescription='';
+    update(){
+        //there will be a method here to establish connection with backend and sign up the articles' id and name, some day....
+
     },
-    signDownCompany(){
-        //there will be a method here to establish connection with backend and sign down the companies' id and name, some day....
-        this.aId='';
-        this.aName='';
-        this.aDescription='';
+    authDate(){
+        //there will be a method here to establish connection with backend and sign down the articles' id and name, some day....
+
     },
-    loadCompanies(){
-        //there will be a method here to establish connection with backend and load the companies' id and name, some day....
-        this.aId='';
-        this.aName='';
-        this.aDescription='';
-    },
+    authOrder(){
+        //there will be a method here to establish connection with backend and update the table, some day....
+
+    }
   },
   components: { VueTableDynamic }
 }
@@ -143,9 +123,15 @@ button:hover{
   font-family: "GOTY0", "GOTY1", "GOTY2", verdana;
 }
 
+#header1{
+  margin: 2%;
+  font-size: 30px;
+}
+
 #table{
   width: 80%;
   margin-left: 10%;
   margin-top: 2%;
 }
+
 </style>
