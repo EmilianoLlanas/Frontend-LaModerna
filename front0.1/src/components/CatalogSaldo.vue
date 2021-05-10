@@ -11,17 +11,17 @@
       <br>
       <input v-model="salCli" placeholder="Cliente">
       <br>
-      <label>NumeroFactura</label>
+      <label>Numero Factura</label>
       <br>
-      <input v-model="salIdFac" placeholder="NumeroFactura">
+      <input v-model="salIdFac" placeholder="Numero Factura">
       <br>
-      <label>SaldoOrden</label>
+      <label>Saldo Orden</label>
       <br>
-      <input v-model="salOrd" placeholder="SaldoOrden">
+      <input v-model="salOrd" placeholder="Saldo Orden">
       <br>
-      <label>SaldoFactura</label>
+      <label>Saldo Factura</label>
       <br>
-      <input v-model="salFac" placeholder="SaldoFactura">
+      <input v-model="salFac" placeholder="Saldo Factura">
    </form>
   </div>
    <br>
