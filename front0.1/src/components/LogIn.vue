@@ -15,6 +15,11 @@
       <button @click="navCatalogSaldo"> Ir al catálogo de Saldos </button>
       <button @click="navCatalogWarehouse"> Ir al catálogo de Almacenes </button>
       <button @click="navCatalogDeliveryAddresses"> Ir al catálogo de Direcciones de entrega </button>
+      <button @click="navCatalogInventory"> Ir al catálogo de Inventario </button>
+      <button @click="navProcessedOrders"> Ir a la Consulta de Órdenes Procesadas </button>
+      <button @click="navOrderStatus"> Ir a la Consulta de Estatus de Órdenes </button>
+      <button @click="navAuthorizeDates"> Ir a la autorizacion de fechas de entrega </button>
+      <button @click="navMenuAge"> ir a menu principal de AGE </button>
     </div>
 
 </template>
@@ -60,10 +65,24 @@ export default {
 
     navCatalogDeliveryAddresses() {
       this.$router.push({name: 'CatalogDeliveryAddresses'})
+    },
+    navCatalogInventory() {
+      this.$router.push({name: 'CatalogInventory'})
+    },
+    navProcessedOrders() {
+      this.$router.push({name: 'ProcessedOrders'})
+    },
+    navOrderStatus() {
+      this.$router.push({name: 'OrderStatus'})
+    },
+    navAuthorizeDates(){
+      this.$router.push({name:'AuthorizeDates'})
+    },
+    navMenuAge(){
+      this.$router.push({name:'MenuAGE'})
     }
     }
   }
-
 </script>
 
 <style scoped>
