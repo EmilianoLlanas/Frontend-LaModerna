@@ -28,7 +28,7 @@
    <button @click="signUpSaldo"> Dar de alta </button>
    <button @click="signDownSaldo"> Dar de baja </button>
    <button @click="loadSaldo">Actualizar </button>
-   <div style="width: 80%" >
+   <div id="table">
   <vue-table-dynamic :params="params"
       @select="onSelect"
       @selection-change="onSelectionChange"
