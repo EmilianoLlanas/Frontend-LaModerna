@@ -1,6 +1,6 @@
 <template>
     <div id="test">
-    <h1> Catálogo de Compañías </h1>
+    <h1 id="header1"> Catálogo de Compañías </h1>
     <div class="inputForm">
     <form>
       <label>ID</label>
@@ -158,6 +158,11 @@ button:hover{
   margin: 1%;
   color: #3B0EA4;
   font-family: "GOTY0", "GOTY1", "GOTY2", verdana;
+}
+
+#header1{
+  margin: 2%;
+  font-size: 30px;
 }
 
 #table{
