@@ -21,6 +21,7 @@ import CatalogInventory from '@/components/CatalogInventory'
 import ProcessedOrders from '@/components/ProcessedOrders'
 import OrderStatus from '@/components/OrderStatus'
 import AuthorizeDates from '@/components/AuthorizeDates'
+import MenuAGE from '@/components/MenuAGE'
 
 Vue.use(Router)
 
@@ -138,7 +139,11 @@ export default new Router({
       path: '/AuthorizeDates',
       name: 'AuthorizeDates',
       component: AuthorizeDates
+    },
+    {
+      path: '/MenuAGE',
+      name: 'MenuAGE',
+      component: MenuAGE
     }
   ]
-
 })

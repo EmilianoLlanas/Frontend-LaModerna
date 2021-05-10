@@ -19,6 +19,7 @@
       <button @click="navProcessedOrders"> Ir a la Consulta de Órdenes Procesadas </button>
       <button @click="navOrderStatus"> Ir a la Consulta de Estatus de Órdenes </button>
       <button @click="navAuthorizeDates"> Ir a la autorizacion de fechas de entrega </button>
+      <button @click="navMenuAge"> ir a menu principal de AGE </button>
     </div>
 
 </template>
@@ -76,11 +77,12 @@ export default {
     },
     navAuthorizeDates(){
       this.$router.push({name:'AuthorizeDates'})
-
+    },
+    navMenuAge(){
+      this.$router.push({name:'MenuAGE'})
     }
     }
   }
-
 </script>
 
 <style scoped>
