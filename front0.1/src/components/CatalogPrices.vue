@@ -80,6 +80,7 @@ export default {
           ['ejemplo1','lista0','123','0','111','13.3','2','Descripcion 1','12/11/20','12/11/21'],
           ['ejemplo2','lista1','124','2','123','32.3','1','Descripcion 2','12/12/20','12/12/21'],
         ],
+        deleteData:[],
         header: 'row',
         border: true,
         stripe: true,
@@ -98,6 +99,7 @@ export default {
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
+      this.params.deleteData=checkedIndexs
     },
     signUpPrice(){
         //there will be a method here to establish connection with backend and sign up the articles' id and name, some day....
@@ -124,6 +126,9 @@ export default {
         this.aDescripcion='';
         this.aFechaInicio='';
         this.aFechaCaducidad='';
+        for (var i = this.params.deleteData.length-1; i>0 ; i--) {
+          this.params.data.splice(this.params.deleteData[i], 1)
+        }
     },
     loadPrices(){
         //there will be a method here to establish connection with backend and update the table, some day....

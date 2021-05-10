@@ -59,6 +59,7 @@ export default {
           [0,1,2,3,4],
           [0,1,2,3,4],
         ],
+        deleteData:[],
         header: 'row',
         border: true,
         stripe: true,
@@ -77,6 +78,7 @@ export default {
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
+      this.params.deleteData=checkedIndexs
     },
     signUpClient(){
         //there will be a method here to establish connection with backend and sign up the articles' id and name, some day....
@@ -93,6 +95,9 @@ export default {
         this.aNombreA='';
         this.aNombreB='';
         this.aEstatus='';
+        for (var i = this.params.deleteData.length-1; i>0 ; i--) {
+          this.params.data.splice(this.params.deleteData[i], 1)
+        }
     },
     loadClient(){
         //there will be a method here to establish connection with backend and update the table, some day....

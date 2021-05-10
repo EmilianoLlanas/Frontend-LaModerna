@@ -22,6 +22,7 @@ import ProcessedOrders from '@/components/ProcessedOrders'
 import OrderStatus from '@/components/OrderStatus'
 import AuthorizeDates from '@/components/AuthorizeDates'
 import MenuAGE from '@/components/MenuAGE'
+import OrderEdit from '@/components/OrderEdit'
 
 
 Vue.use(Router)
@@ -140,6 +141,11 @@ export default new Router({
       path: '/AuthorizeDates',
       name: 'AuthorizeDates',
       component: AuthorizeDates
+    },
+    {
+      path: '/OrderEdit',
+      name: 'OrderEdit',
+      component: OrderEdit
     },
     {
       path: '/MenuAGE',

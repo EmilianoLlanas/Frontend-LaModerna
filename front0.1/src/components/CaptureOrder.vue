@@ -30,6 +30,7 @@
         <br>
         <textarea v-model="aObservaciones" placeholder="Observaciones de la orden"></textarea> 
         <br>
+        <br>
       </form>
   </div>
   <br>
