@@ -24,7 +24,6 @@
       <input v-model="facEst" placeholder="Estatus de entrega">
    </form>
   </div>
-   <br>
    <button @click="signUpFactura"> Dar de alta </button>
    <button @click="signDownFactura"> Dar de baja </button>
    <button @click="loadFactura">Actualizar </button>
