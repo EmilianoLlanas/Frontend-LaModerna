@@ -23,12 +23,12 @@
         <br>
         <input v-model="aClieDest" placeholder="Nombre del cliente">
 
-
     </form>
   </div>
    <br>
    <button @click="sendItem"> Agregar Artículo </button>
    <button @click="sendData"> Enviar Artículos</button>
+   <button @click="deleteData"> Eliminar Artículo</button>
 
    <div style="width: 80%" >
   <vue-table-dynamic :params="params"
@@ -55,6 +55,7 @@ export default {
       aClieDest:'',
       allArticles:[],
       empty:true,
+      select:'',
       params: {
       data: [
         ['Compañía Origen', 'Cliente Origen', 'Artículo', 'Compañía Destino','Cliente Destino'],
@@ -84,6 +85,8 @@ export default {
   methods: {
     onSelect (isChecked, index, data) {
       console.log('onSelect: ', isChecked, index, data)
+      this.select=index;
+      console.log('es',this.select)
       console.log('Checked Data:', this.$refs.table.getCheckedRowDatas(true))
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
@@ -122,6 +125,15 @@ export default {
       else
       {
         alert('Se han enviado los datos')
+      }
+
+    },
+    deleteData(){
+      if(this.select!=''){
+        this.params.data.splice(this.select,1);
+      //  this.select='';
+      }else{
+        alert('No se ha seleccionado nada')
       }
 
     }
