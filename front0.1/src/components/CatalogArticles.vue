@@ -48,6 +48,7 @@ export default {
           [5, 'a8c325', 'aab418'],
 
         ],
+        deleteData:[],
         header: 'row',
         border: true,
         stripe: true,
@@ -66,9 +67,18 @@ export default {
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
+      this.params.deleteData=checkedIndexs
     },
     signUpArticle(){
         //there will be a method here to establish connection with backend and sign up the articles' id and name, some day....
+        if(this.aId==''||this.aName==''||this.aDescription=='')
+        {
+          alert('Por favor, llene todos los campos para registrar inventario')
+        }
+        else
+        {
+          this.params.data.push([this.aId, this.aName,this.aDescription]);
+        }
         this.aId='';
         this.aName='';
         this.aDescription='';
@@ -78,12 +88,17 @@ export default {
         this.aId='';
         this.aName='';
         this.aDescription='';
+
+        for (var i = this.params.deleteData.length-1; i>0 ; i--) {
+          this.params.data.splice(this.params.deleteData[i], 1)
+        }
     },
     loadArticles(){
         //there will be a method here to establish connection with backend and update the table, some day....
         this.aId='';
         this.aName='';
         this.aDescription='';
+        alert('Actualizando tabla con Base de datos')
     }
   },
   components: { VueTableDynamic }

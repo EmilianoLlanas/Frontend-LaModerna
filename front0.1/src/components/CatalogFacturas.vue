@@ -33,7 +33,6 @@
       @select="onSelect"
       @selection-change="onSelectionChange"
       ref="table"></vue-table-dynamic>
-
   </div>
   </div>
 </template>
@@ -46,7 +45,7 @@ export default {
     return {
       facDate:'',
       facId:'',
-      facDate:'',
+      facCli:'',
       facOrd:'',
       facEst:'',
       params: {
@@ -56,6 +55,7 @@ export default {
           ['31/12/20', '4486', 'Barcel', '9021', 'ok'],
           ['10/01/21', '6548', 'Totis', '2312', 'ok'],
         ],
+        deleteDate:[],
         header: 'row',
         border: true,
         stripe: true,
@@ -74,30 +74,36 @@ export default {
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
+      this.params.deleteData=checkedIndexs
     },
     signUpFactura(){
-        //there will be a method here to establish connection with backend and sign up the deliveries' company and ldate, some day....
-        this.facDate='';
-        this.facId='';
-        this.facDate='';
-        this.facOrd='';
-        this.facEst='';
+      if(this.facDate==''||this.facId==''||this.facCli==''||this.facOrd==''||this.facEst=='')
+      {
+        alert('Por favor, llene todos los campos para registrar la Factura')
+      }
+      else
+      {
+        this.params.data.push([this.facDate, this.facId, this.facCli,this.facOrd,this.facEst]);
+      }
     },
     signDownFactura(){
-        //there will be a method here to establish connection with backend and sign down the deliveries' company and date, some day....
         this.facDate='';
         this.facId='';
         this.facDate='';
         this.facOrd='';
         this.facEst='';
+        console.log(this.params.deleteData.length)
+        for (var i = this.params.deleteData.length-1; i>0 ; i--) {
+        this.params.data.splice(this.params.deleteData[i], 1)
+      }
     },
     loadFactura(){
-        //there will be a method here to establish connection with backend and update the table, some day....
         this.facDate='';
         this.facId='';
         this.facDate='';
         this.facOrd='';
         this.facEst='';
+        alert("Actualizando informacion...");
     }
   },
   components: { VueTableDynamic }

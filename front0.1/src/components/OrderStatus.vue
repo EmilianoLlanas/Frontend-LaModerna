@@ -1,8 +1,12 @@
 <template>
+
     <div id="test">
-    <h1> Órdenes de venta en proceso </h1>
+      <router-view/>
+    <h1> Estatus de órdenes de venta </h1>
 
    <button @click="loadOrders">Actualizar</button>
+   <button @click="navOrdersInProcess"> Ir a la Consulta de Órdenes en proceso </button>
+  <button @click="navProcessedOrders"> Ir a la Consulta de Órdenes Procesadas </button>
    <div id="table" >
 
   <vue-table-dynamic :params="params"
@@ -11,7 +15,7 @@
       ref="table"></vue-table-dynamic>
 
     <!--  <OrderDetails :id="params.id" :cliente="params.cliente"></OrderDetails>-->
-    <OrderDetails :id="params.id"></OrderDetails>
+    <OrderStatusDetails :id="params.id"></OrderStatusDetails>
   </div>
 
   </div>
@@ -19,12 +23,12 @@
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic';
-import OrderDetails from '@/components/OrderDetails.vue';
+import OrderStatusDetails from '@/components/OrderStatusDetails.vue';
 
 
 
 export default {
-  name: 'OrdersInProcess',
+  name: 'OrderStatus',
 
   data() {
 
@@ -38,6 +42,10 @@ export default {
           ["2", "BARCEL", "PAPELITO-DURO-800 ","2021-02-1","PAPELITO DURO","800","$63250.00"],
           ["3", "TIA ROSA", "ALUMINIO-ARRUGADO-100 ","2021-04-2","ALUMINIO ARRUGADO","100","$5050.00"],
           ["4", "MOLINOS JORGE", "EMPAQUE-AWITADO-1500 ","2020-12-26","EMPAQUE AWITADO","1500","$70950.00"],
+          ["5", "BIMBO", "PAPELITO-SUAVE-500 ","2021-03-21","PAPELITO SUAVE","500","$50250.00"],
+          ["6", "BARCEL", "PAPELITO-DURO-800 ","2021-02-1","PAPELITO DURO","800","$63250.00"],
+          ["7", "TIA ROSA", "ALUMINIO-ARRUGADO-100 ","2021-04-2","ALUMINIO ARRUGADO","100","$5050.00"],
+          ["8", "MOLINOS JORGE", "EMPAQUE-AWITADO-1500 ","2020-12-26","EMPAQUE AWITADO","1500","$70950.00"],
         ],
         id:[],
         header: 'row',
@@ -69,9 +77,15 @@ export default {
     loadOrders(){
       alert('Actualizando tablas con base de datos')
     },
+    navProcessedOrders() {
+      this.$router.push({name: 'ProcessedOrders'})
+    },
+    navOrdersInProcess() {
+      this.$router.push({name: 'OrdersInProcess'})
+    },
 
   },
-  components: { VueTableDynamic,OrderDetails }
+  components: { VueTableDynamic,OrderStatusDetails }
 }
 </script>
 

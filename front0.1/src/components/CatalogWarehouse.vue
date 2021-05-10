@@ -41,6 +41,7 @@ export default {
           ['Barcel', '244 sur'],
           ['Totis', '930 este'],
         ],
+        deleteDate:[],
         header: 'row',
         border: true,
         stripe: true,
@@ -59,21 +60,30 @@ export default {
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
+      this.params.deleteDate=checkedIndexs
     },
     signUpWarehouse(){
-        //there will be a method here to establish connection with backend and sign up the warehouses' company and location, some day....
-        this.wareCom='';
-        this.wareUbi='';
+        if(this.wareCom==''||this.wareUbi=='')
+        {
+          alert('Por favor, llene todos los campos para registrar el almacen')
+        }
+        else
+        {
+          this.params.data.push([this.wareCom,this.wareUbi]);
+        }
     },
     signDownWarehouse(){
-        //there will be a method here to establish connection with backend and sign down the warehouses' company and location, some day....
         this.wareCom='';
         this.wareUbi='';
+        console.log(this.params.deleteData.length)
+        for (var i = this.params.deleteData.length-1; i>0 ; i--) {
+        this.params.data.splice(this.params.deleteData[i], 1)
+      }
     },
     loadWarehouse(){
-        //there will be a method here to establish connection with backend and update the table, some day....
         this.wareCom='';
         this.wareUbi='';
+        alert("Actualizando informacion...");
     }
   },
   components: { VueTableDynamic }

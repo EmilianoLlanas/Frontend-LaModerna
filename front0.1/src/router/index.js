@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import OrderDetails from '@/components/OrderDetails'
 import OrdersInProcess from '@/components/OrdersInProcess'
 import CatalogArticles from '@/components/CatalogArticles'
 import CatalogCompanies from '@/components/CatalogCompanies'
@@ -17,6 +18,11 @@ import RoleAssign from '@/components/RoleAssign'
 import LogInPrincipal from '@/components/LogInPrincipal'
 import CatalogDeliveryAddresses from '@/components/CatalogDeliveryAddresses'
 import CatalogInventory from '@/components/CatalogInventory'
+import ProcessedOrders from '@/components/ProcessedOrders'
+import OrderStatus from '@/components/OrderStatus'
+import AuthorizeDates from '@/components/AuthorizeDates'
+import MenuAGE from '@/components/MenuAGE'
+import OrderEdit from '@/components/OrderEdit'
 
 
 Vue.use(Router)
@@ -106,17 +112,45 @@ export default new Router({
       name: 'CatalogSharedArticles',
       component: CatalogSharedArticles
     },
-    
+
     {
       path: '/CatalogDeliveryAddresses',
       name: 'CatalogDeliveryAddresses',
       component: CatalogDeliveryAddresses
-    }, 
+    },
     {
       path: '/CatalogInventory',
       name: 'CatalogInventory',
       component: CatalogInventory
+    },
+    {
+      path: '/OrderDetails',
+      name: 'OrderDetails',
+      component: OrderDetails
+    },
+    {
+      path: '/ProcessedOrders',
+      name: 'ProcessedOrders',
+      component: ProcessedOrders
+    },
+    {
+    path: '/OrderStatus',
+    name: 'OrderStatus',
+    component: OrderStatus
+  },{
+      path: '/AuthorizeDates',
+      name: 'AuthorizeDates',
+      component: AuthorizeDates
+    },
+    {
+      path: '/OrderEdit',
+      name: 'OrderEdit',
+      component: OrderEdit
+    },
+    {
+      path: '/MenuAGE',
+      name: 'MenuAGE',
+      component: MenuAGE
     }
   ]
-
 })

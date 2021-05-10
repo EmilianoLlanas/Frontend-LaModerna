@@ -46,6 +46,7 @@ export default {
           ['0235', 'Barcel', '01/10/20'],
           ['0066', 'Totis', '27/08/19'],
         ],
+        deleteDate:[],
         header: 'row',
         border: true,
         stripe: true,
@@ -64,24 +65,32 @@ export default {
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
+      this.params.deleteData=checkedIndexs
     },
     signUpDeliver(){
-        //there will be a method here to establish connection with backend and sign up the deliveries' company and ldate, some day....
-        this.delivOrd='';
-        this.delivCom='';
-        this.delivDate='';
+        if(this.delivOrd==''||this.delivCom==''||this.delivDate=='')
+        {
+          alert('Por favor, llene todos los campos para registrar la entrega')
+        }
+        else
+        {
+          this.params.data.push([this.delivOrd, this.delivCom, this.delivDate]);
+        }
     },
     signDownDeliver(){
-        //there will be a method here to establish connection with backend and sign down the deliveries' company and date, some day....
-        this.delivOrd='';
-        this.delivCom='';
-        this.delivDate='';
+      this.delivOrd='';
+      this.delivCom='';
+      this.delivDate='';
+      console.log(this.params.deleteData.length)
+      for (var i = this.params.deleteData.length-1; i>0 ; i--) {
+      this.params.data.splice(this.params.deleteData[i], 1)
+      }
     },
     loadDeliver(){
-        //there will be a method here to establish connection with backend and update the table, some day....
         this.delivOrd='';
         this.delivCom='';
         this.delivDate='';
+        alert("Actualizando informacion...");
     }
   },
   components: { VueTableDynamic }

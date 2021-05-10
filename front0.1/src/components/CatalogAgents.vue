@@ -51,12 +51,13 @@ export default {
           ['Barcel', '626', 'Sara', 'Activo'],
           ['Totis', '250', 'Selena', 'Inactivo'],
         ],
+        deleteDate:[],
         header: 'row',
         border: true,
         stripe: true,
         showCheck: true,
         enableSearch: true,
-        sort: [0, 1,2,3],
+        sort: [0,1,2,3],
         pagination: true,
         pageSize: 10,
       }
@@ -69,27 +70,34 @@ export default {
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
+      this.params.deleteDate=checkedIndexs
     },
     signUpAgent(){
-        //there will be a method here to establish connection with backend and sign up the agents' id and name, some day....
-        this.agCom='';
-        this.agId='';
-        this.rep='';
-        this.agEst='';
+        if(this.agCom==''||this.agId==''||this.rep==''||this.agEst=='')
+        {
+          alert('Por favor, llene todos los campos para registrar al agente')
+        }
+        else
+        {
+          this.params.data.push([this.agCom, this.agId, this.rep, this.agEst]);
+        }
     },
     signDownAgent(){
-        //there will be a method here to establish connection with backend and sign down the agents' id and name, some day....
-        this.agCom='';
-        this.agId='';
-        this.rep='';
-        this.agEst='';
+      this.agCom='';
+      this.agId='';
+      this.rep='';
+      this.agEst='';
+      console.log(this.params.deleteData.length)
+      for (var i = this.params.deleteData.length-1; i>0 ; i--) {
+      this.params.data.splice(this.params.deleteData[i], 1)
+      }
     },
     loadAgent(){
-        //there will be a method here to establish connection with backend and update the table, some day....
         this.agCom='';
         this.agId='';
         this.rep='';
         this.agEst='';
+        alert("Actualizando informacion...");
     }
   },
   components: { VueTableDynamic }

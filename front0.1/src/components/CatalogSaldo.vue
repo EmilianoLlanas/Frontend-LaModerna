@@ -5,23 +5,23 @@
     <form>
       <label>Orden</label>
       <br>
-      <input v-model="ordId" placeholder="Fecha">
+      <input v-model="ordId" placeholder="Orden">
       <br>
       <label>Cliente</label>
       <br>
-      <input v-model="salCli" placeholder="Numero de Factura">
+      <input v-model="salCli" placeholder="Cliente">
       <br>
       <label>NumeroFactura</label>
       <br>
-      <input v-model="salIdFac" placeholder="Cliente">
+      <input v-model="salIdFac" placeholder="NumeroFactura">
       <br>
       <label>SaldoOrden</label>
       <br>
-      <input v-model="salOrd" placeholder="Numero de Orden">
+      <input v-model="salOrd" placeholder="SaldoOrden">
       <br>
       <label>SaldoFactura</label>
       <br>
-      <input v-model="salFac" placeholder="Estatus de entrega">
+      <input v-model="salFac" placeholder="SaldoFactura">
    </form>
   </div>
    <br>
@@ -41,7 +41,7 @@
 <script>
 import VueTableDynamic from 'vue-table-dynamic'
 export default {
-  name: 'CatalogFacturas',
+  name: 'CatalogSaldo',
   data() {
     return {
       ordId:'',
@@ -56,6 +56,7 @@ export default {
           ['2410', 'Barcel', '45', '4500', '2500'],
           ['5342', 'Totis', '88', '6400', '500'],
         ],
+        deleteData:[],
         header: 'row',
         border: true,
         stripe: true,
@@ -74,30 +75,36 @@ export default {
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
+      this.params.deleteData=checkedIndexs
     },
-    signUpFactura(){
-        //there will be a method here to establish connection with backend and sign up some day....
-        this.ordId='';
-        this.salCli='';
-        this.salIdFac='';
-        this.salOrd='';
-        this.salFac='';
+    signUpSaldo(){
+        if(this.ordId==''||this.salCli==''||this.salIdFac==''||this.salOrd==''||this.salFac=='')
+        {
+          alert('Por favor, llene todos los campos para registrar el saldo');
+        }
+        else
+        {
+          this.params.data.push([this.ordId, this.salCli,this.salIdFac,this.salOrd,this.salFac]);
+        }
     },
-    signDownFactura(){
-        //there will be a method here to establish connection with backend and sign down some day....
-        this.ordId='';
-        this.salCli='';
-        this.salIdFac='';
-        this.salOrd='';
-        this.salFac='';
+    signDownSaldo(){
+      this.ordId='';
+      this.salCli='';
+      this.salIdFac='';
+      this.salOrd='';
+      this.salFac='';
+      console.log(this.params.deleteData.length)
+      for (var i = this.params.deleteData.length-1; i>0 ; i--) {
+      this.params.data.splice(this.params.deleteData[i], 1)
+      }
     },
-    loadFactura(){
-        //there will be a method here to establish connection with backend and update the table, some day....
-        this.ordId='';
-        this.salCli='';
-        this.salIdFac='';
-        this.salOrd='';
-        this.salFac='';
+    loadSaldo(){
+      this.ordId='';
+      this.salCli='';
+      this.salIdFac='';
+      this.salOrd='';
+      this.salFac='';
+      alert("Actualizando informacion...");
     }
   },
   components: { VueTableDynamic }

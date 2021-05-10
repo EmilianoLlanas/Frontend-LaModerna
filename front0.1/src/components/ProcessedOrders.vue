@@ -1,6 +1,6 @@
 <template>
     <div id="test">
-    <h1> Órdenes de venta en proceso </h1>
+    <h1> Órdenes de venta Procesadas </h1>
 
    <button @click="loadOrders">Actualizar</button>
    <div id="table" >
@@ -9,9 +9,7 @@
       @select="onSelect"
       @selection-change="onSelectionChange"
       ref="table"></vue-table-dynamic>
-
-    <!--  <OrderDetails :id="params.id" :cliente="params.cliente"></OrderDetails>-->
-    <OrderDetails :id="params.id"></OrderDetails>
+    <ProcessedOrdersDetails :id="params.id"></ProcessedOrdersDetails>
   </div>
 
   </div>
@@ -19,12 +17,10 @@
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic';
-import OrderDetails from '@/components/OrderDetails.vue';
-
-
+import ProcessedOrdersDetails from '@/components/ProcessedOrdersDetails.vue';
 
 export default {
-  name: 'OrdersInProcess',
+  name: 'ProcessedOrders',
 
   data() {
 
@@ -63,15 +59,12 @@ export default {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
       this.params.id=checkedIndexs
     },
-    orderReport(){
-        //there will be a method here to establish connection with backend and sign up the articles' id and name, some day....
-    },
     loadOrders(){
-      alert('Actualizando tablas con base de datos')
+        alert('Actualizando tablas con ERP')
     },
 
   },
-  components: { VueTableDynamic,OrderDetails }
+  components: { VueTableDynamic,ProcessedOrdersDetails }
 }
 </script>
 
