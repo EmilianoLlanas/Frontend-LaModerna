@@ -131,7 +131,7 @@ export default {
     deleteData(){
       if(this.select!=''){
         this.params.data.splice(this.select,1);
-      //  this.select='';
+        this.select='';
       }else{
         alert('No se ha seleccionado nada')
       }
