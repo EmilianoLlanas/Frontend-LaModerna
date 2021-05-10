@@ -38,6 +38,7 @@
   <button @click="cancel"> Cancelar </button>
   <br>
   </div>
+<div></div>
 </template>
 
 <script>
