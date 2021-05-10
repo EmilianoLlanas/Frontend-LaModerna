@@ -13,44 +13,28 @@
         <br>
         <label>Artículo</label>
         <br>
-        <input v-model="aArticulo" placeholder="Identificador de la compañía">
+        <input v-model="aArticulo" placeholder="Identificador del articulo">
         <br>
         <label>Compañia Destino</label>
         <br>
-        <input v-model="aCompDest" placeholder="Nombre de la compañia">
+        <input v-model="aCompDest" placeholder="Identificador de la compañía">
         <br>
         <label>Cliente Destino</label>
         <br>
         <input v-model="aClieDest" placeholder="Nombre del cliente">
-
 
     </form>
   </div>
    <br>
    <button @click="sendItem"> Agregar Artículo </button>
    <button @click="sendData"> Enviar Artículos</button>
+   <button @click="deleteData"> Eliminar Artículo</button>
 
-  <div id="table">
-    <table class="table mt-5">
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Compañía Origen </th>
-      <th scope="col">Cliente Origen </th>
-      <th scope="col">Artículo </th>
-      <th scope="col">Compañía Destino </th>
-      <th scope="col">Cliente Destino </th>
-    </tr>
-    <tbody>
-      <tr v-for="(entry, i) in sortedList" :key="i">
-        <th scope="row">{{ ++i }}</th>
-        <td>{{ entry.aCompOrig}}</td>
-        <td>{{ entry.aClieOrig }}</td>
-        <td>{{ entry.aArticulo }}</td>
-        <td>{{ entry.aCompDest}}</td>
-        <td>{{ entry.aClieDest }}</td>
-      </tr>
-    </tbody>
-</table>
+   <div style="width: 80%" >
+  <vue-table-dynamic :params="params"
+      @select="onSelect"
+      @selection-change="onSelectionChange"
+      ref="table"></vue-table-dynamic>
 
   </div>
 
@@ -59,28 +43,37 @@
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic'
+import { required,email } from 'vuelidate/lib/validators'
 export default {
   name: 'CatalogSharedArticles',
-  data:() =>({
+  data(){
+    return{
       aCompOrig:'',
       aClieOrig:'',
       aArticulo:'',
       aCompDest:'',
       aClieDest:'',
       allArticles:[],
-      /*
-     params: {
-        header: 'row',
-        border: true,
-        stripe: true,
-        showCheck: true,
-        enableSearch: true,
-        sort: [0, 1,2],
-        pagination: true,
-        pageSize: 10,
-      }*/
-    })
+      empty:true,
+      select:'',
+      params: {
+      data: [
+        ['Compañía Origen', 'Cliente Origen', 'Artículo', 'Compañía Destino','Cliente Destino'],
+
+      ],
+   header: 'row',
+   border: true,
+   stripe: true,
+   showCheck: true,
+   enableSearch: true,
+   sort: [0, 1,2],
+   pagination: true,
+   pageSize: 10,
+ }
+}
+    }
   ,
+
   computed:{
     sortedList: function() {
       return this.allArticles.slice().sort(function(a, b) {
@@ -92,21 +85,31 @@ export default {
   methods: {
     onSelect (isChecked, index, data) {
       console.log('onSelect: ', isChecked, index, data)
+      this.select=index;
+      console.log('es',this.select)
       console.log('Checked Data:', this.$refs.table.getCheckedRowDatas(true))
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
     },
     sendItem(){
-      this.allArticles.push({
-      aCompOrig:this.aCompOrig,
-      aClieOrig:this.aClieOrig,
-      aArticulo:this.aArticulo,
-      aCompDest:this.aCompDest,
-      aClieDest:this.aClieDest});
+      if(this.aCompOrig==''||this.aClieOrig==''||this.aArticulo==''||this.aClieDest==''||this.aCompDest=='')
+      {
+        alert('Por favor, llene todos los campos para registrar inventario')
+      }
+      else
+      {
+        this.empty=false;
+        console.log(this.empty);
+      this.params.data.push([
+       this.aCompOrig,
+       this.aClieOrig,
+       this.aArticulo,
+       this.aCompDest,
+       this.aClieDest]);
       this.clearForm();
-
-    },
+      }
+  },
     clearForm(){
       this.aCompOrig='';
       this.aClieOrig='';
@@ -115,6 +118,23 @@ export default {
       this.aClieDest='';
     },
     sendData(){
+      if(this.empty==true)
+      {
+        alert('No hay ningun artículo compartido')
+      }
+      else
+      {
+        alert('Se han enviado los datos')
+      }
+
+    },
+    deleteData(){
+      if(this.select!=''){
+        this.params.data.splice(this.select,1);
+        this.select='';
+      }else{
+        alert('No se ha seleccionado nada')
+      }
 
     }
   },
