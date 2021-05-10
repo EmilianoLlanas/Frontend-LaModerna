@@ -18,10 +18,8 @@
       <label>Direccion de entrega</label>
       <br>
       <input v-model="aDireccion" placeholder="Direccion de entrega">
-      <br>
    </form>
   </div>
-   <br>
    <div id="table">
   <vue-table-dynamic :params="params"
       @select="onSelect"
