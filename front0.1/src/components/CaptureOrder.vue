@@ -35,6 +35,7 @@
   <br>
   <button @click="save"> Guardar </button>
   <button @click="cancel"> Cancelar </button>
+  <br>
   </div>
 </template>
 
