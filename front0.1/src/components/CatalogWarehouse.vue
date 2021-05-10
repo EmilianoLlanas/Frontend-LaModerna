@@ -12,7 +12,6 @@
       <input v-model="wareUbi" placeholder="Ubicación del almacen">
    </form>
   </div>
-   <br>
    <button @click="signUpWare"> Dar de alta </button>
    <button @click="signDownWare"> Dar de baja </button>
    <button @click="loadWare">Actualizar </button>
