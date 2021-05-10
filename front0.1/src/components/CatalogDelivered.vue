@@ -20,6 +20,7 @@
    <button @click="signUpDeliver"> Dar de alta </button>
    <button @click="signDownDeliver"> Dar de baja </button>
    <button @click="loadDeliver">Actualizar </button>
+   <button @click="reportDeliver">Generar Reporte</button>
    <div style="width: 80%" >
   <vue-table-dynamic :params="params"
       @select="onSelect"
@@ -66,19 +67,21 @@ export default {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
     },
     signUpDeliver(){
-        //there will be a method here to establish connection with backend and sign up the deliveries' company and ldate, some day....
-        this.delivOrd='';
-        this.delivCom='';
-        this.delivDate='';
+        if(this.delivOrd==''||this.delivCom==''||this.delivDate=='')
+        {
+          alert('Por favor, llene todos los campos para registrar la entrega')
+        }
+        else
+        {
+          this.params.data.push([this.delivOrd, this.delivCom, this.delivDate]);
+        }
     },
     signDownDeliver(){
-        //there will be a method here to establish connection with backend and sign down the deliveries' company and date, some day....
         this.delivOrd='';
         this.delivCom='';
         this.delivDate='';
     },
     loadDeliver(){
-        //there will be a method here to establish connection with backend and update the table, some day....
         this.delivOrd='';
         this.delivCom='';
         this.delivDate='';

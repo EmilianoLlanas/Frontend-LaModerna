@@ -24,6 +24,7 @@
    <button @click="signUpAgent"> Dar de alta </button>
    <button @click="signDownAgent"> Dar de baja </button>
    <button @click="loadAgent">Actualizar </button>
+   <button @click="reportAgent">Generar Reporte</button>
    <div style="width: 80%" >
   <vue-table-dynamic :params="params"
       @select="onSelect"
@@ -56,7 +57,7 @@ export default {
         stripe: true,
         showCheck: true,
         enableSearch: true,
-        sort: [0, 1,2,3],
+        sort: [0,1,2,3],
         pagination: true,
         pageSize: 10,
       }
@@ -71,21 +72,25 @@ export default {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
     },
     signUpAgent(){
-        //there will be a method here to establish connection with backend and sign up the agents' id and name, some day....
-        this.agCom='';
-        this.agId='';
-        this.rep='';
-        this.agEst='';
+        if(this.agCom==''||this.agId==''||this.rep==''||this.agEst=='')
+        {
+          alert('Por favor, llene todos los campos para registrar al agente')
+        }
+        else
+        {
+          this.params.data.push([this.agCom, this.agId, this.rep, this.agEst]);
+        }
     },
     signDownAgent(){
-        //there will be a method here to establish connection with backend and sign down the agents' id and name, some day....
-        this.agCom='';
-        this.agId='';
-        this.rep='';
-        this.agEst='';
+        if(this.agCom==''||this.agId==''||this.rep==''||this.agEst=='')
+        {
+          alert('Por favor, llene todos los campos para eliminar un agente ');
+        }
+        else{
+          alert('Eliminando agente'+this.agId);
+        }
     },
     loadAgent(){
-        //there will be a method here to establish connection with backend and update the table, some day....
         this.agCom='';
         this.agId='';
         this.rep='';
