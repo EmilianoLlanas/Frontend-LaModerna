@@ -18,6 +18,7 @@
       <button @click="navCatalogInventory"> Ir al catálogo de Inventario </button>
       <button @click="navProcessedOrders"> Ir a la Consulta de Órdenes Procesadas </button>
       <button @click="navOrderStatus"> Ir a la Consulta de Estatus de Órdenes </button>
+      <button @click="navAuthorizeDates"> Ir a la autorizacion de fechas de entrega </button>
     </div>
 
 </template>
@@ -72,6 +73,9 @@ export default {
     },
     navOrderStatus() {
       this.$router.push({name: 'OrderStatus'})
+    navAuthorizeDates(){
+      this.$router.push({name:'AuthorizeDates'})
+
     }
     }
   }
