@@ -17,6 +17,7 @@ import RoleAssign from '@/components/RoleAssign'
 import LogInPrincipal from '@/components/LogInPrincipal'
 import CatalogDeliveryAddresses from '@/components/CatalogDeliveryAddresses'
 import CatalogInventory from '@/components/CatalogInventory'
+import AuthorizeDates from '@/components/AuthorizeDates'
 
 
 Vue.use(Router)
@@ -106,16 +107,21 @@ export default new Router({
       name: 'CatalogSharedArticles',
       component: CatalogSharedArticles
     },
-    
+
     {
       path: '/CatalogDeliveryAddresses',
       name: 'CatalogDeliveryAddresses',
       component: CatalogDeliveryAddresses
-    }, 
+    },
     {
       path: '/CatalogInventory',
       name: 'CatalogInventory',
       component: CatalogInventory
+    },
+    {
+      path: '/AuthorizeDates',
+      name: 'AuthorizeDates',
+      component: AuthorizeDates
     }
   ]
 
