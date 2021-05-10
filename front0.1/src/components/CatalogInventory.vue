@@ -5,7 +5,7 @@
     <form>
       <label>Compañia</label>
       <br>
-      <input v-model="invCom" placeholder="Compañía"> 
+      <input v-model="invCom" placeholder="Compañía">
       <input v-model="invWarehouse" placeholder="Almacén">
       <input v-model="invArticle" placeholder="Artículo">
       <input v-model="invStock" placeholder="Stock">
@@ -59,11 +59,9 @@ export default {
       console.log('onSelect: ', isChecked, index, data)
       console.log('Checked Data:', this.$refs.table.getCheckedRowDatas(true))
     },
-
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
     },
-
     signUpInv(){
         //there will be a method here to establish connection with backend and sign up the address' data, some day....
         if(this.invCom==''||this.invWarehouse==''||this.invArticle==''||this.invStock=='')
@@ -75,7 +73,6 @@ export default {
           this.params.data.push([this.invCom, this.invWarehouse, this.invArticle, this.invStock]);
         }
     },
-
     signDownInv(){
         //there will be a method here to establish connection with backend and sign down the address' data, some day....
         if(this.invCom==''||this.invArticle==''||this.invWarehouse=='')
@@ -86,7 +83,7 @@ export default {
         else{
           alert('Eliminando artículo'+this.invArticle+' de '+this.invCom+', almacén'+this.invWarehouse);
         }
-        
+
     },
     loadInv(){
         //there will be a method here to establish connection with backend and update the table, some day....
