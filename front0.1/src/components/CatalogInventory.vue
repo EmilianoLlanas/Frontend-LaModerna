@@ -4,10 +4,12 @@
     <div class="inputForm">
     <form>
       <label>Compañia</label>
-      <br>
       <input v-model="invCom" placeholder="Compañía"> 
+      <label>Almacén</label>
       <input v-model="invWarehouse" placeholder="Almacén">
+      <label>Artículo</label>
       <input v-model="invArticle" placeholder="Artículo">
+      <label>Stock</label>
       <input v-model="invStock" placeholder="Stock">
    </form>
   </div>
