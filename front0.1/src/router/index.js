@@ -22,6 +22,7 @@ import ProcessedOrders from '@/components/ProcessedOrders'
 import OrderStatus from '@/components/OrderStatus'
 import AuthorizeDates from '@/components/AuthorizeDates'
 
+
 Vue.use(Router)
 
 export default new Router({
@@ -134,7 +135,7 @@ export default new Router({
     path: '/OrderStatus',
     name: 'OrderStatus',
     component: OrderStatus
-  },
+  },{
       path: '/AuthorizeDates',
       name: 'AuthorizeDates',
       component: AuthorizeDates
