@@ -1,6 +1,6 @@
 <template>
-    <div>
-    <h1> Catálogo de Direcciones de entrega </h1>
+    <div id="test">
+    <h1 id="header1"> Catálogo de Direcciones de entrega </h1>
     <div class="inputForm">
     <form>
       <label>Compañia</label>
