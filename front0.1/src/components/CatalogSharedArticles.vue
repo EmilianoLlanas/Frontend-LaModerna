@@ -13,63 +13,75 @@
         <br>
         <label>Artículo</label>
         <br>
-        <input v-model="aArticulo" placeholder="Identificador de la compañía">
+        <input v-model="aArticulo" placeholder="Identificador del articulo">
         <br>
         <label>Compañia Destino</label>
         <br>
-        <input v-model="aCompDest" placeholder="Nombre de la compañia">
+        <input v-model="aCompDest" placeholder="Identificador de la compañía">
         <br>
         <label>Cliente Destino</label>
         <br>
         <input v-model="aClieDest" placeholder="Nombre del cliente">
 
-
     </form>
   </div>
    <br>
-   <button @click="sendData"> Enviar Datos </button>
+   <button @click="sendItem"> Agregar Artículo </button>
+      <button @click="deleteData"> Eliminar Artículos</button>
+   <button @click="sendData"> Enviar Artículos</button>
 
-  <div id="table">
-    <vue-table-dynamic :params="params"
+
+   <div style="width: 80%" >
+  <vue-table-dynamic :params="params"
       @select="onSelect"
       @selection-change="onSelectionChange"
-      ref="table">
-    </vue-table-dynamic>
+      ref="table"></vue-table-dynamic>
+
   </div>
+
   </div>
 </template>
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic'
+import { required,email } from 'vuelidate/lib/validators'
 export default {
   name: 'CatalogSharedArticles',
-  data() {
-    return {
+  data(){
+    return{
       aCompOrig:'',
       aClieOrig:'',
       aArticulo:'',
       aCompDest:'',
       aClieDest:'',
+      allArticles:[],
+      empty:true,
       params: {
-        data: [
-          ['Compañia Origen', 'Cliente Origen','Artículo','Compañia Destino','Cliente Destino'],
-          [1, 'b3ba90', 'aab418', 101, 'aab418'],
-          [2, 'ec0b78', 'ba045d', 102, 'cab415'],
-          [3, 'a8c325', 'aab418', 103, 'dab417'],
-          [4, 'a8c325', 'aab418', 104, 'lab316'],
-          [5, 'a8c325', 'aab418', 105, 'dgb115'],
+      data: [
+        ['Compañía Origen', 'Cliente Origen', 'Artículo', 'Compañía Destino','Cliente Destino'],
 
-        ],
-        header: 'row',
-        border: true,
-        stripe: true,
-        showCheck: true,
-        enableSearch: true,
-        sort: [0, 1,2],
-        pagination: true,
-        pageSize: 10,
-      }
+      ],
+   deleteData:[],
+   header: 'row',
+   border: true,
+   stripe: true,
+   showCheck: true,
+   enableSearch: true,
+   sort: [0, 1,2],
+   pagination: true,
+   pageSize: 10,
+ }
+}
     }
+  ,
+
+  computed:{
+    sortedList: function() {
+      return this.allArticles.slice().sort(function(a, b) {
+        return b.score - a.score;
+      });
+    },
+
   },
   methods: {
     onSelect (isChecked, index, data) {
@@ -78,9 +90,56 @@ export default {
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
+      this.params.deleteData=checkedIndexs
+    },
+    sendItem(){
+      if(this.aCompOrig==''||this.aClieOrig==''||this.aArticulo==''||this.aClieDest==''||this.aCompDest=='')
+      {
+        alert('Por favor, llene todos los campos para registrar inventario')
+      }
+      else
+      {
+        this.empty=false;
+        console.log(this.params.data.length);
+      this.params.data.push([
+       this.aCompOrig,
+       this.aClieOrig,
+       this.aArticulo,
+       this.aCompDest,
+       this.aClieDest]);
+      this.clearForm();
+      }
+  },
+    clearForm(){
+      this.aCompOrig='';
+      this.aClieOrig='';
+      this.aArticulo='';
+      this.aCompDest='';
+      this.aClieDest='';
     },
     sendData(){
-        //there will be a method here to establish connection with backend and sign up the articles' id and name, some day....
+      if(this.params.data.length>1)
+      {
+
+        console.log('imprime, esto',(this.params.data.length)-1)
+        alert('Se han enviado los datos')
+      }
+      else
+      {
+        console.log('imprime, esto no',this.params.data.length)
+         alert('No hay ningun artículo compartido')
+      }
+
+    },
+    deleteData(){
+      if(this.params.deleteData.length>=1){
+        console.log(this.params.deleteData.length)
+        for (var i = this.params.deleteData.length-1; i>0 ; i--) {
+          this.params.data.splice(this.params.deleteData[i], 1)
+        }
+      }else{
+        alert('No se ha seleccionado nada')
+      }
 
     }
   },
@@ -89,6 +148,29 @@ export default {
 </script>
 
 <style scoped>
+table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+  border: 3px solid purple;
+}
+th, td {
+  padding: 5px;
+}
+tbody td {
+  text-align: center;
+}
+
+tfoot th {
+  text-align: right;
+}
+tbody tr:nth-child(odd) {
+  background-color: #fbd7fc;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #e495e4;
+}
 .inputForm {
   width: 400px;
   clear: both;

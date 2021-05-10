@@ -1,0 +1,51 @@
+<template>
+    <div>
+    <h2> Reporte de Órdenes </h2>
+    <ul v-for="i of id">
+
+        <li v-if="i!==0"> Número de Orden: {{ordenes[i].id}} </li>
+        <li v-if="i!==0"> Cliente: {{ordenes[i].cliente}} </li>
+        <li v-if="i!==0"> Nombre: {{ordenes[i].nombre}} </li>
+        <li v-if="i!==0"> Fecha de Órden: {{ordenes[i].fechaOr}} </li>
+        <li v-if="i!==0"> Artículo: {{ordenes[i].articulo}} </li>
+        <li v-if="i!==0"> Descripción: {{ordenes[i].descripcion}} </li>
+        <li v-if="i!==0"> Cantidad: {{ordenes[i].cantidad}} </li>
+        <li v-if="i!==0"> Precio: {{ordenes[i].precio}} </li>
+        <li v-if="i!==0"> Fecha solicitada: {{ordenes[i].fechaSol}} </li>
+        <li v-if="i!==0"> Estatus de autorización por área:</li>
+        <ul>
+            <li v-if="i!==0"> Facturación: <b>{{ordenes[i].facturacion}}</b> </li>
+            <li v-if="i!==0"> Cuentas por Cobrar: <b>{{ordenes[i].cxc}}</b> </li>
+            <li v-if="i!==0"> Precios: <b>{{ordenes[i].preciosAut}}</b> </li>
+            <li v-if="i!==0"> Ingeniería: <b>{{ordenes[i].ingenieria}}</b> </li>
+            <li v-if="i!==0"> Planeación: <b>{{ordenes[i].planeacion}}</b></li>
+        </ul>
+
+        <li v-if="i===0"> Detalles: </li>
+
+    </ul>
+
+  </div>
+</template>
+
+
+<script>
+
+export default {
+  name: 'OrderDetails',
+  data(){
+    return{
+        ordenes:[
+          {},
+          {id:'1',cliente:'BIMBO',nombre:'PAPELITO-SUAVE-500',fechaOr:'2021-03-21',articulo:'PAPELITO SUAVE',descripcion:'Es un papelito que esta suave, peso por unidad: 800 g',cantidad:'500', precio:'$50250.00',fechaSol:'2021-02-28',facturacion:'No Autorizada',cxc:'No Autorizada',preciosAut:'No Autorizada',ingenieria:'No Autorizada',planeacion:'Autorizada'},
+          {id:'2',cliente:'BARCEL',nombre:'PAPELITO-DURO-800',fechaOr:'2021-02-1',articulo:'PAPELITO DURO',descripcion:'Es un papelito que esta duro, peso por unidad: 1600 g',cantidad:'800', precio:'$63250.00',fechaSol:'2021-01-28',facturacion:'No Autorizada',cxc:'No Autorizada',preciosAut:'Autorizada',ingenieria:'No Autorizada',planeacion:'Autorizada'},
+          {id:'3',cliente:'TIA ROSA',nombre:'ALUMINIO-ARRUGADO-100',fechaOr:'2021-04-2',articulo:'ALUMINIO ARRUGADO',descripcion:'Es aluminio que esta arrugado, peso por unidad: 2300 g',cantidad:'100', precio:'$5050.00',fechaSol:'2021-03-8',facturacion:'No Autorizada',cxc:'Autorizada',preciosAut:'No Autorizada',ingenieria:'No Autorizada',planeacion:'Autorizada'},
+          {id:'4',cliente:'MOLINOS JORGE',nombre:'EMPAQUE-AWITADO-1500',fechaOr:'2020-12-26',articulo:'EMPAQUE AWITADO',descripcion:'Es un empaque que esta triste, pobrecito, peso por unidad: 1300 g',cantidad:'1500', precio:'$70950.00',fechaSol:'2020-12-8',facturacion:'Autorizada',cxc:'Autorizada',preciosAut:'Autorizada',ingenieria:'No Autorizada',planeacion:'Autorizada'},
+      ]
+    }
+  },
+  props: {
+    id:Array
+  }
+  }
+</script>
