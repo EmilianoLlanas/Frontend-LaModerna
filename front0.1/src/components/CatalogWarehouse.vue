@@ -16,6 +16,7 @@
    <button @click="signUpWare"> Dar de alta </button>
    <button @click="signDownWare"> Dar de baja </button>
    <button @click="loadWare">Actualizar </button>
+   <button @click="reportWare">Generar Reporte</button>
    <div style="width: 80%" >
   <vue-table-dynamic :params="params"
       @select="onSelect"
@@ -61,17 +62,20 @@ export default {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
     },
     signUpWarehouse(){
-        //there will be a method here to establish connection with backend and sign up the warehouses' company and location, some day....
-        this.wareCom='';
-        this.wareUbi='';
+        if(this.wareCom==''||this.wareUbi=='')
+        {
+          alert('Por favor, llene todos los campos para registrar el almacen')
+        }
+        else
+        {
+          this.params.data.push([this.wareCom,this.wareUbi]);
+        }
     },
     signDownWarehouse(){
-        //there will be a method here to establish connection with backend and sign down the warehouses' company and location, some day....
         this.wareCom='';
         this.wareUbi='';
     },
     loadWarehouse(){
-        //there will be a method here to establish connection with backend and update the table, some day....
         this.wareCom='';
         this.wareUbi='';
     }

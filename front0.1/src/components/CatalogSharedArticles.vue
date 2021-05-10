@@ -27,15 +27,33 @@
     </form>
   </div>
    <br>
-   <button @click="sendData"> Enviar Datos </button>
+   <button @click="sendItem"> Agregar Artículo </button>
+   <button @click="sendData"> Enviar Artículos</button>
 
   <div id="table">
-    <vue-table-dynamic :params="params"
-      @select="onSelect"
-      @selection-change="onSelectionChange"
-      ref="table">
-    </vue-table-dynamic>
+    <table class="table mt-5">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Compañía Origen </th>
+      <th scope="col">Cliente Origen </th>
+      <th scope="col">Artículo </th>
+      <th scope="col">Compañía Destino </th>
+      <th scope="col">Cliente Destino </th>
+    </tr>
+    <tbody>
+      <tr v-for="(entry, i) in sortedList" :key="i">
+        <th scope="row">{{ ++i }}</th>
+        <td>{{ entry.aCompOrig}}</td>
+        <td>{{ entry.aClieOrig }}</td>
+        <td>{{ entry.aArticulo }}</td>
+        <td>{{ entry.aCompDest}}</td>
+        <td>{{ entry.aClieDest }}</td>
+      </tr>
+    </tbody>
+</table>
+
   </div>
+
   </div>
 </template>
 
@@ -43,23 +61,15 @@
 import VueTableDynamic from 'vue-table-dynamic'
 export default {
   name: 'CatalogSharedArticles',
-  data() {
-    return {
+  data:() =>({
       aCompOrig:'',
       aClieOrig:'',
       aArticulo:'',
       aCompDest:'',
       aClieDest:'',
-      params: {
-        data: [
-          ['Compañia Origen', 'Cliente Origen','Artículo','Compañia Destino','Cliente Destino'],
-          [1, 'b3ba90', 'aab418', 101, 'aab418'],
-          [2, 'ec0b78', 'ba045d', 102, 'cab415'],
-          [3, 'a8c325', 'aab418', 103, 'dab417'],
-          [4, 'a8c325', 'aab418', 104, 'lab316'],
-          [5, 'a8c325', 'aab418', 105, 'dgb115'],
-
-        ],
+      allArticles:[],
+      /*
+     params: {
         header: 'row',
         border: true,
         stripe: true,
@@ -68,8 +78,16 @@ export default {
         sort: [0, 1,2],
         pagination: true,
         pageSize: 10,
-      }
-    }
+      }*/
+    })
+  ,
+  computed:{
+    sortedList: function() {
+      return this.allArticles.slice().sort(function(a, b) {
+        return b.score - a.score;
+      });
+    },
+
   },
   methods: {
     onSelect (isChecked, index, data) {
@@ -79,8 +97,24 @@ export default {
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
     },
+    sendItem(){
+      this.allArticles.push({
+      aCompOrig:this.aCompOrig,
+      aClieOrig:this.aClieOrig,
+      aArticulo:this.aArticulo,
+      aCompDest:this.aCompDest,
+      aClieDest:this.aClieDest});
+      this.clearForm();
+
+    },
+    clearForm(){
+      this.aCompOrig='';
+      this.aClieOrig='';
+      this.aArticulo='';
+      this.aCompDest='';
+      this.aClieDest='';
+    },
     sendData(){
-        //there will be a method here to establish connection with backend and sign up the articles' id and name, some day....
 
     }
   },
@@ -89,6 +123,29 @@ export default {
 </script>
 
 <style scoped>
+table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+  border: 3px solid purple;
+}
+th, td {
+  padding: 5px;
+}
+tbody td {
+  text-align: center;
+}
+
+tfoot th {
+  text-align: right;
+}
+tbody tr:nth-child(odd) {
+  background-color: #fbd7fc;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #e495e4;
+}
 .inputForm {
   width: 400px;
   clear: both;
