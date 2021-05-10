@@ -20,7 +20,6 @@
       <input v-model="agEst" placeholder="Estatus del agente">
    </form>
   </div>
-   <br>
    <button @click="signUpAgent"> Dar de alta </button>
    <button @click="signDownAgent"> Dar de baja </button>
    <button @click="loadAgent">Actualizar </button>
