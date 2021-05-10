@@ -23,12 +23,13 @@
         <br>
         <input v-model="aClieDest" placeholder="Nombre del cliente">
 
-
     </form>
   </div>
    <br>
    <button @click="sendItem"> Agregar Artículo </button>
+      <button @click="deleteData"> Eliminar Artículos</button>
    <button @click="sendData"> Enviar Artículos</button>
+
 
    <div style="width: 80%" >
   <vue-table-dynamic :params="params"
@@ -60,6 +61,7 @@ export default {
         ['Compañía Origen', 'Cliente Origen', 'Artículo', 'Compañía Destino','Cliente Destino'],
 
       ],
+   deleteData:[],
    header: 'row',
    border: true,
    stripe: true,
@@ -88,6 +90,7 @@ export default {
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
+      this.params.deleteData=checkedIndexs
     },
     sendItem(){
       if(this.aCompOrig==''||this.aClieOrig==''||this.aArticulo==''||this.aClieDest==''||this.aCompDest=='')
@@ -97,7 +100,7 @@ export default {
       else
       {
         this.empty=false;
-        console.log(this.empty);
+        console.log(this.params.data.length);
       this.params.data.push([
        this.aCompOrig,
        this.aClieOrig,
@@ -115,13 +118,27 @@ export default {
       this.aClieDest='';
     },
     sendData(){
-      if(this.empty==true)
+      if(this.params.data.length>1)
       {
-        alert('No hay ningun artículo compartido')
+
+        console.log('imprime, esto',(this.params.data.length)-1)
+        alert('Se han enviado los datos')
       }
       else
       {
-        alert('Se han enviado los datos')
+        console.log('imprime, esto no',this.params.data.length)
+         alert('No hay ningun artículo compartido')
+      }
+
+    },
+    deleteData(){
+      if(this.params.deleteData.length>=1){
+        console.log(this.params.deleteData.length)
+        for (var i = this.params.deleteData.length-1; i>0 ; i--) {
+          this.params.data.splice(this.params.deleteData[i], 1)
+        }
+      }else{
+        alert('No se ha seleccionado nada')
       }
 
     }

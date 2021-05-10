@@ -23,6 +23,7 @@ import OrderStatus from '@/components/OrderStatus'
 import AuthorizeDates from '@/components/AuthorizeDates'
 import MenuAGE from '@/components/MenuAGE'
 
+
 Vue.use(Router)
 
 export default new Router({
