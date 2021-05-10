@@ -47,33 +47,3 @@ export default {
 #test {
   background-color: gray;
 }
-
-
-    },
-    consultStatus(){
-
-    },consultOrder(){
-
-    },modifyOrder(){
-
-    },
-    captureOrder(){
-
-    },
-    searchOrder(){
-
-    }
-    }
-  }
-
-</script>
-
-<style scoped>
-
-#test {
-  background-color: gray;
-
-}
-
-
-</style>
