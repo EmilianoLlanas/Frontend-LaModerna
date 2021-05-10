@@ -1,6 +1,6 @@
 <template>
     <div id="test">
-    <h1> Catálogo de Clientes </h1>
+    <h1 id="header1"> Catálogo de Clientes </h1>
     <div class="inputForm">
     <form>
       <label>Compañia</label>
@@ -176,5 +176,10 @@ button{
 
 button:hover{
   background-color: rgba(14,44,164,0.30) ;
+}
+
+#header1{
+  margin: 2%;
+  font-size: 30px;
 }
 </style>
