@@ -7,7 +7,7 @@
       <br>
       <input v-model="facDate" placeholder="Fecha">
       <br>
-      <label>NumeroFactura</label>
+      <label>Numero Factura</label>
       <br>
       <input v-model="facId" placeholder="Numero de Factura">
       <br>
