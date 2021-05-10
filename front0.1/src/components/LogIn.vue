@@ -16,6 +16,7 @@
       <button @click="navCatalogWarehouse"> Ir al catálogo de Almacenes </button>
       <button @click="navCatalogDeliveryAddresses"> Ir al catálogo de Direcciones de entrega </button>
       <button @click="navAuthorizeDates"> Ir a la autorizacion de fechas de entrega </button>
+      <button @click="navMenuAge"> ir a menu principal de AGE </button>
     </div>
 
 </template>
@@ -64,6 +65,9 @@ export default {
     },
     navAuthorizeDates(){
       this.$router.push({name:'AuthorizeDates'})
+    },
+    navMenuAge(){
+      this.$router.push({name:'MenuAGE'})
     }
     }
   }
