@@ -24,7 +24,6 @@
    <button @click="signUpAgent"> Dar de alta </button>
    <button @click="signDownAgent"> Dar de baja </button>
    <button @click="loadAgent">Actualizar </button>
-   <button @click="reportAgent">Generar Reporte</button>
    <div style="width: 80%" >
   <vue-table-dynamic :params="params"
       @select="onSelect"
@@ -52,6 +51,7 @@ export default {
           ['Barcel', '626', 'Sara', 'Activo'],
           ['Totis', '250', 'Selena', 'Inactivo'],
         ],
+        deleteDate:[],
         header: 'row',
         border: true,
         stripe: true,
@@ -70,6 +70,7 @@ export default {
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
+      this.params.deleteDate=checkedIndexs
     },
     signUpAgent(){
         if(this.agCom==''||this.agId==''||this.rep==''||this.agEst=='')
@@ -82,19 +83,21 @@ export default {
         }
     },
     signDownAgent(){
-        if(this.agCom==''||this.agId==''||this.rep==''||this.agEst=='')
-        {
-          alert('Por favor, llene todos los campos para eliminar un agente ');
-        }
-        else{
-          alert('Eliminando agente'+this.agId);
-        }
+      this.agCom='';
+      this.agId='';
+      this.rep='';
+      this.agEst='';
+      console.log(this.params.deleteData.length)
+      for (var i = this.params.deleteData.length-1; i>0 ; i--) {
+      this.params.data.splice(this.params.deleteData[i], 1)
+      }
     },
     loadAgent(){
         this.agCom='';
         this.agId='';
         this.rep='';
         this.agEst='';
+        alert("Actualizando informacion...");
     }
   },
   components: { VueTableDynamic }

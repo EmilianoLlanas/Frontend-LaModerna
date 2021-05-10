@@ -20,7 +20,6 @@
    <button @click="signUpDeliver"> Dar de alta </button>
    <button @click="signDownDeliver"> Dar de baja </button>
    <button @click="loadDeliver">Actualizar </button>
-   <button @click="reportDeliver">Generar Reporte</button>
    <div style="width: 80%" >
   <vue-table-dynamic :params="params"
       @select="onSelect"
@@ -47,6 +46,7 @@ export default {
           ['0235', 'Barcel', '01/10/20'],
           ['0066', 'Totis', '27/08/19'],
         ],
+        deleteDate:[],
         header: 'row',
         border: true,
         stripe: true,
@@ -65,6 +65,7 @@ export default {
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
+      this.params.deleteData=checkedIndexs
     },
     signUpDeliver(){
         if(this.delivOrd==''||this.delivCom==''||this.delivDate=='')
@@ -77,14 +78,19 @@ export default {
         }
     },
     signDownDeliver(){
-        this.delivOrd='';
-        this.delivCom='';
-        this.delivDate='';
+      this.delivOrd='';
+      this.delivCom='';
+      this.delivDate='';
+      console.log(this.params.deleteData.length)
+      for (var i = this.params.deleteData.length-1; i>0 ; i--) {
+      this.params.data.splice(this.params.deleteData[i], 1)
+      }
     },
     loadDeliver(){
         this.delivOrd='';
         this.delivCom='';
         this.delivDate='';
+        alert("Actualizando informacion...");
     }
   },
   components: { VueTableDynamic }
