@@ -46,7 +46,7 @@ export default {
         stripe: true,
         showCheck: true,
         enableSearch: true,
-        sort: [0, 1],
+        sort: [0,1],
         pagination: true,
         pageSize: 10,
       }
@@ -61,17 +61,17 @@ export default {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
       this.params.deleteDate=checkedIndexs
     },
-    signUpWarehouse(){
+    signUpWare(){
         if(this.wareCom==''||this.wareUbi=='')
         {
           alert('Por favor, llene todos los campos para registrar el almacen')
         }
         else
         {
-          this.params.data.push([this.wareCom,this.wareUbi]);
+          this.params.data.push([this.wareCom, this.wareUbi]);
         }
     },
-    signDownWarehouse(){
+    signDownWare(){
         this.wareCom='';
         this.wareUbi='';
         console.log(this.params.deleteData.length)
@@ -79,7 +79,7 @@ export default {
         this.params.data.splice(this.params.deleteData[i], 1)
       }
     },
-    loadWarehouse(){
+    loadWare(){
         this.wareCom='';
         this.wareUbi='';
         alert("Actualizando informacion...");
