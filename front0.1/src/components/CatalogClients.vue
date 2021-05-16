@@ -82,6 +82,12 @@ export default {
     },
     signUpClient(){
         //there will be a method here to establish connection with backend and sign up the articles' id and name, some day....
+        if(this.aCompania=='' ||this.aCliente=='' ||this.aNombreA=='' ||this.aNombreB=='' ||this.aEstatus==''){
+          alert('Por favor, llene todos los campos para registrar un Cliente')
+        }else{
+          this.params.data.push([this.aCompania,this.aCliente,this.aNombreA,this.aNombreB,this.aEstatus]);
+        }
+
         this.aCompania='';
         this.aCliente='';
         this.aNombreA='';
