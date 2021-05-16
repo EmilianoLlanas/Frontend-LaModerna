@@ -1,6 +1,6 @@
 <template>
     <div id="test">
-    <h1> Captura de ordenes </h1>
+    <h1 id="header1"> Captura de ordenes </h1>
     <div class="inputForm">
     <form>
       <label>Cliente</label>
@@ -161,6 +161,11 @@ button{
 
 button:hover{
   background-color: rgba(14,44,164,0.30) ;
+}
+
+#header1{
+  margin: 2%;
+  font-size: 30px;
 }
 
 </style>

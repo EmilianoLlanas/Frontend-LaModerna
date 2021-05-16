@@ -1,6 +1,6 @@
 <template>
     <div id="test">
-    <h1> Catálogo de Clientes </h1>
+    <h1 id="header1"> Catálogo de Clientes </h1>
     <div class="inputForm">
     <form>
       <label>Compañia</label>
@@ -82,6 +82,12 @@ export default {
     },
     signUpClient(){
         //there will be a method here to establish connection with backend and sign up the articles' id and name, some day....
+        if(this.aCompania=='' ||this.aCliente=='' ||this.aNombreA=='' ||this.aNombreB=='' ||this.aEstatus==''){
+          alert('Por favor, llene todos los campos para registrar un Cliente')
+        }else{
+          this.params.data.push([this.aCompania,this.aCliente,this.aNombreA,this.aNombreB,this.aEstatus]);
+        }
+
         this.aCompania='';
         this.aCliente='';
         this.aNombreA='';
@@ -176,5 +182,10 @@ button{
 
 button:hover{
   background-color: rgba(14,44,164,0.30) ;
+}
+
+#header1{
+  margin: 2%;
+  font-size: 30px;
 }
 </style>

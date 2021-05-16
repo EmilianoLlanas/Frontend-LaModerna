@@ -103,6 +103,12 @@ export default {
     },
     signUpPrice(){
         //there will be a method here to establish connection with backend and sign up the articles' id and name, some day....
+        if(this.aCompania=='' || this.aLista=='' || this.aArticulo=='' || this.aNivDescuento=='' || this.aCantidad=='' || this.aPrecio=='' || this.aDescuento=='' || this.aDescripcion=='' || this.aFechaInicio=='' || this.aFechaCaducidad=='' ){
+          alert('Por favor, llene todos los campos para registrar un Precio')
+        }else{
+          this.params.data.push([this.aCompania,this.aLista,this.aArticulo,this.aNivDescuento,this.aCantidad,this.aPrecio,this.aDescuento,this.aDescripcion,this.aFechaInicio,this.aFechaCaducidad]);
+        }
+
         this.aCompania='';
         this.aLista='';
         this.aArticulo='';
@@ -142,6 +148,7 @@ export default {
         this.aDescripcion='';
         this.aFechaInicio='';
         this.aFechaCaducidad='';
+        alert('Actualizando tabla con Base de datos')
     },
     generateReport(){
       //aqui se mandara a llamar la pagina de reportes
