@@ -13,7 +13,8 @@
       <br>
       <label>Fecha</label>
       <br>
-      <input v-model="delivDate" placeholder="Fecha de entrega">
+       <datepicker placeholder="Fecha de entrega" v-model="delivDate" :format="customFormatter"></datepicker>
+
    </form>
   </div>
    <button @click="signUpDeliver"> Dar de alta </button>
@@ -31,6 +32,9 @@
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic'
+import Datepicker from 'vuejs-datepicker'
+import moment from 'moment'
+
 export default {
   name: 'CatalogDelivered',
   data() {
@@ -73,7 +77,7 @@ export default {
         }
         else
         {
-          this.params.data.push([this.delivOrd, this.delivCom, this.delivDate]);
+          this.params.data.push([this.delivOrd, this.delivCom, this.customFormatter(this.delivDate)]);
         }
     },
     signDownDeliver(){
@@ -90,9 +94,12 @@ export default {
         this.delivCom='';
         this.delivDate='';
         alert("Actualizando informacion...");
-    }
+    },
+    customFormatter(date) {
+     return moment(date).format('YYYY/MM/DD');
+   }
   },
-  components: { VueTableDynamic }
+  components: { VueTableDynamic,Datepicker }
 }
 </script>
 
