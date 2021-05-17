@@ -3,27 +3,41 @@
     <h1> Catálogo de Direcciones de entrega </h1>
     <div class="inputForm">
     <form>
-      <label>Compañia</label>
+      <label>Compañía</label>
       <br>
       <input v-model="addressCom" placeholder="Compañía"> 
       <br>
+      <label>Cliente</label>
+      <br>
       <input v-model="addressClient" placeholder="Cliente">
       <br>
-      <input v-model="addressDelivery" placeholder="Dirección Entrega">
+      <label>Dirección de Entrega</label>
+      <br>
+      <input v-model="addressDelivery" placeholder="Numero de Dirección Entrega">
+      <br>
+      <label>Nombre</label>
       <br>
       <input v-model="addressName" placeholder="Nombre">
       <br>
+      <label>Código postal</label>
+      <br>
       <input v-model="addressPostCode" placeholder="CódigoPostal">
+      <br>
+      <label>Código de ruta</label>
       <br>
       <input v-model="addressRouteCode" placeholder="CódigoRuta">
       <br>
+      <label>País</label>
+      <br>
       <input v-model="addressCountry" placeholder="País">
+      <br>
+      <label>RFC</label>
       <br>
       <input v-model="addressRFC" placeholder="RFC">
    </form>
   </div>
    <br>
-   <button @click="signUpAddress"> Dar de alta </button>
+   <button @click="checkForm"> Dar de alta </button>
    <button @click="signDownAddress"> Dar de baja </button>
    <button @click="loadAddress">Actualizar </button>
    <div style="width: 80%" >
@@ -33,6 +47,11 @@
       ref="table"></vue-table-dynamic>
 
   </div>
+    <div id="error">
+      <ul>
+        <li v-for="error in errors" v-bind:key="error">{{error}}</li>
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -50,6 +69,7 @@ export default {
       addressRouteCode:'',
       addressCountry:'',
       addressRFC:'',
+      errors:[],
       params: {
         data: [
           ['Compañía', 'Cliente','Dirección entrega','Nombre',  'CódigoPostal', 'CódigoRuta','País', 'RFC'],
@@ -79,6 +99,48 @@ export default {
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
       this.params.deleteData=checkedIndexs
+    },
+
+    checkForm(){
+        this.errors=[];
+        if(this.addressCom && this.addressClient && this.addressDelivery && this.addressName && this.addressPostCode && this.addressRouteCode && this.addressCountry && this.addressRFC){
+          this.signUpAddress();
+        }
+        else{
+          alert("Por favor, llene todos los campos correctamente para agregar un registro");
+           if(!this.addressCom) 
+          {
+            this.errors.push('Introduce compañía');
+          }
+          if(!this.addressClient) 
+          {
+            this.errors.push('Introduce un cliente');
+          }
+          if(!this.addressDelivery) 
+          {
+            this.errors.push('Introduce una dirección');
+          }
+          if(!this.addressName) 
+          {
+            this.errors.push('Introduce un nombre');
+          }        
+          if(!this.addressPostCode) 
+          {
+            this.errors.push('Introduce un código postal');
+          }   
+          if(!this.addressRouteCode) 
+          {
+            this.errors.push('Introduce un código de ruta');
+          } 
+          if(!this.addressCountry) 
+          {
+            this.errors.push('Introduce un país para la dirección');
+          } 
+          if(!this.addressRFC) 
+          {
+            this.errors.push('Introduce un RFC');
+          } 
+        }
     },
 
     signUpAddress(){
