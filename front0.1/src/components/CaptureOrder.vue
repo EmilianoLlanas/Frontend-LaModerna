@@ -13,7 +13,7 @@
       <br>
       <label>Fecha de Captura</label>
       <br>
-      <input v-model="aFecha" placeholder="dd/mm/aa">
+      <datepicker placeholder="Fecha de entrega" v-model="aFecha" :format="customFormatter"></datepicker>
       <br>
       <label>Direccion de entrega</label>
       <br>
@@ -28,7 +28,7 @@
       <form>
         <label>Observaciones</label>
         <br>
-        <textarea v-model="aObservaciones" placeholder="Observaciones de la orden"></textarea> 
+        <textarea v-model="aObservaciones" placeholder="Observaciones de la orden"></textarea>
         <br>
         <br>
       </form>
@@ -42,6 +42,8 @@
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic'
+import Datepicker from 'vuejs-datepicker'
+import moment from 'moment'
 export default {
   name: 'CaptureOrder',
   data() {
@@ -94,9 +96,12 @@ export default {
       this.aFecha='';
       this.aDireccion='';
       this.aObservaciones='';
-    }
+    },
+    customFormatter(date) {
+     return moment(date).format('YYYY/MM/DD');
+   }
   },
-  components: { VueTableDynamic }
+  components: { VueTableDynamic, Datepicker }
 }
 </script>
 

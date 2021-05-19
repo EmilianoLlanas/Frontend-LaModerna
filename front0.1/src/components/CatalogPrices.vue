@@ -36,11 +36,11 @@
       <br>
       <label>Fecha de inicio</label>
       <br>
-      <input v-model="aFechaInicio" placeholder="dd/mm/aa">
+      <datepicker placeholder="Fecha de entrega" v-model="aFechaInicio" :format="customFormatter"></datepicker>
       <br>
       <label>Fecha de caducidad</label>
       <br>
-      <input v-model="aFechaCaducidad" placeholder="dd/mm/aa">
+      <datepicker placeholder="Fecha de entrega" v-model="aFechaCaducidad" :format="customFormatter"></datepicker>
    </form>
   </div>
    <button @click="signUpPrice"> Dar de alta </button>
@@ -59,6 +59,9 @@
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic'
+import Datepicker from 'vuejs-datepicker'
+import moment from 'moment'
+
 export default {
   name: 'CatalogPrices',
   data() {
@@ -152,9 +155,12 @@ export default {
     },
     generateReport(){
       //aqui se mandara a llamar la pagina de reportes
-    }
+    },
+    customFormatter(date) {
+     return moment(date).format('YYYY/MM/DD');
+   }
   },
-  components: { VueTableDynamic }
+  components: { VueTableDynamic,Datepicker }
 }
 </script>
 
