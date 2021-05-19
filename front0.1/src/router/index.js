@@ -23,6 +23,7 @@ import OrderStatus from '@/components/OrderStatus'
 import AuthorizeDates from '@/components/AuthorizeDates'
 import MenuAGE from '@/components/MenuAGE'
 import OrderEdit from '@/components/OrderEdit'
+import ConsultSalesOrders from '@/components/ConsultSalesOrders'
 
 
 Vue.use(Router)
@@ -151,6 +152,11 @@ export default new Router({
       path: '/MenuAGE',
       name: 'MenuAGE',
       component: MenuAGE
+    },
+    {
+      path: '/ConsultSalesOrderes',
+      name: 'ConsultSalesOrders',
+      component: ConsultSalesOrders
     }
   ]
 })
