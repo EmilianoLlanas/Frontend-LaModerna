@@ -5,7 +5,7 @@
     <form>
       <label>Fecha</label>
       <br>
-      <input v-model="facDate" placeholder="Fecha">
+      <datepicker placeholder="Fecha" v-model="facDate" :format="customFormatter"></datepicker>
       <br>
       <label>Numero Factura</label>
       <br>
@@ -38,6 +38,9 @@
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic'
+import Datepicker from 'vuejs-datepicker'
+import moment from 'moment'
+
 export default {
   name: 'CatalogFacturas',
   data() {
@@ -82,7 +85,7 @@ export default {
       }
       else
       {
-        this.params.data.push([this.facDate, this.facId, this.facCli,this.facOrd,this.facEst]);
+        this.params.data.push([this.customFormatter(this.facDate), this.facId, this.facCli,this.facOrd,this.facEst]);
       }
     },
     signDownFactura(){
@@ -103,9 +106,12 @@ export default {
         this.facOrd='';
         this.facEst='';
         alert("Actualizando informacion...");
+    },
+    customFormatter(date) {
+      return moment(date).format('YYYY/MM/DD');
     }
   },
-  components: { VueTableDynamic }
+  components: { VueTableDynamic,Datepicker }
 }
 </script>
 
