@@ -25,15 +25,15 @@ export default {
     soBaan:'',
       params: {
         data: [
-          ['Orden','Orden Baan','Cliente', 'Nombre', 'Producto', 'Fecha de orden', 'Fecha de entrega','Fecha definida', 'Stock', 'Unidades'],
-          ["1","135","BIMBO",'PAPELITO-SUAVE-500','2021-03-21','2021-04-21','2021-04-22','PAPELITO SUAVE', '3000','5000'],
-          ["2","256","BARCEL",'PAPELITO-DURO-800','2021-02-1','2021-05-21','2021-05-22','PAPELITO DURO','500', '5000'],
-          ["3","389","TIA ROSA",'ALUMINIO-ARRUGADO-100','2021-04-2','2021-04-21','2021-04-22','ALUMINIO ARRUGADO', '4000', '5000'],
-          ["4","412","MOLINOS JORGE",'EMPAQUE-AWITADO-1500','2020-12-26','2021-04-21','2021-04-22','EMPAQUE AWITADO', '3010', '5000'],
-          ["5","545","BIMBO",'PAPELITO-SUAVE-500','2021-03-21','2021-04-21','2021-04-22','PAPELITO SUAVE', '3000', '8000'],
-          ["6","678","BARCEL",'PAPELITO-DURO-800','2021-02-1','2021-04-21','2021-04-22','PAPELITO DURO','3000', '9000'],
-          ["7","723","TIA ROSA",'ALUMINIO-ARRUGADO-100','2021-04-2','2021-04-21','2021-04-22','ALUMINIO ARRUGADO','3400', '5000'],
-          ["8","856","MOLINOS JORGE",'EMPAQUE-AWITADO-1500','2020-12-26','2021-04-21','2021-04-22','EMPAQUE AWITADO', '3010', '5000']
+          ['Orden','Orden Baan','Cliente', 'Nombre', 'Fecha de orden', 'Fecha de entrega','Fecha definida'],
+          ["1","135","BIMBO",'PAPELITO-SUAVE-500','2021-03-21','2021-04-21','2021-04-22'],
+          ["2","256","BARCEL",'PAPELITO-DURO-800','2021-02-1','2021-05-21','2021-05-22'],
+          ["3","389","TIA ROSA",'ALUMINIO-ARRUGADO-100','2021-04-2','2021-04-21','2021-04-22'],
+          ["4","412","MOLINOS JORGE",'EMPAQUE-AWITADO-1500','2020-12-26','2021-04-21','2021-04-22'],
+          ["5","545","BIMBO",'PAPELITO-SUAVE-500','2021-03-21','2021-04-21','2021-04-22'],
+          ["6","678","BARCEL",'PAPELITO-DURO-800','2021-02-1','2021-04-21','2021-04-22'],
+          ["7","723","TIA ROSA",'ALUMINIO-ARRUGADO-100','2021-04-2','2021-04-21','2021-04-22'],
+          ["8","856","MOLINOS JORGE",'EMPAQUE-AWITADO-1500','2020-12-26','2021-04-21','2021-04-22']
         ],
         id:[],
         header: 'row',
@@ -55,13 +55,8 @@ export default {
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
       this.params.id=checkedIndexs
-    },
-    search(){
-      //aqui habra una conexion a backend para guardar la orden
-      this.soCliente='',
-      this.soNoOrden='',
-      this.soBaan=''
     }
+    
   },
   components: { VueTableDynamic, SalesOrderStatusDetails }
 }
