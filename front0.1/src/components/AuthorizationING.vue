@@ -1,6 +1,24 @@
 <template>
     <div id="test">
-    <h1 id="header1"> Consulta de órdenes de venta</h1>
+    <h1 id="header1"> Autorización de ingeniería </h1>
+    <div class="inputForm">
+    <form>
+      <label>Orden Baan</label>
+      <br>
+      <input v-model="soBaan" placeholder="Orden Baan">
+      <br>
+      <label>No. de orden</label>
+      <br>
+      <input v-model="soNoOrden" placeholder="No de orden">
+      <br>
+      <label>Cliente</label>
+      <br>
+      <input v-model="soCliente" placeholder="Cliente">
+      <br>
+   </form>
+   <br>
+  <button @click="search"> Buscar </button>
+  </div>
    <div>
   <vue-table-dynamic :params="params"
       @select="onSelect"
@@ -17,7 +35,7 @@
 import VueTableDynamic from 'vue-table-dynamic';
 import SalesOrderStatusDetails from '@/components/SalesOrderStatusDetails.vue';
 export default {
-  name: 'ConsultSalesOrders',
+  name: 'AuthorizationING',
   data() {
     return {
     soCliente:'',
