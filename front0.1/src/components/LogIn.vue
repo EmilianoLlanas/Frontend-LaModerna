@@ -24,7 +24,9 @@
       <button @click="navMenuAge"> ir a menu principal de AGE </button>
       <button @click="navConsultSalesOrder">Consultar órdenes de venta</button>
       <button @click="navAuthorizationING">Autorización de ING</button>
-      <button @click="navAuthorizationOrdersCxC">Autorización de ordenes CxC</button>
+      <button @click="navAuthorizeVTA">Autorizacion de VTA</button>
+      <button @click="navAuthorizeOrderCxC">Autorización de ordenes CxC</button>
+
     </div>
 
 </template>
@@ -72,7 +74,6 @@ export default {
     navCatalogWarehouse() {
       this.$router.push({name: 'CatalogWarehouse'})
     },
-
     navCatalogDeliveryAddresses() {
       this.$router.push({name: 'CatalogDeliveryAddresses'})
     },
@@ -97,7 +98,10 @@ export default {
     navAuthorizationING(){
       this.$router.push({name:'AuthorizationING'})
     },
-    navAuthorizationOrdersCxC(){
+    navAuthorizeVTA(){
+      this.$router.push({name:'AuthorizeVTA'})
+
+    navAuthorizeOrderCxC(){
       this.$router.push({name:'AuthorizeOrderCxc'})
     },
     backup(){
