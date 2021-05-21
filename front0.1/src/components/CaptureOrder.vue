@@ -83,6 +83,25 @@ export default {
     },
     save(){
       //aqui habra una conexion a backend para guardar la orden
+      if(this.aCliente && this.aNoOrden && this.aFecha && this.aDireccion && this.aObservaciones){
+
+      }else{
+        if(!this.aCliente){
+          alert('campo cliente vacio')
+        }
+        if(!this.aNoOrden){
+          alert('campo numero de orden vacio')
+        }
+        if(!this.aFecha){
+          alert('campo fecha vacio')
+        }
+        if(!this.aDireccion){
+          alert('campo Direccion vacio')
+        }
+        if(!this.aObservaciones){
+          alert('campo Observaciones vacio')
+        }
+      }
       this.aCliente='';
       this.aNoOrden='';
       this.aFecha='';
