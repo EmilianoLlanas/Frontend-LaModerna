@@ -24,7 +24,8 @@ import AuthorizeDates from '@/components/AuthorizeDates'
 import MenuAGE from '@/components/MenuAGE'
 import OrderEdit from '@/components/OrderEdit'
 import AllSalesReport from '@/components/AllSalesReport'
-
+import OrderStatusCxc from '@/components/OrderStatusCxc'
+import AuthorizeOrderCxc from '@/components/AuthorizeOrderCxc'
 
 Vue.use(Router)
 
@@ -138,7 +139,8 @@ export default new Router({
     path: '/OrderStatus',
     name: 'OrderStatus',
     component: OrderStatus
-  },{
+  },
+  {
       path: '/AuthorizeDates',
       name: 'AuthorizeDates',
       component: AuthorizeDates
@@ -157,6 +159,16 @@ export default new Router({
       path: '/AllSalesReport',
       name: AllSalesReport,
       component: AllSalesReport
+    },
+    {
+      path: '/OrderStatusCxc',
+      name: OrderStatusCxc,
+      component: OrderStatusCxc
+    },
+    {
+      path: '/AuthorizeOrderCxc',
+      name: AuthorizeOrderCxc,
+      component: AuthorizeOrderCxc
     },
   ]
 })
