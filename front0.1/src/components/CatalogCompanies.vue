@@ -2,17 +2,22 @@
     <div id="test">
     <h1 id="header1"> Catálogo de Compañías </h1>
     <div class="inputForm">
+      <div id="error">
+        <ul>
+          <li v-for="error in errors" v-bind:key="error">{{error}}</li>
+        </ul>
+     </div>
     <form>
       <label>ID</label>
       <br>
-      <input v-model="aId" placeholder="Identificador de la Compañía">
+      <input v-model="aId" type="number" min="0" placeholder="Identificador de la Compañía">
       <br>
       <label>Nombre</label>
       <br>
       <input v-model="aName" placeholder="Nombre de la Compañía">
     </form>
     </div>
-   <button @click="signUpCompany"> Dar de alta </button>
+   <button @click="checkForm"> Dar de alta </button>
    <button @click="signDownCompany"> Dar de baja </button>
    <button @click="loadCompanies"> Actualizar </button>
    <div id="table" >
@@ -33,7 +38,7 @@ export default {
     return {
       aId:'',
       aName:'',
-      aDescription:'',
+      errors:[],
       params: {
         data: [
           ['ID', 'Nombre'],
@@ -65,17 +70,26 @@ export default {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
       this.params.deleteData=checkedIndexs
     },
+    checkForm(){
+        this.errors=[];
+        if(this.aId && this.aName){
+          this.signUpCompany();
+        }
+        else{
+          alert("Por favor, llene todos los campos correctamente para agregar un registro");
+           if(!this.aId)
+          {
+            this.errors.push('Introduce un ID de compañía');
+          }
+          if(!this.aName)
+          {
+            this.errors.push('Introduce el nombre de la compañía');
+          }
+        }
+    },
     signUpCompany(){
         //there will be a method here to establish connection with backend and sign up the companies' id and name, some day....
-
-        if(this.aId==''||this.aName=='')
-        {
-          alert('Por favor, llene todos los campos para registrar inventario')
-        }
-        else
-        {
-          this.params.data.push([this.aId, this.aName]);
-        }
+        this.params.data.push([this.aId, this.aName]);
         this.aId='';
         this.aName='';
     },
@@ -83,7 +97,7 @@ export default {
         //there will be a method here to establish connection with backend and sign down the companies' id and name, some day....
         this.aId='';
         this.aName='';
-        
+
         for (var i = this.params.deleteData.length-1; i>0 ; i--) {
           this.params.data.splice(this.params.deleteData[i], 1)
         }
