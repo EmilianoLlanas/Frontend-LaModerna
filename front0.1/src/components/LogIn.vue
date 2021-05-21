@@ -24,6 +24,7 @@
       <button @click="navMenuAge"> ir a menu principal de AGE </button>
       <button @click="navConsultSalesOrder">Consultar órdenes de venta</button>
       <button @click="navAuthorizationING">Autorización de ING</button>
+      <button @click="navAuthorizationOrdersCxC">Autorización de ordenes CxC</button>
     </div>
 
 </template>
@@ -95,6 +96,9 @@ export default {
     },
     navAuthorizationING(){
       this.$router.push({name:'AuthorizationING'})
+    },
+    navAuthorizationOrdersCxC(){
+      this.$router.push({name:'AuthorizeOrderCxc'})
     },
     backup(){
       var date = new Date();
