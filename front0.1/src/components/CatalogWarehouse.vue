@@ -40,7 +40,7 @@ export default {
           ['Barcel', '244 sur'],
           ['Totis', '930 este'],
         ],
-        deleteDate:[],
+        deleteData:[],
         header: 'row',
         border: true,
         stripe: true,

@@ -50,7 +50,7 @@ export default {
           ['Barcel', '626', 'Sara', 'Activo'],
           ['Totis', '250', 'Selena', 'Inactivo'],
         ],
-        deleteDate:[],
+        deleteData:[],
         header: 'row',
         border: true,
         stripe: true,

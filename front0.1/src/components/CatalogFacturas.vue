@@ -57,7 +57,7 @@ export default {
           ['31/12/20', '4486', 'Barcel', '9021', 'ok'],
           ['10/01/21', '6548', 'Totis', '2312', 'ok'],
         ],
-        deleteDate:[],
+        deleteData:[],
         header: 'row',
         border: true,
         stripe: true,
