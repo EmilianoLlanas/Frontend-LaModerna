@@ -40,7 +40,7 @@
    <button @click="checkForm"> Dar de alta </button>
    <button @click="signDownAddress"> Dar de baja </button>
    <button @click="loadAddress">Actualizar </button>
-   <div style="width: 80%" >
+   <div>
   <vue-table-dynamic :params="params"
       @select="onSelect"
       @selection-change="onSelectionChange"
@@ -83,7 +83,7 @@ export default {
         stripe: true,
         showCheck: true,
         enableSearch: true,
-        sort: [0, 1],/* Maybe this should change */
+        sort: [0, 1],
         pagination: true,
         pageSize: 10,
         //newAddress:[addressCom, addressClient, addressPostCode, addressCountry, addressRFC]
