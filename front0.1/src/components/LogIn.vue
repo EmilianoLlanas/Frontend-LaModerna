@@ -25,6 +25,8 @@
       <button @click="navConsultSalesOrder">Consultar órdenes de venta</button>
       <button @click="navAuthorizationING">Autorización de ING</button>
       <button @click="navAuthorizeVTA">Autorizacion de VTA</button>
+      <button @click="navAuthorizeOrderCxC">Autorización de ordenes CxC</button>
+
     </div>
 
 </template>
@@ -72,7 +74,6 @@ export default {
     navCatalogWarehouse() {
       this.$router.push({name: 'CatalogWarehouse'})
     },
-
     navCatalogDeliveryAddresses() {
       this.$router.push({name: 'CatalogDeliveryAddresses'})
     },
@@ -99,6 +100,9 @@ export default {
     },
     navAuthorizeVTA(){
       this.$router.push({name:'AuthorizeVTA'})
+
+    navAuthorizeOrderCxC(){
+      this.$router.push({name:'AuthorizeOrderCxc'})
     },
     backup(){
       var date = new Date();

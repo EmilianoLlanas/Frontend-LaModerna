@@ -172,12 +172,12 @@ export default new Router({
     {
 
       path: '/OrderStatusCxc',
-      name: OrderStatusCxc,
+      name: 'OrderStatusCxc',
       component: OrderStatusCxc
     },
     {
       path: '/AuthorizeOrderCxc',
-      name: AuthorizeOrderCxc,
+      name: 'AuthorizeOrderCxc',
       component: AuthorizeOrderCxc
     },
     {
