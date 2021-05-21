@@ -22,6 +22,8 @@
       <button @click="backup"> Generar respaldo del sistema </button>
       <button @click="restore"> Restaurar sistema </button>
       <button @click="navMenuAge"> ir a menu principal de AGE </button>
+      <button @click="navConsultSalesOrder">Consultar órdenes de venta</button>
+      <button @click="navAuthorizationING">Autorización de ING</button>
     </div>
 
 </template>
@@ -87,6 +89,12 @@ export default {
     },
     navMenuAge(){
       this.$router.push({name:'MenuAGE'})
+    },
+    navConsultSalesOrder(){
+      this.$router.push({name:'ConsultSalesOrders'})
+    },
+    navAuthorizationING(){
+      this.$router.push({name:'AuthorizationING'})
     },
     backup(){
       var date = new Date();
