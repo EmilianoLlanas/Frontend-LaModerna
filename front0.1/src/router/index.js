@@ -28,7 +28,7 @@ import AllSalesReport from '@/components/AllSalesReport'
 import OrderStatusCxc from '@/components/OrderStatusCxc'
 import AuthorizeOrderCxc from '@/components/AuthorizeOrderCxc'
 import AuthorizationING from '@/components/AuthorizationING'
-
+import AuthorizeVTA from '@/components/AuthorizeVTA'
 
 
 Vue.use(Router)
@@ -180,11 +180,15 @@ export default new Router({
       name: AuthorizeOrderCxc,
       component: AuthorizeOrderCxc
     },
-
+    {
       path: '/AuthorizationING',
       name: 'AuthorizationING',
       component: AuthorizationING
+    },
+    {
+      path: '/AuthorizeVTA',
+      name: 'AuthorizeVTA',
+      component: AuthorizeVTA
     }
-
   ]
 })
