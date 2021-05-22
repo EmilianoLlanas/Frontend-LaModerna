@@ -73,7 +73,7 @@ export default {
   data() {
     return {
       aCompania:'',
-      aLista:'',
+      aLista:0,
       aArticulo:'',
       aNivDescuento:0,
       aCantidad:0,
