@@ -2,9 +2,10 @@
  <div id="fullpage">
    <div id="sidebar">
       <!--<router-view/>-->
-                <div id="menuhead">
-                    <h3> Menú </h3>
-                </div>
+            <div id="menuhead">
+                <h3> Menú </h3>
+            </div>
+            <div id="menu-buttons">
                 <a @click="navCatalogArticles"> <div class="element"> Catálogo de Artículos </div></a>
                 <a @click="navCatalogCompanies"> <div class="element">Catálogo de Compañías </div></a>
                 <a @click="navCatalogPrices"> <div class="element">Catálogo de Precios  </div></a>
@@ -33,11 +34,12 @@
                 <a @click="ordenesTodas"> <div class="element"> Todas las Ordenes </div></a>
                 <a @click="sharedItems"> <div class="element"> Catálogo Artículos Compartidos </div></a>
             </div>
-      <div id="content">
-        <iframe width="100%" height="100%" :src="this.source"></iframe>
-      </div>
+
 
     </div>
+   <div id="content">
+     <iframe width="100%" height="100%" :src="this.source"></iframe>
+   </div>
   </div>
 </template>
 
@@ -47,7 +49,7 @@ export default {
 
   data: function() {
         return {
-            dateS: ""
+            dateS: "",
             source:'',
         }
     },
@@ -181,6 +183,11 @@ h3{
   font-family:  "GOTY0","GOTY1","GOTY2",verdana;
 }
 
+#menu-buttons {
+  max-height: 800px;
+  overflow: scroll;
+}
+
 #sidebar .element:hover{
   background: rgba(14,44,164,0.30);
   color: white;
@@ -196,7 +203,7 @@ h3{
   font-family: Verdana;
   font-size: 20px;
 }
-        
+
 .inputForm  input {
   width: 100%;
   clear: both;
@@ -211,7 +218,7 @@ h3{
   background: #f2f2f2;
   padding: 10px;
 }
-        
+
 .inputForm  textarea {
   padding: 10px;
   width: 150%;
@@ -224,11 +231,11 @@ h3{
   border-radius: 6px;
   border: transparent;
   background: #f2f2f2;
-  width: 100%; 
+  width: 100%;
   font-family: Verdana;
   font-size: 20px;
 }
-        
+
 button{
   margin-top: 0%;
   margin-left: 3%;
@@ -244,18 +251,18 @@ button{
   border: transparent;
   margin-bottom: 40px;
 }
-        
+
 button:hover{
   background-color: rgba(14,44,164,0.30) ;
 }
-        
+
 #test{
   background-color: rgba(33,52,133,0.20);
   margin: 1%;
   color: #3B0EA4;
   font-family: "GOTY0", "GOTY1", "GOTY2", verdana;
 }
-        
+
 #header1{
   margin: 2%;
   font-family: Verdana;
@@ -263,7 +270,7 @@ button:hover{
   color: #3B0EA4;
   text-align: center;
 }
-        
+
 #table{
   width: 80%;
   margin-left: 10%;
