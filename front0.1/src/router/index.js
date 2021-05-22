@@ -28,8 +28,10 @@ import AllSalesReport from '@/components/AllSalesReport'
 import OrderStatusCxc from '@/components/OrderStatusCxc'
 import AuthorizeOrderCxc from '@/components/AuthorizeOrderCxc'
 import AuthorizationING from '@/components/AuthorizationING'
+import BlockClient from '@/components/BlockClient'
+import AuthorizeOrderCST from '@/components/AuthorizeOrderCST'
 import AuthorizeVTA from '@/components/AuthorizeVTA'
-
+import Backup from '@/components/Backup'
 
 Vue.use(Router)
 
@@ -186,9 +188,24 @@ export default new Router({
       component: AuthorizationING
     },
     {
+      path:'/BlockClient',
+      name:'BlockClient',
+      component: BlockClient
+    },
+    {
+      path:'/AuthorizeOrderCST',
+      name:'AuthorizeOrderCST',
+      component: AuthorizeOrderCST
+    },
+    {
       path: '/AuthorizeVTA',
       name: 'AuthorizeVTA',
       component: AuthorizeVTA
+    },
+    {
+      path: '/Backup',
+      name: 'Backup',
+      component: Backup
     }
   ]
 })

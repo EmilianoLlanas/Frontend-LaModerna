@@ -19,13 +19,17 @@
       <button @click="navProcessedOrders"> Ir a la Consulta de Órdenes Procesadas </button>
       <button @click="navOrderStatus"> Ir a la Consulta de Estatus de Órdenes </button>
       <button @click="navAuthorizeDates"> Ir a la autorizacion de fechas de entrega </button>
-      <button @click="backup"> Generar respaldo del sistema </button>
-      <button @click="restore"> Restaurar sistema </button>
+      <button @click="navRoles"> Ir a la autorizacion de fechas de entrega </button>
+      <button @click="navBackup"> Generar respaldo </button>
       <button @click="navMenuAge"> ir a menu principal de AGE </button>
       <button @click="navConsultSalesOrder">Consultar órdenes de venta</button>
       <button @click="navAuthorizationING">Autorización de ING</button>
       <button @click="navAuthorizeVTA">Autorizacion de VTA</button>
       <button @click="navAuthorizeOrderCxC">Autorización de ordenes CxC</button>
+      <button @click="navBlock">Bloqueo de Clientes</button>
+      <button @click="navAuthorizeOrderCST">Autorización de ordenes CST</button>
+      <button @click="ordenesTodas">Todas las Ordenes</button>
+      <button @click="sharedItems">Ir a catálogo Artículos Compartidos</button>
 
     </div>
 
@@ -104,14 +108,24 @@ export default {
     navAuthorizeOrderCxC(){
       this.$router.push({name:'AuthorizeOrderCxc'})
     },
-    backup(){
-      var date = new Date();
-      this.dateS = date.toISOString().substring(0,19);
-      alert("Generando respaldo del sistema");
+    ordenesTodas(){
+      this.$router.push({name:'AllSalesReport'})
     },
-    restore(){
-      alert("Sistema restaurado desde el respaldo hecho el: "+this.dateS)
-    }
+    sharedItems(){
+      this.$router.push({name:'CatalogSharedArticles'})
+    },
+   navBackup(){
+      this.$router.push({name:'Backup'})
+    },
+    navRoles(){
+      this.$router.push({name:'RoleAssign'})
+    },
+    navAuthorizeOrderCST(){
+      this.$router.push({name:'AuthorizeOrderCST'})
+    },
+    navBlock(){
+      this.$router.push({name:'BlockClient'})
+    },
     }
   }
 </script>

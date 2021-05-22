@@ -1,11 +1,10 @@
 <template>
   <div id="test">
-    <h1 id="header1"> Autorizacion de fechas </h1>
+    <h1 id="header1"> Autorizacion de ordenes CST </h1>
     <div class="inputForm">
 
   </div>
-   <button @click="authOrder"> Autorizar entrega </button>
-   <button @click="authDate"> Autorizar Fecha </button>
+   <button @click="authOrder"> Autorizar orden </button>
    <button @click="update">Actualizar </button>
   <div id="table">
     <vue-table-dynamic :params="params"
@@ -20,23 +19,27 @@
 <script>
 import VueTableDynamic from 'vue-table-dynamic'
 export default {
-  name: 'AuthorizeDates',
+  name: 'AuthorizeOrderCxc',
   data() {
     return {
-      select:-1,
+        id:'',
+        cliente:'',
+        fecha:'',
+        authStat:'',
       params: {
         data: [
-          ['ID','Cliente','Fecha','Fecha Autorizada','Entrega Autorizada'],
-          [1, 'Zara', '1/12/2021','NO','NO'],
-          [2, 'WalMart', '1/12/2021','SI','NO'],
-          [3, 'Soriana', '1/12/2021','NO','SI'],
+          ['ID','Cliente','Fecha','Autorizada'],
+          [1, 'Zara', '1/12/2021','NO'],
+          [2, 'WalMart', '1/12/2021','NO'],
+          [3, 'Soriana', '1/12/2021','NO'],
         ],
+        deleteData:[],
         header: 'row',
         border: true,
         stripe: true,
         showCheck: true,
         enableSearch: true,
-        sort: [0, 1,2],
+        sort: [0, 1, 2],
         pagination: true,
         pageSize: 10,
       }
@@ -44,32 +47,18 @@ export default {
   },
   methods: {
     onSelect (isChecked, index, data) {
-      this.select=index;
       console.log('onSelect: ', isChecked, index, data)
       console.log('Checked Data:', this.$refs.table.getCheckedRowDatas(true))
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
-    },
-    update(){
-        //there will be a method here to establish connection with backend and sign up the articles' id and name, some day....
-
-    },
-    authDate(){
-        //there will be a method here to establish connection with backend and sign down the articles' id and name, some day....
-        if(this.params.data[this.select][3]=='NO'){
-          this.params.data[this.select][3]='SI'
-          this.params.data.push(this.params.data[this.select])
-          this.params.data.splice(this.select, 1)
-        }
+      this.params.deleteData=checkedIndexs
     },
     authOrder(){
-        //there will be a method here to establish connection with backend and update the table, some day....
-        if(this.params.data[this.select][4]=='NO'){
-          this.params.data[this.select][4]='SI'
-          this.params.data.push(this.params.data[this.select])
-          this.params.data.splice(this.select, 1)
-        }
+        this.authStat='SI'
+  },
+    update(){
+            alert("Actualizando informacion...");
     }
   },
   components: { VueTableDynamic }
