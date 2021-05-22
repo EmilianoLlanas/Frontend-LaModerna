@@ -19,8 +19,7 @@
       <button @click="navProcessedOrders"> Ir a la Consulta de Órdenes Procesadas </button>
       <button @click="navOrderStatus"> Ir a la Consulta de Estatus de Órdenes </button>
       <button @click="navAuthorizeDates"> Ir a la autorizacion de fechas de entrega </button>
-      <button @click="backup"> Generar respaldo del sistema </button>
-      <button @click="restore"> Restaurar sistema </button>
+      <button @click="backup"> Generar respaldo </button>
       <button @click="navMenuAge"> ir a menu principal de AGE </button>
       <button @click="navConsultSalesOrder">Consultar órdenes de venta</button>
       <button @click="navAuthorizationING">Autorización de ING</button>
@@ -107,19 +106,14 @@ export default {
       this.$router.push({name:'AuthorizeOrderCxc'})
     },
     ordenesTodas(){
-    this.$router.push({name:'AllSalesReport'})
+      this.$router.push({name:'AllSalesReport'})
     },
     sharedItems(){
       this.$router.push({name:'CatalogSharedArticles'})
     },
     backup(){
-      var date = new Date();
-      this.dateS = date.toISOString().substring(0,19);
-      alert("Generando respaldo del sistema");
+      this.$router.push({name:'Backup'})
     },
-    restore(){
-      alert("Sistema restaurado desde el respaldo hecho el: "+this.dateS)
-    }
     }
   }
 </script>
