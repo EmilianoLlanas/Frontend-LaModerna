@@ -100,7 +100,7 @@ export default {
     },
     navAuthorizeVTA(){
       this.$router.push({name:'AuthorizeVTA'})
-
+    },
     navAuthorizeOrderCxC(){
       this.$router.push({name:'AuthorizeOrderCxc'})
     },

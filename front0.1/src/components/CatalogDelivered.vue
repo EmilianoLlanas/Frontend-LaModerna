@@ -2,6 +2,11 @@
     <div id="test">
     <h1 id="header1"> Catálogo de Entregadas </h1>
     <div class="inputForm">
+      <div id="error">
+        <ul>
+          <li v-for="error in errors" v-bind:key="error">{{error}}</li>
+        </ul>
+      </div>
     <form>
       <label>Orden</label>
       <br>
@@ -17,7 +22,7 @@
 
    </form>
   </div>
-   <button @click="signUpDeliver"> Dar de alta </button>
+   <button @click="checkForm"> Dar de alta </button>
    <button @click="signDownDeliver"> Dar de baja </button>
    <button @click="loadDeliver">Actualizar </button>
    <div id="table">
@@ -70,6 +75,27 @@ export default {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
       this.params.deleteData=checkedIndexs
     },
+    checkForm(){
+      this.errors=[];
+      if(this.delivOrd && this.delivCom && this.delivDate){
+        this.signUpDeliver();
+      }
+      else{
+        alert('Por favor, llene todos los campos para registrar la entrega')
+        if(!this.delivOrd)
+        {
+          this.errors.push("Introduce numero de Orden");
+        }
+        if(!this.delivCom)
+        {
+          this.errors.push("Introduce Compañia");
+        }
+        if(!this.delivDate)
+        {
+          this.errors.push("Introduce fecha de Orden");
+        }
+      }
+    },
     signUpDeliver(){
         if(this.delivOrd==''||this.delivCom==''||this.delivDate=='')
         {
@@ -79,6 +105,9 @@ export default {
         {
           this.params.data.push([this.delivOrd, this.delivCom, this.customFormatter(this.delivDate)]);
         }
+        this.delivOrd='';
+        this.delivCom='';
+        this.delivDate='';
     },
     signDownDeliver(){
       this.delivOrd='';

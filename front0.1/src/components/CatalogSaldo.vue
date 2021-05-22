@@ -2,6 +2,11 @@
     <div id="test">
     <h1 id="header1"> Catálogo de Saldos </h1>
     <div class="inputForm">
+      <div id="error">
+        <ul>
+          <li v-for="error in errors" v-bind:key="error">{{error}}</li>
+        </ul>
+      </div>
     <form>
       <label>Orden</label>
       <br>
@@ -24,7 +29,7 @@
       <input v-model="salFac" placeholder="Saldo Factura">
    </form>
   </div>
-   <button @click="signUpSaldo"> Dar de alta </button>
+   <button @click="checkForm"> Dar de alta </button>
    <button @click="signDownSaldo"> Dar de baja </button>
    <button @click="loadSaldo">Actualizar </button>
    <div id="table">
@@ -76,6 +81,35 @@ export default {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
       this.params.deleteData=checkedIndexs
     },
+    checkForm(){
+      this.errors=[];
+      if(this.ordId && this.salCli && this.salIdFac && this.salOrd && this.salFac){
+        this.signUpSaldo();
+      }
+      else{
+        alert('Por favor, llene todos los campos para registrar el saldo');
+        if(!this.ordId)
+        {
+          this.errors.push('Introduce numero de Orden');
+        }
+        if(!this.salCli)
+        {
+          this.errors.push('Introduce nombre de Cliente');
+        }
+        if(!this.salIdFac)
+        {
+          this.errors.push('Introduce numero de Factura');
+        }
+        if(!this.salOrd)
+        {
+          this.errors.push('Introduce saldo de la Orden');
+        }
+        if(!this.salFac)
+        {
+          this.errors.push('Introduce saldo de la Factura');
+        }
+      }
+    },
     signUpSaldo(){
         if(this.ordId==''||this.salCli==''||this.salIdFac==''||this.salOrd==''||this.salFac=='')
         {
@@ -85,6 +119,11 @@ export default {
         {
           this.params.data.push([this.ordId, this.salCli,this.salIdFac,this.salOrd,this.salFac]);
         }
+        this.ordId='';
+        this.salCli='';
+        this.salIdFac='';
+        this.salOrd='';
+        this.salFac='';
     },
     signDownSaldo(){
       this.ordId='';
