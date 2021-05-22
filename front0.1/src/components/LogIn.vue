@@ -26,6 +26,7 @@
       <button @click="navAuthorizationING">Autorización de ING</button>
       <button @click="navAuthorizeVTA">Autorizacion de VTA</button>
       <button @click="navAuthorizeOrderCxC">Autorización de ordenes CxC</button>
+      <button @click="ordenesTodas">Todas las Ordenes</button>
 
     </div>
 
@@ -103,6 +104,9 @@ export default {
     },
     navAuthorizeOrderCxC(){
       this.$router.push({name:'AuthorizeOrderCxc'})
+    },
+    ordenesTodas(){
+    this.$router.push({name:'AllSalesReport'})
     },
     backup(){
       var date = new Date();

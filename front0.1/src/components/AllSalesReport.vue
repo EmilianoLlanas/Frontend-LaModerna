@@ -5,9 +5,9 @@
       <label>Fecha de Orden</label>
       <br>
       <label>Desde:</label>
-      <input v-model="fromDate" placeholder="Fecha">
+      <datepicker v-model="fromDate" placeholder="Fecha":format="customFormatter"></datepicker>
       <label>Hasta:</label>
-      <input v-model="toDate" placeholder="Fecha">
+      <datepicker v-model="toDate" placeholder="Fecha":format="customFormatter"></datepicker>
       <br>
       <br>
       <label>Folio Baan</label>
@@ -61,6 +61,8 @@
 <script>
 import VueTableDynamic from 'vue-table-dynamic';
 import AllSalesReportDetails from '@/components/AllSalesReportDetails.vue';
+import Datepicker from 'vuejs-datepicker'
+import moment from 'moment'
 
 
 
@@ -118,9 +120,13 @@ export default {
     findOrders(){
       alert('Buscando Ordenes')
     },
+    customFormatter(date) {
+      return moment(date).format('YYYY/MM/DD');
+    }
 
   },
-  components: { VueTableDynamic,AllSalesReportDetails }
+
+  components: { VueTableDynamic,AllSalesReportDetails,Datepicker }
 }
 </script>
 
