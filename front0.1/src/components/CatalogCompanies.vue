@@ -1,18 +1,23 @@
 <template>
     <div id="test">
-    <h1> Catálogo de Compañías </h1>
+    <h1 id="header1"> Catálogo de Compañías </h1>
     <div class="inputForm">
+      <div id="error">
+        <ul>
+          <li v-for="error in errors" v-bind:key="error">{{error}}</li>
+        </ul>
+     </div>
     <form>
       <label>ID</label>
       <br>
-      <input v-model="aId" placeholder="Identificador de la Compañía">
+      <input v-model="aId" type="number" min="0" placeholder="Identificador de la Compañía">
       <br>
       <label>Nombre</label>
       <br>
       <input v-model="aName" placeholder="Nombre de la Compañía">
     </form>
     </div>
-   <button @click="signUpCompany"> Dar de alta </button>
+   <button @click="checkForm"> Dar de alta </button>
    <button @click="signDownCompany"> Dar de baja </button>
    <button @click="loadCompanies"> Actualizar </button>
    <div id="table" >
@@ -33,7 +38,7 @@ export default {
     return {
       aId:'',
       aName:'',
-      aDescription:'',
+      errors:[],
       params: {
         data: [
           ['ID', 'Nombre'],
@@ -44,6 +49,7 @@ export default {
           [5, 'a8c325']
 
         ],
+        deleteData:[],
         header: 'row',
         border: true,
         stripe: true,
@@ -62,24 +68,49 @@ export default {
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
+      this.params.deleteData=checkedIndexs
+    },
+    checkForm(){
+        this.errors=[];
+        if(this.aId && this.aName){
+          this.signUpCompany();
+        }
+        else{
+          alert("Por favor, llene todos los campos correctamente para agregar un registro");
+           if(!this.aId)
+          {
+            this.errors.push('Introduce un ID de compañía');
+          }
+          if(!this.aName)
+          {
+            this.errors.push('Introduce el nombre de la compañía');
+          }
+        }
     },
     signUpCompany(){
         //there will be a method here to establish connection with backend and sign up the companies' id and name, some day....
+        this.params.data.push([this.aId, this.aName]);
         this.aId='';
         this.aName='';
-        this.aDescription='';
     },
     signDownCompany(){
         //there will be a method here to establish connection with backend and sign down the companies' id and name, some day....
         this.aId='';
         this.aName='';
-        this.aDescription='';
+
+        for (var i = this.params.deleteData.length-1; i>0 ; i--) {
+          this.params.data.splice(this.params.deleteData[i], 1)
+        }
+
+
+
+
     },
     loadCompanies(){
         //there will be a method here to establish connection with backend and load the companies' id and name, some day....
         this.aId='';
         this.aName='';
-        this.aDescription='';
+        alert('Actualizando tabla con Base de datos')
     },
   },
   components: { VueTableDynamic }
@@ -141,6 +172,11 @@ button:hover{
   margin: 1%;
   color: #3B0EA4;
   font-family: "GOTY0", "GOTY1", "GOTY2", verdana;
+}
+
+#header1{
+  margin: 2%;
+  font-size: 30px;
 }
 
 #table{

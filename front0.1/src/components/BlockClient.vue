@@ -1,45 +1,46 @@
 <template>
     <div id="test">
-    <h1 id="header1"> Órdenes de venta en proceso </h1>
-
-   <button @click="loadOrders">Actualizar</button>
-   <div id="table" >
-
+    <h1 id="header1"> Bloquear Cliente </h1>
+    <div class="inputForm">
+    <form>
+      <label>Cliente</label>
+      <br>
+      <input v-model="aCliente" placeholder="Cliente">
+    </form>
+   <button @click="blockCli">Bloquear</button>
+   </div>
+   <div id="table">
   <vue-table-dynamic :params="params"
       @select="onSelect"
       @selection-change="onSelectionChange"
       ref="table"></vue-table-dynamic>
 
-    <!--  <OrderDetails :id="params.id" :cliente="params.cliente"></OrderDetails>-->
-    <OrderDetails :id="params.id"></OrderDetails>
   </div>
-
   </div>
 </template>
 
 <script>
-import VueTableDynamic from 'vue-table-dynamic';
-import OrderDetails from '@/components/OrderDetails.vue';
-
-
-
+import VueTableDynamic from 'vue-table-dynamic'
 export default {
-  name: 'OrdersInProcess',
-
+  name: 'CatalogClients',
   data() {
-
     return {
-
+    aCompania:'',
+    aCliente:'',
+    aNombreA:'',
+    aNombreB:'',
+    aEstatus:'',
       params: {
-
         data: [
-          ['ID','Cliente' ,'Nombre','Fecha Orden','Artículo','Cantidad','Precio'],
-          ["1", "BIMBO", "PAPELITO-SUAVE-500 ","2021-03-21","PAPELITO SUAVE","500","$50250.00"],
-          ["2", "BARCEL", "PAPELITO-DURO-800 ","2021-02-1","PAPELITO DURO","800","$63250.00"],
-          ["3", "TIA ROSA", "ALUMINIO-ARRUGADO-100 ","2021-04-2","ALUMINIO ARRUGADO","100","$5050.00"],
-          ["4", "MOLINOS JORGE", "EMPAQUE-AWITADO-1500 ","2020-12-26","EMPAQUE AWITADO","1500","$70950.00"],
+          ['Compañia','Cliente','Nombre A','Nombre B','Estatus'],
+          [0,1,2,3,4],
+          [0,1,2,3,4],
+          [0,1,2,3,4],
+          [0,1,2,3,4],
+          [0,1,2,3,4],
+          [0,1,2,3,4],
         ],
-        id:[],
+        deleteData:[],
         header: 'row',
         border: true,
         stripe: true,
@@ -48,30 +49,59 @@ export default {
         sort: [0, 1,2],
         pagination: true,
         pageSize: 10,
-      },
-
+      }
     }
   },
   methods: {
     onSelect (isChecked, index, data) {
       console.log('onSelect: ', isChecked, index, data)
       console.log('Checked Data:', this.$refs.table.getCheckedRowDatas(true))
-
-
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
-      this.params.id=checkedIndexs
+      this.params.deleteData=checkedIndexs
     },
-    orderReport(){
+    signUpClient(){
         //there will be a method here to establish connection with backend and sign up the articles' id and name, some day....
-    },
-    loadOrders(){
-      alert('Actualizando tablas con base de datos')
-    },
+        if(this.aCompania=='' ||this.aCliente=='' ||this.aNombreA=='' ||this.aNombreB=='' ||this.aEstatus==''){
+          alert('Por favor, llene todos los campos para registrar un Cliente')
+        }else{
+          this.params.data.push([this.aCompania,this.aCliente,this.aNombreA,this.aNombreB,this.aEstatus]);
+        }
 
+        this.aCompania='';
+        this.aCliente='';
+        this.aNombreA='';
+        this.aNombreB='';
+        this.aEstatus='';
+    },
+    signDownClient(){
+        //there will be a method here to establish connection with backend and sign down the articles' id and name, some day....
+        this.aCompania='';
+        this.aCliente='';
+        this.aNombreA='';
+        this.aNombreB='';
+        this.aEstatus='';
+        for (var i = this.params.deleteData.length-1; i>0 ; i--) {
+          this.params.data.splice(this.params.deleteData[i], 1)
+        }
+    },
+    loadClient(){
+        //there will be a method here to establish connection with backend and update the table, some day....
+        this.aCompania='';
+        this.aCliente='';
+        this.aNombreA='';
+        this.aNombreB='';
+        this.aEstatus='';
+    },
+    generateReport(){
+      //aqui se mandara a llamar la pagina de reportes
+    },
+    blockCli(){
+      alert("Cliente "+this.aCliente+" ha sido bloqueado");
+    }
   },
-  components: { VueTableDynamic,OrderDetails }
+  components: { VueTableDynamic }
 }
 </script>
 
@@ -114,8 +144,8 @@ export default {
 }
 
 #table{
-  width: 90%;
-  margin-left: 3%;
+  width: 80%;
+  margin-left: 10%;
   margin-top: 2%;
 }
 

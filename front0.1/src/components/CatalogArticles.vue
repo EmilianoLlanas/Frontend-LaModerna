@@ -2,10 +2,15 @@
   <div id="test">
     <h1 id="header1"> Catálogo de Artículos </h1>
     <div class="inputForm">
+      <div id="error">
+        <ul>
+          <li v-for="error in errors" v-bind:key="error">{{error}}</li>
+        </ul>
+      </div>
       <form>
         <label>ID</label>
         <br>
-        <input v-model="aId" placeholder="Identificador del artículo">
+        <input v-model="aId" type="number" min="0" placeholder="Identificador del artículo">
         <br>
         <label>Nombre</label>
         <br>
@@ -16,7 +21,7 @@
         <textarea v-model="aDescription" placeholder="Descripción del artículo"></textarea>
     </form>
   </div>
-   <button @click="signUpArticle"> Dar de alta </button>
+   <button @click="checkForm"> Dar de alta </button>
    <button @click="signDownArticle"> Dar de baja </button>
    <button @click="loadArticles">Actualizar </button>
   <div id="table">
@@ -38,6 +43,7 @@ export default {
       aId:'',
       aName:'',
       aDescription:'',
+      errors:[],
       params: {
         data: [
           ['ID', 'Nombre','Descripción'],
@@ -48,6 +54,7 @@ export default {
           [5, 'a8c325', 'aab418'],
 
         ],
+        deleteData:[],
         header: 'row',
         border: true,
         stripe: true,
@@ -66,9 +73,39 @@ export default {
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
+      this.params.deleteData=checkedIndexs
+    },
+    checkForm(){
+        this.errors=[];
+        if(this.aId && this.aName && this.aDescription){
+          this.signUpArticle();
+        }
+        else{
+          alert("Por favor, llene todos los campos correctamente para agregar un registro");
+           if(!this.aId)
+          {
+            this.errors.push('Introduce un ID de artículo');
+          }
+          if(!this.aName)
+          {
+            this.errors.push('Introduce el nombre del artículo');
+          }
+          if(!this.aDescription)
+          {
+            this.errors.push('Introduce la descripción del artículo');
+          }
+        }
     },
     signUpArticle(){
         //there will be a method here to establish connection with backend and sign up the articles' id and name, some day....
+        if(this.aId==''||this.aName==''||this.aDescription=='')
+        {
+          alert('Por favor, llene todos los campos para registrar inventario')
+        }
+        else
+        {
+          this.params.data.push([this.aId, this.aName,this.aDescription]);
+        }
         this.aId='';
         this.aName='';
         this.aDescription='';
@@ -78,12 +115,17 @@ export default {
         this.aId='';
         this.aName='';
         this.aDescription='';
+
+        for (var i = this.params.deleteData.length-1; i>0 ; i--) {
+          this.params.data.splice(this.params.deleteData[i], 1)
+        }
     },
     loadArticles(){
         //there will be a method here to establish connection with backend and update the table, some day....
         this.aId='';
         this.aName='';
         this.aDescription='';
+        alert('Actualizando tabla con Base de datos')
     }
   },
   components: { VueTableDynamic }

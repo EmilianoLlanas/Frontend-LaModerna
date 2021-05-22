@@ -2,12 +2,17 @@
     <div id="test">
     <h1 id="header1"> Catálogo de Facturas </h1>
     <div class="inputForm">
+      <div id="error">
+        <ul>
+          <li v-for="error in errors" v-bind:key="error">{{error}}</li>
+        </ul>
+      </div>
     <form>
       <label>Fecha</label>
       <br>
-      <input v-model="facDate" placeholder="Fecha">
+      <datepicker placeholder="Fecha" v-model="facDate" :format="customFormatter"></datepicker>
       <br>
-      <label>NumeroFactura</label>
+      <label>Numero Factura</label>
       <br>
       <input v-model="facId" placeholder="Numero de Factura">
       <br>
@@ -21,10 +26,10 @@
       <br>
       <label>Entrega</label>
       <br>
-      <input v-model="facEst" placeholder="Estatus de entrega">
+      <input v-model="facEst" placeholder="Estatus de Entrega">
    </form>
   </div>
-   <button @click="signUpFactura"> Dar de alta </button>
+   <button @click="checkForm"> Dar de alta </button>
    <button @click="signDownFactura"> Dar de baja </button>
    <button @click="loadFactura">Actualizar </button>
    <div id="table">
@@ -38,15 +43,19 @@
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic'
+import Datepicker from 'vuejs-datepicker'
+import moment from 'moment'
+
 export default {
   name: 'CatalogFacturas',
   data() {
     return {
       facDate:'',
       facId:'',
-      facDate:'',
+      facCli:'',
       facOrd:'',
       facEst:'',
+      errors:[],
       params: {
         data: [
           ['Fecha', 'NumeroFactura', 'Cliente','Orden','Entrega'],
@@ -54,6 +63,7 @@ export default {
           ['31/12/20', '4486', 'Barcel', '9021', 'ok'],
           ['10/01/21', '6548', 'Totis', '2312', 'ok'],
         ],
+        deleteData:[],
         header: 'row',
         border: true,
         stripe: true,
@@ -72,33 +82,76 @@ export default {
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
+      this.params.deleteData=checkedIndexs
+    },
+    checkForm(){
+      this.errors=[];
+      if(this.facDate && this.facId && this.facCli && this.facOrd && this.facEst){
+        this.signUpFactura();
+      }
+      else{
+        alert('Por favor, llene todos los campos para registrar la Factura');
+        if(!this.facDate)
+        {
+          this.errors.push('Introduce una fecha');
+        }
+        if(!this.facId)
+        {
+          this.errors.push('Introduce un numero de factura');
+        }
+        if(!this.facCli)
+        {
+          this.errors.push('Introduce un nombre de cliente');
+        }
+        if(!this.facOrd)
+        {
+          this.errors.push('Introduce un numero de orden');
+        }
+        if(!this.facEst)
+        {
+          this.errors.push('Introduce un estatus de entrega');
+        }
+      }
     },
     signUpFactura(){
-        //there will be a method here to establish connection with backend and sign up the deliveries' company and ldate, some day....
-        this.facDate='';
-        this.facId='';
-        this.facDate='';
-        this.facOrd='';
-        this.facEst='';
+      if(this.facDate==''||this.facId==''||this.facCli==''||this.facOrd==''||this.facEst=='')
+      {
+        alert('Por favor, llene todos los campos para registrar la Factura')
+      }
+      else
+      {
+        this.params.data.push([this.customFormatter(this.facDate), this.facId, this.facCli,this.facOrd,this.facEst]);
+      }
+      this.facDate='';
+      this.facId='';
+      this.facDate='';
+      this.facOrd='';
+      this.facEst='';
     },
     signDownFactura(){
-        //there will be a method here to establish connection with backend and sign down the deliveries' company and date, some day....
         this.facDate='';
         this.facId='';
         this.facDate='';
         this.facOrd='';
         this.facEst='';
+        console.log(this.params.deleteData.length)
+        for (var i = this.params.deleteData.length-1; i>0 ; i--) {
+        this.params.data.splice(this.params.deleteData[i], 1)
+      }
     },
     loadFactura(){
-        //there will be a method here to establish connection with backend and update the table, some day....
         this.facDate='';
         this.facId='';
         this.facDate='';
         this.facOrd='';
         this.facEst='';
+        alert("Actualizando informacion...");
+    },
+    customFormatter(date) {
+      return moment(date).format('YYYY/MM/DD');
     }
   },
-  components: { VueTableDynamic }
+  components: { VueTableDynamic,Datepicker }
 }
 </script>
 
@@ -109,7 +162,6 @@ export default {
   color: #213485;
   margin: 3%;
 }
-
 .inputForm  input {
   width: 100%;
   clear: both;
@@ -120,7 +172,6 @@ export default {
   border-radius: 6px;
   border: transparent;
 }
-
 .inputForm  textarea {
   width: 150%;
   height: 90px;
@@ -132,7 +183,6 @@ export default {
   border-radius: 6px;
   border: transparent;
 }
-
 button{
   margin-top: 0%;
   margin-left: 3%;
@@ -147,23 +197,19 @@ button{
   border-radius: 6px;
   border: transparent;
 }
-
 button:hover{
   background-color: rgba(14,44,164,0.30) ;
 }
-
 #test{
   background-color: rgba(33,52,133,0.20);
   margin: 1%;
   color: #3B0EA4;
   font-family: "GOTY0", "GOTY1", "GOTY2", verdana;
 }
-
 #header1{
   margin: 2%;
   font-size: 30px;
 }
-
 #table{
   width: 80%;
   margin-left: 10%;

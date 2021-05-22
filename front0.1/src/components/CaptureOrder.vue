@@ -1,6 +1,6 @@
 <template>
     <div id="test">
-    <h1> Captura de ordenes </h1>
+    <h1 id="header1"> Captura de ordenes </h1>
     <div class="inputForm">
     <form>
       <label>Cliente</label>
@@ -9,19 +9,17 @@
       <br>
       <label>No. de orden</label>
       <br>
-      <input v-model="aNoOrden" placeholder="No de cliente">
+      <input v-model="aNoOrden" placeholder="No de cliente" disabledDates="disabledDates" type="number">
       <br>
       <label>Fecha de Captura</label>
       <br>
-      <input v-model="aFecha" placeholder="dd/mm/aa">
+      <datepicker placeholder="Fecha de entrega" v-model="aFecha" :format="customFormatter" :disabledDates="disabledDates"></datepicker>
       <br>
       <label>Direccion de entrega</label>
       <br>
       <input v-model="aDireccion" placeholder="Direccion de entrega">
-      <br>
    </form>
   </div>
-   <br>
    <div id="table">
   <vue-table-dynamic :params="params"
       @select="onSelect"
@@ -30,17 +28,22 @@
       <form>
         <label>Observaciones</label>
         <br>
-        <textarea v-model="aObservaciones" placeholder="Observaciones de la orden"></textarea> 
+        <textarea v-model="aObservaciones" placeholder="Observaciones de la orden"></textarea>
+        <br>
         <br>
       </form>
   </div>
+  <br>
   <button @click="save"> Guardar </button>
   <button @click="cancel"> Cancelar </button>
+  <br>
   </div>
 </template>
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic'
+import Datepicker from 'vuejs-datepicker'
+import moment from 'moment'
 export default {
   name: 'CaptureOrder',
   data() {
@@ -50,6 +53,10 @@ export default {
     aFecha:'',
     aDireccion:'',
     aObservaciones:'',
+    disabledDates: {
+          to: new Date(Date.now() - 8640000)
+    },
+    errors:[],
       params: {
         data: [
           ['Articulo','Cantidad','Fecha solicitata'],
@@ -80,6 +87,26 @@ export default {
     },
     save(){
       //aqui habra una conexion a backend para guardar la orden
+      this.errors=[]
+      if(this.aCliente && this.aNoOrden && this.aFecha && this.aDireccion && this.aObservaciones){
+
+      }else{
+        if(!this.aCliente){
+          this.errors.push('campo cliente vacio')
+        }
+        if(!this.aNoOrden){
+          this.errors.push('campo numero de orden vacio')
+        }
+        if(!this.aFecha){
+          this.errors.push('campo fecha vacio')
+        }
+        if(!this.aDireccion){
+          this.errors.push('campo Direccion vacio')
+        }
+        if(!this.aObservaciones){
+          this.errors.push('campo Observaciones vacio')
+        }
+      }
       this.aCliente='';
       this.aNoOrden='';
       this.aFecha='';
@@ -93,9 +120,12 @@ export default {
       this.aFecha='';
       this.aDireccion='';
       this.aObservaciones='';
-    }
+    },
+    customFormatter(date) {
+     return moment(date).format('YYYY/MM/DD');
+   }
   },
-  components: { VueTableDynamic }
+  components: { VueTableDynamic, Datepicker }
 }
 </script>
 
@@ -160,6 +190,11 @@ button{
 
 button:hover{
   background-color: rgba(14,44,164,0.30) ;
+}
+
+#header1{
+  margin: 2%;
+  font-size: 30px;
 }
 
 </style>

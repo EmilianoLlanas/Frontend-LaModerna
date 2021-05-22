@@ -1,17 +1,58 @@
 <template>
     <div id="test">
-    <h1 id="header1"> Órdenes de venta en proceso </h1>
+    <h1> Reporte de ordenes de venta </h1>
+    <form>
+      <label>Fecha de Orden</label>
+      <br>
+      <label>Desde:</label>
+      <datepicker v-model="fromDate" placeholder="Fecha":format="customFormatter"></datepicker>
+      <label>Hasta:</label>
+      <datepicker v-model="toDate" placeholder="Fecha":format="customFormatter"></datepicker>
+      <br>
+      <br>
+      <label>Folio Baan</label>
+      <br>
+      <label>Desde:</label>
+      <input v-model="fromBaan" placeholder="Folio">
+      <label>Hasta:</label>
+      <input v-model="toBaan" placeholder="Folio">
+      <br>
+      <br>
+      <label>Cliente</label>
+      <br>
+      <label>Desde:</label>
+      <input v-model="fromClient" placeholder="No Cliente">
+      <label>Hasta:</label>
+      <input v-model="toClient" placeholder="No Cliente">
+      <br>
+      <br>
+      <label>Artículo</label>
+      <br>
+      <label>Desde:</label>
+      <input v-model="fromItem" placeholder="No Articulo">
+      <label>Hasta:</label>
+      <input v-model="toItem" placeholder="No Articulo">
+      <br>
+      <br>
 
-   <button @click="loadOrders">Actualizar</button>
+
+  </form>
+
+
+
+
+
+   <button @click="findOrders">Crear reporte</button>
+
+
+
    <div id="table" >
 
   <vue-table-dynamic :params="params"
       @select="onSelect"
       @selection-change="onSelectionChange"
       ref="table"></vue-table-dynamic>
-
-    <!--  <OrderDetails :id="params.id" :cliente="params.cliente"></OrderDetails>-->
-    <OrderDetails :id="params.id"></OrderDetails>
+        <AllSalesReportDetails :id="params.id"></AllSalesReportDetails>
   </div>
 
   </div>
@@ -19,25 +60,35 @@
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic';
-import OrderDetails from '@/components/OrderDetails.vue';
+import AllSalesReportDetails from '@/components/AllSalesReportDetails.vue';
+import Datepicker from 'vuejs-datepicker'
+import moment from 'moment'
 
 
 
 export default {
-  name: 'OrdersInProcess',
+  name: 'AllSalesReport',
 
   data() {
 
     return {
+      fromDate:'',
+      toDate:'',
+      fromBaan:'',
+      toBaan:'',
+      fromClient:'',
+      toClient:'',
+      fromItem:'',
+      toItem:'',
 
       params: {
 
         data: [
-          ['ID','Cliente' ,'Nombre','Fecha Orden','Artículo','Cantidad','Precio'],
-          ["1", "BIMBO", "PAPELITO-SUAVE-500 ","2021-03-21","PAPELITO SUAVE","500","$50250.00"],
-          ["2", "BARCEL", "PAPELITO-DURO-800 ","2021-02-1","PAPELITO DURO","800","$63250.00"],
-          ["3", "TIA ROSA", "ALUMINIO-ARRUGADO-100 ","2021-04-2","ALUMINIO ARRUGADO","100","$5050.00"],
-          ["4", "MOLINOS JORGE", "EMPAQUE-AWITADO-1500 ","2020-12-26","EMPAQUE AWITADO","1500","$70950.00"],
+          ['Orden','Orden Baan' ,'CIL','Nombre','F.Orden','F.Solicitud','F. Def','FACT','CXC','PRE','ING','VB','Baan','BervC','Rep','Artículo','Unidad','Notas'],
+          ["1", "1881", "1991","Sabritas","15-03-19","18-03-19","18-03-19","SI","NO","NO","SI","NO","SI","NO","NO","1991","12","LSL"],
+          ["2", "1882", "2021","Barcel","15-03-19","18-03-19","18-03-19","SI","SI","SI","SI","SI","SI","SI","SI","2020","192","MKL"],
+
+
         ],
         id:[],
         header: 'row',
@@ -66,12 +117,16 @@ export default {
     orderReport(){
         //there will be a method here to establish connection with backend and sign up the articles' id and name, some day....
     },
-    loadOrders(){
-      alert('Actualizando tablas con base de datos')
+    findOrders(){
+      alert('Buscando Ordenes')
     },
+    customFormatter(date) {
+      return moment(date).format('YYYY/MM/DD');
+    }
 
   },
-  components: { VueTableDynamic,OrderDetails }
+
+  components: { VueTableDynamic,AllSalesReportDetails,Datepicker }
 }
 </script>
 
@@ -136,10 +191,5 @@ button{
 
 button:hover{
   background-color: rgba(14,44,164,0.30) ;
-}
-
-#header1{
-  margin: 2%;
-  font-size: 30px;
 }
 </style>

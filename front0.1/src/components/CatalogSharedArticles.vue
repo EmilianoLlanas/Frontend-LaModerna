@@ -1,7 +1,13 @@
 <template>
   <div id="test">
     <h1 id="header1"> Catálogo de Artículos Compartidos </h1>
+
     <div class="inputForm">
+      <div id="error">
+        <ul>
+          <li v-for="error in errors" v-bind:key="error">{{error}}</li>
+        </ul>
+     </div>
       <form>
         <label>Compañía Origen</label>
         <br>
@@ -27,8 +33,9 @@
   </div>
    <br>
    <button @click="sendItem"> Agregar Artículo </button>
+      <button @click="deleteData"> Eliminar Artículos</button>
    <button @click="sendData"> Enviar Artículos</button>
-   <button @click="deleteData"> Eliminar Artículo</button>
+
 
    <div style="width: 80%" >
   <vue-table-dynamic :params="params"
@@ -53,14 +60,15 @@ export default {
       aArticulo:'',
       aCompDest:'',
       aClieDest:'',
+      errors:[],
       allArticles:[],
       empty:true,
-      select:'',
       params: {
       data: [
         ['Compañía Origen', 'Cliente Origen', 'Artículo', 'Compañía Destino','Cliente Destino'],
 
       ],
+   deleteData:[],
    header: 'row',
    border: true,
    stripe: true,
@@ -85,30 +93,56 @@ export default {
   methods: {
     onSelect (isChecked, index, data) {
       console.log('onSelect: ', isChecked, index, data)
-      this.select=index;
-      console.log('es',this.select)
       console.log('Checked Data:', this.$refs.table.getCheckedRowDatas(true))
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
+      this.params.deleteData=checkedIndexs
     },
     sendItem(){
-      if(this.aCompOrig==''||this.aClieOrig==''||this.aArticulo==''||this.aClieDest==''||this.aCompDest=='')
+      this.errors=[];
+      if(this.aCompOrig && this.aClieOrig && this.aArticulo && this.aClieDest && this.aCompDest)
       {
-        alert('Por favor, llene todos los campos para registrar inventario')
+        this.signupItem();
       }
       else
       {
-        this.empty=false;
-        console.log(this.empty);
-      this.params.data.push([
-       this.aCompOrig,
-       this.aClieOrig,
-       this.aArticulo,
-       this.aCompDest,
-       this.aClieDest]);
-      this.clearForm();
+        alert("Por favor, llene todos los campos correctamente para agregar un registro");
+
+        if(!this.aCompOrig)
+       {
+         this.errors.push('Introduce compañia origen');
+       }
+       if(!this.aClieOrig)
+       {
+         this.errors.push('Introduce cliente origen');
+       }
+       if(!this.aArticulo)
+       {
+         this.errors.push('Introduce el articulo');
+       }
+       if(!this.aClieDest)
+       {
+         this.errors.push('Introduce cliente destino');
+       }
+       if(!this.this.aCompDest)
+       {
+         this.errors.push('Introduce cliente destino');
+       }
+
       }
+  },
+  signupItem(){
+    this.empty=false;
+    console.log(this.params.data.length);
+  this.params.data.push([
+   this.aCompOrig,
+   this.aClieOrig,
+   this.aArticulo,
+   this.aCompDest,
+   this.aClieDest]);
+  this.clearForm();
+
   },
     clearForm(){
       this.aCompOrig='';
@@ -118,20 +152,25 @@ export default {
       this.aClieDest='';
     },
     sendData(){
-      if(this.empty==true)
+      if(this.params.data.length>1)
       {
-        alert('No hay ningun artículo compartido')
+
+        console.log('imprime, esto',(this.params.data.length)-1)
+        alert('Se han enviado los datos')
       }
       else
       {
-        alert('Se han enviado los datos')
+        console.log('imprime, esto no',this.params.data.length)
+         alert('No hay ningun artículo compartido')
       }
 
     },
     deleteData(){
-      if(this.select!=''){
-        this.params.data.splice(this.select,1);
-        this.select='';
+      if(this.params.deleteData.length>=1){
+        console.log(this.params.deleteData.length)
+        for (var i = this.params.deleteData.length-1; i>0 ; i--) {
+          this.params.data.splice(this.params.deleteData[i], 1)
+        }
       }else{
         alert('No se ha seleccionado nada')
       }

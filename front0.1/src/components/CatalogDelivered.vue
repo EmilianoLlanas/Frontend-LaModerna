@@ -2,6 +2,11 @@
     <div id="test">
     <h1 id="header1"> Catálogo de Entregadas </h1>
     <div class="inputForm">
+      <div id="error">
+        <ul>
+          <li v-for="error in errors" v-bind:key="error">{{error}}</li>
+        </ul>
+      </div>
     <form>
       <label>Orden</label>
       <br>
@@ -13,10 +18,11 @@
       <br>
       <label>Fecha</label>
       <br>
-      <input v-model="delivDate" placeholder="Fecha de entrega">
+       <datepicker placeholder="Fecha de entrega" v-model="delivDate" :format="customFormatter"></datepicker>
+
    </form>
   </div>
-   <button @click="signUpDeliver"> Dar de alta </button>
+   <button @click="checkForm"> Dar de alta </button>
    <button @click="signDownDeliver"> Dar de baja </button>
    <button @click="loadDeliver">Actualizar </button>
    <div id="table">
@@ -31,6 +37,9 @@
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic'
+import Datepicker from 'vuejs-datepicker'
+import moment from 'moment'
+
 export default {
   name: 'CatalogDelivered',
   data() {
@@ -38,6 +47,7 @@ export default {
       delivOrd:'',
       delivCom:'',
       delivDate:'',
+      errors:[],
       params: {
         data: [
           ['Orden', 'Compañia', 'Fecha'],
@@ -45,6 +55,7 @@ export default {
           ['0235', 'Barcel', '01/10/20'],
           ['0066', 'Totis', '27/08/19'],
         ],
+        deleteData:[],
         header: 'row',
         border: true,
         stripe: true,
@@ -63,27 +74,62 @@ export default {
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
+      this.params.deleteData=checkedIndexs
+    },
+    checkForm(){
+      this.errors=[];
+      if(this.delivOrd && this.delivCom && this.delivDate){
+        this.signUpDeliver();
+      }
+      else{
+        alert('Por favor, llene todos los campos para registrar la entrega')
+        if(!this.delivOrd)
+        {
+          this.errors.push("Introduce numero de Orden");
+        }
+        if(!this.delivCom)
+        {
+          this.errors.push("Introduce Compañia");
+        }
+        if(!this.delivDate)
+        {
+          this.errors.push("Introduce fecha de Orden");
+        }
+      }
     },
     signUpDeliver(){
-        //there will be a method here to establish connection with backend and sign up the deliveries' company and ldate, some day....
+        if(this.delivOrd==''||this.delivCom==''||this.delivDate=='')
+        {
+          alert('Por favor, llene todos los campos para registrar la entrega')
+        }
+        else
+        {
+          this.params.data.push([this.delivOrd, this.delivCom, this.customFormatter(this.delivDate)]);
+        }
         this.delivOrd='';
         this.delivCom='';
         this.delivDate='';
     },
     signDownDeliver(){
-        //there will be a method here to establish connection with backend and sign down the deliveries' company and date, some day....
-        this.delivOrd='';
-        this.delivCom='';
-        this.delivDate='';
+      this.delivOrd='';
+      this.delivCom='';
+      this.delivDate='';
+      console.log(this.params.deleteData.length)
+      for (var i = this.params.deleteData.length-1; i>0 ; i--) {
+      this.params.data.splice(this.params.deleteData[i], 1)
+      }
     },
     loadDeliver(){
-        //there will be a method here to establish connection with backend and update the table, some day....
         this.delivOrd='';
         this.delivCom='';
         this.delivDate='';
-    }
+        alert("Actualizando informacion...");
+    },
+    customFormatter(date) {
+     return moment(date).format('YYYY/MM/DD');
+   }
   },
-  components: { VueTableDynamic }
+  components: { VueTableDynamic,Datepicker }
 }
 </script>
 
@@ -94,7 +140,6 @@ export default {
   color: #213485;
   margin: 3%;
 }
-
 .inputForm  input {
   width: 100%;
   clear: both;
@@ -105,7 +150,6 @@ export default {
   border-radius: 6px;
   border: transparent;
 }
-
 .inputForm  textarea {
   width: 150%;
   height: 90px;
@@ -117,7 +161,6 @@ export default {
   border-radius: 6px;
   border: transparent;
 }
-
 button{
   margin-top: 0%;
   margin-left: 3%;
@@ -132,23 +175,19 @@ button{
   border-radius: 6px;
   border: transparent;
 }
-
 button:hover{
   background-color: rgba(14,44,164,0.30) ;
 }
-
 #test{
   background-color: rgba(33,52,133,0.20);
   margin: 1%;
   color: #3B0EA4;
   font-family: "GOTY0", "GOTY1", "GOTY2", verdana;
 }
-
 #header1{
   margin: 2%;
   font-size: 30px;
 }
-
 #table{
   width: 80%;
   margin-left: 10%;

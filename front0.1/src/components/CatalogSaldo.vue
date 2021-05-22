@@ -2,29 +2,34 @@
     <div id="test">
     <h1 id="header1"> Catálogo de Saldos </h1>
     <div class="inputForm">
+      <div id="error">
+        <ul>
+          <li v-for="error in errors" v-bind:key="error">{{error}}</li>
+        </ul>
+      </div>
     <form>
       <label>Orden</label>
       <br>
-      <input v-model="ordId" placeholder="Fecha">
+      <input v-model="ordId" placeholder="Orden">
       <br>
       <label>Cliente</label>
       <br>
-      <input v-model="salCli" placeholder="Numero de Factura">
+      <input v-model="salCli" placeholder="Cliente">
       <br>
-      <label>NumeroFactura</label>
+      <label>Numero Factura</label>
       <br>
-      <input v-model="salIdFac" placeholder="Cliente">
+      <input v-model="salIdFac" placeholder="Numero Factura">
       <br>
-      <label>SaldoOrden</label>
+      <label>Saldo Orden</label>
       <br>
-      <input v-model="salOrd" placeholder="Numero de Orden">
+      <input v-model="salOrd" placeholder="Saldo Orden">
       <br>
-      <label>SaldoFactura</label>
+      <label>Saldo Factura</label>
       <br>
-      <input v-model="salFac" placeholder="Estatus de entrega">
+      <input v-model="salFac" placeholder="Saldo Factura">
    </form>
   </div>
-   <button @click="signUpSaldo"> Dar de alta </button>
+   <button @click="checkForm"> Dar de alta </button>
    <button @click="signDownSaldo"> Dar de baja </button>
    <button @click="loadSaldo">Actualizar </button>
    <div id="table">
@@ -40,7 +45,7 @@
 <script>
 import VueTableDynamic from 'vue-table-dynamic'
 export default {
-  name: 'CatalogFacturas',
+  name: 'CatalogSaldo',
   data() {
     return {
       ordId:'',
@@ -48,6 +53,7 @@ export default {
       salIdFac:'',
       salOrd:'',
       salFac:'',
+      errors:[],
       params: {
         data: [
           ['Orden', 'Cliente', 'NumeroFactura','SaldoOrden','SaldoFactura'],
@@ -55,6 +61,7 @@ export default {
           ['2410', 'Barcel', '45', '4500', '2500'],
           ['5342', 'Totis', '88', '6400', '500'],
         ],
+        deleteData:[],
         header: 'row',
         border: true,
         stripe: true,
@@ -73,30 +80,70 @@ export default {
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
+      this.params.deleteData=checkedIndexs
     },
-    signUpFactura(){
-        //there will be a method here to establish connection with backend and sign up some day....
+    checkForm(){
+      this.errors=[];
+      if(this.ordId && this.salCli && this.salIdFac && this.salOrd && this.salFac){
+        this.signUpSaldo();
+      }
+      else{
+        alert('Por favor, llene todos los campos para registrar el saldo');
+        if(!this.ordId)
+        {
+          this.errors.push('Introduce numero de Orden');
+        }
+        if(!this.salCli)
+        {
+          this.errors.push('Introduce nombre de Cliente');
+        }
+        if(!this.salIdFac)
+        {
+          this.errors.push('Introduce numero de Factura');
+        }
+        if(!this.salOrd)
+        {
+          this.errors.push('Introduce saldo de la Orden');
+        }
+        if(!this.salFac)
+        {
+          this.errors.push('Introduce saldo de la Factura');
+        }
+      }
+    },
+    signUpSaldo(){
+        if(this.ordId==''||this.salCli==''||this.salIdFac==''||this.salOrd==''||this.salFac=='')
+        {
+          alert('Por favor, llene todos los campos para registrar el saldo');
+        }
+        else
+        {
+          this.params.data.push([this.ordId, this.salCli,this.salIdFac,this.salOrd,this.salFac]);
+        }
         this.ordId='';
         this.salCli='';
         this.salIdFac='';
         this.salOrd='';
         this.salFac='';
     },
-    signDownFactura(){
-        //there will be a method here to establish connection with backend and sign down some day....
-        this.ordId='';
-        this.salCli='';
-        this.salIdFac='';
-        this.salOrd='';
-        this.salFac='';
+    signDownSaldo(){
+      this.ordId='';
+      this.salCli='';
+      this.salIdFac='';
+      this.salOrd='';
+      this.salFac='';
+      console.log(this.params.deleteData.length)
+      for (var i = this.params.deleteData.length-1; i>0 ; i--) {
+      this.params.data.splice(this.params.deleteData[i], 1)
+      }
     },
-    loadFactura(){
-        //there will be a method here to establish connection with backend and update the table, some day....
-        this.ordId='';
-        this.salCli='';
-        this.salIdFac='';
-        this.salOrd='';
-        this.salFac='';
+    loadSaldo(){
+      this.ordId='';
+      this.salCli='';
+      this.salIdFac='';
+      this.salOrd='';
+      this.salFac='';
+      alert("Actualizando informacion...");
     }
   },
   components: { VueTableDynamic }
@@ -110,7 +157,6 @@ export default {
   color: #213485;
   margin: 3%;
 }
-
 .inputForm  input {
   width: 100%;
   clear: both;
@@ -121,7 +167,6 @@ export default {
   border-radius: 6px;
   border: transparent;
 }
-
 .inputForm  textarea {
   width: 150%;
   height: 90px;
@@ -133,7 +178,6 @@ export default {
   border-radius: 6px;
   border: transparent;
 }
-
 button{
   margin-top: 0%;
   margin-left: 3%;
@@ -148,23 +192,19 @@ button{
   border-radius: 6px;
   border: transparent;
 }
-
 button:hover{
   background-color: rgba(14,44,164,0.30) ;
 }
-
 #test{
   background-color: rgba(33,52,133,0.20);
   margin: 1%;
   color: #3B0EA4;
   font-family: "GOTY0", "GOTY1", "GOTY2", verdana;
 }
-
 #header1{
   margin: 2%;
   font-size: 30px;
 }
-
 #table{
   width: 80%;
   margin-left: 10%;
