@@ -48,6 +48,7 @@ export default {
       agId:'',
       rep:'',
       agEst:'',
+      errors:[],
       params: {
         data: [
           ['Compañia', 'idAgente', 'Representante','Estatus'],

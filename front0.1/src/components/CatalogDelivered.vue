@@ -47,6 +47,7 @@ export default {
       delivOrd:'',
       delivCom:'',
       delivDate:'',
+      errors:[],
       params: {
         data: [
           ['Orden', 'Compañia', 'Fecha'],
