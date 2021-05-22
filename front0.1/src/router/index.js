@@ -201,7 +201,7 @@ export default new Router({
       path: '/AuthorizeVTA',
       name: 'AuthorizeVTA',
       component: AuthorizeVTA
-    }
+    },
     {
       path: '/Backup',
       name: 'Backup',

@@ -29,6 +29,7 @@
       <button @click="navBlock">Bloqueo de Clientes</button>
       <button @click="navAuthorizeOrderCST">Autorización de ordenes CST</button>
       <button @click="ordenesTodas">Todas las Ordenes</button>
+      <button @click="sharedItems">Ir a catálogo Artículos Compartidos</button>
 
     </div>
 
@@ -110,7 +111,10 @@ export default {
     ordenesTodas(){
       this.$router.push({name:'AllSalesReport'})
     },
-    navBackup(){
+    sharedItems(){
+      this.$router.push({name:'CatalogSharedArticles'})
+    },
+   navBackup(){
       this.$router.push({name:'Backup'})
     },
     navRoles(){

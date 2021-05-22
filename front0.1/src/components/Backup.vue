@@ -22,6 +22,7 @@ export default {
       alert("Sistema restaurado desde el respaldo hecho el: "+this.dateS);
     }
 }
+}
 </script>
 
 <style scoped>
