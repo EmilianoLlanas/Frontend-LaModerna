@@ -23,6 +23,7 @@ export default {
   name: 'AuthorizeDates',
   data() {
     return {
+      select:-1,
       params: {
         data: [
           ['ID','Cliente','Fecha','Fecha Autorizada','Entrega Autorizada'],
@@ -43,6 +44,7 @@ export default {
   },
   methods: {
     onSelect (isChecked, index, data) {
+      this.select=index;
       console.log('onSelect: ', isChecked, index, data)
       console.log('Checked Data:', this.$refs.table.getCheckedRowDatas(true))
     },
@@ -55,11 +57,19 @@ export default {
     },
     authDate(){
         //there will be a method here to establish connection with backend and sign down the articles' id and name, some day....
-
+        if(this.params.data[this.select][3]=='NO'){
+          this.params.data[this.select][3]='SI'
+          this.params.data.splice(this.select, 1)
+          this.params.data.push(this.params.data[this.select])
+        }
     },
     authOrder(){
         //there will be a method here to establish connection with backend and update the table, some day....
-
+        if(this.params.data[this.select][4]=='NO'){
+          this.params.data[this.select][4]='SI'
+          this.params.data.splice(this.select, 1)
+          this.params.data.push(this.params.data[this.select])
+        }
     }
   },
   components: { VueTableDynamic }

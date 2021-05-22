@@ -1,6 +1,11 @@
 <template>
     <div id="test">
     <h1 id="header1"> Catálogo de Clientes </h1>
+    <div id="error">
+    <ul>
+    <li v-for="error in errors" v-bind:key="error">{{error}}</li>
+    </ul>
+    </div>
     <div class="inputForm">
     <form>
       <label>Compañia</label>
@@ -49,6 +54,7 @@ export default {
     aNombreA:'',
     aNombreB:'',
     aEstatus:'',
+    errors:[],
       params: {
         data: [
           ['Compañia','Cliente','Nombre A','Nombre B','Estatus'],
@@ -82,23 +88,24 @@ export default {
     },
     signUpClient(){
         //there will be a method here to establish connection with backend and sign up the articles' id and name, some day....
+        this.errors=[]
         if(this.aCompania &&  this.aCliente &&  this.aNombreA &&  this.aNombreB &&  this.aEstatus){
           this.params.data.push([this.aCompania,this.aCliente,this.aNombreA,this.aNombreB,this.aEstatus]);
         }else{
           if(!this.aCompania){
-            alert('campo compañia vacio')
+            this.errors.push('campo compañia vacio')
           }
           if(!this.aCliente){
-            alert('campo cliente vacio')
+            this.errors.push('campo cliente vacio')
           }
           if(!this.aNombreA){
-            alert('campo nombre A vacio')
+            this.errors.push('campo nombre A vacio')
           }
           if(!this.aNombreB){
-            alert('campo nombre B vacio')
+            this.errors.push('campo nombre B vacio')
           }
           if(!this.aEstatus){
-            alert('campo Estatus vacio')
+            this.errors.push('campo Estatus vacio')
           }
         }
 
