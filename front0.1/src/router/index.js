@@ -30,6 +30,8 @@ import AuthorizeOrderCxc from '@/components/AuthorizeOrderCxc'
 import AuthorizationING from '@/components/AuthorizationING'
 import BlockClient from '@/components/BlockClient'
 import AuthorizeOrderCST from '@/components/AuthorizeOrderCST'
+import AuthorizeVTA from '@/components/AuthorizeVTA'
+
 
 Vue.use(Router)
 
@@ -194,7 +196,11 @@ export default new Router({
       path:'/AuthorizeOrderCST',
       name:'AuthorizeOrderCST',
       component: AuthorizeOrderCST
+    },
+    {
+      path: '/AuthorizeVTA',
+      name: 'AuthorizeVTA',
+      component: AuthorizeVTA
     }
-
   ]
 })
