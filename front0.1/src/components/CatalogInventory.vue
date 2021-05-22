@@ -1,12 +1,17 @@
 <template>
-    <div>
-    <h1> Catálogo de Inventarios </h1>
-    
+    <div id="test">
+    <h1 id="header1">Catálogo de Inventarios </h1>
+
     <div class="inputForm">
+      <div id="error">
+        <ul>
+          <li v-for="error in errors" v-bind:key="error">{{error}}</li>
+        </ul>
+      </div>
     <form>
       <label>Compañía</label>
       <br>
-      <input id="invCom" v-model="invCom" placeholder="Compañía"> 
+      <input id="invCom" v-model="invCom" placeholder="Compañía">
       <br>
       <label>Almacén</label>
       <br>
@@ -26,18 +31,14 @@
    <button @click="signDownInv"> Eliminar </button>
    <button @click="loadInv">Actualizar </button>
    <button @click="reportInv">Generar reporte </button>
-   <div style="width: 80%" >
+   <div id="table" >
   <vue-table-dynamic :params="params"
       @select="onSelect"
       @selection-change="onSelectionChange"
       ref="table"></vue-table-dynamic>
 
   </div>
-    <div id="error">
-    <ul>
-        <li v-for="error in errors" v-bind:key="error">{{error}}</li>
-      </ul>
-      </div>
+
   </div>
 </template>
 
@@ -90,22 +91,22 @@ export default {
         }
         else{
           alert("Por favor, llene todos los campos correctamente para agregar un registro");
-           if(!this.invCom) 
+           if(!this.invCom)
           {
             this.errors.push('Introduce compañía');
           }
-          if(!this.invWarehouse) 
+          if(!this.invWarehouse)
           {
             this.errors.push('Introduce almacén');
           }
-          if(!this.invArticle) 
+          if(!this.invArticle)
           {
             this.errors.push('Introduce artículo');
           }
           if(!this.invStock) //como es un campo numerico, no recoge nada si llenas con texto
           {
             this.errors.push('Stock no es un número valido');
-          }          
+          }
         }
     },
 
@@ -124,8 +125,8 @@ export default {
         //there will be a method here to establish connection with backend and sign down the address' data, some day....
         for (var i = this.params.deleteData.length-1; i>0 ; i--) {
           this.params.data.splice(this.params.deleteData[i], 1)
-        }       
-        
+        }
+
     },
     loadInv(){
         //there will be a method here to establish connection with backend and update the table, some day....
@@ -208,4 +209,5 @@ button:hover{
   margin-left: 10%;
   margin-top: 2%;
 }
+
 </style>
