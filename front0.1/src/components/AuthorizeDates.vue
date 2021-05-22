@@ -59,16 +59,16 @@ export default {
         //there will be a method here to establish connection with backend and sign down the articles' id and name, some day....
         if(this.params.data[this.select][3]=='NO'){
           this.params.data[this.select][3]='SI'
-          this.params.data.splice(this.select, 1)
           this.params.data.push(this.params.data[this.select])
+          this.params.data.splice(this.select, 1)
         }
     },
     authOrder(){
         //there will be a method here to establish connection with backend and update the table, some day....
         if(this.params.data[this.select][4]=='NO'){
           this.params.data[this.select][4]='SI'
-          this.params.data.splice(this.select, 1)
           this.params.data.push(this.params.data[this.select])
+          this.params.data.splice(this.select, 1)
         }
     }
   },
