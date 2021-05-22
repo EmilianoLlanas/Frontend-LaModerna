@@ -1,27 +1,6 @@
 <template>
 
-<<<<<<< Updated upstream
-    <div id="test">
-      <router-view/>
-      <h1> Login </h1>
-      <button @click="navCatalogArticles"> Ir al catálogo de Artículos </button>
-      <button @click="navCatalogCompanies"> Ir al catálogo de Compañías </button>
-      <button @click="navCatalogPrices"> Ir al catálogo de Precios </button>
-      <button @click="navCatalogClients"> Ir al catálogo de Clientes </button>
-      <button @click="navCaptureOrder"> Ir a la captura de Órdenes </button>
-      <button @click="navOrdersInProcess"> Ir a la Consulta de Órdenes en proceso </button>
-      <button @click="navCatalogAgents"> Ir al catálogo de Agentes </button>
-      <button @click="navCatalogDelivered"> Ir al catálogo de Entregas </button>
-      <button @click="navCatalogFacturas"> Ir al catálogo de Facturas </button>
-      <button @click="navCatalogSaldo"> Ir al catálogo de Saldos </button>
-      <button @click="navCatalogWarehouse"> Ir al catálogo de Almacenes </button>
-      <button @click="navCatalogDeliveryAddresses"> Ir al catálogo de Direcciones de entrega </button>
-      <button @click="navCatalogInventory"> Ir al catálogo de Inventario </button>
-      <button @click="navProcessedOrders"> Ir a la Consulta de Órdenes Procesadas </button>
-      <button @click="navOrderStatus"> Ir a la Consulta de Estatus de Órdenes </button>
-      <button @click="navAuthorizeDates"> Ir a la autorizacion de fechas de entrega </button>
-      <button @click="navMenuAge"> ir a menu principal de AGE </button>
-=======
+
  <div id="fullpage">
    <div id="sidebar">
       <!--<router-view/>-->
@@ -44,77 +23,120 @@
                 <a @click="navProcessedOrders"> <div class="element"> Consulta de Órdenes Procesadas  </div></a>
                 <a @click="navOrderStatus"> <div class="element"> Consulta de Estatus de Órdenes  </div></a>
                 <a @click="navAuthorizeDates"> <div class="element">Autorizacion de fechas de entrega  </div></a>
-                <a @click="backup"> <div class="element">Generar respaldo del sistema  </div></a>
-                <a @click="restore"> <div class="element"> Restaurar sistema  </div></a>
-                <a @click="navMenuAge"> <div class="element"> menu principal de AGE  </div></a>
+                <a @click="navMenuAge"> <div class="element"> Menu principal de AGE  </div></a>
+                <a @click="navBackup"> <div class="element"> Generar respaldo </div></a>
+                <a @click="navMenuAge"> <div class="element"> Menu principal de AGE </div></a>
+                <a @click="navConsultSalesOrder"> <div class="element"> Consultar órdenes de venta </div></a>
+                <a @click="navAuthorizationING"> <div class="element"> Autorización de ING </div></a>
+                <a @click="navAuthorizeVTA"> <div class="element"> Autorizacion de VTA </div></a>
+                <a @click="navAuthorizeOrderCxC"> <div class="element"> Autorización de ordenes CxC </div></a>
+                <a @click="navBlock"> <div class="element"> Bloqueo de Clientes </div></a>
+                <a @click="navAuthorizeOrderCST"> <div class="element"> Autorización de ordenes CST </div></a>
+                <a @click="ordenesTodas"> <div class="element"> Todas las Ordenes </div></a>
+                <a @click="sharedItems"> <div class="element"> Catálogo Artículos Compartidos </div></a>
             </div>
       <div id="content">
-        <iframe width="100%" height="100%" src="http://localhost:8081/#/CatalogArticles"></iframe>
-      </div> 
->>>>>>> Stashed changes
+        <iframe width="100%" height="100%" :src="this.source"></iframe>
+      </div>
+
     </div>
   </div>
 </template>
 
 <script>
-
 export default {
   name: 'Login',
-  methods: {
+  data() {
+    return {
+
+      source:'',
+    }
+  },
+
+    methods: {
       navCatalogArticles () {
-      this.$router.push({ name:'CatalogArticles' });
+      this.source='http://localhost:8081/#/CatalogArticles';
     },
       navCatalogCompanies () {
-      this.$router.push({ name:'CatalogCompanies' });
+      this.source='http://localhost:8081/#/CatalogCompanies';
     },
     navCatalogPrices () {
-      this.$router.push({name:'CatalogPrices'});
+    this.source='http://localhost:8081/#/CatalogPrices';
     },
     navCatalogClients() {
-      this.$router.push({name:'CatalogClients'})
+      this.source='http://localhost:8081/#/CatalogClients';
     },
     navCaptureOrder() {
-      this.$router.push({name: 'CaptureOrder'})
+      this.source='http://localhost:8081/#/CaptureOrder';
     },
     navOrdersInProcess() {
-      this.$router.push({name: 'OrdersInProcess'})
+      this.source='http://localhost:8081/#/OrdersInProcess';
     },
     navCatalogAgents() {
-      this.$router.push({name: 'CatalogAgents'})
+      this.source='http://localhost:8081/#/CatalogAgents';
     },
     navCatalogDelivered() {
-      this.$router.push({name: 'CatalogDelivered'})
+      this.source='http://localhost:8081/#/CatalogDelivered';
     },
     navCatalogFacturas() {
-      this.$router.push({name: 'CatalogFacturas'})
+      this.source='http://localhost:8081/#/CatalogFacturas';
     },
     navCatalogSaldo() {
-      this.$router.push({name: 'CatalogSaldo'})
+      this.source='http://localhost:8081/#/CatalogSaldo';
     },
     navCatalogWarehouse() {
-      this.$router.push({name: 'CatalogWarehouse'})
+      this.source='http://localhost:8081/#/CatalogWarehouse';
     },
-
     navCatalogDeliveryAddresses() {
-      this.$router.push({name: 'CatalogDeliveryAddresses'})
+      this.source='http://localhost:8081/#/CatalogDeliveryAddresses';
     },
     navCatalogInventory() {
-      this.$router.push({name: 'CatalogInventory'})
+      this.source='http://localhost:8081/#/CatalogInventory';
     },
     navProcessedOrders() {
-      this.$router.push({name: 'ProcessedOrders'})
+      this.source='http://localhost:8081/#/ProcessedOrders';
     },
     navOrderStatus() {
-      this.$router.push({name: 'OrderStatus'})
+      this.source='http://localhost:8081/#/OrderStatus';
     },
-    navAuthorizeDates(){
-      this.$router.push({name:'AuthorizeDates'})
+    navAuthorizeDates() {
+      this.source='http://localhost:8081/#/AuthorizeDates';
     },
-    navMenuAge(){
-      this.$router.push({name:'MenuAGE'})
-    }
-    }
+    navRoles() {
+      this.source='http://localhost:8081/#/RoleAssign';
+    },
+    navBackup () {
+      this.source='http://localhost:8081/#/Backup';
+    },
+      navMenuAge() {
+      this.source='http://localhost:8081/#/MenuAGE';
+    },
+    navConsultSalesOrder() {
+    this.source='http://localhost:8081/#/ConsultSalesOrder';
+    },
+    navAuthorizationING() {
+      this.source='http://localhost:8081/#/AuthorizationING';
+    },
+    navAuthorizeVTA() {
+      this.source='http://localhost:8081/#/AuthorizeVTA';
+    },
+    navAuthorizeOrderCxC() {
+      this.source='http://localhost:8081/#/AuthorizeOrderCxC';
+    },
+    navBlock() {
+      this.source='http://localhost:8081/#/BlockClient';
+    },
+    navAuthorizeOrderCST() {
+      this.source='http://localhost:8081/#/AuthorizeOrderCST';
+    },
+    ordenesTodas() {
+      this.source='http://localhost:8081/#/AllSalesReport';
+    },
+    sharedItems() {
+      this.source='http://localhost:8081/#/CatalogSharedArticles';
+    },
   }
+}
 </script>
 
 <style scoped>
