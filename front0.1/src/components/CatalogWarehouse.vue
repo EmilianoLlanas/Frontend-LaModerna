@@ -2,6 +2,11 @@
     <div id="test">
     <h1 id="header1"> Catálogo de Almacenes </h1>
     <div class="inputForm">
+      <div id="error">
+        <ul>
+          <li v-for="error in errors" v-bind:key="error">{{error}}</li>
+        </ul>
+      </div>
     <form>
       <label>Compañia</label>
       <br>
@@ -12,7 +17,7 @@
       <input v-model="wareUbi" placeholder="Ubicación del almacen">
    </form>
   </div>
-   <button @click="signUpWare"> Dar de alta </button>
+   <button @click="checkForm"> Dar de alta </button>
    <button @click="signDownWare"> Dar de baja </button>
    <button @click="loadWare">Actualizar </button>
    <div id="table">
@@ -61,6 +66,23 @@ export default {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
       this.params.deleteDate=checkedIndexs
     },
+    checkForm(){
+      this.errors=[];
+      if(this.wareCom && this.wareUbi){
+        this.signUpWare();
+      }
+      else{
+        alert('Por favor, llene todos los campos para registrar el almacen');
+        if(!this.wareCom)
+        {
+          this.errors.push('Introduce nombre de la Compañia');
+        }
+        if(!this.wareUbi)
+        {
+          this.errors.push('Introudce ubicacion del Almacen');
+        }
+      }
+    },
     signUpWare(){
         if(this.wareCom==''||this.wareUbi=='')
         {
@@ -70,6 +92,8 @@ export default {
         {
           this.params.data.push([this.wareCom, this.wareUbi]);
         }
+        this.wareCom='';
+        this.wareUbi='';
     },
     signDownWare(){
         this.wareCom='';
