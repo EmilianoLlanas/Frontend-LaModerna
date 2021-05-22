@@ -1,7 +1,12 @@
 <template>
-    <div>
-    <h1> Catálogo de Direcciones de entrega </h1>
+    <div id="test">
+    <h1 id="header1">Catálogo de Direcciones de entrega </h1>
     <div class="inputForm">
+      <div id="error">
+        <ul>
+          <li v-for="error in errors" v-bind:key="error">{{error}}</li>
+        </ul>
+      </div>
     <form>
       <label>Compañía</label>
       <br>
@@ -47,11 +52,7 @@
       ref="table"></vue-table-dynamic>
 
   </div>
-    <div id="error">
-      <ul>
-        <li v-for="error in errors" v-bind:key="error">{{error}}</li>
-      </ul>
-    </div>
+   
   </div>
 </template>
 
