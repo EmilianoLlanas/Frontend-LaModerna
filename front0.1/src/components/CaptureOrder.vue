@@ -9,11 +9,11 @@
       <br>
       <label>No. de orden</label>
       <br>
-      <input v-model="aNoOrden" placeholder="No de cliente">
+      <input v-model="aNoOrden" placeholder="No de cliente" disabledDates="disabledDates" type="number">
       <br>
       <label>Fecha de Captura</label>
       <br>
-      <datepicker placeholder="Fecha de entrega" v-model="aFecha" :format="customFormatter"></datepicker>
+      <datepicker placeholder="Fecha de entrega" v-model="aFecha" :format="customFormatter" :disabledDates="disabledDates"></datepicker>
       <br>
       <label>Direccion de entrega</label>
       <br>
@@ -53,6 +53,9 @@ export default {
     aFecha:'',
     aDireccion:'',
     aObservaciones:'',
+    disabledDates: {
+          to: new Date(Date.now() - 8640000)
+    },
     errors:[],
       params: {
         data: [
