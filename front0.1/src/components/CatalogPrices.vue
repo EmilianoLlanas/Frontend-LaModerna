@@ -1,6 +1,11 @@
 <template>
     <div id="test">
     <h1 id="header1"> Catálogo de Precios </h1>
+    <div id="error">
+    <ul>
+    <li v-for="error in errors" v-bind:key="error">{{error}}</li>
+    </ul>
+    </div>
     <div class="inputForm">
     <form>
       <label>Compañia</label>
@@ -55,6 +60,7 @@
 
   </div>
   </div>
+  </div>
 </template>
 
 <script>
@@ -76,6 +82,7 @@ export default {
       aDescripcion:'',
       aFechaInicio:'',
       aFechaCaducidad:'',
+      errors:[],
       params: {
         data: [
           ['Compañia','Lista de precios','Articulo','Nivel de Descuento','Cantidad','Precio','Descuento','Descripción','Fecha de inicio','Fecha de caducidad'],
@@ -105,39 +112,40 @@ export default {
       this.params.deleteData=checkedIndexs
     },
     signUpPrice(){
+        this.errors=[]
         //there will be a method here to establish connection with backend and sign up the articles' id and name, some day....
         if(this.aCompania && this.aLista && this.aArticulo && this.aNivDescuento && this.aCantidad && this.aPrecio && this.aDescuento && this.aDescripcion && this.aFechaInicio && this.aFechaCaducidad){
-          this.params.data.push([this.aCompania, this.aLista, this.aArticulo, this.aNivDescuento, this.aCantidad, this.aPrecio, this.aDescuento, this.aDescripcion, this.aFechaInicio, this.aFechaCaducidad]) 
+          this.params.data.push([this.aCompania, this.aLista, this.aArticulo, this.aNivDescuento, this.aCantidad, this.aPrecio, this.aDescuento, this.aDescripcion, this.aFechaInicio, this.aFechaCaducidad])
         }else{
           if(!this.aCompania){
-            alert('campo compañía esta vacio')
+            this.errors.push('campo compañía esta vacio')
           }
           if(!this.aLista){
-            alert('campo lista esta vacio')
+            this.errors.push('campo lista esta vacio')
           }
           if(!this.aArticulo){
-            alert('campo articulo esta vacio')
+            this.errors.push('campo articulo esta vacio')
           }
           if(!this.aNivDescuento){
-            alert('campo nivel de Descuento esta vacio')
+            this.errors.push('campo nivel de Descuento esta vacio')
           }
           if(!this.aCantidad){
-            alert('campo cantidad esta vacio')
+            this.errors.push('campo cantidad esta vacio')
           }
           if(!this.aPrecio){
-            alert('campo precio esta vacio')
+            this.errors.push('campo precio esta vacio')
           }
           if(!this.aDescuento){
-            alert('campo descuento esta vacio')
+            this.errors.push('campo descuento esta vacio')
           }
           if(!this.aDescripcion){
-            alert('campo descripcion esta vacio')
+            this.errors.push('campo descripcion esta vacio')
           }
           if(!this.aFechaInicio){
-            alert('campo fecha de inicio esta vacio')
+            this.errors.push('campo fecha de inicio esta vacio')
           }
           if(!this.aFechaCaducidad){
-            alert('campo fecha de caducidad esta vacio')
+            this.errors.push('campo fecha de caducidad esta vacio')
           }
         }
         this.aCompania='';
@@ -173,34 +181,34 @@ export default {
           alert('aqui va la logica de update')
         }else{
           if(!this.aCompania){
-            alert('campo compañía esta vacio')
+            this.errors.push('campo compañía esta vacio')
           }
           if(!this.aLista){
-            alert('campo lista esta vacio')
+            this.errors.push('campo lista esta vacio')
           }
           if(!this.aArticulo){
-            alert('campo articulo esta vacio')
+            this.errors.push('campo articulo esta vacio')
           }
           if(!this.aNivDescuento){
-            alert('campo nivel de Descuento esta vacio')
+            this.errors.push('campo nivel de Descuento esta vacio')
           }
           if(!this.aCantidad){
-            alert('campo cantidad esta vacio')
+            this.errors.push('campo cantidad esta vacio')
           }
           if(!this.aPrecio){
-            alert('campo precio esta vacio')
+            this.errors.push('campo precio esta vacio')
           }
           if(!this.aDescuento){
-            alert('campo descuento esta vacio')
+            this.errors.push('campo descuento esta vacio')
           }
           if(!this.aDescripcion){
-            alert('campo descripcion esta vacio')
+            this.errors.push('campo descripcion esta vacio')
           }
           if(!this.aFechaInicio){
-            alert('campo fecha de inicio esta vacio')
+            this.errors.push('campo fecha de inicio esta vacio')
           }
           if(!this.aFechaCaducidad){
-            alert('campo fecha de caducidad esta vacio')
+            this.errors.push('campo fecha de caducidad esta vacio')
           }
         }
         this.aCompania='';
