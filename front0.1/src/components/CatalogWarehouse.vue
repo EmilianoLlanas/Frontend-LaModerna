@@ -65,7 +65,7 @@ export default {
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
-      this.params.deleteDate=checkedIndexs
+      this.params.deleteData=checkedIndexs
     },
     checkForm(){
       this.errors=[];
