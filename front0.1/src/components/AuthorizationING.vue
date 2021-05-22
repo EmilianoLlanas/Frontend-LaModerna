@@ -1,67 +1,59 @@
 <template>
     <div id="test">
-    <h1 id="header1"> Captura de ordenes </h1>
+    <h1 id="header1"> Autorización de ingeniería </h1>
     <div class="inputForm">
     <form>
-      <label>Cliente</label>
+      <label>Orden Baan</label>
       <br>
-      <input v-model="aCliente" placeholder="Cliente">
+      <input v-model="soBaan" placeholder="Orden Baan">
       <br>
       <label>No. de orden</label>
       <br>
-      <input v-model="aNoOrden" placeholder="No de cliente">
+      <input v-model="soNoOrden" placeholder="No de orden">
       <br>
-      <label>Fecha de Captura</label>
+      <label>Cliente</label>
       <br>
-      <datepicker placeholder="Fecha de entrega" v-model="aFecha" :format="customFormatter"></datepicker>
+      <input v-model="soCliente" placeholder="Cliente">
       <br>
-      <label>Direccion de entrega</label>
-      <br>
-      <input v-model="aDireccion" placeholder="Direccion de entrega">
    </form>
+   <br>
+  <button @click="search"> Buscar </button>
   </div>
-   <div id="table">
+   <div>
   <vue-table-dynamic :params="params"
       @select="onSelect"
       @selection-change="onSelectionChange"
       ref="table"></vue-table-dynamic>
-      <form>
-        <label>Observaciones</label>
-        <br>
-        <textarea v-model="aObservaciones" placeholder="Observaciones de la orden"></textarea>
-        <br>
-        <br>
-      </form>
+      <SalesOrderStatusDetails :id="params.id"></SalesOrderStatusDetails>
   </div>
-  <br>
-  <button @click="save"> Guardar </button>
-  <button @click="cancel"> Cancelar </button>
+  
   <br>
   </div>
 </template>
 
 <script>
-import VueTableDynamic from 'vue-table-dynamic'
-import Datepicker from 'vuejs-datepicker'
-import moment from 'moment'
+import VueTableDynamic from 'vue-table-dynamic';
+import SalesOrderStatusDetails from '@/components/SalesOrderStatusDetails.vue';
 export default {
-  name: 'CaptureOrder',
+  name: 'AuthorizationING',
   data() {
     return {
-    aCliente:'',
-    aNoOrden:'',
-    aFecha:'',
-    aDireccion:'',
-    aObservaciones:'',
+    soCliente:'',
+    soNoOrden:'',
+    soBaan:'',
       params: {
         data: [
-          ['Articulo','Cantidad','Fecha solicitata'],
-          ['art','100','dd/mm/aa'],
-          ['art','100','dd/mm/aa'],
-          ['art','100','dd/mm/aa'],
-          ['art','100','dd/mm/aa'],
-          ['art','100','dd/mm/aa'],
+          ['Orden','Orden Baan','Cliente', 'Nombre', 'Producto', 'Fecha de orden', 'Fecha de entrega','Fecha definida', 'Stock', 'Unidades'],
+          ["1","135","BIMBO",'PAPELITO-SUAVE-500','2021-03-21','2021-04-21','2021-04-22','PAPELITO SUAVE', '3000','5000'],
+          ["2","256","BARCEL",'PAPELITO-DURO-800','2021-02-1','2021-05-21','2021-05-22','PAPELITO DURO','500', '5000'],
+          ["3","389","TIA ROSA",'ALUMINIO-ARRUGADO-100','2021-04-2','2021-04-21','2021-04-22','ALUMINIO ARRUGADO', '4000', '5000'],
+          ["4","412","MOLINOS JORGE",'EMPAQUE-AWITADO-1500','2020-12-26','2021-04-21','2021-04-22','EMPAQUE AWITADO', '3010', '5000'],
+          ["5","545","BIMBO",'PAPELITO-SUAVE-500','2021-03-21','2021-04-21','2021-04-22','PAPELITO SUAVE', '3000', '8000'],
+          ["6","678","BARCEL",'PAPELITO-DURO-800','2021-02-1','2021-04-21','2021-04-22','PAPELITO DURO','3000', '9000'],
+          ["7","723","TIA ROSA",'ALUMINIO-ARRUGADO-100','2021-04-2','2021-04-21','2021-04-22','ALUMINIO ARRUGADO','3400', '5000'],
+          ["8","856","MOLINOS JORGE",'EMPAQUE-AWITADO-1500','2020-12-26','2021-04-21','2021-04-22','EMPAQUE AWITADO', '3010', '5000']
         ],
+        id:[],
         header: 'row',
         border: true,
         stripe: true,
@@ -80,47 +72,16 @@ export default {
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
+      this.params.id=checkedIndexs
     },
-    save(){
+    search(){
       //aqui habra una conexion a backend para guardar la orden
-      if(this.aCliente && this.aNoOrden && this.aFecha && this.aDireccion && this.aObservaciones){
-
-      }else{
-        if(!this.aCliente){
-          alert('campo cliente vacio')
-        }
-        if(!this.aNoOrden){
-          alert('campo numero de orden vacio')
-        }
-        if(!this.aFecha){
-          alert('campo fecha vacio')
-        }
-        if(!this.aDireccion){
-          alert('campo Direccion vacio')
-        }
-        if(!this.aObservaciones){
-          alert('campo Observaciones vacio')
-        }
-      }
-      this.aCliente='';
-      this.aNoOrden='';
-      this.aFecha='';
-      this.aDireccion='';
-      this.aObservaciones='';
-    },
-    cancel(){
-      //aqui habra una conexion a backend para cancelar la captura
-      this.aCliente='';
-      this.aNoOrden='';
-      this.aFecha='';
-      this.aDireccion='';
-      this.aObservaciones='';
-    },
-    customFormatter(date) {
-     return moment(date).format('YYYY/MM/DD');
-   }
+      this.soCliente='',
+      this.soNoOrden='',
+      this.soBaan=''
+    }
   },
-  components: { VueTableDynamic, Datepicker }
+  components: { VueTableDynamic, SalesOrderStatusDetails }
 }
 </script>
 

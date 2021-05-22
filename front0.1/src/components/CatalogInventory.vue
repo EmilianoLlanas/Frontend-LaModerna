@@ -1,29 +1,43 @@
 <template>
-    <div id="test">
-    <h1 id="header1"> Catálogo de Inventarios </h1>
+    <div>
+    <h1> Catálogo de Inventarios </h1>
+    
     <div class="inputForm">
     <form>
-      <label>Compañia</label>
-      <input v-model="invCom" placeholder="Compañía"> 
+      <label>Compañía</label>
+      <br>
+      <input id="invCom" v-model="invCom" placeholder="Compañía"> 
+      <br>
       <label>Almacén</label>
-      <input v-model="invWarehouse" placeholder="Almacén">
+      <br>
+      <input id="invWarehouse" v-model="invWarehouse" placeholder="Almacén">
+      <br>
       <label>Artículo</label>
-      <input v-model="invArticle" placeholder="Artículo">
+      <br>
+      <input id="invArticle" v-model="invArticle" placeholder="Artículo">
+      <br>
       <label>Stock</label>
-      <input v-model="invStock" placeholder="Stock">
+      <br>
+      <input id= "invStock" v-model="invStock" type="number" min="0" placeholder="Stock">
    </form>
   </div>
-   <button @click="signUpInv"> Agregar </button>
+   <br>
+   <button @click="checkForm"> Agregar </button>
    <button @click="signDownInv"> Eliminar </button>
    <button @click="loadInv">Actualizar </button>
    <button @click="reportInv">Generar reporte </button>
-   <div id="table">
+   <div style="width: 80%" >
   <vue-table-dynamic :params="params"
       @select="onSelect"
       @selection-change="onSelectionChange"
       ref="table"></vue-table-dynamic>
 
   </div>
+    <div id="error">
+    <ul>
+        <li v-for="error in errors" v-bind:key="error">{{error}}</li>
+      </ul>
+      </div>
   </div>
 </template>
 
@@ -36,14 +50,17 @@ export default {
       invCom:'',
       invWarehouse:'',
       invArticle:'',
-      invStock:'',
+      invStock:0,
+      select:'',
+      errors:[],
       params: {
         data: [
           ['Compañía', 'Almacén', 'Artículo', 'Stock'],
-          ['Plásticos de México', 'Blvd. Solidaridad las Torres S/N, San Salvador Tizatlali, 52172 Metepec, Méx.' ,'200109 CORR. MARQUETA 5KG', '4320.0'],
-          ['Barcel', 'Avenida Eduardo Monroy Cárdenas 2000 San Antonio Buenavista, 50110 Toluca de Lerdo, Méx.' ,'200167 CORR. UNIVERSAL GRANEL ', '40.0'],
-          ['Totis', 'Delegación San Buenaventura, 50110 Toluca de Lerdo, Méx.' ,'LAMINA CARTON CH-1 ', '2000.0' ],
+          ['Plásticos de México', 'Blvd. Solidaridad las Torres S/N, San Salvador Tizatlali, 52172 Metepec, Méx.' ,'200109 CORR. MARQUETA 5KG', '4320'],
+          ['Barcel', 'Avenida Eduardo Monroy Cárdenas 2000 San Antonio Buenavista, 50110 Toluca de Lerdo, Méx.' ,'200167 CORR. UNIVERSAL GRANEL ', '40'],
+          ['Totis', 'Delegación San Buenaventura, 50110 Toluca de Lerdo, Méx.','LAMINA CARTON CH-1 ', '2000' ],
         ],
+        deleteData:[],
         header: 'row',
         border: true,
         stripe: true,
@@ -63,30 +80,51 @@ export default {
 
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
+      this.params.deleteData=checkedIndexs
+    },
+
+    checkForm(){
+        this.errors=[];
+        if(this.invCom && this.invWarehouse && this.invArticle && this.invStock){
+          this.signUpInv();
+        }
+        else{
+          alert("Por favor, llene todos los campos correctamente para agregar un registro");
+           if(!this.invCom) 
+          {
+            this.errors.push('Introduce compañía');
+          }
+          if(!this.invWarehouse) 
+          {
+            this.errors.push('Introduce almacén');
+          }
+          if(!this.invArticle) 
+          {
+            this.errors.push('Introduce artículo');
+          }
+          if(!this.invStock) //como es un campo numerico, no recoge nada si llenas con texto
+          {
+            this.errors.push('Stock no es un número valido');
+          }          
+        }
     },
 
     signUpInv(){
         //there will be a method here to establish connection with backend and sign up the address' data, some day....
-        if(this.invCom==''||this.invWarehouse==''||this.invArticle==''||this.invStock=='')
-        {
-          alert('Por favor, llene todos los campos para registrar inventario')
-        }
-        else
-        {
+
+          //Push data
           this.params.data.push([this.invCom, this.invWarehouse, this.invArticle, this.invStock]);
-        }
+          this.invCom='';
+          this.invWarehouse='';
+          this.invArticle='';
+          this.invStock='';
     },
 
     signDownInv(){
         //there will be a method here to establish connection with backend and sign down the address' data, some day....
-        if(this.invCom==''||this.invArticle==''||this.invWarehouse=='')
-        {
-          alert('Por favor, llene los campos Compañía, Artículo y Almacén para eliminar un artículo '+
-          this.invArticle+' '+this.invCom+' '+this.invWarehouse)
-        }
-        else{
-          alert('Eliminando artículo'+this.invArticle+' de '+this.invCom+', almacén'+this.invWarehouse);
-        }
+        for (var i = this.params.deleteData.length-1; i>0 ; i--) {
+          this.params.data.splice(this.params.deleteData[i], 1)
+        }       
         
     },
     loadInv(){
@@ -101,6 +139,7 @@ export default {
   components: { VueTableDynamic }
 }
 </script>
+
 
 <style scoped>
 .inputForm {

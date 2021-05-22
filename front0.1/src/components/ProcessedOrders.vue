@@ -1,6 +1,6 @@
 <template>
     <div id="test">
-    <h1> Órdenes de venta Procesadas </h1>
+    <h1 id="header1"> Órdenes de venta Procesadas </h1>
 
    <button @click="loadOrders">Actualizar</button>
    <div id="table" >
@@ -129,5 +129,10 @@ button{
 
 button:hover{
   background-color: rgba(14,44,164,0.30) ;
+}
+
+#header1{
+  margin: 2%;
+  font-size: 30px;
 }
 </style>

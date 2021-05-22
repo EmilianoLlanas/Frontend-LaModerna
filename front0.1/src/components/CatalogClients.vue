@@ -1,6 +1,6 @@
 <template>
     <div id="test">
-    <h1> Catálogo de Clientes </h1>
+    <h1 id="header1"> Catálogo de Clientes </h1>
     <div class="inputForm">
     <form>
       <label>Compañia</label>
@@ -82,30 +82,50 @@ export default {
     },
     signUpClient(){
         //there will be a method here to establish connection with backend and sign up the articles' id and name, some day....
-        this.aCompania='';
-        this.aCliente='';
-        this.aNombreA='';
-        this.aNombreB='';
-        this.aEstatus='';
+        if(this.aCompania &&  this.aCliente &&  this.aNombreA &&  this.aNombreB &&  this.aEstatus){
+          this.params.data.push([this.aCompania,this.aCliente,this.aNombreA,this.aNombreB,this.aEstatus]);
+        }else{
+          if(!this.aCompania){
+            alert('campo compañia vacio')
+          }
+          if(!this.aCliente){
+            alert('campo cliente vacio')
+          }
+          if(!this.aNombreA){
+            alert('campo nombre A vacio')
+          }
+          if(!this.aNombreB){
+            alert('campo nombre B vacio')
+          }
+          if(!this.aEstatus){
+            alert('campo Estatus vacio')
+          }
+        }
+
+        this.aCompania='' ;
+        this.aCliente='' ;
+        this.aNombreA='' ;
+        this.aNombreB='' ;
+        this.aEstatus='' ;
     },
     signDownClient(){
         //there will be a method here to establish connection with backend and sign down the articles' id and name, some day....
-        this.aCompania='';
-        this.aCliente='';
-        this.aNombreA='';
-        this.aNombreB='';
-        this.aEstatus='';
+        this.aCompania='' ;
+        this.aCliente='' ;
+        this.aNombreA='' ;
+        this.aNombreB='' ;
+        this.aEstatus='' ;
         for (var i = this.params.deleteData.length-1; i>0 ; i--) {
           this.params.data.splice(this.params.deleteData[i], 1)
         }
     },
     loadClient(){
         //there will be a method here to establish connection with backend and update the table, some day....
-        this.aCompania='';
-        this.aCliente='';
-        this.aNombreA='';
-        this.aNombreB='';
-        this.aEstatus='';
+        this.aCompania='' ;
+        this.aCliente='' ;
+        this.aNombreA='' ;
+        this.aNombreB='' ;
+        this.aEstatus='' ;
     },
     generateReport(){
       //aqui se mandara a llamar la pagina de reportes
@@ -176,5 +196,10 @@ button{
 
 button:hover{
   background-color: rgba(14,44,164,0.30) ;
+}
+
+#header1{
+  margin: 2%;
+  font-size: 30px;
 }
 </style>

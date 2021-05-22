@@ -36,11 +36,11 @@
       <br>
       <label>Fecha de inicio</label>
       <br>
-      <input v-model="aFechaInicio" placeholder="dd/mm/aa">
+      <datepicker placeholder="Fecha de entrega" v-model="aFechaInicio" :format="customFormatter"></datepicker>
       <br>
       <label>Fecha de caducidad</label>
       <br>
-      <input v-model="aFechaCaducidad" placeholder="dd/mm/aa">
+      <datepicker placeholder="Fecha de entrega" v-model="aFechaCaducidad" :format="customFormatter"></datepicker>
    </form>
   </div>
    <button @click="signUpPrice"> Dar de alta </button>
@@ -59,6 +59,9 @@
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic'
+import Datepicker from 'vuejs-datepicker'
+import moment from 'moment'
+
 export default {
   name: 'CatalogPrices',
   data() {
@@ -66,10 +69,10 @@ export default {
       aCompania:'',
       aLista:'',
       aArticulo:'',
-      aNivDescuento:'',
-      aCantidad:'',
-      aPrecio:'',
-      aDescuento:'',
+      aNivDescuento:0,
+      aCantidad:0,
+      aPrecio:0,
+      aDescuento:0,
       aDescripcion:'',
       aFechaInicio:'',
       aFechaCaducidad:'',
@@ -103,6 +106,40 @@ export default {
     },
     signUpPrice(){
         //there will be a method here to establish connection with backend and sign up the articles' id and name, some day....
+        if(this.aCompania && this.aLista && this.aArticulo && this.aNivDescuento && this.aCantidad && this.aPrecio && this.aDescuento && this.aDescripcion && this.aFechaInicio && this.aFechaCaducidad){
+          this.params.data.push([this.aCompania, this.aLista, this.aArticulo, this.aNivDescuento, this.aCantidad, this.aPrecio, this.aDescuento, this.aDescripcion, this.aFechaInicio, this.aFechaCaducidad]) 
+        }else{
+          if(!this.aCompania){
+            alert('campo compañía esta vacio')
+          }
+          if(!this.aLista){
+            alert('campo lista esta vacio')
+          }
+          if(!this.aArticulo){
+            alert('campo articulo esta vacio')
+          }
+          if(!this.aNivDescuento){
+            alert('campo nivel de Descuento esta vacio')
+          }
+          if(!this.aCantidad){
+            alert('campo cantidad esta vacio')
+          }
+          if(!this.aPrecio){
+            alert('campo precio esta vacio')
+          }
+          if(!this.aDescuento){
+            alert('campo descuento esta vacio')
+          }
+          if(!this.aDescripcion){
+            alert('campo descripcion esta vacio')
+          }
+          if(!this.aFechaInicio){
+            alert('campo fecha de inicio esta vacio')
+          }
+          if(!this.aFechaCaducidad){
+            alert('campo fecha de caducidad esta vacio')
+          }
+        }
         this.aCompania='';
         this.aLista='';
         this.aArticulo='';
@@ -132,6 +169,40 @@ export default {
     },
     loadPrices(){
         //there will be a method here to establish connection with backend and update the table, some day....
+        if(this.aCompania && this.aLista && this.aArticulo && this.aNivDescuento && this.aCantidad && this.aPrecio && this.aDescuento && this.aDescripcion && this.aFechaInicio && this.aFechaCaducidad){
+          alert('aqui va la logica de update')
+        }else{
+          if(!this.aCompania){
+            alert('campo compañía esta vacio')
+          }
+          if(!this.aLista){
+            alert('campo lista esta vacio')
+          }
+          if(!this.aArticulo){
+            alert('campo articulo esta vacio')
+          }
+          if(!this.aNivDescuento){
+            alert('campo nivel de Descuento esta vacio')
+          }
+          if(!this.aCantidad){
+            alert('campo cantidad esta vacio')
+          }
+          if(!this.aPrecio){
+            alert('campo precio esta vacio')
+          }
+          if(!this.aDescuento){
+            alert('campo descuento esta vacio')
+          }
+          if(!this.aDescripcion){
+            alert('campo descripcion esta vacio')
+          }
+          if(!this.aFechaInicio){
+            alert('campo fecha de inicio esta vacio')
+          }
+          if(!this.aFechaCaducidad){
+            alert('campo fecha de caducidad esta vacio')
+          }
+        }
         this.aCompania='';
         this.aLista='';
         this.aArticulo='';
@@ -142,12 +213,16 @@ export default {
         this.aDescripcion='';
         this.aFechaInicio='';
         this.aFechaCaducidad='';
+        alert('Actualizando tabla con Base de datos')
     },
     generateReport(){
       //aqui se mandara a llamar la pagina de reportes
-    }
+    },
+    customFormatter(date) {
+     return moment(date).format('YYYY/MM/DD');
+   }
   },
-  components: { VueTableDynamic }
+  components: { VueTableDynamic,Datepicker }
 }
 </script>
 
