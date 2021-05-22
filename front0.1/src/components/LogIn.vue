@@ -27,6 +27,7 @@
       <button @click="navAuthorizeVTA">Autorizacion de VTA</button>
       <button @click="navAuthorizeOrderCxC">Autorización de ordenes CxC</button>
       <button @click="ordenesTodas">Todas las Ordenes</button>
+      <button @click="sharedItems">Ir a catálogo Artículos Compartidos</button>
 
     </div>
 
@@ -107,6 +108,9 @@ export default {
     },
     ordenesTodas(){
     this.$router.push({name:'AllSalesReport'})
+    },
+    sharedItems(){
+      this.$router.push({name:'CatalogSharedArticles'})
     },
     backup(){
       var date = new Date();
