@@ -58,10 +58,10 @@ export default {
       this.params.deleteData=checkedIndexs
     },
     authOrder(){
-       if(this.params.data[this.select][4]=='NO'){
-          this.params.data[this.select][4]='SI'
-          this.params.data.splice(this.select, 1)
+       if(this.params.data[this.select][3]=='NO'){
+          this.params.data[this.select][3]='SI'
           this.params.data.push(this.params.data[this.select])
+          this.params.data.splice(this.select, 1)
         }
   },
     update(){
