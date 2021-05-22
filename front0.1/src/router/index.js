@@ -28,6 +28,8 @@ import AllSalesReport from '@/components/AllSalesReport'
 import OrderStatusCxc from '@/components/OrderStatusCxc'
 import AuthorizeOrderCxc from '@/components/AuthorizeOrderCxc'
 import AuthorizationING from '@/components/AuthorizationING'
+import BlockClient from '@/components/BlockClient'
+import AuthorizeOrderCST from '@/components/AuthorizeOrderCST'
 import AuthorizeVTA from '@/components/AuthorizeVTA'
 
 
@@ -184,6 +186,16 @@ export default new Router({
       path: '/AuthorizationING',
       name: 'AuthorizationING',
       component: AuthorizationING
+    },
+    {
+      path:'/BlockClient',
+      name:'BlockClient',
+      component: BlockClient
+    },
+    {
+      path:'/AuthorizeOrderCST',
+      name:'AuthorizeOrderCST',
+      component: AuthorizeOrderCST
     },
     {
       path: '/AuthorizeVTA',
