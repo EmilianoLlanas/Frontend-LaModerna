@@ -19,12 +19,15 @@
       <button @click="navProcessedOrders"> Ir a la Consulta de Órdenes Procesadas </button>
       <button @click="navOrderStatus"> Ir a la Consulta de Estatus de Órdenes </button>
       <button @click="navAuthorizeDates"> Ir a la autorizacion de fechas de entrega </button>
-      <button @click="backup"> Generar respaldo </button>
+      <button @click="navRoles"> Ir a la autorizacion de fechas de entrega </button>
+      <button @click="navBackup"> Generar respaldo </button>
       <button @click="navMenuAge"> ir a menu principal de AGE </button>
       <button @click="navConsultSalesOrder">Consultar órdenes de venta</button>
       <button @click="navAuthorizationING">Autorización de ING</button>
       <button @click="navAuthorizeVTA">Autorizacion de VTA</button>
       <button @click="navAuthorizeOrderCxC">Autorización de ordenes CxC</button>
+      <button @click="navBlock">Bloqueo de Clientes</button>
+      <button @click="navAuthorizeOrderCST">Autorización de ordenes CST</button>
       <button @click="ordenesTodas">Todas las Ordenes</button>
 
     </div>
@@ -107,8 +110,17 @@ export default {
     ordenesTodas(){
       this.$router.push({name:'AllSalesReport'})
     },
-    backup(){
+    navBackup(){
       this.$router.push({name:'Backup'})
+    },
+    navRoles(){
+      this.$router.push({name:'RoleAssign'})
+    },
+    navAuthorizeOrderCST(){
+      this.$router.push({name:'AuthorizeOrderCST'})
+    },
+    navBlock(){
+      this.$router.push({name:'BlockClient'})
     },
     }
   }
