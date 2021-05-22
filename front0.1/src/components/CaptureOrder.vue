@@ -9,11 +9,11 @@
       <br>
       <label>No. de orden</label>
       <br>
-      <input v-model="aNoOrden" placeholder="No de cliente">
+      <input v-model="aNoOrden" placeholder="No de cliente" disabledDates="disabledDates" type="number">
       <br>
       <label>Fecha de Captura</label>
       <br>
-      <datepicker placeholder="Fecha de entrega" v-model="aFecha" :format="customFormatter"></datepicker>
+      <datepicker placeholder="Fecha de entrega" v-model="aFecha" :format="customFormatter" :disabledDates="disabledDates"></datepicker>
       <br>
       <label>Direccion de entrega</label>
       <br>
@@ -53,6 +53,10 @@ export default {
     aFecha:'',
     aDireccion:'',
     aObservaciones:'',
+    disabledDates: {
+          to: new Date(Date.now() - 8640000)
+    },
+    errors:[],
       params: {
         data: [
           ['Articulo','Cantidad','Fecha solicitata'],
@@ -83,23 +87,24 @@ export default {
     },
     save(){
       //aqui habra una conexion a backend para guardar la orden
+      this.errors=[]
       if(this.aCliente && this.aNoOrden && this.aFecha && this.aDireccion && this.aObservaciones){
 
       }else{
         if(!this.aCliente){
-          alert('campo cliente vacio')
+          this.errors.push('campo cliente vacio')
         }
         if(!this.aNoOrden){
-          alert('campo numero de orden vacio')
+          this.errors.push('campo numero de orden vacio')
         }
         if(!this.aFecha){
-          alert('campo fecha vacio')
+          this.errors.push('campo fecha vacio')
         }
         if(!this.aDireccion){
-          alert('campo Direccion vacio')
+          this.errors.push('campo Direccion vacio')
         }
         if(!this.aObservaciones){
-          alert('campo Observaciones vacio')
+          this.errors.push('campo Observaciones vacio')
         }
       }
       this.aCliente='';

@@ -2,6 +2,11 @@
     <div id="test">
     <h1 id="header1"> Catálogo de Facturas </h1>
     <div class="inputForm">
+      <div id="error">
+        <ul>
+          <li v-for="error in errors" v-bind:key="error">{{error}}</li>
+        </ul>
+      </div>
     <form>
       <label>Fecha</label>
       <br>
@@ -24,7 +29,7 @@
       <input v-model="facEst" placeholder="Estatus de Entrega">
    </form>
   </div>
-   <button @click="signUpFactura"> Dar de alta </button>
+   <button @click="checkForm"> Dar de alta </button>
    <button @click="signDownFactura"> Dar de baja </button>
    <button @click="loadFactura">Actualizar </button>
    <div id="table">
@@ -50,6 +55,7 @@ export default {
       facCli:'',
       facOrd:'',
       facEst:'',
+      errors:[],
       params: {
         data: [
           ['Fecha', 'NumeroFactura', 'Cliente','Orden','Entrega'],
@@ -78,6 +84,35 @@ export default {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
       this.params.deleteData=checkedIndexs
     },
+    checkForm(){
+      this.errors=[];
+      if(this.facDate && this.facId && this.facCli && this.facOrd && this.facEst){
+        this.signUpFactura();
+      }
+      else{
+        alert('Por favor, llene todos los campos para registrar la Factura');
+        if(!this.facDate)
+        {
+          this.errors.push('Introduce una fecha');
+        }
+        if(!this.facId)
+        {
+          this.errors.push('Introduce un numero de factura');
+        }
+        if(!this.facCli)
+        {
+          this.errors.push('Introduce un nombre de cliente');
+        }
+        if(!this.facOrd)
+        {
+          this.errors.push('Introduce un numero de orden');
+        }
+        if(!this.facEst)
+        {
+          this.errors.push('Introduce un estatus de entrega');
+        }
+      }
+    },
     signUpFactura(){
       if(this.facDate==''||this.facId==''||this.facCli==''||this.facOrd==''||this.facEst=='')
       {
@@ -87,6 +122,11 @@ export default {
       {
         this.params.data.push([this.customFormatter(this.facDate), this.facId, this.facCli,this.facOrd,this.facEst]);
       }
+      this.facDate='';
+      this.facId='';
+      this.facDate='';
+      this.facOrd='';
+      this.facEst='';
     },
     signDownFactura(){
         this.facDate='';

@@ -183,7 +183,6 @@ button:hover{
 }
 
 #test{
-  background-color: rgba(33,52,133,0.20);
   margin: 1%;
   color: #3B0EA4;
   font-family: "GOTY0", "GOTY1", "GOTY2", verdana;

@@ -1,7 +1,13 @@
 <template>
   <div id="test">
     <h1 id="header1"> Catálogo de Artículos Compartidos </h1>
+
     <div class="inputForm">
+      <div id="error">
+        <ul>
+          <li v-for="error in errors" v-bind:key="error">{{error}}</li>
+        </ul>
+     </div>
       <form>
         <label>Compañía Origen</label>
         <br>
@@ -54,6 +60,7 @@ export default {
       aArticulo:'',
       aCompDest:'',
       aClieDest:'',
+      errors:[],
       allArticles:[],
       empty:true,
       params: {
@@ -93,22 +100,49 @@ export default {
       this.params.deleteData=checkedIndexs
     },
     sendItem(){
-      if(this.aCompOrig==''||this.aClieOrig==''||this.aArticulo==''||this.aClieDest==''||this.aCompDest=='')
+      this.errors=[];
+      if(this.aCompOrig && this.aClieOrig && this.aArticulo && this.aClieDest && this.aCompDest)
       {
-        alert('Por favor, llene todos los campos para registrar inventario')
+        this.signupItem();
       }
       else
       {
-        this.empty=false;
-        console.log(this.params.data.length);
-      this.params.data.push([
-       this.aCompOrig,
-       this.aClieOrig,
-       this.aArticulo,
-       this.aCompDest,
-       this.aClieDest]);
-      this.clearForm();
+        alert("Por favor, llene todos los campos correctamente para agregar un registro");
+
+        if(!this.aCompOrig)
+       {
+         this.errors.push('Introduce compañia origen');
+       }
+       if(!this.aClieOrig)
+       {
+         this.errors.push('Introduce cliente origen');
+       }
+       if(!this.aArticulo)
+       {
+         this.errors.push('Introduce el articulo');
+       }
+       if(!this.aClieDest)
+       {
+         this.errors.push('Introduce cliente destino');
+       }
+       if(!this.this.aCompDest)
+       {
+         this.errors.push('Introduce cliente destino');
+       }
+
       }
+  },
+  signupItem(){
+    this.empty=false;
+    console.log(this.params.data.length);
+  this.params.data.push([
+   this.aCompOrig,
+   this.aClieOrig,
+   this.aArticulo,
+   this.aCompDest,
+   this.aClieDest]);
+  this.clearForm();
+
   },
     clearForm(){
       this.aCompOrig='';

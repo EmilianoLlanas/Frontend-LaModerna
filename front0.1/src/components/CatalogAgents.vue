@@ -2,6 +2,11 @@
     <div id="test">
     <h1 id="header1"> Catálogo de Agentes </h1>
     <div class="inputForm">
+      <div id="error">
+        <ul>
+          <li v-for="error in errors" v-bind:key="error">{{error}}</li>
+        </ul>
+      </div>
     <form>
       <label>Compañia</label>
       <br>
@@ -20,7 +25,7 @@
       <input v-model="agEst" placeholder="Estatus del agente">
    </form>
   </div>
-   <button @click="signUpAgent"> Dar de alta </button>
+   <button @click="checkForm"> Dar de alta </button>
    <button @click="signDownAgent"> Dar de baja </button>
    <button @click="loadAgent">Actualizar </button>
    <div id="table">
@@ -43,6 +48,7 @@ export default {
       agId:'',
       rep:'',
       agEst:'',
+      errors:[],
       params: {
         data: [
           ['Compañia', 'idAgente', 'Representante','Estatus'],
@@ -69,7 +75,32 @@ export default {
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
-      this.params.deleteDate=checkedIndexs
+      this.params.deleteData=checkedIndexs
+    },
+    checkForm(){
+      this.errors=[];
+      if(this.agCom && this.agId && this.rep && this.agEst){
+        this.signUpAgent();
+      }
+      else{
+        alert('Por favor, llene todos los campos para registrar al agente');
+        if(!this.agCom)
+        {
+          this.errors.push('Introduce el nombre de la Compañia');
+        }
+        if(!this.agId)
+        {
+          this.errors.push('Introduce un id de Agente');
+        }
+        if(!this.rep)
+        {
+          this.errors.push('Introduce un representante del Agente');
+        }
+        if(!this.agEst)
+        {
+          this.errors.push('Introduce estatus del agente');
+        }
+      }
     },
     signUpAgent(){
         if(this.agCom==''||this.agId==''||this.rep==''||this.agEst=='')
@@ -80,6 +111,10 @@ export default {
         {
           this.params.data.push([this.agCom, this.agId, this.rep, this.agEst]);
         }
+        this.agCom='';
+        this.agId='';
+        this.rep='';
+        this.agEst='';
     },
     signDownAgent(){
       this.agCom='';

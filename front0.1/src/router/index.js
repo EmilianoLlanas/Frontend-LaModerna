@@ -31,7 +31,7 @@ import AuthorizationING from '@/components/AuthorizationING'
 import BlockClient from '@/components/BlockClient'
 import AuthorizeOrderCST from '@/components/AuthorizeOrderCST'
 import AuthorizeVTA from '@/components/AuthorizeVTA'
-
+import Backup from '@/components/Backup'
 
 Vue.use(Router)
 
@@ -201,6 +201,11 @@ export default new Router({
       path: '/AuthorizeVTA',
       name: 'AuthorizeVTA',
       component: AuthorizeVTA
+    },
+    {
+      path: '/Backup',
+      name: 'Backup',
+      component: Backup
     }
   ]
 })
