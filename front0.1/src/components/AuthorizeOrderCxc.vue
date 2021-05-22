@@ -22,10 +22,7 @@ export default {
   name: 'AuthorizeOrderCxc',
   data() {
     return {
-        id:'',
-        cliente:'',
-        fecha:'',
-        authStat:'',
+        select:-1,
       params: {
         data: [
           ['ID','Cliente','Fecha','Autorizada'],
@@ -47,6 +44,7 @@ export default {
   },
   methods: {
     onSelect (isChecked, index, data) {
+      this.select=index;
       console.log('onSelect: ', isChecked, index, data)
       console.log('Checked Data:', this.$refs.table.getCheckedRowDatas(true))
     },
@@ -55,8 +53,12 @@ export default {
       this.params.deleteData=checkedIndexs
     },
     authOrder(){
-        this.authStat='SI'
-  },
+      if(this.params.data[this.select][4]=='NO'){
+          this.params.data[this.select][4]='SI'
+          this.params.data.splice(this.select, 1)
+          this.params.data.push(this.params.data[this.select])
+        }
+    },
     update(){
             alert("Actualizando informacion...");
     }
