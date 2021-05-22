@@ -24,7 +24,6 @@
                 <a @click="navAuthorizeDates"> <div class="element">Autorizacion de fechas de entrega  </div></a>
                 <a @click="navMenuAge"> <div class="element"> Menu principal de AGE  </div></a>
                 <a @click="navBackup"> <div class="element"> Generar respaldo </div></a>
-                <a @click="navMenuAge"> <div class="element"> Menu principal de AGE </div></a>
                 <a @click="navConsultSalesOrder"> <div class="element"> Consultar órdenes de venta </div></a>
                 <a @click="navAuthorizationING"> <div class="element"> Autorización de ING </div></a>
                 <a @click="navAuthorizeVTA"> <div class="element"> Autorizacion de VTA </div></a>
@@ -113,7 +112,7 @@ export default {
       this.source='http://localhost:8080/#/MenuAGE';
     },
     navConsultSalesOrder() {
-    this.source='http://localhost:8080/#/ConsultSalesOrder';
+      this.source='http://localhost:8080/#/ConsultSalesOrders';
     },
     navAuthorizationING() {
       this.source='http://localhost:8080/#/AuthorizationING';

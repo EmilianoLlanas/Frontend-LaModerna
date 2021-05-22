@@ -162,7 +162,7 @@ export default new Router({
       component: MenuAGE
     },
     {
-      path: '/ConsultSalesOrderes',
+      path: '/ConsultSalesOrders',
       name: 'ConsultSalesOrders',
       component: ConsultSalesOrders
     },
