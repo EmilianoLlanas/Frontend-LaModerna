@@ -2,6 +2,11 @@
     <div id="test">
     <h1> Reporte de ordenes de venta </h1>
     <form>
+      <div id="error">
+        <ul>
+          <li v-for="error in errors" v-bind:key="error">{{error}}</li>
+        </ul>
+     </div>
       <label>Fecha de Orden</label>
       <br>
       <label>Desde:</label>
@@ -80,6 +85,7 @@ export default {
       toClient:'',
       fromItem:'',
       toItem:'',
+      errors:[],
 
       params: {
 
@@ -118,7 +124,17 @@ export default {
         //there will be a method here to establish connection with backend and sign up the articles' id and name, some day....
     },
     findOrders(){
-      alert('Buscando Ordenes')
+      this.errors=[];
+      if((this.fromDate && this.toDate) || (this.fromBaan && this.toBaan) || (this.fromClient&& this.toClient) || (this.fromItem&& this.toItem))
+      {
+        alert('Buscando Ordenes')
+      }
+      else
+      {
+        alert("Por favor, llene al menos un campo");
+
+      }
+
     },
     customFormatter(date) {
       return moment(date).format('YYYY/MM/DD');
