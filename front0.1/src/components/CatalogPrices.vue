@@ -14,7 +14,7 @@
       <br>
       <label>lista de Precios</label>
       <br>
-      <input v-model="aLista" placeholder="Lista de precios">
+      <input v-model="aLista" placeholder="Lista de precios" type="number">
       <br>
       <label>Articulo</label>
       <br>
@@ -22,18 +22,18 @@
       <br>
       <label>Nivel de Descuento</label>
       <br>
-      <input v-model="aNivDescuento" placeholder="0%">
+      <input v-model="aNivDescuento" placeholder="0" type="number">
       <label>Cantidad</label>
       <br>
-      <input v-model="aCantidad" placeholder="Cantidad">
+      <input v-model="aCantidad" placeholder="Cantidad" type="number">
       <br>
       <label>Precio</label>
       <br>
-      <input v-model="aPrecio" placeholder="Precio">
+      <input v-model="aPrecio" placeholder="Precio" type="number">
       <br>
       <label>Descuento</label>
       <br>
-      <input v-model="aDescuento" placeholder="0%">
+      <input v-model="aDescuento" placeholder="0" type="number">
       <br>
       <label>Descripcion</label>
       <br>
@@ -73,7 +73,7 @@ export default {
   data() {
     return {
       aCompania:'',
-      aLista:'',
+      aLista:0,
       aArticulo:'',
       aNivDescuento:0,
       aCantidad:0,
