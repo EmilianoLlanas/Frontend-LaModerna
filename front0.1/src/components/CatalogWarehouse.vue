@@ -38,6 +38,7 @@ export default {
     return {
       wareCom:'',
       wareUbi:'',
+      errors:[],
       params: {
         data: [
           ['Compañia', 'Ubicacion'],

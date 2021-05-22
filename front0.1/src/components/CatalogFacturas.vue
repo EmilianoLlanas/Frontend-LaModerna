@@ -55,6 +55,7 @@ export default {
       facCli:'',
       facOrd:'',
       facEst:'',
+      errors:[],
       params: {
         data: [
           ['Fecha', 'NumeroFactura', 'Cliente','Orden','Entrega'],

@@ -53,6 +53,7 @@ export default {
       salIdFac:'',
       salOrd:'',
       salFac:'',
+      errors:[],
       params: {
         data: [
           ['Orden', 'Cliente', 'NumeroFactura','SaldoOrden','SaldoFactura'],
