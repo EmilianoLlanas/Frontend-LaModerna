@@ -1,140 +1,300 @@
 <template>
-
-    <div id="test">
-      <router-view/>
-      <h1> Login </h1>
-      <button @click="navCatalogArticles"> Ir al catálogo de Artículos </button>
-      <button @click="navCatalogCompanies"> Ir al catálogo de Compañías </button>
-      <button @click="navCatalogPrices"> Ir al catálogo de Precios </button>
-      <button @click="navCatalogClients"> Ir al catálogo de Clientes </button>
-      <button @click="navCaptureOrder"> Ir a la captura de Órdenes </button>
-      <button @click="navOrdersInProcess"> Ir a la Consulta de Órdenes en proceso </button>
-      <button @click="navCatalogAgents"> Ir al catálogo de Agentes </button>
-      <button @click="navCatalogDelivered"> Ir al catálogo de Entregas </button>
-      <button @click="navCatalogFacturas"> Ir al catálogo de Facturas </button>
-      <button @click="navCatalogSaldo"> Ir al catálogo de Saldos </button>
-      <button @click="navCatalogWarehouse"> Ir al catálogo de Almacenes </button>
-      <button @click="navCatalogDeliveryAddresses"> Ir al catálogo de Direcciones de entrega </button>
-      <button @click="navCatalogInventory"> Ir al catálogo de Inventario </button>
-      <button @click="navProcessedOrders"> Ir a la Consulta de Órdenes Procesadas </button>
-      <button @click="navOrderStatus"> Ir a la Consulta de Estatus de Órdenes </button>
-      <button @click="navAuthorizeDates"> Ir a la autorizacion de fechas de entrega </button>
-      <button @click="navRoles"> Ir a la autorizacion de fechas de entrega </button>
-      <button @click="navBackup"> Generar respaldo </button>
-      <button @click="navMenuAge"> ir a menu principal de AGE </button>
-      <button @click="navConsultSalesOrder">Consultar órdenes de venta</button>
-      <button @click="navAuthorizationING">Autorización de ING</button>
-      <button @click="navAuthorizeVTA">Autorizacion de VTA</button>
-      <button @click="navAuthorizeOrderCxC">Autorización de ordenes CxC</button>
-      <button @click="navBlock">Bloqueo de Clientes</button>
-      <button @click="navAuthorizeOrderCST">Autorización de ordenes CST</button>
-      <button @click="ordenesTodas">Todas las Ordenes</button>
-      <button @click="sharedItems">Ir a catálogo Artículos Compartidos</button>
+ <div id="fullpage">
+   <div id="sidebar">
+      <!--<router-view/>-->
+                <div id="menuhead">
+                    <h3> Menú </h3>
+                </div>
+                <a @click="navCatalogArticles"> <div class="element"> Catálogo de Artículos </div></a>
+                <a @click="navCatalogCompanies"> <div class="element">Catálogo de Compañías </div></a>
+                <a @click="navCatalogPrices"> <div class="element">Catálogo de Precios  </div></a>
+                <a @click="navCatalogClients"> <div class="element">Catálogo de Clientes </div> </a>
+                <a @click="navCaptureOrder"> <div class="element">Captura de Órdenes  </div></a>
+                <a @click="navOrdersInProcess"> <div class="element">Consulta de Órdenes en proceso </div> </a>
+                <a @click="navCatalogAgents"> <div class="element">Catálogo de Agentes  </div></a>
+                <a @click="navCatalogDelivered"> <div class="element">Catálogo de Entregas  </div></a>
+                <a @click="navCatalogFacturas"> <div class="element">Catálogo de Facturas </div> </a>
+                <a @click="navCatalogSaldo"> <div class="element">Catálogo de Saldos  </div></a>
+                <a @click="navCatalogWarehouse"> <div class="element">Catálogo de Almacenes  </div></a>
+                <a @click="navCatalogDeliveryAddresses"> <div class="element">Catálogo de Direcciones de entrega  </div></a>
+                <a @click="navCatalogInventory"> <div class="element">Catálogo de Inventario  </div></a>
+                <a @click="navProcessedOrders"> <div class="element"> Consulta de Órdenes Procesadas  </div></a>
+                <a @click="navOrderStatus"> <div class="element"> Consulta de Estatus de Órdenes  </div></a>
+                <a @click="navAuthorizeDates"> <div class="element">Autorizacion de fechas de entrega  </div></a>
+                <a @click="navMenuAge"> <div class="element"> Menu principal de AGE  </div></a>
+                <a @click="navBackup"> <div class="element"> Generar respaldo </div></a>
+                <a @click="navMenuAge"> <div class="element"> Menu principal de AGE </div></a>
+                <a @click="navConsultSalesOrder"> <div class="element"> Consultar órdenes de venta </div></a>
+                <a @click="navAuthorizationING"> <div class="element"> Autorización de ING </div></a>
+                <a @click="navAuthorizeVTA"> <div class="element"> Autorizacion de VTA </div></a>
+                <a @click="navAuthorizeOrderCxC"> <div class="element"> Autorización de ordenes CxC </div></a>
+                <a @click="navBlock"> <div class="element"> Bloqueo de Clientes </div></a>
+                <a @click="navAuthorizeOrderCST"> <div class="element"> Autorización de ordenes CST </div></a>
+                <a @click="ordenesTodas"> <div class="element"> Todas las Ordenes </div></a>
+                <a @click="sharedItems"> <div class="element"> Catálogo Artículos Compartidos </div></a>
+            </div>
+      <div id="content">
+        <iframe width="100%" height="100%" :src="this.source"></iframe>
+      </div>
 
     </div>
-
+  </div>
 </template>
 
 <script>
-
 export default {
   name: 'Login',
+
   data: function() {
         return {
             dateS: ""
+            source:'',
         }
     },
   methods: {
+
       navCatalogArticles () {
-      this.$router.push({ name:'CatalogArticles' });
+      this.source='http://localhost:8080/#/CatalogArticles';
     },
       navCatalogCompanies () {
-      this.$router.push({ name:'CatalogCompanies' });
+      this.source='http://localhost:8080/#/CatalogCompanies';
     },
     navCatalogPrices () {
-      this.$router.push({name:'CatalogPrices'});
+    this.source='http://localhost:8080/#/CatalogPrices';
     },
     navCatalogClients() {
-      this.$router.push({name:'CatalogClients'})
+      this.source='http://localhost:8080/#/CatalogClients';
     },
     navCaptureOrder() {
-      this.$router.push({name: 'CaptureOrder'})
+      this.source='http://localhost:8080/#/CaptureOrder';
     },
     navOrdersInProcess() {
-      this.$router.push({name: 'OrdersInProcess'})
+      this.source='http://localhost:8080/#/OrdersInProcess';
     },
     navCatalogAgents() {
-      this.$router.push({name: 'CatalogAgents'})
+      this.source='http://localhost:8080/#/CatalogAgents';
     },
     navCatalogDelivered() {
-      this.$router.push({name: 'CatalogDelivered'})
+      this.source='http://localhost:8080/#/CatalogDelivered';
     },
     navCatalogFacturas() {
-      this.$router.push({name: 'CatalogFacturas'})
+      this.source='http://localhost:8080/#/CatalogFacturas';
     },
     navCatalogSaldo() {
-      this.$router.push({name: 'CatalogSaldo'})
+      this.source='http://localhost:8080/#/CatalogSaldo';
     },
     navCatalogWarehouse() {
-      this.$router.push({name: 'CatalogWarehouse'})
+      this.source='http://localhost:8080/#/CatalogWarehouse';
     },
     navCatalogDeliveryAddresses() {
-      this.$router.push({name: 'CatalogDeliveryAddresses'})
+      this.source='http://localhost:8080/#/CatalogDeliveryAddresses';
     },
     navCatalogInventory() {
-      this.$router.push({name: 'CatalogInventory'})
+      this.source='http://localhost:8080/#/CatalogInventory';
     },
     navProcessedOrders() {
-      this.$router.push({name: 'ProcessedOrders'})
+      this.source='http://localhost:8080/#/ProcessedOrders';
     },
     navOrderStatus() {
-      this.$router.push({name: 'OrderStatus'})
+      this.source='http://localhost:8080/#/OrderStatus';
     },
-    navAuthorizeDates(){
-      this.$router.push({name:'AuthorizeDates'})
+    navAuthorizeDates() {
+      this.source='http://localhost:8080/#/AuthorizeDates';
     },
-    navMenuAge(){
-      this.$router.push({name:'MenuAGE'})
+    navRoles() {
+      this.source='http://localhost:8080/#/RoleAssign';
     },
-    navConsultSalesOrder(){
-      this.$router.push({name:'ConsultSalesOrders'})
+    navBackup () {
+      this.source='http://localhost:8080/#/Backup';
     },
-    navAuthorizationING(){
-      this.$router.push({name:'AuthorizationING'})
+      navMenuAge() {
+      this.source='http://localhost:8080/#/MenuAGE';
     },
-    navAuthorizeVTA(){
-      this.$router.push({name:'AuthorizeVTA'})
+    navConsultSalesOrder() {
+    this.source='http://localhost:8080/#/ConsultSalesOrder';
     },
-    navAuthorizeOrderCxC(){
-      this.$router.push({name:'AuthorizeOrderCxc'})
+    navAuthorizationING() {
+      this.source='http://localhost:8080/#/AuthorizationING';
     },
-    ordenesTodas(){
-      this.$router.push({name:'AllSalesReport'})
+    navAuthorizeVTA() {
+      this.source='http://localhost:8080/#/AuthorizeVTA';
     },
-    sharedItems(){
-      this.$router.push({name:'CatalogSharedArticles'})
+    navAuthorizeOrderCxC() {
+      this.source='http://localhost:8080/#/AuthorizeOrderCxC';
     },
-   navBackup(){
-      this.$router.push({name:'Backup'})
+    navBlock() {
+      this.source='http://localhost:8080/#/BlockClient';
     },
-    navRoles(){
-      this.$router.push({name:'RoleAssign'})
+    navAuthorizeOrderCST() {
+      this.source='http://localhost:8080/#/AuthorizeOrderCST';
     },
-    navAuthorizeOrderCST(){
-      this.$router.push({name:'AuthorizeOrderCST'})
+    ordenesTodas() {
+      this.source='http://localhost:8080/#/AllSalesReport';
     },
-    navBlock(){
-      this.$router.push({name:'BlockClient'})
+    sharedItems() {
+      this.source='http://localhost:8080/#/CatalogSharedArticles';
     },
-    }
   }
+}
 </script>
 
 <style scoped>
 
-#test {
-  background-color: gray;
-
+*{
+  padding: 0;
+  margin: 0;
 }
 
+#fullpage{
+  display: flex;
+}
+
+#sidebar{
+  background: #f7f7f7;
+  height: 100vh;
+  width: 22%;
+}
+
+#content{
+  background: rgba(33,52,133,0.20);
+  width: 100%;
+  height: 100vh;
+}
+
+#menuhead{
+  background: #3B0EA4;
+  padding: 1em;
+}
+
+h3{
+  text-align: center;
+  font-size: 2.4em;
+  font-family:  "GOTY0","GOTY1","GOTY2",verdana;
+  color: #f7f7f7;
+}
+
+#sidebar div{
+  text-align: center;
+  padding: 20px;
+  border-bottom: solid 1px #7a7a7a;
+  font-size: 16px;
+  font-family:  "GOTY0","GOTY1","GOTY2",verdana;
+}
+
+#sidebar .element:hover{
+  background: rgba(14,44,164,0.30);
+  color: white;
+  font-weight: bold;
+}
+
+.inputForm {
+  width: 90%;
+  clear: both;
+  color: #213485;
+  margin: 3%;
+  font-size: 20px;
+  font-family: Verdana;
+  font-size: 20px;
+}
+        
+.inputForm  input {
+  width: 100%;
+  clear: both;
+  margin-top: 2%;
+  margin-bottom: 5%;
+  height: 50px;
+  font-size: 20px;
+  font-family: "GOTY0", "GOTY1", "GOTY2", verdana;
+  opacity: 50%;
+  border-radius: 6px;
+  border: transparent;
+  background: #f2f2f2;
+  padding: 10px;
+}
+        
+.inputForm  textarea {
+  padding: 10px;
+  width: 150%;
+  height: 90px;
+  color: #213485;
+  margin-top: 2%;
+  margin-bottom: 0%;
+  font-family: "GOTY0", "GOTY1", "GOTY2", verdana;
+  opacity: 50%;
+  border-radius: 6px;
+  border: transparent;
+  background: #f2f2f2;
+  width: 100%; 
+  font-family: Verdana;
+  font-size: 20px;
+}
+        
+button{
+  margin-top: 0%;
+  margin-left: 3%;
+  color: #0E2CA4;
+  opacity: 70%;
+  font-family: "GOTY0", "GOTY1", "GOTY2", verdana;
+  text-shadow: 1px 1px rgba(14,44,164,0.50);
+  background-color: transparent;
+  padding: 5px;
+  font-weight: 700;
+  font-size: 24px;
+  border-radius: 6px;
+  border: transparent;
+  margin-bottom: 40px;
+}
+        
+button:hover{
+  background-color: rgba(14,44,164,0.30) ;
+}
+        
+#test{
+  background-color: rgba(33,52,133,0.20);
+  margin: 1%;
+  color: #3B0EA4;
+  font-family: "GOTY0", "GOTY1", "GOTY2", verdana;
+}
+        
+#header1{
+  margin: 2%;
+  font-family: Verdana;
+  font-size: 60px;
+  color: #3B0EA4;
+  text-align: center;
+}
+        
+#table{
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 2%;
+}
+
+label{
+  font-family: Verdana;
+  font-weight: bold;
+}
+
+#card{
+  background: #fff;
+  width: 80%;
+  margin: 5em;
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.14);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.14);
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.14);
+  border-radius: 15px;
+}
+
+#cardheader{
+  height: 20px;
+  width: 100%;
+  background: #3B0EA4;
+}
+
+#buttons{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 </style>
