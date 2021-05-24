@@ -1,15 +1,40 @@
 <template>
     <div id="test">
-    <h1 id="header1"> Órdenes de venta Procesadas </h1>
+    <h1> Modificar Órdenes </h1>
 
-   <button @click="loadOrders">Actualizar</button>
-   <div id="table" >
+    <label>Folio</label>
+    <input v-model="aId" placeholder="Folio de orden">
+    <br>
+    <button @click="editOrders">Editar por folio</button>
+    <div id="editForm" >
+      <label>Cliente</label>
+      <input v-model="aClient" placeholder="Cliente que realiza la orden">
+      <br>
+      <label>Nombre</label>
+      <input v-model="aName" placeholder="Concepto de orden">
+      <br>
+      <label>Fecha Orden</label>
+      <input v-model="aDate" placeholder="Fecha de orden">
+      <br>
+      <label>Artículo</label>
+      <input v-model="aArticle" placeholder="Artículo">
+      <br>
+      <label>Cantidad</label>
+      <input v-model="aAmount" placeholder="Cantidad">
+      <br>
+      <label>Precio</label>
+      <input v-model="aPrice" placeholder="Precio">
+    </div>
+    <button @click="loadOrders">Actualizar</button>
+    <div id="table" >
 
-  <vue-table-dynamic :params="params"
+      <vue-table-dynamic :params="params"
       @select="onSelect"
       @selection-change="onSelectionChange"
       ref="table"></vue-table-dynamic>
-    <ProcessedOrdersDetails :id="params.id"></ProcessedOrdersDetails>
+
+    <!--  <OrderDetails :id="params.id" :cliente="params.cliente"></OrderDetails>-->
+    <OrderDetails :id="params.id"></OrderDetails>
   </div>
 
   </div>
@@ -17,10 +42,12 @@
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic';
-import ProcessedOrdersDetails from '@/components/ProcessedOrdersDetails.vue';
+import OrderDetails from '@/components/OrderDetails.vue';
+
+
 
 export default {
-  name: 'ProcessedOrders',
+  name: 'OrdersInProcess',
 
   data() {
 
@@ -59,12 +86,18 @@ export default {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
       this.params.id=checkedIndexs
     },
-    loadOrders(){
-        alert('Actualizando tablas con ERP')
+    orderReport(){
+        //there will be a method here to establish connection with backend and sign up the articles' id and name, some day....
     },
+    loadOrders(){
+      alert('Actualizando tablas con base de datos')
+    },
+    editOrders(){
+      document.getElementById("editForm").style.display = "block";
+    }
 
   },
-  components: { VueTableDynamic,ProcessedOrdersDetails }
+  components: { VueTableDynamic,OrderDetails }
 }
 </script>
 
@@ -131,8 +164,8 @@ button:hover{
   background-color: rgba(14,44,164,0.30) ;
 }
 
-#header1{
-  margin: 2%;
-  font-size: 30px;
+#editForm {
+  margin-left: 3%;
+  display: none;
 }
 </style>

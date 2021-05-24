@@ -61,7 +61,7 @@
 <script>
 import VueTableDynamic from 'vue-table-dynamic'
 export default {
-  name: 'CatalogFacturas',
+  name: 'CatalogSaldo',
   data() {
     return {
       ordId:'',
@@ -69,6 +69,7 @@ export default {
       salIdFac:'',
       salOrd:'',
       salFac:'',
+      errors:[],
       params: {
         data: [
           ['Orden', 'Cliente', 'NumeroFactura','SaldoOrden','SaldoFactura'],
@@ -76,6 +77,7 @@ export default {
           ['2410', 'Barcel', '45', '4500', '2500'],
           ['5342', 'Totis', '88', '6400', '500'],
         ],
+        deleteData:[],
         header: 'row',
         border: true,
         stripe: true,
@@ -94,30 +96,70 @@ export default {
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
+      this.params.deleteData=checkedIndexs
     },
-    signUpFactura(){
-        //there will be a method here to establish connection with backend and sign up some day....
+    checkForm(){
+      this.errors=[];
+      if(this.ordId && this.salCli && this.salIdFac && this.salOrd && this.salFac){
+        this.signUpSaldo();
+      }
+      else{
+        alert('Por favor, llene todos los campos para registrar el saldo');
+        if(!this.ordId)
+        {
+          this.errors.push('Introduce numero de Orden');
+        }
+        if(!this.salCli)
+        {
+          this.errors.push('Introduce nombre de Cliente');
+        }
+        if(!this.salIdFac)
+        {
+          this.errors.push('Introduce numero de Factura');
+        }
+        if(!this.salOrd)
+        {
+          this.errors.push('Introduce saldo de la Orden');
+        }
+        if(!this.salFac)
+        {
+          this.errors.push('Introduce saldo de la Factura');
+        }
+      }
+    },
+    signUpSaldo(){
+        if(this.ordId==''||this.salCli==''||this.salIdFac==''||this.salOrd==''||this.salFac=='')
+        {
+          alert('Por favor, llene todos los campos para registrar el saldo');
+        }
+        else
+        {
+          this.params.data.push([this.ordId, this.salCli,this.salIdFac,this.salOrd,this.salFac]);
+        }
         this.ordId='';
         this.salCli='';
         this.salIdFac='';
         this.salOrd='';
         this.salFac='';
     },
-    signDownFactura(){
-        //there will be a method here to establish connection with backend and sign down some day....
-        this.ordId='';
-        this.salCli='';
-        this.salIdFac='';
-        this.salOrd='';
-        this.salFac='';
+    signDownSaldo(){
+      this.ordId='';
+      this.salCli='';
+      this.salIdFac='';
+      this.salOrd='';
+      this.salFac='';
+      console.log(this.params.deleteData.length)
+      for (var i = this.params.deleteData.length-1; i>0 ; i--) {
+      this.params.data.splice(this.params.deleteData[i], 1)
+      }
     },
-    loadFactura(){
-        //there will be a method here to establish connection with backend and update the table, some day....
-        this.ordId='';
-        this.salCli='';
-        this.salIdFac='';
-        this.salOrd='';
-        this.salFac='';
+    loadSaldo(){
+      this.ordId='';
+      this.salCli='';
+      this.salIdFac='';
+      this.salOrd='';
+      this.salFac='';
+      alert("Actualizando informacion...");
     }
   },
   components: { VueTableDynamic }
@@ -167,7 +209,6 @@ export default {
   font-family: Verdana;
   font-size: 20px;
 }
-
 button{
   margin-top: 0%;
   margin-left: 3%;
@@ -183,11 +224,9 @@ button{
   border: transparent;
   margin-bottom: 40px;
 }
-
 button:hover{
   background-color: rgba(14,44,164,0.30);
 }
-
 #header1{
   margin: 2%;
   font-family: Verdana;
@@ -195,7 +234,6 @@ button:hover{
   color: #3B0EA4;
   text-align: center;
 }
-
 #table{
   width: 80%;
   margin-left: 10%;

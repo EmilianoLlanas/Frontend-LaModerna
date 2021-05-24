@@ -22,6 +22,16 @@ import ProcessedOrders from '@/components/ProcessedOrders'
 import OrderStatus from '@/components/OrderStatus'
 import AuthorizeDates from '@/components/AuthorizeDates'
 import MenuAGE from '@/components/MenuAGE'
+import OrderEdit from '@/components/OrderEdit'
+import ConsultSalesOrders from '@/components/ConsultSalesOrders'
+import AllSalesReport from '@/components/AllSalesReport'
+import OrderStatusCxc from '@/components/OrderStatusCxc'
+import AuthorizeOrderCxc from '@/components/AuthorizeOrderCxc'
+import AuthorizationING from '@/components/AuthorizationING'
+import BlockClient from '@/components/BlockClient'
+import AuthorizeOrderCST from '@/components/AuthorizeOrderCST'
+import AuthorizeVTA from '@/components/AuthorizeVTA'
+import Backup from '@/components/Backup'
 
 Vue.use(Router)
 
@@ -135,15 +145,67 @@ export default new Router({
     path: '/OrderStatus',
     name: 'OrderStatus',
     component: OrderStatus
-  },{
+  },
+  {
       path: '/AuthorizeDates',
       name: 'AuthorizeDates',
       component: AuthorizeDates
     },
     {
+      path: '/OrderEdit',
+      name: 'OrderEdit',
+      component: OrderEdit
+    },
+    {
       path: '/MenuAGE',
       name: 'MenuAGE',
       component: MenuAGE
+    },
+    {
+      path: '/ConsultSalesOrderes',
+      name: 'ConsultSalesOrders',
+      component: ConsultSalesOrders
+    },
+    {
+      path: '/AllSalesReport',
+      name: 'AllSalesReport',
+      component: AllSalesReport
+    },
+    {
+
+      path: '/OrderStatusCxc',
+      name: 'OrderStatusCxc',
+      component: OrderStatusCxc
+    },
+    {
+      path: '/AuthorizeOrderCxc',
+      name: 'AuthorizeOrderCxc',
+      component: AuthorizeOrderCxc
+    },
+    {
+      path: '/AuthorizationING',
+      name: 'AuthorizationING',
+      component: AuthorizationING
+    },
+    {
+      path:'/BlockClient',
+      name:'BlockClient',
+      component: BlockClient
+    },
+    {
+      path:'/AuthorizeOrderCST',
+      name:'AuthorizeOrderCST',
+      component: AuthorizeOrderCST
+    },
+    {
+      path: '/AuthorizeVTA',
+      name: 'AuthorizeVTA',
+      component: AuthorizeVTA
+    },
+    {
+      path: '/Backup',
+      name: 'Backup',
+      component: Backup
     }
   ]
 })

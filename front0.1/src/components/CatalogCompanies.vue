@@ -54,7 +54,7 @@ export default {
     return {
       aId:'',
       aName:'',
-      aDescription:'',
+      errors:[],
       params: {
         data: [
           ['ID', 'Nombre'],
@@ -65,6 +65,7 @@ export default {
           [5, 'a8c325']
 
         ],
+        deleteData:[],
         header: 'row',
         border: true,
         stripe: true,
@@ -83,24 +84,49 @@ export default {
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
+      this.params.deleteData=checkedIndexs
+    },
+    checkForm(){
+        this.errors=[];
+        if(this.aId && this.aName){
+          this.signUpCompany();
+        }
+        else{
+          alert("Por favor, llene todos los campos correctamente para agregar un registro");
+           if(!this.aId)
+          {
+            this.errors.push('Introduce un ID de compañía');
+          }
+          if(!this.aName)
+          {
+            this.errors.push('Introduce el nombre de la compañía');
+          }
+        }
     },
     signUpCompany(){
         //there will be a method here to establish connection with backend and sign up the companies' id and name, some day....
+        this.params.data.push([this.aId, this.aName]);
         this.aId='';
         this.aName='';
-        this.aDescription='';
     },
     signDownCompany(){
         //there will be a method here to establish connection with backend and sign down the companies' id and name, some day....
         this.aId='';
         this.aName='';
-        this.aDescription='';
+
+        for (var i = this.params.deleteData.length-1; i>0 ; i--) {
+          this.params.data.splice(this.params.deleteData[i], 1)
+        }
+
+
+
+
     },
     loadCompanies(){
         //there will be a method here to establish connection with backend and load the companies' id and name, some day....
         this.aId='';
         this.aName='';
-        this.aDescription='';
+        alert('Actualizando tabla con Base de datos')
     },
   },
   components: { VueTableDynamic }
@@ -177,6 +203,11 @@ button:hover{
   font-size: 60px;
   color: #3B0EA4;
   text-align: center;
+}
+
+#header1{
+  margin: 2%;
+  font-size: 30px;
 }
 
 #table{

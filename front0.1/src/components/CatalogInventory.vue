@@ -63,14 +63,17 @@ export default {
       invCom:'',
       invWarehouse:'',
       invArticle:'',
-      invStock:'',
+      invStock:0,
+      select:'',
+      errors:[],
       params: {
         data: [
           ['Compañía', 'Almacén', 'Artículo', 'Stock'],
-          ['Plásticos de México', 'Blvd. Solidaridad las Torres S/N, San Salvador Tizatlali, 52172 Metepec, Méx.' ,'200109 CORR. MARQUETA 5KG', '4320.0'],
-          ['Barcel', 'Avenida Eduardo Monroy Cárdenas 2000 San Antonio Buenavista, 50110 Toluca de Lerdo, Méx.' ,'200167 CORR. UNIVERSAL GRANEL ', '40.0'],
-          ['Totis', 'Delegación San Buenaventura, 50110 Toluca de Lerdo, Méx.' ,'LAMINA CARTON CH-1 ', '2000.0' ],
+          ['Plásticos de México', 'Blvd. Solidaridad las Torres S/N, San Salvador Tizatlali, 52172 Metepec, Méx.' ,'200109 CORR. MARQUETA 5KG', '4320'],
+          ['Barcel', 'Avenida Eduardo Monroy Cárdenas 2000 San Antonio Buenavista, 50110 Toluca de Lerdo, Méx.' ,'200167 CORR. UNIVERSAL GRANEL ', '40'],
+          ['Totis', 'Delegación San Buenaventura, 50110 Toluca de Lerdo, Méx.','LAMINA CARTON CH-1 ', '2000' ],
         ],
+        deleteData:[],
         header: 'row',
         border: true,
         stripe: true,
@@ -90,31 +93,52 @@ export default {
 
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
+      this.params.deleteData=checkedIndexs
+    },
+
+    checkForm(){
+        this.errors=[];
+        if(this.invCom && this.invWarehouse && this.invArticle && this.invStock){
+          this.signUpInv();
+        }
+        else{
+          alert("Por favor, llene todos los campos correctamente para agregar un registro");
+           if(!this.invCom)
+          {
+            this.errors.push('Introduce compañía');
+          }
+          if(!this.invWarehouse)
+          {
+            this.errors.push('Introduce almacén');
+          }
+          if(!this.invArticle)
+          {
+            this.errors.push('Introduce artículo');
+          }
+          if(!this.invStock) //como es un campo numerico, no recoge nada si llenas con texto
+          {
+            this.errors.push('Stock no es un número valido');
+          }
+        }
     },
 
     signUpInv(){
         //there will be a method here to establish connection with backend and sign up the address' data, some day....
-        if(this.invCom==''||this.invWarehouse==''||this.invArticle==''||this.invStock=='')
-        {
-          alert('Por favor, llene todos los campos para registrar inventario')
-        }
-        else
-        {
+
+          //Push data
           this.params.data.push([this.invCom, this.invWarehouse, this.invArticle, this.invStock]);
-        }
+          this.invCom='';
+          this.invWarehouse='';
+          this.invArticle='';
+          this.invStock='';
     },
 
     signDownInv(){
         //there will be a method here to establish connection with backend and sign down the address' data, some day....
-        if(this.invCom==''||this.invArticle==''||this.invWarehouse=='')
-        {
-          alert('Por favor, llene los campos Compañía, Artículo y Almacén para eliminar un artículo '+
-          this.invArticle+' '+this.invCom+' '+this.invWarehouse)
+        for (var i = this.params.deleteData.length-1; i>0 ; i--) {
+          this.params.data.splice(this.params.deleteData[i], 1)
         }
-        else{
-          alert('Eliminando artículo'+this.invArticle+' de '+this.invCom+', almacén'+this.invWarehouse);
-        }
-        
+
     },
     loadInv(){
         //there will be a method here to establish connection with backend and update the table, some day....
@@ -128,6 +152,7 @@ export default {
   components: { VueTableDynamic }
 }
 </script>
+
 
 <style scoped>
 .inputForm{

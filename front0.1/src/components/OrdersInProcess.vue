@@ -149,4 +149,9 @@ label{
   align-items: center;
   justify-content: center;
 }
+
+#header1{
+  margin: 2%;
+  font-size: 30px;
+}
 </style>

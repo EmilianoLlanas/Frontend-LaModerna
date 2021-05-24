@@ -52,6 +52,9 @@
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic'
+import Datepicker from 'vuejs-datepicker'
+import moment from 'moment'
+
 export default {
   name: 'CatalogDelivered',
   data() {
@@ -59,6 +62,7 @@ export default {
       delivOrd:'',
       delivCom:'',
       delivDate:'',
+      errors:[],
       params: {
         data: [
           ['Orden', 'Compañia', 'Fecha'],
@@ -66,6 +70,7 @@ export default {
           ['0235', 'Barcel', '01/10/20'],
           ['0066', 'Totis', '27/08/19'],
         ],
+        deleteData:[],
         header: 'row',
         border: true,
         stripe: true,
@@ -84,27 +89,62 @@ export default {
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
+      this.params.deleteData=checkedIndexs
+    },
+    checkForm(){
+      this.errors=[];
+      if(this.delivOrd && this.delivCom && this.delivDate){
+        this.signUpDeliver();
+      }
+      else{
+        alert('Por favor, llene todos los campos para registrar la entrega')
+        if(!this.delivOrd)
+        {
+          this.errors.push("Introduce numero de Orden");
+        }
+        if(!this.delivCom)
+        {
+          this.errors.push("Introduce Compañia");
+        }
+        if(!this.delivDate)
+        {
+          this.errors.push("Introduce fecha de Orden");
+        }
+      }
     },
     signUpDeliver(){
-        //there will be a method here to establish connection with backend and sign up the deliveries' company and ldate, some day....
+        if(this.delivOrd==''||this.delivCom==''||this.delivDate=='')
+        {
+          alert('Por favor, llene todos los campos para registrar la entrega')
+        }
+        else
+        {
+          this.params.data.push([this.delivOrd, this.delivCom, this.customFormatter(this.delivDate)]);
+        }
         this.delivOrd='';
         this.delivCom='';
         this.delivDate='';
     },
     signDownDeliver(){
-        //there will be a method here to establish connection with backend and sign down the deliveries' company and date, some day....
-        this.delivOrd='';
-        this.delivCom='';
-        this.delivDate='';
+      this.delivOrd='';
+      this.delivCom='';
+      this.delivDate='';
+      console.log(this.params.deleteData.length)
+      for (var i = this.params.deleteData.length-1; i>0 ; i--) {
+      this.params.data.splice(this.params.deleteData[i], 1)
+      }
     },
     loadDeliver(){
-        //there will be a method here to establish connection with backend and update the table, some day....
         this.delivOrd='';
         this.delivCom='';
         this.delivDate='';
-    }
+        alert("Actualizando informacion...");
+    },
+    customFormatter(date) {
+     return moment(date).format('YYYY/MM/DD');
+   }
   },
-  components: { VueTableDynamic }
+  components: { VueTableDynamic,Datepicker }
 }
 </script>
 
@@ -151,7 +191,6 @@ export default {
   font-family: Verdana;
   font-size: 20px;
 }
-
 button{
   margin-top: 0%;
   margin-left: 3%;

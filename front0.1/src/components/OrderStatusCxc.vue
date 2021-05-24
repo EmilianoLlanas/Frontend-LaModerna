@@ -1,15 +1,20 @@
 <template>
+
     <div id="test">
-    <h1 id="header1"> Órdenes de venta Procesadas </h1>
+      <router-view/>
+    <h1> Estatus de órdenes de venta CxC </h1>
 
    <button @click="loadOrders">Actualizar</button>
+   <button @click="navOrdersInProcess"> Ir a la Consulta de Órdenes en proceso </button>
+  <button @click="navProcessedOrders"> Ir a la Consulta de Órdenes Procesadas </button>
    <div id="table" >
 
   <vue-table-dynamic :params="params"
       @select="onSelect"
       @selection-change="onSelectionChange"
       ref="table"></vue-table-dynamic>
-    <ProcessedOrdersDetails :id="params.id"></ProcessedOrdersDetails>
+
+    <OrderStatusDetails :id="params.id"></OrderStatusDetails>
   </div>
 
   </div>
@@ -17,10 +22,12 @@
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic';
-import ProcessedOrdersDetails from '@/components/ProcessedOrdersDetails.vue';
+import OrderStatusDetails from '@/components/OrderStatusDetails.vue';
+
+
 
 export default {
-  name: 'ProcessedOrders',
+  name: 'OrderStatusCxc',
 
   data() {
 
@@ -34,6 +41,10 @@ export default {
           ["2", "BARCEL", "PAPELITO-DURO-800 ","2021-02-1","PAPELITO DURO","800","$63250.00"],
           ["3", "TIA ROSA", "ALUMINIO-ARRUGADO-100 ","2021-04-2","ALUMINIO ARRUGADO","100","$5050.00"],
           ["4", "MOLINOS JORGE", "EMPAQUE-AWITADO-1500 ","2020-12-26","EMPAQUE AWITADO","1500","$70950.00"],
+          ["5", "BIMBO", "PAPELITO-SUAVE-500 ","2021-03-21","PAPELITO SUAVE","500","$50250.00"],
+          ["6", "BARCEL", "PAPELITO-DURO-800 ","2021-02-1","PAPELITO DURO","800","$63250.00"],
+          ["7", "TIA ROSA", "ALUMINIO-ARRUGADO-100 ","2021-04-2","ALUMINIO ARRUGADO","100","$5050.00"],
+          ["8", "MOLINOS JORGE", "EMPAQUE-AWITADO-1500 ","2020-12-26","EMPAQUE AWITADO","1500","$70950.00"],
         ],
         id:[],
         header: 'row',
@@ -52,19 +63,23 @@ export default {
     onSelect (isChecked, index, data) {
       console.log('onSelect: ', isChecked, index, data)
       console.log('Checked Data:', this.$refs.table.getCheckedRowDatas(true))
-
-
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
       this.params.id=checkedIndexs
     },
     loadOrders(){
-        alert('Actualizando tablas con ERP')
+      alert('Actualizando tablas con base de datos')
+    },
+    navProcessedOrders() {
+      this.$router.push({name: 'ProcessedOrders'})
+    },
+    navOrdersInProcess() {
+      this.$router.push({name: 'OrdersInProcess'})
     },
 
   },
-  components: { VueTableDynamic,ProcessedOrdersDetails }
+  components: { VueTableDynamic,OrderStatusDetails }
 }
 </script>
 
@@ -129,10 +144,5 @@ button{
 
 button:hover{
   background-color: rgba(14,44,164,0.30) ;
-}
-
-#header1{
-  margin: 2%;
-  font-size: 30px;
 }
 </style>

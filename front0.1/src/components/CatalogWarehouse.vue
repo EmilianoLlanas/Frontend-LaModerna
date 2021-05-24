@@ -53,6 +53,7 @@ export default {
     return {
       wareCom:'',
       wareUbi:'',
+      errors:[],
       params: {
         data: [
           ['Compañia', 'Ubicacion'],
@@ -60,12 +61,13 @@ export default {
           ['Barcel', '244 sur'],
           ['Totis', '930 este'],
         ],
+        deleteData:[],
         header: 'row',
         border: true,
         stripe: true,
         showCheck: true,
         enableSearch: true,
-        sort: [0, 1],
+        sort: [0,1],
         pagination: true,
         pageSize: 10,
       }
@@ -78,21 +80,49 @@ export default {
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
+      this.params.deleteData=checkedIndexs
     },
-    signUpWarehouse(){
-        //there will be a method here to establish connection with backend and sign up the warehouses' company and location, some day....
+    checkForm(){
+      this.errors=[];
+      if(this.wareCom && this.wareUbi){
+        this.signUpWare();
+      }
+      else{
+        alert('Por favor, llene todos los campos para registrar el almacen');
+        if(!this.wareCom)
+        {
+          this.errors.push('Introduce nombre de la Compañia');
+        }
+        if(!this.wareUbi)
+        {
+          this.errors.push('Introudce ubicacion del Almacen');
+        }
+      }
+    },
+    signUpWare(){
+        if(this.wareCom==''||this.wareUbi=='')
+        {
+          alert('Por favor, llene todos los campos para registrar el almacen')
+        }
+        else
+        {
+          this.params.data.push([this.wareCom, this.wareUbi]);
+        }
         this.wareCom='';
         this.wareUbi='';
     },
-    signDownWarehouse(){
-        //there will be a method here to establish connection with backend and sign down the warehouses' company and location, some day....
+    signDownWare(){
         this.wareCom='';
         this.wareUbi='';
+        console.log(this.params.deleteData.length)
+        for (var i = this.params.deleteData.length-1; i>0 ; i--) {
+        this.params.data.splice(this.params.deleteData[i], 1)
+      }
     },
-    loadWarehouse(){
-        //there will be a method here to establish connection with backend and update the table, some day....
+    loadWare(){
         this.wareCom='';
         this.wareUbi='';
+        alert("Actualizando informacion...");
     }
   },
   components: { VueTableDynamic }

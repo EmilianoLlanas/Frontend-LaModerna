@@ -75,24 +75,29 @@
       
     </div>
   </div>
+  </div>
 </template>
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic'
+import Datepicker from 'vuejs-datepicker'
+import moment from 'moment'
+
 export default {
   name: 'CatalogPrices',
   data() {
     return {
       aCompania:'',
-      aLista:'',
+      aLista:0,
       aArticulo:'',
-      aNivDescuento:'',
-      aCantidad:'',
-      aPrecio:'',
-      aDescuento:'',
+      aNivDescuento:0,
+      aCantidad:0,
+      aPrecio:0,
+      aDescuento:0,
       aDescripcion:'',
       aFechaInicio:'',
       aFechaCaducidad:'',
+      errors:[],
       params: {
         data: [
           ['Compañia','Lista de precios','Articulo','Nivel de Descuento','Cantidad','Precio','Descuento','Descripción','Fecha de inicio','Fecha de caducidad'],
@@ -100,6 +105,7 @@ export default {
           ['ejemplo1','lista0','123','0','111','13.3','2','Descripcion 1','12/11/20','12/11/21'],
           ['ejemplo2','lista1','124','2','123','32.3','1','Descripcion 2','12/12/20','12/12/21'],
         ],
+        deleteData:[],
         header: 'row',
         border: true,
         stripe: true,
@@ -118,8 +124,10 @@ export default {
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
+      this.params.deleteData=checkedIndexs
     },
     signUpPrice(){
+        this.errors=[]
         //there will be a method here to establish connection with backend and sign up the articles' id and name, some day....
         if(this.aCompania && this.aLista && this.aArticulo && this.aNivDescuento && this.aCantidad && this.aPrecio && this.aDescuento && this.aDescripcion && this.aFechaInicio && this.aFechaCaducidad){
           this.params.data.push([this.aCompania, this.aLista, this.aArticulo, this.aNivDescuento, this.aCantidad, this.aPrecio, this.aDescuento, this.aDescripcion, this.aFechaInicio, this.aFechaCaducidad])
@@ -178,9 +186,46 @@ export default {
         this.aDescripcion='';
         this.aFechaInicio='';
         this.aFechaCaducidad='';
+        for (var i = this.params.deleteData.length-1; i>0 ; i--) {
+          this.params.data.splice(this.params.deleteData[i], 1)
+        }
     },
     loadPrices(){
         //there will be a method here to establish connection with backend and update the table, some day....
+        if(this.aCompania && this.aLista && this.aArticulo && this.aNivDescuento && this.aCantidad && this.aPrecio && this.aDescuento && this.aDescripcion && this.aFechaInicio && this.aFechaCaducidad){
+          alert('aqui va la logica de update')
+        }else{
+          if(!this.aCompania){
+            this.errors.push('campo compañía esta vacio')
+          }
+          if(!this.aLista){
+            this.errors.push('campo lista esta vacio')
+          }
+          if(!this.aArticulo){
+            this.errors.push('campo articulo esta vacio')
+          }
+          if(!this.aNivDescuento){
+            this.errors.push('campo nivel de Descuento esta vacio')
+          }
+          if(!this.aCantidad){
+            this.errors.push('campo cantidad esta vacio')
+          }
+          if(!this.aPrecio){
+            this.errors.push('campo precio esta vacio')
+          }
+          if(!this.aDescuento){
+            this.errors.push('campo descuento esta vacio')
+          }
+          if(!this.aDescripcion){
+            this.errors.push('campo descripcion esta vacio')
+          }
+          if(!this.aFechaInicio){
+            this.errors.push('campo fecha de inicio esta vacio')
+          }
+          if(!this.aFechaCaducidad){
+            this.errors.push('campo fecha de caducidad esta vacio')
+          }
+        }
         this.aCompania='';
         this.aLista='';
         this.aArticulo='';
@@ -191,12 +236,16 @@ export default {
         this.aDescripcion='';
         this.aFechaInicio='';
         this.aFechaCaducidad='';
+        alert('Actualizando tabla con Base de datos')
     },
     generateReport(){
       //aqui se mandara a llamar la pagina de reportes
-    }
+    },
+    customFormatter(date) {
+     return moment(date).format('YYYY/MM/DD');
+   }
   },
-  components: { VueTableDynamic }
+  components: { VueTableDynamic,Datepicker }
 }
 </script>
 

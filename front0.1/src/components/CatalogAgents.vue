@@ -1,4 +1,3 @@
-
 <template>
 
   <div id="content">
@@ -65,6 +64,7 @@ export default {
       agId:'',
       rep:'',
       agEst:'',
+      errors:[],
       params: {
         data: [
           ['Compañia', 'idAgente', 'Representante','Estatus'],
@@ -72,12 +72,13 @@ export default {
           ['Barcel', '626', 'Sara', 'Activo'],
           ['Totis', '250', 'Selena', 'Inactivo'],
         ],
+        deleteData:[],
         header: 'row',
         border: true,
         stripe: true,
         showCheck: true,
         enableSearch: true,
-        sort: [0, 1,2,3],
+        sort: [0,1,2,3],
         pagination: true,
         pageSize: 10,
       }
@@ -90,27 +91,63 @@ export default {
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
+      this.params.deleteData=checkedIndexs
+    },
+    checkForm(){
+      this.errors=[];
+      if(this.agCom && this.agId && this.rep && this.agEst){
+        this.signUpAgent();
+      }
+      else{
+        alert('Por favor, llene todos los campos para registrar al agente');
+        if(!this.agCom)
+        {
+          this.errors.push('Introduce el nombre de la Compañia');
+        }
+        if(!this.agId)
+        {
+          this.errors.push('Introduce un id de Agente');
+        }
+        if(!this.rep)
+        {
+          this.errors.push('Introduce un representante del Agente');
+        }
+        if(!this.agEst)
+        {
+          this.errors.push('Introduce estatus del agente');
+        }
+      }
     },
     signUpAgent(){
-        //there will be a method here to establish connection with backend and sign up the agents' id and name, some day....
+        if(this.agCom==''||this.agId==''||this.rep==''||this.agEst=='')
+        {
+          alert('Por favor, llene todos los campos para registrar al agente')
+        }
+        else
+        {
+          this.params.data.push([this.agCom, this.agId, this.rep, this.agEst]);
+        }
         this.agCom='';
         this.agId='';
         this.rep='';
         this.agEst='';
     },
     signDownAgent(){
-        //there will be a method here to establish connection with backend and sign down the agents' id and name, some day....
-        this.agCom='';
-        this.agId='';
-        this.rep='';
-        this.agEst='';
+      this.agCom='';
+      this.agId='';
+      this.rep='';
+      this.agEst='';
+      console.log(this.params.deleteData.length)
+      for (var i = this.params.deleteData.length-1; i>0 ; i--) {
+      this.params.data.splice(this.params.deleteData[i], 1)
+      }
     },
     loadAgent(){
-        //there will be a method here to establish connection with backend and update the table, some day....
         this.agCom='';
         this.agId='';
         this.rep='';
         this.agEst='';
+        alert("Actualizando informacion...");
     }
   },
   components: { VueTableDynamic }
@@ -160,7 +197,6 @@ export default {
   font-family: Verdana;
   font-size: 20px;
 }
-
 button{
   margin-top: 0%;
   margin-left: 3%;
@@ -176,11 +212,9 @@ button{
   border: transparent;
   margin-bottom: 40px;
 }
-
 button:hover{
   background-color: rgba(14,44,164,0.30);
 }
-
 #header1{
   margin: 2%;
   font-family: Verdana;
@@ -188,7 +222,6 @@ button:hover{
   color: #3B0EA4;
   text-align: center;
 }
-
 #table{
   width: 80%;
   margin-left: 10%;

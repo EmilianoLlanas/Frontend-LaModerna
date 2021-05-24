@@ -60,15 +60,19 @@
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic'
+import Datepicker from 'vuejs-datepicker'
+import moment from 'moment'
+
 export default {
   name: 'CatalogFacturas',
   data() {
     return {
       facDate:'',
       facId:'',
-      facDate:'',
+      facCli:'',
       facOrd:'',
       facEst:'',
+      errors:[],
       params: {
         data: [
           ['Fecha', 'NumeroFactura', 'Cliente','Orden','Entrega'],
@@ -76,6 +80,7 @@ export default {
           ['31/12/20', '4486', 'Barcel', '9021', 'ok'],
           ['10/01/21', '6548', 'Totis', '2312', 'ok'],
         ],
+        deleteData:[],
         header: 'row',
         border: true,
         stripe: true,
@@ -94,33 +99,76 @@ export default {
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
+      this.params.deleteData=checkedIndexs
+    },
+    checkForm(){
+      this.errors=[];
+      if(this.facDate && this.facId && this.facCli && this.facOrd && this.facEst){
+        this.signUpFactura();
+      }
+      else{
+        alert('Por favor, llene todos los campos para registrar la Factura');
+        if(!this.facDate)
+        {
+          this.errors.push('Introduce una fecha');
+        }
+        if(!this.facId)
+        {
+          this.errors.push('Introduce un numero de factura');
+        }
+        if(!this.facCli)
+        {
+          this.errors.push('Introduce un nombre de cliente');
+        }
+        if(!this.facOrd)
+        {
+          this.errors.push('Introduce un numero de orden');
+        }
+        if(!this.facEst)
+        {
+          this.errors.push('Introduce un estatus de entrega');
+        }
+      }
     },
     signUpFactura(){
-        //there will be a method here to establish connection with backend and sign up the deliveries' company and ldate, some day....
-        this.facDate='';
-        this.facId='';
-        this.facDate='';
-        this.facOrd='';
-        this.facEst='';
+      if(this.facDate==''||this.facId==''||this.facCli==''||this.facOrd==''||this.facEst=='')
+      {
+        alert('Por favor, llene todos los campos para registrar la Factura')
+      }
+      else
+      {
+        this.params.data.push([this.customFormatter(this.facDate), this.facId, this.facCli,this.facOrd,this.facEst]);
+      }
+      this.facDate='';
+      this.facId='';
+      this.facDate='';
+      this.facOrd='';
+      this.facEst='';
     },
     signDownFactura(){
-        //there will be a method here to establish connection with backend and sign down the deliveries' company and date, some day....
         this.facDate='';
         this.facId='';
         this.facDate='';
         this.facOrd='';
         this.facEst='';
+        console.log(this.params.deleteData.length)
+        for (var i = this.params.deleteData.length-1; i>0 ; i--) {
+        this.params.data.splice(this.params.deleteData[i], 1)
+      }
     },
     loadFactura(){
-        //there will be a method here to establish connection with backend and update the table, some day....
         this.facDate='';
         this.facId='';
         this.facDate='';
         this.facOrd='';
         this.facEst='';
+        alert("Actualizando informacion...");
+    },
+    customFormatter(date) {
+      return moment(date).format('YYYY/MM/DD');
     }
   },
-  components: { VueTableDynamic }
+  components: { VueTableDynamic,Datepicker }
 }
 </script>
 
@@ -195,7 +243,6 @@ button:hover{
   color: #3B0EA4;
   text-align: center;
 }
-
 #table{
   width: 80%;
   margin-left: 10%;
