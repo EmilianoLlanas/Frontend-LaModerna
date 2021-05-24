@@ -1,4 +1,5 @@
 <template>
+
   <div id="content">
 
     <h1 id="header1"> Catálogo de Artículos </h1>
@@ -7,7 +8,8 @@
 
      <div id="cardheader"></div>
 
-     <div class="inputForm">
+      <div class="inputForm">
+
         <form>
           <label>ID</label>
           <br>
@@ -103,7 +105,7 @@ export default {
 </script>
 
 <style scoped>
-.inputForm {
+.inputForm{
   width: 90%;
   clear: both;
   color: #213485;
@@ -113,7 +115,7 @@ export default {
   font-size: 20px;
 }
 
-.inputForm input {
+.inputForm input{
   width: 100%;
   clear: both;
   margin-top: 2%;
@@ -126,9 +128,10 @@ export default {
   border: transparent;
   background: #f2f2f2;
   padding: 10px;
+  color: #213485;
 }
 
-.inputForm textarea {
+.inputForm textarea{
   padding: 10px;
   width: 150%;
   height: 90px;
@@ -206,4 +209,10 @@ label{
   align-items: center;
   justify-content: center;
 }
+
+#error{
+  color: red;
+}
 </style>
+
+
