@@ -32,6 +32,7 @@
                 <a @click="navAuthorizeOrderCST"> <div class="element"> Autorización de ordenes CST </div></a>
                 <a @click="ordenesTodas"> <div class="element"> Todas las Ordenes </div></a>
                 <a @click="sharedItems"> <div class="element"> Catálogo Artículos Compartidos </div></a>
+                <a @click="navSearchOrdersperClient"> <div class="element"> Búsqueda de artículo por cliente (ING)</div></a>
             </div>
 
 
@@ -135,6 +136,9 @@ export default {
     sharedItems() {
       this.source='http://localhost:8080/#/CatalogSharedArticles';
     },
+    navSearchOrdersperClient(){
+      this.source='http://localhost:8080/#/SearchArticlesING';
+    }
   }
 }
 </script>
