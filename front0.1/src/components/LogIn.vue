@@ -47,62 +47,62 @@ export default {
 
   data: function() {
         return {
-            dateS: ""
+            dateS: "",
             source:'',
         }
     },
   methods: {
 
       navCatalogArticles () {
-      this.source='http://localhost:8080/#/CatalogArticles';
+      this.source='http://localhost:8081/#/CatalogArticles';
     },
       navCatalogCompanies () {
-      this.source='http://localhost:8080/#/CatalogCompanies';
+      this.source='http://localhost:8081/#/CatalogCompanies';
     },
     navCatalogPrices () {
-    this.source='http://localhost:8080/#/CatalogPrices';
+    this.source='http://localhost:8081/#/CatalogPrices';
     },
     navCatalogClients() {
-      this.source='http://localhost:8080/#/CatalogClients';
+      this.source='http://localhost:8081/#/CatalogClients';
     },
     navCaptureOrder() {
-      this.source='http://localhost:8080/#/CaptureOrder';
+      this.source='http://localhost:8081/#/CaptureOrder';
     },
     navOrdersInProcess() {
-      this.source='http://localhost:8080/#/OrdersInProcess';
+      this.source='http://localhost:8081/#/OrdersInProcess';
     },
     navCatalogAgents() {
-      this.source='http://localhost:8080/#/CatalogAgents';
+      this.source='http://localhost:8081/#/CatalogAgents';
     },
     navCatalogDelivered() {
-      this.source='http://localhost:8080/#/CatalogDelivered';
+      this.source='http://localhost:8081/#/CatalogDelivered';
     },
     navCatalogFacturas() {
-      this.source='http://localhost:8080/#/CatalogFacturas';
+      this.source='http://localhost:8081/#/CatalogFacturas';
     },
     navCatalogSaldo() {
-      this.source='http://localhost:8080/#/CatalogSaldo';
+      this.source='http://localhost:8081/#/CatalogSaldo';
     },
     navCatalogWarehouse() {
-      this.source='http://localhost:8080/#/CatalogWarehouse';
+      this.source='http://localhost:8081/#/CatalogWarehouse';
     },
     navCatalogDeliveryAddresses() {
-      this.source='http://localhost:8080/#/CatalogDeliveryAddresses';
+      this.source='http://localhost:8081/#/CatalogDeliveryAddresses';
     },
     navCatalogInventory() {
-      this.source='http://localhost:8080/#/CatalogInventory';
+      this.source='http://localhost:8081/#/CatalogInventory';
     },
     navProcessedOrders() {
-      this.source='http://localhost:8080/#/ProcessedOrders';
+      this.source='http://localhost:8081/#/ProcessedOrders';
     },
     navOrderStatus() {
-      this.source='http://localhost:8080/#/OrderStatus';
+      this.source='http://localhost:8081/#/OrderStatus';
     },
     navAuthorizeDates() {
-      this.source='http://localhost:8080/#/AuthorizeDates';
+      this.source='http://localhost:8081/#/AuthorizeDates';
     },
     navRoles() {
-      this.source='http://localhost:8080/#/RoleAssign';
+      this.source='http://localhost:8081/#/RoleAssign';
     },
     navBackup () {
       this.source='http://localhost:8080/#/Backup';
