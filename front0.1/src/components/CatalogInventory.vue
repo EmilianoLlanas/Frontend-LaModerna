@@ -2,7 +2,7 @@
 
   <div id="content">
 
-    <h1 id="header1">Catálogo de Inventarios </h1>
+    <h1 id="header1"> Catálogo de Inventarios </h1>
 
     <div id="card">
 
@@ -38,8 +38,8 @@
       <div id="buttons">
         <button @click="checkForm"> Agregar </button>
         <button @click="signDownInv"> Eliminar </button>
-        <button @click="loadInv">Actualizar </button>
-        <button @click="reportInv">Generar reporte </button>
+        <button @click="loadInv"> Actualizar </button>
+        <button @click="reportInv"> Generar reporte </button>
       </div>
 
       <div id="table" >

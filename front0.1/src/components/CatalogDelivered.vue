@@ -2,7 +2,7 @@
 
   <div id="content">
 
-    <h1 id="header1"> Catálogo de Entregadas </h1>
+    <h1 id="header1"> Catálogo de Entregas </h1>
 
     <div id="card">
 
@@ -35,7 +35,7 @@
       <div id="buttons">
         <button @click="checkForm"> Dar de alta </button>
         <button @click="signDownDeliver"> Dar de baja </button>
-        <button @click="loadDeliver">Actualizar </button>
+        <button @click="loadDeliver"> Actualizar </button>
       </div>
 
       <div id="table">
@@ -191,6 +191,7 @@ export default {
   font-family: Verdana;
   font-size: 20px;
 }
+
 button{
   margin-top: 0%;
   margin-left: 3%;

@@ -43,7 +43,7 @@
       <div id="buttons">
         <button @click="checkForm"> Dar de alta </button>
         <button @click="signDownFactura"> Dar de baja </button>
-        <button @click="loadFactura">Actualizar </button>
+        <button @click="loadFactura"> Actualizar </button>
       </div>
 
       <div id="table">
@@ -243,6 +243,7 @@ button:hover{
   color: #3B0EA4;
   text-align: center;
 }
+
 #table{
   width: 80%;
   margin-left: 10%;

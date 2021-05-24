@@ -2,7 +2,7 @@
 
   <div id="content">
     
-    <h1 id="header1">Catálogo de Direcciones de entrega </h1>
+    <h1 id="header1"> Catálogo de Direcciones de Entrega </h1>
 
     <div id="card">
 
@@ -35,11 +35,11 @@
           <br>
           <label>Código postal</label>
           <br>
-          <input v-model="addressPostCode" placeholder="CódigoPostal">
+          <input v-model="addressPostCode" placeholder="Código Postal">
           <br>
           <label>Código de ruta</label>
           <br>
-          <input v-model="addressRouteCode" placeholder="CódigoRuta">
+          <input v-model="addressRouteCode" placeholder="Código Ruta">
           <br>
           <label>País</label>
           <br>
@@ -55,7 +55,7 @@
       <div id="buttons">
         <button @click="checkForm"> Dar de alta </button>
         <button @click="signDownAddress"> Dar de baja </button>
-        <button @click="loadAddress">Actualizar </button>
+        <button @click="loadAddress"> Actualizar </button>
       </div>
 
       <div id="table">

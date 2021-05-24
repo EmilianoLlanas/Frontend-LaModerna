@@ -205,11 +205,6 @@ button:hover{
   text-align: center;
 }
 
-#header1{
-  margin: 2%;
-  font-size: 30px;
-}
-
 #table{
   width: 80%;
   margin-left: 10%;

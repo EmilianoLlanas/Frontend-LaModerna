@@ -2,7 +2,7 @@
 
   <div id="content">
 
-    <h1 id="header1"> Órdenes de venta en proceso </h1>
+    <h1 id="header1"> Órdenes de Venta en Proceso </h1>
 
     <div id="card">
 
@@ -21,7 +21,7 @@
       </div>
       
       <div id="buttons">
-        <button @click="loadOrders">Actualizar</button>
+        <button @click="loadOrders"> Actualizar </button>
       </div>
 
     </div>
@@ -148,10 +148,5 @@ label{
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-#header1{
-  margin: 2%;
-  font-size: 30px;
 }
 </style>

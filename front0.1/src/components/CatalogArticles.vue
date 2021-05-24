@@ -6,9 +6,15 @@
 
     <div id="card">
 
-     <div id="cardheader"></div>
+      <div id="cardheader"></div>
 
       <div class="inputForm">
+
+        <div id="error">
+          <ul>
+            <li v-for="error in errors" v-bind:key="error">{{error}}</li>
+          </ul>
+        </div>
 
         <form>
           <label>ID</label>

@@ -266,9 +266,4 @@ label{
 #error{
   color: red;
 }
-
-#header1{
-  margin: 2%;
-  font-size: 30px;
-}
 </style>

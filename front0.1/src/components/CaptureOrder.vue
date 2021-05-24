@@ -2,7 +2,7 @@
 
   <div id="content">
 
-    <h1 id="header1"> Captura de ordenes </h1>
+    <h1 id="header1"> Captura de Órdenes </h1>
 
     <div id="card">
 

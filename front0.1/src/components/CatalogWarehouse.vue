@@ -30,7 +30,7 @@
       <div id="buttons">
         <button @click="checkForm"> Dar de alta </button>
         <button @click="signDownWare"> Dar de baja </button>
-        <button @click="loadWare">Actualizar </button>
+        <button @click="loadWare"> Actualizar </button>
       </div>
 
       <div id="table">
