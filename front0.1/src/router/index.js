@@ -32,6 +32,7 @@ import BlockClient from '@/components/BlockClient'
 import AuthorizeOrderCST from '@/components/AuthorizeOrderCST'
 import AuthorizeVTA from '@/components/AuthorizeVTA'
 import Backup from '@/components/Backup'
+import SearchArticlesperClient from '@/components/SearchArticlesperClient'
 
 Vue.use(Router)
 
@@ -206,6 +207,11 @@ export default new Router({
       path: '/Backup',
       name: 'Backup',
       component: Backup
+    },
+    {
+      path: '/SearchArticlesING',
+      name: 'SearchArticlesperClient',
+      component: SearchArticlesperClient
     }
   ]
 })
