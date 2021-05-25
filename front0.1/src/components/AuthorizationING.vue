@@ -42,8 +42,49 @@
         <br>
       </div>
 
-    </div>
+    </div>  
+  <div>
+    
+<table id="firstTable">
+  <thead>
+    <tr>
+      <th>ORDEN</th>
+      <th>ORDEN BAAN</th>
+      <th>PRODUCTO</th>
+      <th> Fecha de entrega </th>
+      <th> Fecha definida </th>
+      <th> Stock </th>
+      <th> Unidades </th>
+      <th>SUAJE </th>
+      <th>GRABADO </th>
+      <th>Autorización ING </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr v-for="row in rows" v-bind:key="row">
+      <td>{{row.order}}</td>
+      <td>{{row.orderBaan}}</td>
+      <td>{{row.product}}</td>
+      <td>{{row.dateRequired}}</td>
+      <td>{{row.datePlaned}}</td>
+      <td>{{row.stock}}</td>
+      <td>{{row.units}}</td>
+      <td><input type="checkbox" id="checkboxSuaje" v-model= row.suaje></td>
+      <td><input type="checkbox" id="checkboxGrabado" v-model= row.grabado></td>
+      <td><input type="checkbox" :disabled="autorization ? false : true" id="checkboxAuthorization" v-model= row.autorization></td>
+    </tr>
+  </tbody>
+</table>
+
+
   </div>
+
+  <br>
+
+  </div>
+
+
+  
 </template>
 
 <script>
@@ -53,20 +94,17 @@ export default {
   name: 'AuthorizationING',
   data() {
     return {
+      rows: [
+      {order:'1', orderBaan:'135', client:'0303', suaje:true, grabado:false,  name:'BIMBO', product:'PAPELITO-SUAVE-500',dateOrdered:'2021-03-21', dateRequired:'2021-04-21', datePlaned:'2021-04-22', stock:'4056', units:'1000', autorization:false },          
+      {order:'2', orderBaan:'435', client:'0403', suaje:false, grabado:true,  name:'BARCEL', product:'CAJITA-400',dateOrdered:'2021-06-21', dateRequired:'2021-08-21', datePlaned:'2021-08-20', stock:'2050', units:'3000', autorization:false }          
+    ],
+      
     soCliente:'',
     soNoOrden:'',
     soBaan:'',
       params: {
         data: [
-          ['Orden','Orden Baan','Cliente', 'Nombre', 'Producto', 'Fecha de orden', 'Fecha de entrega','Fecha definida', 'Stock', 'Unidades'],
-          ["1","135","BIMBO",'PAPELITO-SUAVE-500','2021-03-21','2021-04-21','2021-04-22','PAPELITO SUAVE', '3000','5000'],
-          ["2","256","BARCEL",'PAPELITO-DURO-800','2021-02-1','2021-05-21','2021-05-22','PAPELITO DURO','500', '5000'],
-          ["3","389","TIA ROSA",'ALUMINIO-ARRUGADO-100','2021-04-2','2021-04-21','2021-04-22','ALUMINIO ARRUGADO', '4000', '5000'],
-          ["4","412","MOLINOS JORGE",'EMPAQUE-AWITADO-1500','2020-12-26','2021-04-21','2021-04-22','EMPAQUE AWITADO', '3010', '5000'],
-          ["5","545","BIMBO",'PAPELITO-SUAVE-500','2021-03-21','2021-04-21','2021-04-22','PAPELITO SUAVE', '3000', '8000'],
-          ["6","678","BARCEL",'PAPELITO-DURO-800','2021-02-1','2021-04-21','2021-04-22','PAPELITO DURO','3000', '9000'],
-          ["7","723","TIA ROSA",'ALUMINIO-ARRUGADO-100','2021-04-2','2021-04-21','2021-04-22','ALUMINIO ARRUGADO','3400', '5000'],
-          ["8","856","MOLINOS JORGE",'EMPAQUE-AWITADO-1500','2020-12-26','2021-04-21','2021-04-22','EMPAQUE AWITADO', '3010', '5000']
+          
         ],
         id:[],
         header: 'row',
@@ -77,6 +115,7 @@ export default {
         sort: [0, 1,2],
         pagination: true,
         pageSize: 10,
+        
       }
     }
   },
@@ -96,7 +135,15 @@ export default {
       this.soBaan=''
     }
   },
-  components: { VueTableDynamic, SalesOrderStatusDetails }
+  components: { VueTableDynamic, SalesOrderStatusDetails },
+  computed: {
+    "columns": function columns() {
+      if (this.rows.length == 0) {
+        return [];
+      }
+      return Object.keys(this.rows[0])
+    }
+    },
 }
 </script>
 

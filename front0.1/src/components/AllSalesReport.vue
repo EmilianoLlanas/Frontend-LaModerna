@@ -1,66 +1,65 @@
 <template>
+    <div id="test">
+    <h1> Reporte de ordenes de venta </h1>
+    <form>
+      <div id="error">
+        <ul>
+          <li v-for="error in errors" v-bind:key="error">{{error}}</li>
+        </ul>
+     </div>
+      <label>Fecha de Orden</label>
+      <br>
+      <label>Desde:</label>
+      <datepicker v-model="fromDate" placeholder="Fecha":format="customFormatter"></datepicker>
+      <label>Hasta:</label>
+      <datepicker v-model="toDate" placeholder="Fecha":format="customFormatter"></datepicker>
+      <br>
+      <br>
+      <label>Folio Baan</label>
+      <br>
+      <label>Desde:</label>
+      <input v-model="fromBaan" placeholder="Folio">
+      <label>Hasta:</label>
+      <input v-model="toBaan" placeholder="Folio">
+      <br>
+      <br>
+      <label>Cliente</label>
+      <br>
+      <label>Desde:</label>
+      <input v-model="fromClient" placeholder="No Cliente">
+      <label>Hasta:</label>
+      <input v-model="toClient" placeholder="No Cliente">
+      <br>
+      <br>
+      <label>Artículo</label>
+      <br>
+      <label>Desde:</label>
+      <input v-model="fromItem" placeholder="No Articulo">
+      <label>Hasta:</label>
+      <input v-model="toItem" placeholder="No Articulo">
+      <br>
+      <br>
 
-  <div id="content">
 
-    <h1 id="header1"> Reporte de ordenes de venta </h1>
+  </form>
 
-    <div id="card">
 
-      <div id="cardheader"></div>
 
-      <div class="inputForm">
-        <form>
-          <label>Fecha de Orden</label>
-          <br>
-          <label>Desde:</label>
-          <datepicker v-model="fromDate" placeholder="Fecha":format="customFormatter"></datepicker>
-          <br>
-          <label>Hasta:</label>
-          <datepicker v-model="toDate" placeholder="Fecha":format="customFormatter"></datepicker>
-          <br>
-          <br>
-          <label>Folio Baan</label>
-          <br>
-          <label>Desde:</label>
-          <input v-model="fromBaan" placeholder="Folio">
-          <label>Hasta:</label>
-          <input v-model="toBaan" placeholder="Folio">
-          <br>
-          <br>
-          <label>Cliente</label>
-          <br>
-          <label>Desde:</label>
-          <input v-model="fromClient" placeholder="No Cliente">
-          <label>Hasta:</label>
-          <input v-model="toClient" placeholder="No Cliente">
-          <br>
-          <br>
-          <label>Artículo</label>
-          <br>
-          <label>Desde:</label>
-          <input v-model="fromItem" placeholder="No Articulo">
-          <label>Hasta:</label>
-          <input v-model="toItem" placeholder="No Articulo">
-          <br>
-          <br>
-        </form>
 
-        <div id="buttons">
-          <button @click="findOrders">Crear reporte</button>
-        </div>
 
-        <div id="table" >
-          <vue-table-dynamic :params="params"
-            @select="onSelect"
-            @selection-change="onSelectionChange"
-            ref="table">
-          </vue-table-dynamic>
+   <button @click="findOrders">Crear reporte</button>
 
-          <AllSalesReportDetails :id="params.id"></AllSalesReportDetails>
 
-          </br>
-          
-        </div>
+
+   <div id="table" >
+
+  <vue-table-dynamic :params="params"
+      @select="onSelect"
+      @selection-change="onSelectionChange"
+      ref="table"></vue-table-dynamic>
+        <AllSalesReportDetails :id="params.id"></AllSalesReportDetails>
+  </div>
+
 
       </div>
     </div>
@@ -89,6 +88,7 @@ export default {
       toClient:'',
       fromItem:'',
       toItem:'',
+      errors:[],
 
       params: {
 
@@ -127,7 +127,17 @@ export default {
         //there will be a method here to establish connection with backend and sign up the articles' id and name, some day....
     },
     findOrders(){
-      alert('Buscando Ordenes')
+      this.errors=[];
+      if((this.fromDate && this.toDate) || (this.fromBaan && this.toBaan) || (this.fromClient&& this.toClient) || (this.fromItem&& this.toItem))
+      {
+        alert('Buscando Ordenes')
+      }
+      else
+      {
+        alert("Por favor, llene al menos un campo");
+
+      }
+
     },
     customFormatter(date) {
       return moment(date).format('YYYY/MM/DD');
