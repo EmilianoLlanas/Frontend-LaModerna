@@ -22,8 +22,9 @@
                 <a @click="navProcessedOrders"> <div class="element"> Consulta de Órdenes Procesadas  </div></a>
                 <a @click="navOrderStatus"> <div class="element"> Consulta de Estatus de Órdenes  </div></a>
                 <a @click="navAuthorizeDates"> <div class="element">Autorizacion de fechas de entrega  </div></a>
-                <a @click="navMenuAge"> <div class="element"> Menu principal de AGE  </div></a>
+                <a @click="navRoles"> <div class="element"> Asignacion de roles </div></a>
                 <a @click="navBackup"> <div class="element"> Generar respaldo </div></a>
+                <a @click="navMenuAge"> <div class="element"> Menu principal de AGE  </div></a>
                 <a @click="navConsultSalesOrder"> <div class="element"> Consultar órdenes de venta </div></a>
                 <a @click="navAuthorizationING"> <div class="element"> Autorización de ING </div></a>
                 <a @click="navAuthorizeVTA"> <div class="element"> Autorizacion de VTA </div></a>
@@ -56,85 +57,87 @@ export default {
   methods: {
 
       navCatalogArticles () {
-      this.source='http://localhost:8080/#/CatalogArticles';
+      this.source='http://localhost:8081/#/CatalogArticles';
     },
       navCatalogCompanies () {
-      this.source='http://localhost:8080/#/CatalogCompanies';
+      this.source='http://localhost:8081/#/CatalogCompanies';
     },
-    navCatalogPrices () {
-    this.source='http://localhost:8080/#/CatalogPrices';
+      navCatalogPrices () {
+    this.source='http://localhost:8081/#/CatalogPrices';
     },
-    navCatalogClients() {
-      this.source='http://localhost:8080/#/CatalogClients';
+      navCatalogClients() {
+      this.source='http://localhost:8081/#/CatalogClients';
     },
-    navCaptureOrder() {
-      this.source='http://localhost:8080/#/CaptureOrder';
+      navCaptureOrder() {
+      this.source='http://localhost:8081/#/CaptureOrder';
     },
-    navOrdersInProcess() {
-      this.source='http://localhost:8080/#/OrdersInProcess';
+      navOrdersInProcess() {
+      this.source='http://localhost:8081/#/OrdersInProcess';
     },
-    navCatalogAgents() {
-      this.source='http://localhost:8080/#/CatalogAgents';
+      navCatalogAgents() {
+      this.source='http://localhost:8081/#/CatalogAgents';
     },
-    navCatalogDelivered() {
-      this.source='http://localhost:8080/#/CatalogDelivered';
+      navCatalogDelivered() {
+      this.source='http://localhost:8081/#/CatalogDelivered';
     },
-    navCatalogFacturas() {
-      this.source='http://localhost:8080/#/CatalogFacturas';
+      navCatalogFacturas() {
+      this.source='http://localhost:8081/#/CatalogFacturas';
     },
-    navCatalogSaldo() {
-      this.source='http://localhost:8080/#/CatalogSaldo';
+      navCatalogSaldo() {
+      this.source='http://localhost:8081/#/CatalogSaldo';
     },
-    navCatalogWarehouse() {
-      this.source='http://localhost:8080/#/CatalogWarehouse';
+      navCatalogWarehouse() {
+      this.source='http://localhost:8081/#/CatalogWarehouse';
     },
-    navCatalogDeliveryAddresses() {
-      this.source='http://localhost:8080/#/CatalogDeliveryAddresses';
+      navCatalogDeliveryAddresses() {
+      this.source='http://localhost:8081/#/CatalogDeliveryAddresses';
     },
-    navCatalogInventory() {
-      this.source='http://localhost:8080/#/CatalogInventory';
+      navCatalogInventory() {
+      this.source='http://localhost:8081/#/CatalogInventory';
     },
-    navProcessedOrders() {
-      this.source='http://localhost:8080/#/ProcessedOrders';
+      navProcessedOrders() {
+      this.source='http://localhost:8081/#/ProcessedOrders';
     },
-    navOrderStatus() {
-      this.source='http://localhost:8080/#/OrderStatus';
+      navOrderStatus() {
+      this.source='http://localhost:8081/#/OrderStatus';
     },
-    navAuthorizeDates() {
-      this.source='http://localhost:8080/#/AuthorizeDates';
+      navAuthorizeDates() {
+      this.source='http://localhost:8081/#/AuthorizeDates';
     },
-    navRoles() {
-      this.source='http://localhost:8080/#/RoleAssign';
+      navRoles() {
+      this.source='http://localhost:8081/#/RoleAssign';
     },
-    navBackup () {
-      this.source='http://localhost:8080/#/Backup';
+      navBackup () {
+      this.source='http://localhost:8081/#/Backup';
     },
       navMenuAge() {
-      this.source='http://localhost:8080/#/MenuAGE';
+      this.source='http://localhost:8081/#/MenuAGE';
     },
+
     navConsultSalesOrder() {
       this.source='http://localhost:8080/#/ConsultSalesOrders';
+
     },
-    navAuthorizationING() {
-      this.source='http://localhost:8080/#/AuthorizationING';
+      navAuthorizationING() {
+      this.source='http://localhost:8081/#/AuthorizationING';
     },
     navAuthorizeVTA() {
-      this.source='http://localhost:8080/#/AuthorizeVTA';
+      this.source='http://localhost:8081/#/AuthorizeVTA';
     },
     navAuthorizeOrderCxC() {
-      this.source='http://localhost:8080/#/AuthorizeOrderCxC';
+      this.source='http://localhost:8081/#/AuthorizeOrderCxC';
     },
     navBlock() {
-      this.source='http://localhost:8080/#/BlockClient';
+      this.source='http://localhost:8081/#/BlockClient';
     },
     navAuthorizeOrderCST() {
-      this.source='http://localhost:8080/#/AuthorizeOrderCST';
+      this.source='http://localhost:8081/#/AuthorizeOrderCST';
     },
     ordenesTodas() {
-      this.source='http://localhost:8080/#/AllSalesReport';
+      this.source='http://localhost:8081/#/AllSalesReport';
     },
     sharedItems() {
-      this.source='http://localhost:8080/#/CatalogSharedArticles';
+      this.source='http://localhost:8081/#/CatalogSharedArticles';
     },
     navSearchOrdersperClient(){
       this.source='http://localhost:8080/#/SearchArticlesING';
