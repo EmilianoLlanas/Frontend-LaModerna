@@ -17,7 +17,6 @@
 
           <input v-model="aUser" placeholder="Usuario del Empleado a modificar">
 
-          
           <br>
           <div class="checkboxes">
             <input type="checkbox" id="Cl1" name="ADM" value="ADM">
@@ -132,6 +131,12 @@ export default {
 </script>
 
 <style scoped>
+.checkboxes{
+  color: purple;
+  font-size: 15px;
+  display: flex;
+}
+
 .inputForm{
   width: 90%;
   clear: both;

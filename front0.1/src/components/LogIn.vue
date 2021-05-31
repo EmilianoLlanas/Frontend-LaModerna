@@ -34,6 +34,7 @@
                 <a @click="ordenesTodas"> <div class="element"> Todas las Ordenes </div></a>
                 <a @click="sharedItems"> <div class="element"> Catálogo Artículos Compartidos </div></a>
                 <a @click="navSearchOrdersperClient"> <div class="element"> Búsqueda de artículo por cliente (ING)</div></a>
+                <a @click="navTimeReport"> <div class="element"> Reporte de Tiempo </div></a>
             </div>
 
 
@@ -141,6 +142,9 @@ export default {
     },
     navSearchOrdersperClient(){
       this.source='http://localhost:8080/#/SearchArticlesING';
+    },
+    navTimeReport(){
+      this.source='http://localhost:8080/#/TimeReport';
     }
   }
 }
