@@ -2,6 +2,11 @@
     <div id="test">
     <h1 id="header1"> Autorización de ingeniería </h1>
     <div class="inputForm">
+      <div id="error">
+        <ul>
+          <li v-for="error in errors" v-bind:key="error">{{error}}</li>
+        </ul>
+      </div>
     <form>
       <label>Orden Baan</label>
       <br>
@@ -13,7 +18,7 @@
       <br>
       <label>Cliente</label>
       <br>
-      <input v-model="soCliente" placeholder="Cliente">
+      <input v-model="soClient" placeholder="Cliente">
       <br>
    </form>
    <br>
@@ -21,37 +26,29 @@
   <button @click="search"> Buscar </button>
   </div>
    <div>
-  <vue-table-dynamic :params="params"
-      @select="onSelect"
-      @selection-change="onSelectionChange"
-      ref="table"></vue-table-dynamic>
-      <SalesOrderStatusDetails :id="params.id"></SalesOrderStatusDetails>
-  </div>
+    </div>
   
   <div>
     
-
-
-
-
-
 <table id="firstTable">
   <thead>
     <tr>
-      <th>ORDEN</th>
-      <th>ORDEN BAAN</th>
-      <th>PRODUCTO</th>
+      <th> </th>
+      <th>Orden</th>
+      <th>Orden Baan</th>
+      <th>Producto</th>
       <th> Fecha de entrega </th>
       <th> Fecha definida </th>
       <th> Stock </th>
       <th> Unidades </th>
-      <th>SUAJE </th>
-      <th>GRABADO </th>
+      <th>Suaje</th>
+      <th>Grabado</th>
       <th>Autorización ING </th>
     </tr>
   </thead>
   <tbody>
     <tr v-for="row in rows" v-bind:key="row">
+      <td><input type="checkbox" id="checkboxDie" v-model= row.isSelected></td>
       <td>{{row.order}}</td>
       <td>{{row.orderBaan}}</td>
       <td>{{row.product}}</td>
@@ -59,9 +56,9 @@
       <td>{{row.datePlaned}}</td>
       <td>{{row.stock}}</td>
       <td>{{row.units}}</td>
-      <td><input type="checkbox" id="checkboxSuaje" v-model= row.suaje></td>
-      <td><input type="checkbox" id="checkboxGrabado" v-model= row.grabado></td>
-      <td><input type="checkbox" :disabled="autorization ? false : true" id="checkboxAuthorization" v-model= row.autorization></td>
+      <td><input type="checkbox" id="checkboxDie" v-model= row.die></td>
+      <td><input type="checkbox" id="checkboxEngraving" v-model= row.engraving></td>
+      <td><input type="checkbox" :disabled="row.die && row.engraving ? false : true" id="checkboxAuthorization" v-model= row.authorization></td>
     </tr>
   </tbody>
 </table>
@@ -71,44 +68,31 @@
 
 
   </div>
-
+  <button @click="search"> Guardar </button>
   <br>
+        <OrderStatusING :order="rows.order"></OrderStatusING>
   </div>
 
-
+    
   
 </template>
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic';
-import SalesOrderStatusDetails from '@/components/SalesOrderStatusDetails.vue';
+import OrderStatusING from '@/components/OrderStatusING.vue';
 export default {
   name: 'AuthorizationING',
   data() {
     return {
       rows: [
-      {order:'1', orderBaan:'135', client:'0303', suaje:true, grabado:false,  name:'BIMBO', product:'PAPELITO-SUAVE-500',dateOrdered:'2021-03-21', dateRequired:'2021-04-21', datePlaned:'2021-04-22', stock:'4056', units:'1000', autorization:false },          
-      {order:'2', orderBaan:'435', client:'0403', suaje:false, grabado:true,  name:'BARCEL', product:'CAJITA-400',dateOrdered:'2021-06-21', dateRequired:'2021-08-21', datePlaned:'2021-08-20', stock:'2050', units:'3000', autorization:false }          
+      {isSelected: false, order:'1', orderBaan:'135', client:'0303', die:true, engraving:false,  name:'BIMBO', product:'PAPELITO-SUAVE-500',dateOrdered:'2021-03-21', dateRequired:'2021-04-21', datePlaned:'2021-04-22', stock:'4056', units:'1000', authorization:false },          
+      {isSelected: false, order:'2', orderBaan:'435', client:'0403', die:false, engraving:true,  name:'BARCEL', product:'CAJITA-400',dateOrdered:'2021-06-21', dateRequired:'2021-08-21', datePlaned:'2021-08-20', stock:'2050', units:'3000', authorization:false }          
     ],
       
-    soCliente:'',
+    soClient:'',
     soNoOrden:'',
     soBaan:'',
-      params: {
-        data: [
-          
-        ],
-        id:[],
-        header: 'row',
-        border: true,
-        stripe: true,
-        showCheck: true,
-        enableSearch: true,
-        sort: [0, 1,2],
-        pagination: true,
-        pageSize: 10,
-        
-      }
+    errors:[]
     }
   },
   methods: {
@@ -118,16 +102,25 @@ export default {
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
-      this.params.id=checkedIndexs
+      this.rows.id=checkedIndexs
     },
     search(){
-      //aqui habra una conexion a backend para guardar la orden
-      this.soCliente='',
-      this.soNoOrden='',
-      this.soBaan=''
+      this.errors=[];
+      if(this.soClient||this.soNoOrden||this.soBaan)
+      {
+        alert('Buscando '+this.soClient+' '+this.soNoOrden+' '+this.soBaan);
+      }
+      else
+      {
+        this.errors.push('Introduce un criterio de busqueda');
+      }
+    },
+    saveAll(){
+      
+      alert('Guardando');
     }
   },
-  components: { VueTableDynamic, SalesOrderStatusDetails },
+  components: { VueTableDynamic, OrderStatusING },
   computed: {
     "columns": function columns() {
       if (this.rows.length == 0) {
