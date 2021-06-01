@@ -42,44 +42,46 @@
         <br>
       </div>
 
+      <div id="stuff">
+        <table id="firstTable">
+          <thead>
+            <tr>
+              <th>ORDEN</th>
+              <th>ORDEN BAAN</th>
+              <th>PRODUCTO</th>
+              <th> Fecha de entrega </th>
+              <th> Fecha definida </th>
+              <th> Stock </th>
+              <th> Unidades </th>
+              <th>SUAJE </th>
+              <th>GRABADO </th>
+              <th>Autorización ING </th>
+            </tr>
+          </thead>
+              
+          <tbody>
+            <tr v-for="row in rows" v-bind:key="row">
+              <td>{{row.order}}</td>
+              <td>{{row.orderBaan}}</td>
+              <td>{{row.product}}</td>
+              <td>{{row.dateRequired}}</td>
+              <td>{{row.datePlaned}}</td>
+              <td>{{row.stock}}</td>
+              <td>{{row.units}}</td>
+              <td><input type="checkbox" id="checkboxSuaje" v-model= row.suaje></td>
+              <td><input type="checkbox" id="checkboxGrabado" v-model= row.grabado></td>
+              <td><input type="checkbox" :disabled="autorization ? false : true" id="checkboxAuthorization" v-model= row.autorization></td>
+            </tr>
+            
+          </tbody>
+
+        </table>
+
+        <br><br>
+        
+      </div>
+
     </div>  
-  <div>
-    
-<table id="firstTable">
-  <thead>
-    <tr>
-      <th>ORDEN</th>
-      <th>ORDEN BAAN</th>
-      <th>PRODUCTO</th>
-      <th> Fecha de entrega </th>
-      <th> Fecha definida </th>
-      <th> Stock </th>
-      <th> Unidades </th>
-      <th>SUAJE </th>
-      <th>GRABADO </th>
-      <th>Autorización ING </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr v-for="row in rows" v-bind:key="row">
-      <td>{{row.order}}</td>
-      <td>{{row.orderBaan}}</td>
-      <td>{{row.product}}</td>
-      <td>{{row.dateRequired}}</td>
-      <td>{{row.datePlaned}}</td>
-      <td>{{row.stock}}</td>
-      <td>{{row.units}}</td>
-      <td><input type="checkbox" id="checkboxSuaje" v-model= row.suaje></td>
-      <td><input type="checkbox" id="checkboxGrabado" v-model= row.grabado></td>
-      <td><input type="checkbox" :disabled="autorization ? false : true" id="checkboxAuthorization" v-model= row.autorization></td>
-    </tr>
-  </tbody>
-</table>
-
-
-  </div>
-
-  <br>
 
   </div>
 
@@ -255,5 +257,10 @@ label{
 
 #error{
   color: red;
+}
+
+#stuff{
+  color: blue;
+  margin: 5em;
 }
 </style>

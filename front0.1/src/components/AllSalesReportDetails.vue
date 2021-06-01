@@ -21,16 +21,19 @@
           <li v-if="i!==0"> Articulo: {{ordenes[i].articulo}} </li>
           <li v-if="i!==0"> Unidad: {{ordenes[i].unidad}} </li>
           <li v-if="i!==0"> Notas:{{ordenes[i].notas}}</li>
-            <ul>
-              <li v-if="i!==0"> Facturación: <b>{{ordenes[i].facturacion}}</b> </li>
-              <li v-if="i!==0"> Cuentas por Cobrar: <b>{{ordenes[i].cxc}}</b> </li>
-              <li v-if="i!==0"> Precios: <b>{{ordenes[i].preciosAut}}</b> </li>
-              <li v-if="i!==0"> Ingeniería: <b>{{ordenes[i].ingenieria}}</b> </li>
-              <li v-if="i!==0"> VB: <b>{{ordenes[i].bv}}</b></li>
-              <li v-if="i!==0"> Baan: <b>{{ordenes[i].baan}}</b></li>
-              <li v-if="i!==0"> BervC: <b>{{ordenes[i].bervc}}</b></li>
-              <li v-if="i!==0"> Rep: <b>{{ordenes[i].rep}}</b></li>
-            </ul>
+
+          <br>
+
+          <ul>
+          <li v-if="i!==0"> Facturación: <b>{{ordenes[i].facturacion}}</b> </li>
+          <li v-if="i!==0"> Cuentas por Cobrar: <b>{{ordenes[i].cxc}}</b> </li>
+          <li v-if="i!==0"> Precios: <b>{{ordenes[i].preciosAut}}</b> </li>
+          <li v-if="i!==0"> Ingeniería: <b>{{ordenes[i].ingenieria}}</b> </li>
+          <li v-if="i!==0"> VB: <b>{{ordenes[i].bv}}</b></li>
+          <li v-if="i!==0"> Baan: <b>{{ordenes[i].baan}}</b></li>
+          <li v-if="i!==0"> BervC: <b>{{ordenes[i].bervc}}</b></li>
+          <li v-if="i!==0"> Rep: <b>{{ordenes[i].rep}}</b></li>
+          </ul>
           <li v-if="i===0"> DETALLES </li>
         </ul>
 
