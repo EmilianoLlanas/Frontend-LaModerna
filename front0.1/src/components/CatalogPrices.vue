@@ -55,6 +55,8 @@
           <label>Fecha de caducidad</label>
           <br>
           <datepicker placeholder="Fecha de entrega" v-model="aFechaCaducidad" :format="customFormatter"></datepicker>
+          <br>
+          <br>
         </form>
       </div>
 
@@ -71,6 +73,7 @@
             @selection-change="onSelectionChange"
             ref="table">
         </vue-table-dynamic>
+        <br>
       </div>
       
     </div>

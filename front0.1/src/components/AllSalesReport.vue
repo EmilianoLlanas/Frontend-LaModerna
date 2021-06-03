@@ -1,69 +1,92 @@
 <template>
-    <div id="test">
-    <h1> Reporte de ordenes de venta </h1>
-    <form>
-      <div id="error">
-        <ul>
-          <li v-for="error in errors" v-bind:key="error">{{error}}</li>
-        </ul>
-     </div>
-      <label>Fecha de Orden</label>
-      <br>
-      <label>Desde:</label>
-      <datepicker v-model="fromDate" placeholder="Fecha":format="customFormatter"></datepicker>
-      <label>Hasta:</label>
-      <datepicker v-model="toDate" placeholder="Fecha":format="customFormatter"></datepicker>
-      <br>
-      <br>
-      <label>Folio Baan</label>
-      <br>
-      <label>Desde:</label>
-      <input v-model="fromBaan" placeholder="Folio">
-      <label>Hasta:</label>
-      <input v-model="toBaan" placeholder="Folio">
-      <br>
-      <br>
-      <label>Cliente</label>
-      <br>
-      <label>Desde:</label>
-      <input v-model="fromClient" placeholder="No Cliente">
-      <label>Hasta:</label>
-      <input v-model="toClient" placeholder="No Cliente">
-      <br>
-      <br>
-      <label>Artículo</label>
-      <br>
-      <label>Desde:</label>
-      <input v-model="fromItem" placeholder="No Articulo">
-      <label>Hasta:</label>
-      <input v-model="toItem" placeholder="No Articulo">
-      <br>
-      <br>
 
+  <div id="content">
 
-  </form>
+    <h1 id="header1"> Reporte de Ordenes de Venta </h1>
 
+    <div id="card">
 
+      <div id="cardheader"></div>
 
+      <div class="inputForm">
 
+        <form>
+          <div id="error">
+            <ul>
+              <li v-for="error in errors" v-bind:key="error">{{error}}</li>
+            </ul>
+          </div>
 
-   <button @click="findOrders">Crear reporte</button>
+          <div style="color: #3B0EA4;">
+          <label>- - - Fecha de Orden - - - </label>
+          </div>
 
+          <br>
+          <label>Desde:</label>
+          <datepicker v-model="fromDate" placeholder="Fecha":format="customFormatter"></datepicker>
+          <br>
+          <label>Hasta:</label>
+          <datepicker v-model="toDate" placeholder="Fecha":format="customFormatter"></datepicker>
+          <br>
+          <br>
 
+          <div style="color: #3B0EA4;">
+          <label>- - - Folio Baan - - -</label>
+          </div>
+          
+          <br>
+          <label>Desde:</label>
+          <input v-model="fromBaan" placeholder="Folio">
+          <label>Hasta:</label>
+          <input v-model="toBaan" placeholder="Folio">
+          <br>
+          <br>
 
-   <div id="table" >
+          <div style="color: #3B0EA4;">
+          <label>- - - Cliente - - -</label>
+          </div>
 
-  <vue-table-dynamic :params="params"
-      @select="onSelect"
-      @selection-change="onSelectionChange"
-      ref="table"></vue-table-dynamic>
-        <AllSalesReportDetails :id="params.id"></AllSalesReportDetails>
-  </div>
+          <br>
+          <label>Desde:</label>
+          <input v-model="fromClient" placeholder="No Cliente">
+          <label>Hasta:</label>
+          <input v-model="toClient" placeholder="No Cliente">
+          <br>
+          <br>
 
+          <div style="color: #3B0EA4;">
+          <label>- - - Artículo - - -</label>
+          </div>
 
+          <br>
+          <label>Desde:</label>
+          <input v-model="fromItem" placeholder="No Articulo">
+          <label>Hasta:</label>
+          <input v-model="toItem" placeholder="No Articulo">
+          <br>
+        </form>
+
+        <div id="buttons">
+          <button @click="findOrders">Crear reporte</button>
+        </div>
+
+        <div id="table" >
+
+          <vue-table-dynamic :params="params"
+              @select="onSelect"
+              @selection-change="onSelectionChange"
+              ref="table">
+          </vue-table-dynamic>
+
+          <AllSalesReportDetails :id="params.id"></AllSalesReportDetails>
+          <br>
+
+        </div>
+        
       </div>
     </div>
   </div>
+
 </template>
 
 <script>
@@ -253,9 +276,5 @@ label{
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-#error{
-  color: red;
 }
 </style>

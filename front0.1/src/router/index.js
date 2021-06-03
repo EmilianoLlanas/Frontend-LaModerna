@@ -33,6 +33,7 @@ import AuthorizeOrderCST from '@/components/AuthorizeOrderCST'
 import AuthorizeVTA from '@/components/AuthorizeVTA'
 import Backup from '@/components/Backup'
 import SearchArticlesperClient from '@/components/SearchArticlesperClient'
+import TimeReport from '@/components/TimeReport'
 
 Vue.use(Router)
 
@@ -212,6 +213,11 @@ export default new Router({
       path: '/SearchArticlesING',
       name: 'SearchArticlesperClient',
       component: SearchArticlesperClient
+    },
+    {
+      path: '/TimeReport',
+      name: 'TimeReport',
+      component: TimeReport
     }
   ]
 })

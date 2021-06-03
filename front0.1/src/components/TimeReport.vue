@@ -2,13 +2,11 @@
 
   <div id="content">
 
-    <h1 id="header1"> Consulta de órdenes de venta</h1>
+    <h1 id="header1"> Reporte de Tiempo por Departamento </h1>
 
     <div id="card">
 
       <div id="cardheader"></div>
-
-      <div class="inputForm">
 
         <div id="table">
           <vue-table-dynamic :params="params"
@@ -16,50 +14,38 @@
             @selection-change="onSelectionChange"
             ref="table">
           </vue-table-dynamic>
-
-          <SalesOrderStatusDetails :id="params.id"></SalesOrderStatusDetails>
-          <br>
-          
         </div>
 
-      </div>
-      
-    </div>
+        <br>
 
-    <br>
+      </div>
+    </div>
 
   </div>
 </template>
 
 <script>
-import VueTableDynamic from 'vue-table-dynamic';
-import SalesOrderStatusDetails from '@/components/SalesOrderStatusDetails.vue';
+import VueTableDynamic from 'vue-table-dynamic'
 export default {
-  name: 'ConsultSalesOrders',
+  name: 'SearchArticlesperClient',
   data() {
     return {
-    soCliente:'',
-    soNoOrden:'',
-    soBaan:'',
+      searchClient:'',
       params: {
         data: [
-          ['Orden','Orden Baan','Cliente', 'Nombre', 'Fecha de orden', 'Fecha de entrega','Fecha definida'],
-          ["1","135","BIMBO",'PAPELITO-SUAVE-500','2021-03-21','2021-04-21','2021-04-22'],
-          ["2","256","BARCEL",'PAPELITO-DURO-800','2021-02-1','2021-05-21','2021-05-22'],
-          ["3","389","TIA ROSA",'ALUMINIO-ARRUGADO-100','2021-04-2','2021-04-21','2021-04-22'],
-          ["4","412","MOLINOS JORGE",'EMPAQUE-AWITADO-1500','2020-12-26','2021-04-21','2021-04-22'],
-          ["5","545","BIMBO",'PAPELITO-SUAVE-500','2021-03-21','2021-04-21','2021-04-22'],
-          ["6","678","BARCEL",'PAPELITO-DURO-800','2021-02-1','2021-04-21','2021-04-22'],
-          ["7","723","TIA ROSA",'ALUMINIO-ARRUGADO-100','2021-04-2','2021-04-21','2021-04-22'],
-          ["8","856","MOLINOS JORGE",'EMPAQUE-AWITADO-1500','2020-12-26','2021-04-21','2021-04-22']
+          ['ID','Area','Fecha Alta','Tiempo Autorizado','Tiempo Total'],
+          ["1", "CxC", "2021-03-21 (07:20)","2021-03-21 (10:20)","3:00"],
+          ["2", "VTA", "2021-03-21 (07:20)","2021-03-21 (10:20)","3:00"],
+          ["3", "ING", "2021-03-21 (07:20)","2021-03-21 (10:20)","3:00"],
+          ["4", "PLN", "2021-03-21 (07:20)","2021-03-21 (10:20)","3:00"],
         ],
-        id:[],
+        deleteDate:[],
         header: 'row',
         border: true,
         stripe: true,
         showCheck: true,
         enableSearch: true,
-        sort: [0, 1,2],
+        sort: [0,1],
         pagination: true,
         pageSize: 10,
       }
@@ -72,15 +58,63 @@ export default {
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
-      this.params.id=checkedIndexs
+      this.params.deleteDate=checkedIndexs
+    },
+    signUpWare(){
+        if(this.wareCom==''||this.wareUbi=='')
+        {
+          alert('Por favor, llene todos los campos para registrar el almacen')
+        }
+        else
+        {
+          this.params.data.push([this.wareCom, this.wareUbi]);
+        }
+    },
+    signDownWare(){
+        this.wareCom='';
+        this.wareUbi='';
+        console.log(this.params.deleteData.length)
+        for (var i = this.params.deleteData.length-1; i>0 ; i--) {
+        this.params.data.splice(this.params.deleteData[i], 1)
+      }
+    },
+    loadWare(){
+        this.wareCom='';
+        this.wareUbi='';
+        alert("Actualizando informacion...");
     }
-    
   },
-  components: { VueTableDynamic, SalesOrderStatusDetails }
+  components: { VueTableDynamic }
 }
 </script>
 
 <style scoped>
+.inputForm{
+  width: 90%;
+  clear: both;
+  color: #213485;
+  margin: 3%;
+  font-size: 20px;
+  font-family: Verdana;
+  font-size: 20px;
+}
+
+.inputForm input{
+  width: 100%;
+  clear: both;
+  margin-top: 2%;
+  margin-bottom: 5%;
+  height: 50px;
+  font-size: 20px;
+  font-family: "GOTY0", "GOTY1", "GOTY2", verdana;
+  opacity: 50%;
+  border-radius: 6px;
+  border: transparent;
+  background: #f2f2f2;
+  padding: 10px;
+  color: #213485;
+}
+
 button{
   margin-top: 0%;
   margin-left: 3%;
