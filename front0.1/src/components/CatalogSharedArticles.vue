@@ -18,6 +18,7 @@
           @selection-change="onSelectionChange"
           ref="table">
         </vue-table-dynamic>
+        <br>
       </div>
 
     </div>

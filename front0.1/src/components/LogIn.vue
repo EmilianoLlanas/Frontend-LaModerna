@@ -141,6 +141,7 @@ export default {
       this.source='http://localhost:8080/#/SharedArticles';
     },
     CatalogSharedItems() {
+
       this.source='http://localhost:8080/#/CatalogSharedArticles';
     },
     navSearchOrdersperClient(){
