@@ -1,124 +1,127 @@
 <template>
-
-  <div id="content">
-
-    <h1 id="header1"> Autorización de Ingeniería </h1>
-
-    <div id="card">
-
-      <div id="cardheader"></div>
-
-      <div class="inputForm">
-
-        <form>
-          <label>Orden Baan</label>
-          <br>
-          <input v-model="soBaan" placeholder="Orden Baan">
-          <br>
-          <label>No. de orden</label>
-          <br>
-          <input v-model="soNoOrden" placeholder="No de orden">
-          <br>
-          <label>Cliente</label>
-          <br>
-          <input v-model="soCliente" placeholder="Cliente">
-          <br>
-        </form>
-        
+    <div id="test">
+    <h1 id="header1"> Autorización de ingeniería </h1>
+    <div class="inputForm">
+      <div id="error">
+        <ul>
+          <li v-for="error in errors" v-bind:key="error">{{error}}</li>
+        </ul>
       </div>
+    <form>
+      <label>Filtrar</label>
+      <br>
+      <input v-model="filter" placeholder="Orden Baan, No de orden o Cliente ">
+      <br>
+   </form>
+   <br>
+   
+  </div>
+   <div>
+    </div>
+  
+  <div>
+    <div id="table">
+  <table id="firstTable">
+    <thead>
+      <tr>
+        <th>Orden</th>
+        <th>Orden Baan</th>
+        <th>Cliente</th>
+        <th>Suaje</th>
+        <th>Grabado</th>
+        <th>Autorización ING </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="(row, index) in filteredRows" :key="`row-${index}`">
+        <td>{{row.order}}</td>
+        <td>{{row.orderBaan}}</td>
+        <td>{{row.client}}</td>
+        <td><input type="checkbox" id="checkboxDie" v-model= row.die ></td>
+        <td><input type="checkbox" id="checkboxEngraving" v-model= row.engraving></td>
+        <td><input type="checkbox" :disabled="row.die && row.engraving ? false : true" id="checkboxAuthorization" v-model= row.authorization></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
-      <div id="buttons">
+  </div>
+  <button @click="saveAll"> Guardar </button>
+  <br>
+      <div id="details">
+        <h2>Detalles</h2>
+          <table id="detailsTable">
+    <thead>
+      <tr>
+        <th>Orden</th>
+        <th>Orden Baan</th>
+        <th>Producto</th>
+        <th> Fecha de entrega </th>
+        <th> Fecha definida </th>
+        <th> Stock </th>
+        <th> Unidades </th>
+        <th>Suaje</th>
+        <th>Grabado</th>
+        <th>Autorización ING </th>
+        <th>Observaciones </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="(row, index) in filteredRows" :key="`row-${index}`">
+        <td>{{row.order}}</td>
+        <td>{{row.orderBaan}}</td>
+        <td>{{row.product}}</td>
+        <td>{{row.dateRequired}}</td>
+        <td>{{row.datePlaned}}</td>
+        <td>{{row.stock}}</td>
+        <td>{{row.units}}</td>
+        <td><input type="checkbox" id="checkboxDie" v-model= row.die></td>
+        <td><input type="checkbox" id="checkboxEngraving" v-model= row.engraving></td>
+        <td><input type="checkbox" :disabled="row.die && row.engraving ? false : true" id="checkboxAuthorization" v-model= row.authorization></td>
+        <td>{{row.notes}} <button @click="writeNote(index, row.notes)">+</button></td>
+      </tr>
+    </tbody>
+  </table>
+      </div>
+      
+      <div id="notes" hidden>
+        <label>Observaciones  </label>
         <br>
-        <button @click="search"> Buscar </button>
-      </div>
-
-      <div id="table">
-        <vue-table-dynamic :params="params"
-          @select="onSelect"
-          @selection-change="onSelectionChange"
-          ref="table">
-        </vue-table-dynamic>
-        <SalesOrderStatusDetails :id="params.id"></SalesOrderStatusDetails>
+        <label>Orden Baan: </label> <input type="text" placeholder="orden baan"/>
         <br>
+        <label>Tipo</label>
+        <select name="rate" >
+                    <option value="die">Suaje</option>
+                    <option value="engraving">Grabado</option>
+                    </select> 
+        <br>
+        <textarea v-model="notes" placeholder="Observaciones"></textarea>
+        <br>
+        <button @click="addNote">Agregar</button>
       </div>
-
-      <div id="stuff">
-        <table id="firstTable">
-          <thead>
-            <tr>
-              <th>ORDEN</th>
-              <th>ORDEN BAAN</th>
-              <th>PRODUCTO</th>
-              <th> Fecha de entrega </th>
-              <th> Fecha definida </th>
-              <th> Stock </th>
-              <th> Unidades </th>
-              <th>SUAJE </th>
-              <th>GRABADO </th>
-              <th>Autorización ING </th>
-            </tr>
-          </thead>
-              
-          <tbody>
-            <tr v-for="row in rows" v-bind:key="row">
-              <td>{{row.order}}</td>
-              <td>{{row.orderBaan}}</td>
-              <td>{{row.product}}</td>
-              <td>{{row.dateRequired}}</td>
-              <td>{{row.datePlaned}}</td>
-              <td>{{row.stock}}</td>
-              <td>{{row.units}}</td>
-              <td><input type="checkbox" id="checkboxSuaje" v-model= row.suaje></td>
-              <td><input type="checkbox" id="checkboxGrabado" v-model= row.grabado></td>
-              <td><input type="checkbox" :disabled="autorization ? false : true" id="checkboxAuthorization" v-model= row.autorization></td>
-            </tr>
-            
-          </tbody>
-
-        </table>
-
-        <br><br>
-        
-      </div>
-
-    </div>  
 
   </div>
 
-
+  
+    
   
 </template>
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic';
-import SalesOrderStatusDetails from '@/components/SalesOrderStatusDetails.vue';
+
 export default {
   name: 'AuthorizationING',
   data() {
     return {
       rows: [
-      {order:'1', orderBaan:'135', client:'0303', suaje:true, grabado:false,  name:'BIMBO', product:'PAPELITO-SUAVE-500',dateOrdered:'2021-03-21', dateRequired:'2021-04-21', datePlaned:'2021-04-22', stock:'4056', units:'1000', autorization:false },          
-      {order:'2', orderBaan:'435', client:'0403', suaje:false, grabado:true,  name:'BARCEL', product:'CAJITA-400',dateOrdered:'2021-06-21', dateRequired:'2021-08-21', datePlaned:'2021-08-20', stock:'2050', units:'3000', autorization:false }          
+      {isSelected: false, order:'1', orderBaan:'135', client:'0303', die:true, engraving:false,  name:'BIMBO', product:'PAPELITO-SUAVE-500',dateOrdered:'2021-03-21', dateRequired:'2021-04-21', datePlaned:'2021-04-22', stock:'4056', units:'1000', authorization:false, notes:'' },          
+      {isSelected: false, order:'2', orderBaan:'435', client:'0403', die:false, engraving:true,  name:'BARCEL', product:'CAJITA-400',dateOrdered:'2021-06-21', dateRequired:'2021-08-21', datePlaned:'2021-08-20', stock:'2050', units:'3000', authorization:false, notes:'Respetar fecha de entrega' }          
     ],
-      
-    soCliente:'',
-    soNoOrden:'',
-    soBaan:'',
-      params: {
-        data: [
-          
-        ],
-        id:[],
-        header: 'row',
-        border: true,
-        stripe: true,
-        showCheck: true,
-        enableSearch: true,
-        sort: [0, 1,2],
-        pagination: true,
-        pageSize: 10,
-        
-      }
+    filter:'',
+    errors:[],
+    notes:'',
+    rowIndex:null
     }
   },
   methods: {
@@ -128,24 +131,45 @@ export default {
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
-      this.params.id=checkedIndexs
+      this.rows.order=checkedIndexs
     },
-    search(){
-      //aqui habra una conexion a backend para guardar la orden
-      this.soCliente='',
-      this.soNoOrden='',
-      this.soBaan=''
+    saveAll(){
+      this.errors.push('Guardando en suaje '+this.rows[0].die+'  '+this.rows[1].die);
+      this.errors.push('Guardando en grabado '+this.rows[0].engraving+'  '+this.rows[1].engraving);
+      this.errors.push('Guardando en autorizacion '+this.rows[0].authorization+'  '+this.rows[1].authorization);
+    },
+    addNote(){
+      //alert('Guardando: '+this.notes+' en '+this.rowIndex);
+      this.rows[this.rowIndex].notes=this.notes;
+      //alert('Saved '+this.rows[this.rowIndex].notes);
+      document.getElementById("notes").hidden=true;
+    },
+    writeNote(index, notesIndex){
+      document.getElementById("notes").removeAttribute("hidden");
+      //alert('Llamado desde '+rowIndex);
+      this.rowIndex=index;
+      this.notes=notesIndex;
     }
   },
-  components: { VueTableDynamic, SalesOrderStatusDetails },
+  components: { VueTableDynamic },
   computed: {
+    filteredRows(){
+    return this.rows.filter(row => {
+      const orders = row.order.toString();
+      const client = row.name.toLowerCase();
+      const baan = row.orderBaan.toString();
+      const searchTerm = this.filter.toLowerCase();
+
+      return orders.includes(searchTerm) || client.includes(searchTerm)|| baan.includes(searchTerm);
+    });
+  },
     "columns": function columns() {
       if (this.rows.length == 0) {
         return [];
       }
       return Object.keys(this.rows[0])
     }
-    },
+    }
 }
 </script>
 
@@ -222,7 +246,7 @@ button:hover{
 }
 
 #table{
-  width: 80%;
+  width: 95%;
   margin-left: 10%;
   margin-top: 2%;
 }
