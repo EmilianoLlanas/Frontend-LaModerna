@@ -28,7 +28,6 @@
       </div>
 
       <div id="buttons">
-        <br>
         <button @click="loadOrders"> Actualizar </button>
       </div>
 
@@ -39,8 +38,6 @@
 <script>
 import VueTableDynamic from 'vue-table-dynamic';
 import OrderStatusDetails from '@/components/OrderStatusDetails.vue';
-
-
 
 export default {
   name: 'OrderStatus',
@@ -136,7 +133,7 @@ button:hover{
 #table{
   width: 80%;
   margin-left: 10%;
-  margin-top: 0%;
+  margin-top: 2%;
 }
 
 label{

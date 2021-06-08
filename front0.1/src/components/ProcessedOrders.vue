@@ -9,7 +9,6 @@
       <div id="cardheader"></div>
 
       <div id="table">
-
         <vue-table-dynamic :params="params"
           @select="onSelect"
           @selection-change="onSelectionChange"
