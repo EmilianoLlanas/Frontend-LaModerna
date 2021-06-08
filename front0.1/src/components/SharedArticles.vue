@@ -40,8 +40,6 @@
 
       </div>
 
-      <br>
-
       <div id="buttons">
         <button @click="sendItem"> Agregar Artículo </button>
         <button @click="deleteData"> Eliminar Artículos</button>
@@ -55,6 +53,7 @@
           @selection-change="onSelectionChange"
           ref="table">
         </vue-table-dynamic>
+        <br>
       </div>
     </div>
   </div>
