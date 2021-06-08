@@ -27,6 +27,7 @@
             <li v-if="i!==0"> Precios: <b>{{ordenes[i].preciosAut}}</b> </li>
             <li v-if="i!==0"> Ingeniería: <b>{{ordenes[i].ingenieria}}</b> </li>
             <li v-if="i!==0"> Planeación: <b>{{ordenes[i].planeacion}}</b></li>
+            <br>
         </ul>
 
         <li v-if="i===0"> DETALLES </li>
