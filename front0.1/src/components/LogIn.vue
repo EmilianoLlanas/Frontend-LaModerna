@@ -58,7 +58,7 @@ export default {
   methods: {
 
       navCatalogArticles () {
-      this.source='http://localhost:80800/#/CatalogArticles';
+      this.source='http://localhost:8080/#/CatalogArticles';
     },
       navCatalogCompanies () {
       this.source='http://localhost:8080/#/CatalogCompanies';
