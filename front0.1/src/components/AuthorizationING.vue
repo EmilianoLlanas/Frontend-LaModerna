@@ -1,34 +1,92 @@
 <template>
-    <div id="test">
-    <h1 id="header1"> Autorización de ingeniería </h1>
-    <div class="inputForm">
-    <form>
-      <label>Orden Baan</label>
-      <br>
-      <input v-model="soBaan" placeholder="Orden Baan">
-      <br>
-      <label>No. de orden</label>
-      <br>
-      <input v-model="soNoOrden" placeholder="No de orden">
-      <br>
-      <label>Cliente</label>
-      <br>
-      <input v-model="soCliente" placeholder="Cliente">
-      <br>
-   </form>
-   <br>
-  <button @click="search"> Buscar </button>
+
+  <div id="content">
+
+    <h1 id="header1"> Autorización de Ingeniería </h1>
+
+    <div id="card">
+
+      <div id="cardheader"></div>
+
+      <div class="inputForm">
+
+        <form>
+          <label>Orden Baan</label>
+          <br>
+          <input v-model="soBaan" placeholder="Orden Baan">
+          <br>
+          <label>No. de orden</label>
+          <br>
+          <input v-model="soNoOrden" placeholder="No de orden">
+          <br>
+          <label>Cliente</label>
+          <br>
+          <input v-model="soCliente" placeholder="Cliente">
+          <br>
+        </form>
+        
+      </div>
+
+      <div id="buttons">
+        <br>
+        <button @click="search"> Buscar </button>
+      </div>
+
+      <div id="table">
+        <vue-table-dynamic :params="params"
+          @select="onSelect"
+          @selection-change="onSelectionChange"
+          ref="table">
+        </vue-table-dynamic>
+        <SalesOrderStatusDetails :id="params.id"></SalesOrderStatusDetails>
+        <br>
+      </div>
+
+      <div id="stuff">
+        <table id="firstTable">
+          <thead>
+            <tr>
+              <th>ORDEN</th>
+              <th>ORDEN BAAN</th>
+              <th>PRODUCTO</th>
+              <th> Fecha de entrega </th>
+              <th> Fecha definida </th>
+              <th> Stock </th>
+              <th> Unidades </th>
+              <th>SUAJE </th>
+              <th>GRABADO </th>
+              <th>Autorización ING </th>
+            </tr>
+          </thead>
+              
+          <tbody>
+            <tr v-for="row in rows" v-bind:key="row">
+              <td>{{row.order}}</td>
+              <td>{{row.orderBaan}}</td>
+              <td>{{row.product}}</td>
+              <td>{{row.dateRequired}}</td>
+              <td>{{row.datePlaned}}</td>
+              <td>{{row.stock}}</td>
+              <td>{{row.units}}</td>
+              <td><input type="checkbox" id="checkboxSuaje" v-model= row.suaje></td>
+              <td><input type="checkbox" id="checkboxGrabado" v-model= row.grabado></td>
+              <td><input type="checkbox" :disabled="autorization ? false : true" id="checkboxAuthorization" v-model= row.autorization></td>
+            </tr>
+            
+          </tbody>
+
+        </table>
+
+        <br><br>
+        
+      </div>
+
+    </div>  
+
   </div>
-   <div>
-  <vue-table-dynamic :params="params"
-      @select="onSelect"
-      @selection-change="onSelectionChange"
-      ref="table"></vue-table-dynamic>
-      <SalesOrderStatusDetails :id="params.id"></SalesOrderStatusDetails>
-  </div>
+
+
   
-  <br>
-  </div>
 </template>
 
 <script>
@@ -38,20 +96,17 @@ export default {
   name: 'AuthorizationING',
   data() {
     return {
+      rows: [
+      {order:'1', orderBaan:'135', client:'0303', suaje:true, grabado:false,  name:'BIMBO', product:'PAPELITO-SUAVE-500',dateOrdered:'2021-03-21', dateRequired:'2021-04-21', datePlaned:'2021-04-22', stock:'4056', units:'1000', autorization:false },          
+      {order:'2', orderBaan:'435', client:'0403', suaje:false, grabado:true,  name:'BARCEL', product:'CAJITA-400',dateOrdered:'2021-06-21', dateRequired:'2021-08-21', datePlaned:'2021-08-20', stock:'2050', units:'3000', autorization:false }          
+    ],
+      
     soCliente:'',
     soNoOrden:'',
     soBaan:'',
       params: {
         data: [
-          ['Orden','Orden Baan','Cliente', 'Nombre', 'Producto', 'Fecha de orden', 'Fecha de entrega','Fecha definida', 'Stock', 'Unidades'],
-          ["1","135","BIMBO",'PAPELITO-SUAVE-500','2021-03-21','2021-04-21','2021-04-22','PAPELITO SUAVE', '3000','5000'],
-          ["2","256","BARCEL",'PAPELITO-DURO-800','2021-02-1','2021-05-21','2021-05-22','PAPELITO DURO','500', '5000'],
-          ["3","389","TIA ROSA",'ALUMINIO-ARRUGADO-100','2021-04-2','2021-04-21','2021-04-22','ALUMINIO ARRUGADO', '4000', '5000'],
-          ["4","412","MOLINOS JORGE",'EMPAQUE-AWITADO-1500','2020-12-26','2021-04-21','2021-04-22','EMPAQUE AWITADO', '3010', '5000'],
-          ["5","545","BIMBO",'PAPELITO-SUAVE-500','2021-03-21','2021-04-21','2021-04-22','PAPELITO SUAVE', '3000', '8000'],
-          ["6","678","BARCEL",'PAPELITO-DURO-800','2021-02-1','2021-04-21','2021-04-22','PAPELITO DURO','3000', '9000'],
-          ["7","723","TIA ROSA",'ALUMINIO-ARRUGADO-100','2021-04-2','2021-04-21','2021-04-22','ALUMINIO ARRUGADO','3400', '5000'],
-          ["8","856","MOLINOS JORGE",'EMPAQUE-AWITADO-1500','2020-12-26','2021-04-21','2021-04-22','EMPAQUE AWITADO', '3010', '5000']
+          
         ],
         id:[],
         header: 'row',
@@ -62,6 +117,7 @@ export default {
         sort: [0, 1,2],
         pagination: true,
         pageSize: 10,
+        
       }
     }
   },
@@ -81,30 +137,47 @@ export default {
       this.soBaan=''
     }
   },
-  components: { VueTableDynamic, SalesOrderStatusDetails }
+  components: { VueTableDynamic, SalesOrderStatusDetails },
+  computed: {
+    "columns": function columns() {
+      if (this.rows.length == 0) {
+        return [];
+      }
+      return Object.keys(this.rows[0])
+    }
+    },
 }
 </script>
 
 <style scoped>
-.inputForm {
-  width: 400px;
+.inputForm{
+  width: 90%;
   clear: both;
   color: #213485;
   margin: 3%;
+  font-size: 20px;
+  font-family: Verdana;
+  font-size: 20px;
 }
 
-.inputForm  input {
+.inputForm input{
   width: 100%;
   clear: both;
   margin-top: 2%;
   margin-bottom: 5%;
+  height: 50px;
+  font-size: 20px;
   font-family: "GOTY0", "GOTY1", "GOTY2", verdana;
   opacity: 50%;
   border-radius: 6px;
   border: transparent;
+  background: #f2f2f2;
+  padding: 10px;
+  color: #213485;
 }
 
-.inputForm  textarea {
+.inputForm textarea{
+  padding: 10px;
   width: 150%;
   height: 90px;
   color: #213485;
@@ -114,19 +187,10 @@ export default {
   opacity: 50%;
   border-radius: 6px;
   border: transparent;
-}
-
-#test{
-  background-color: rgba(33,52,133,0.20);
-  margin: 1%;
-  color: #3B0EA4;
-  font-family: "GOTY0", "GOTY1", "GOTY2", verdana;
-}
-
-#table{
-  width: 80%;
-  margin-left: 10%;
-  margin-top: 2%;
+  background: #f2f2f2;
+  width: 100%; 
+  font-family: Verdana;
+  font-size: 20px;
 }
 
 button{
@@ -139,18 +203,64 @@ button{
   background-color: transparent;
   padding: 5px;
   font-weight: 700;
-  font-size: 12px;
+  font-size: 24px;
   border-radius: 6px;
   border: transparent;
+  margin-bottom: 40px;
 }
 
 button:hover{
-  background-color: rgba(14,44,164,0.30) ;
+  background-color: rgba(14,44,164,0.30);
 }
 
 #header1{
   margin: 2%;
-  font-size: 30px;
+  font-family: Verdana;
+  font-size: 60px;
+  color: #3B0EA4;
+  text-align: center;
 }
 
+#table{
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 2%;
+}
+
+label{
+  font-family: Verdana;
+  font-weight: bold;
+}
+
+#card{
+  background: #fff;
+  width: 80%;
+  margin: 5em;
+  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.14);
+  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.14);
+  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.14);
+  border-radius: 15px;
+}
+
+#cardheader{
+  height: 20px;
+  width: 100%;
+  background: #3B0EA4;
+}
+
+#buttons{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#error{
+  color: red;
+}
+
+#stuff{
+  color: blue;
+  margin: 5em;
+}
 </style>
