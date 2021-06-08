@@ -7,47 +7,10 @@
     <div id="card">
 
       <div id="cardheader"></div>
-
-      <div class="inputForm">
-
-        <div id="error">
-          <ul>
-            <li v-for="error in errors" v-bind:key="error">{{error}}</li>
-          </ul>
-        </div>
-
-        <form>
-          <label>Compañía Origen</label>
-          <br>
-          <input v-model="aCompOrig" placeholder="Identificador de la compañía">
-          <br>
-          <label>Cliente Origen</label>
-          <br>
-          <input v-model="aClieOrig" placeholder="Nombre del cliente">
-          <br>
-          <label>Artículo</label>
-          <br>
-          <input v-model="aArticulo" placeholder="Identificador del articulo">
-          <br>
-          <label>Compañia Destino</label>
-          <br>
-          <input v-model="aCompDest" placeholder="Identificador de la compañía">
-          <br>
-          <label>Cliente Destino</label>
-          <br>
-          <input v-model="aClieDest" placeholder="Nombre del cliente">
-        </form>
-
-      </div>
-
-      <br>
-
       <div id="buttons">
-        <button @click="sendItem"> Agregar Artículo </button>
-        <button @click="deleteData"> Eliminar Artículos</button>
-        <button @click="sendData"> Enviar Artículos</button>
+        <button @click="signDownArticle"> Dar de baja </button>
+        <button @click="loadArticles"> Actualizar </button>
       </div>
-
 
       <div id="table">
         <vue-table-dynamic :params="params"
@@ -56,51 +19,36 @@
           ref="table">
         </vue-table-dynamic>
       </div>
+
     </div>
   </div>
 </template>
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic'
-import { required,email } from 'vuelidate/lib/validators'
 export default {
   name: 'CatalogSharedArticles',
-  data(){
-    return{
-      aCompOrig:'',
-      aClieOrig:'',
-      aArticulo:'',
-      aCompDest:'',
-      aClieDest:'',
+  data() {
+    return {
+      aId:'',
+      aName:'',
+      aDescription:'',
       errors:[],
-      allArticles:[],
-      empty:true,
       params: {
-      data: [
-        ['Compañía Origen', 'Cliente Origen', 'Artículo', 'Compañía Destino','Cliente Destino'],
-
-      ],
-   deleteData:[],
-   header: 'row',
-   border: true,
-   stripe: true,
-   showCheck: true,
-   enableSearch: true,
-   sort: [0, 1,2],
-   pagination: true,
-   pageSize: 10,
- }
-}
+        data: [
+          ['Compañía Origen', 'Cliente Origen', 'Artículo', 'Compañía Destino','Cliente Destino'],
+        ],
+        deleteData:[],
+        header: 'row',
+        border: true,
+        stripe: true,
+        showCheck: true,
+        enableSearch: true,
+        sort: [0, 1,2],
+        pagination: true,
+        pageSize: 10,
+      }
     }
-  ,
-
-  computed:{
-    sortedList: function() {
-      return this.allArticles.slice().sort(function(a, b) {
-        return b.score - a.score;
-      });
-    },
-
   },
   methods: {
     onSelect (isChecked, index, data) {
@@ -111,82 +59,22 @@ export default {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
       this.params.deleteData=checkedIndexs
     },
-    sendItem(){
-      this.errors=[];
-      if(this.aCompOrig && this.aClieOrig && this.aArticulo && this.aClieDest && this.aCompDest)
-      {
-        this.signupItem();
-      }
-      else
-      {
-        alert("Por favor, llene todos los campos correctamente para agregar un registro");
+    signDownArticle(){
+        //there will be a method here to establish connection with backend and sign down the articles' id and name, some day....
+        this.aId='';
+        this.aName='';
+        this.aDescription='';
 
-        if(!this.aCompOrig)
-       {
-         this.errors.push('Introduce compañia origen');
-       }
-       if(!this.aClieOrig)
-       {
-         this.errors.push('Introduce cliente origen');
-       }
-       if(!this.aArticulo)
-       {
-         this.errors.push('Introduce el articulo');
-       }
-       if(!this.aClieDest)
-       {
-         this.errors.push('Introduce cliente destino');
-       }
-       if(!this.this.aCompDest)
-       {
-         this.errors.push('Introduce cliente destino');
-       }
-
-      }
-  },
-  signupItem(){
-    this.empty=false;
-    console.log(this.params.data.length);
-  this.params.data.push([
-   this.aCompOrig,
-   this.aClieOrig,
-   this.aArticulo,
-   this.aCompDest,
-   this.aClieDest]);
-  this.clearForm();
-
-  },
-    clearForm(){
-      this.aCompOrig='';
-      this.aClieOrig='';
-      this.aArticulo='';
-      this.aCompDest='';
-      this.aClieDest='';
-    },
-    sendData(){
-      if(this.params.data.length>1)
-      {
-
-        console.log('imprime, esto',(this.params.data.length)-1)
-        alert('Se han enviado los datos')
-      }
-      else
-      {
-        console.log('imprime, esto no',this.params.data.length)
-         alert('No hay ningun artículo compartido')
-      }
-
-    },
-    deleteData(){
-      if(this.params.deleteData.length>=1){
-        console.log(this.params.deleteData.length)
         for (var i = this.params.deleteData.length-1; i>0 ; i--) {
           this.params.data.splice(this.params.deleteData[i], 1)
         }
-      }else{
-        alert('No se ha seleccionado nada')
-      }
-
+    },
+    loadArticles(){
+        //there will be a method here to establish connection with backend and update the table, some day....
+        this.aId='';
+        this.aName='';
+        this.aDescription='';
+        alert('Actualizando tabla con Base de datos')
     }
   },
   components: { VueTableDynamic }
@@ -194,26 +82,6 @@ export default {
 </script>
 
 <style scoped>
-th, td {
-  padding: 5px;
-}
-
-tbody td {
-  text-align: center;
-}
-
-tfoot th {
-  text-align: right;
-}
-
-tbody tr:nth-child(odd) {
-  background-color: #fbd7fc;
-}
-
-tbody tr:nth-child(even) {
-  background-color: #e495e4;
-}
-
 .inputForm{
   width: 90%;
   clear: both;
@@ -252,7 +120,7 @@ tbody tr:nth-child(even) {
   border-radius: 6px;
   border: transparent;
   background: #f2f2f2;
-  width: 100%; 
+  width: 100%;
   font-family: Verdana;
   font-size: 20px;
 }
