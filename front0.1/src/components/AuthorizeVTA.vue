@@ -37,10 +37,10 @@ export default {
       select:-1,
       params: {
         data: [
-          ['ID','Cliente','Fecha','Autorizada'],
-          [1, 'Zara', '1/12/2021','NO'],
-          [2, 'WalMart', '1/12/2021','NO'],
-          [3, 'Soriana', '1/12/2021','NO'],
+          ['ID','Cliente','Cantidad','Precio','FechaOC','FechaCliente','Autorizada'],
+          [1, 'Zara', '500', '2500', '1/12/2021', '8/12/2021', 'NO'],
+          [2, 'WalMart', '250', '3000', '1/12/2021', '8/12/2021', 'NO'],
+          [3, 'Soriana', '800', '4200', '1/12/2021', '8/12/2021', 'NO'],
         ],
         deleteData:[],
         header: 'row',
@@ -70,8 +70,8 @@ export default {
       this.params.deleteData=checkedIndexs
     },
     authOrder(){
-       if(this.params.data[this.select][3]=='NO'){
-          this.params.data[this.select][3]='SI'
+       if(this.params.data[this.select][6]=='NO'){
+          this.params.data[this.select][6]='SI'
           this.params.data.push(this.params.data[this.select])
           this.params.data.splice(this.select, 1)
         }

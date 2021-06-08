@@ -32,8 +32,10 @@
                 <a @click="navBlock"> <div class="element"> Bloqueo de Clientes </div></a>
                 <a @click="navAuthorizeOrderCST"> <div class="element"> Autorización de ordenes CST </div></a>
                 <a @click="ordenesTodas"> <div class="element"> Todas las Ordenes </div></a>
-                <a @click="sharedItems"> <div class="element"> Catálogo Artículos Compartidos </div></a>
+                <a @click="sharedItems"> <div class="element"> Artículos Compartidos </div></a>
+                <a @click="CatalogSharedItems"> <div class="element"> Catálogo de Artículos Compartidos </div></a>
                 <a @click="navSearchOrdersperClient"> <div class="element"> Búsqueda de artículo por cliente (ING)</div></a>
+                <a @click="navTimeReport"> <div class="element"> Reporte de Tiempo por Departamento </div></a>
             </div>
 
 
@@ -113,7 +115,6 @@ export default {
       navMenuAge() {
       this.source='http://localhost:8080/#/MenuAGE';
     },
-
     navConsultSalesOrder() {
       this.source='http://localhost:8080/#/ConsultSalesOrders';
 
@@ -137,10 +138,17 @@ export default {
       this.source='http://localhost:8080/#/AllSalesReport';
     },
     sharedItems() {
+      this.source='http://localhost:8080/#/SharedArticles';
+    },
+    CatalogSharedItems() {
+
       this.source='http://localhost:8080/#/CatalogSharedArticles';
     },
     navSearchOrdersperClient(){
       this.source='http://localhost:8080/#/SearchArticlesING';
+    },
+    navTimeReport(){
+      this.source='http://localhost:8080/#/TimeReport';
     }
   }
 }

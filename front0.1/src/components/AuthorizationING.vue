@@ -282,4 +282,9 @@ label{
 #error{
   color: red;
 }
+
+#stuff{
+  color: blue;
+  margin: 5em;
+}
 </style>
