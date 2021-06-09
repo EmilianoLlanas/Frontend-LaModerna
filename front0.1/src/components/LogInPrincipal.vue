@@ -115,6 +115,12 @@ export default
 </script>
 
 <style scoped>
+
+*{
+  padding: 0;
+  margin: 0;
+}
+
 .center{
   display: flex;
   margin-left: 8%;

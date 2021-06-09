@@ -1,110 +1,161 @@
 <template>
-    <div id="test">
-    <h1 id="header1"> Autorización de ingeniería </h1>
-    <div class="inputForm">
-      <div id="error">
-        <ul>
-          <li v-for="error in errors" v-bind:key="error">{{error}}</li>
-        </ul>
-      </div>
-    <form>
-      <label>Filtrar</label>
-      <br>
-      <input v-model="filter" placeholder="Orden Baan, No de orden o Cliente ">
-      <br>
-   </form>
-   <br>
-   
-  </div>
-   <div>
-    </div>
-  
-  <div>
-    <div id="table">
-  <table id="firstTable">
-    <thead>
-      <tr>
-        <th>Orden</th>
-        <th>Orden Baan</th>
-        <th>Cliente</th>
-        <th>Suaje</th>
-        <th>Grabado</th>
-        <th>Autorización ING </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="(row, index) in filteredRows" :key="`row-${index}`">
-        <td>{{row.order}}</td>
-        <td>{{row.orderBaan}}</td>
-        <td>{{row.client}}</td>
-        <td><input type="checkbox" id="checkboxDie" v-model= row.die ></td>
-        <td><input type="checkbox" id="checkboxEngraving" v-model= row.engraving></td>
-        <td><input type="checkbox" :disabled="row.die && row.engraving ? false : true" id="checkboxAuthorization" v-model= row.authorization></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
 
-  </div>
-  <button @click="saveAll"> Guardar </button>
-  <br>
-      <div id="details">
-        <h2>Detalles</h2>
-          <table id="detailsTable">
-    <thead>
-      <tr>
-        <th>Orden</th>
-        <th>Orden Baan</th>
-        <th>Producto</th>
-        <th> Fecha de entrega </th>
-        <th> Fecha definida </th>
-        <th> Stock </th>
-        <th> Unidades </th>
-        <th>Suaje</th>
-        <th>Grabado</th>
-        <th>Autorización ING </th>
-        <th>Observaciones </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="(row, index) in filteredRows" :key="`row-${index}`">
-        <td>{{row.order}}</td>
-        <td>{{row.orderBaan}}</td>
-        <td>{{row.product}}</td>
-        <td>{{row.dateRequired}}</td>
-        <td>{{row.datePlaned}}</td>
-        <td>{{row.stock}}</td>
-        <td>{{row.units}}</td>
-        <td><input type="checkbox" id="checkboxDie" v-model= row.die></td>
-        <td><input type="checkbox" id="checkboxEngraving" v-model= row.engraving></td>
-        <td><input type="checkbox" :disabled="row.die && row.engraving ? false : true" id="checkboxAuthorization" v-model= row.authorization></td>
-        <td>{{row.notes}} <button @click="writeNote(index, row.notes)">+</button></td>
-      </tr>
-    </tbody>
-  </table>
+  <div id="content">
+
+    <h1 id="header1"> Autorización de Ingeniería </h1>
+
+    <div id="card">
+
+      <div id="cardheader"></div>
+
+      <div class="inputForm">
+
+        <div id="error">
+          <ul>
+            <li v-for="error in errors" v-bind:key="error">{{error}}</li>
+          </ul>
+        </div>
+
+        <form>
+          <label >Filtrar</label>
+          <br>
+          <input v-model="filter" placeholder="Orden Baan, No de orden o Cliente ">
+          <br>
+        </form>
+        <br>
+                
       </div>
-      
+
+      <div id="tables">
+        <div id="table">
+          <table id="firstTable">
+            <thead>
+              <tr>
+                <th style="padding: 15px; color: purple">Orden</th>
+                <br>
+                <th style="padding: 15px; color: purple">Orden Baan</th>
+                <br>
+                <th style="padding: 15px; color: purple">Cliente</th>
+                <br>
+                <th style="padding: 15px; color: purple">Suaje</th>
+                <br>
+                <th style="padding: 15px; color: purple">Grabado</th>
+                <br>
+                <th style="padding: 15px; color: purple">Autorización ING </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr v-for="(row, index) in filteredRows" :key="`row-${index}`">
+                <td style="padding: 15px">{{row.order}}</td>
+                <br>
+                <td style="padding: 15px">{{row.orderBaan}}</td>
+                <br>
+                <td style="padding: 15px">{{row.client}}</td>
+                <br>
+                <td style="padding: 15px"><input type="checkbox" id="checkboxDie" v-model= row.die ></td>
+                <br>
+                <td style="padding: 15px"><input type="checkbox" id="checkboxEngraving" v-model= row.engraving></td>
+                <br>
+                <td style="padding: 15px"><input type="checkbox" :disabled="row.die && row.engraving ? false : true" id="checkboxAuthorization" v-model= row.authorization></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <div id="buttons">
+        <button @click="saveAll"> Guardar </button>
+      </div>
+
+
+      <div id="details">
+        <h2 style="color: #3B0EA4; font-size: 20px; font-family: Verdana;">Detalles</h2>
+
+        <table id="detailsTable">
+          <thead>
+            <tr>
+              <th style="padding: 10px; color: purple">Orden</th>
+              <br>
+              <th style="padding: 10px; color: purple">Orden Baan</th>
+              <br>
+              <th style="padding: 5px; color: purple">Producto</th>
+              <br>
+              <th style="padding: 10px; color: purple"> Fecha de entrega </th>
+              <br>
+              <th style="padding: 10px; color: purple"> Fecha definida </th>
+              <br>
+              <th style="padding: 10px; color: purple"> Stock </th>
+              <br>
+              <th style="padding: 10px; color: purple"> Unidades </th>
+              <br>
+              <th style="padding: 10px; color: purple">Suaje</th>
+              <br>
+              <th style="padding: 10px; color: purple">Grabado</th>
+              <br>
+              <th style="padding: 10px; color: purple">Autorización ING </th>
+              <br>
+              <th style="padding: 10px; color: purple">Observaciones </th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <tr v-for="(row, index) in filteredRows" :key="`row-${index}`">
+              <td style="padding: 10px">{{row.order}}</td>
+              <br>
+              <td style="padding: 10px">{{row.orderBaan}}</td>
+              <br>
+              <td style="padding: 5px">{{row.product}}</td>
+              <br>
+              <td style="padding: 10px">{{row.dateRequired}}</td>
+              <br>
+              <td style="padding: 10px">{{row.datePlaned}}</td>
+              <br>
+              <td style="padding: 10px">{{row.stock}}</td>
+              <br>
+              <td style="padding: 10px">{{row.units}}</td>
+              <br>
+              <td style="padding: 10px"><input type="checkbox" id="checkboxDie" v-model= row.die></td>
+              <br>
+              <td style="padding: 10px"><input type="checkbox" id="checkboxEngraving" v-model= row.engraving></td>
+              <br>
+              <td style="padding: 10px"><input type="checkbox" :disabled="row.die && row.engraving ? false : true" id="checkboxAuthorization" v-model= row.authorization></td>
+              <br>
+              <td style="padding: 10px">{{row.notes}} <button @click="writeNote(index, row.notes)">+</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+                  
       <div id="notes" hidden>
-        <label>Observaciones  </label>
-        <br>
-        <label>Orden Baan: </label> <input type="text" placeholder="orden baan"/>
-        <br>
+        <label style="color: #3B0EA4; font-size: 20px; font-family: Verdana;"> Observaciones </label>
+        <div class="inputForm">
+          <br>
+          <label> Orden Baan: </label> <input type="text" placeholder="orden baan"/>
+        </div>
+
+        <div class="inputForm">
         <label>Tipo</label>
         <select name="rate" >
-                    <option value="die">Suaje</option>
-                    <option value="engraving">Grabado</option>
-                    </select> 
-        <br>
-        <textarea v-model="notes" placeholder="Observaciones"></textarea>
-        <br>
-        <button @click="addNote">Agregar</button>
+          <option value="die">Suaje</option>
+          <option value="engraving">Grabado</option>
+        </select> 
+        </div>
+
+        <div class="inputForm">
+          <textarea v-model="notes" placeholder="Observaciones"></textarea>
+        </div>
+
+        <div id="buttons">
+          <br>
+          <button @click="addNote">Agregar</button>
+        </div>
       </div>
 
-  </div>
+    </div>
 
-  
-    
-  
+
+  </div>   
 </template>
 
 <script>
@@ -212,7 +263,7 @@ export default {
   border-radius: 6px;
   border: transparent;
   background: #f2f2f2;
-  width: 100%; 
+  width: 100%;
   font-family: Verdana;
   font-size: 20px;
 }
@@ -283,8 +334,27 @@ label{
   color: red;
 }
 
-#stuff{
-  color: blue;
-  margin: 5em;
+#tables{
+  margin-bottom: 3em;
 }
+
+#firstTable{
+  margin-left: 5em;
+}
+
+#details{
+  margin-right: 5%;
+  margin-left: 5%;
+}
+
+#detailsTable{
+  font-size: 12px;
+}
+
+#notes{
+  margin-bottom: 2em;
+  margin-right: 5%;
+  margin-left: 5%;
+}
+
 </style>
