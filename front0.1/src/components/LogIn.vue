@@ -36,6 +36,7 @@
                 <a @click="CatalogSharedItems"> <div class="element"> Catálogo de Artículos Compartidos </div></a>
                 <a @click="navSearchOrdersperClient"> <div class="element"> Búsqueda de artículo por cliente (ING)</div></a>
                 <a @click="navTimeReport"> <div class="element"> Reporte de Tiempo por Departamento </div></a>
+                <a @click="navReportGen"> <div class="element"> Generación de Reportes </div></a>
             </div>
 
 
@@ -149,6 +150,9 @@ export default {
     },
     navTimeReport(){
       this.source='http://localhost:8080/#/TimeReport';
+    },
+    navReportGen(){
+      this.source='http://localhost:8080/#/ReportGenerator';
     }
   }
 }
