@@ -50,17 +50,17 @@
           <br>
           <label>Fecha de inicio</label>
           <br>
-          <datepicker placeholder="Fecha de entrega" v-model="aFechaInicio" :format="customFormatter"></datepicker>
+          <datepicker placeholder="Fecha de entrega" v-model="aFechaInicio" :format="customFormatter" :disabledDates="disabledDates"></datepicker>
           <br>
           <label>Fecha de caducidad</label>
           <br>
-          <datepicker placeholder="Fecha de entrega" v-model="aFechaCaducidad" :format="customFormatter"></datepicker>
+          <datepicker placeholder="Fecha de entrega" v-model="aFechaCaducidad" :format="customFormatter" :disabledDates="disabledDates"></datepicker>
           <br>
           <br>
         </form>
       </div>
 
-      <div id="buttons"> 
+      <div id="buttons">
         <button @click="signUpPrice"> Dar de alta </button>
         <button @click="signDownPrice"> Dar de baja </button>
         <button @click="loadPrices"> Actualizar </button>
@@ -75,7 +75,7 @@
         </vue-table-dynamic>
         <br>
       </div>
-      
+
     </div>
   </div>
   </div>
@@ -100,6 +100,9 @@ export default {
       aDescripcion:'',
       aFechaInicio:'',
       aFechaCaducidad:'',
+      disabledDates: {
+      to: new Date(Date.now() - 8640000)
+      },
       errors:[],
       params: {
         data: [
@@ -291,7 +294,7 @@ export default {
   border-radius: 6px;
   border: transparent;
   background: #f2f2f2;
-  width: 100%; 
+  width: 100%;
   font-family: Verdana;
   font-size: 20px;
 }
