@@ -25,43 +25,6 @@
         <br>
                 
       </div>
-    <form>
-      <label>Filtrar</label>
-      <br>
-      <input v-model="filter" placeholder="Orden Baan, No de orden o Cliente ">
-      <br>
-   </form>
-   <br>
-   
-  </div>
-   <div>
-    </div>
-  
-  <div>
-    <div id="table">
-  <table id="firstTable">
-    <thead>
-      <tr>
-        <th>Orden</th>
-        <th>Orden Baan</th>
-        <th>Cliente</th>
-        <th>Suaje</th>
-        <th>Grabado</th>
-        <th>Autorización ING </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="(row, index) in filteredRows" :key="`row-${index}`">
-        <td>{{row.order}}</td>
-        <td>{{row.orderBaan}}</td>
-        <td>{{row.client}}</td>
-        <td><input type="checkbox" id="checkboxDie" v-model= row.die ></td>
-        <td><input type="checkbox" id="checkboxEngraving" v-model= row.engraving></td>
-        <td><input type="checkbox" :disabled="row.die && row.engraving ? false : true" id="checkboxAuthorization" v-model= row.authorization></td>
-      </tr>
-    </tbody>
-  </table>
-</div>
 
       <div id="tables">
         <div id="table">
@@ -103,19 +66,6 @@
 
       <div id="buttons">
         <button @click="saveAll"> Guardar </button>
-
-        <br>
-        <label>Orden Baan: </label> <input type="text" placeholder="orden baan"/>
-        <br>
-        <label>Tipo</label>
-        <select name="rate" >
-                    <option value="die">Suaje</option>
-                    <option value="engraving">Grabado</option>
-                    </select> 
-        <br>
-        <textarea v-model="notes" placeholder="Observaciones"></textarea>
-        <br>
-        <button @click="addNote">Agregar</button>
       </div>
 
 
