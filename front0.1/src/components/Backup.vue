@@ -11,8 +11,10 @@
       <div class="inputForm">
         <br>
         <br>
-        <button @click="backup">Hacer respaldo</button>
-        <button @click="restore">Restaurar última versión</button>
+        <div id="buttons">
+          <button @click="backup">Hacer respaldo</button>
+          <button @click="restore">Restaurar última versión</button>
+        </div>
       </div>
     </div>
 
@@ -61,7 +63,7 @@ button:hover{
   margin: 2%;
   font-family: Verdana;
   font-size: 60px;
-  color: #3B0EA4;
+  color: #FFFF;
   text-align: center;
 }
 

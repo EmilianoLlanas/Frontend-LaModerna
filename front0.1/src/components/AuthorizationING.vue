@@ -25,6 +25,43 @@
         <br>
                 
       </div>
+    <form>
+      <label>Filtrar</label>
+      <br>
+      <input v-model="filter" placeholder="Orden Baan, No de orden o Cliente ">
+      <br>
+   </form>
+   <br>
+   
+  </div>
+   <div>
+    </div>
+  
+  <div>
+    <div id="table">
+  <table id="firstTable">
+    <thead>
+      <tr>
+        <th>Orden</th>
+        <th>Orden Baan</th>
+        <th>Cliente</th>
+        <th>Suaje</th>
+        <th>Grabado</th>
+        <th>Autorización ING </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="(row, index) in filteredRows" :key="`row-${index}`">
+        <td>{{row.order}}</td>
+        <td>{{row.orderBaan}}</td>
+        <td>{{row.client}}</td>
+        <td><input type="checkbox" id="checkboxDie" v-model= row.die ></td>
+        <td><input type="checkbox" id="checkboxEngraving" v-model= row.engraving></td>
+        <td><input type="checkbox" :disabled="row.die && row.engraving ? false : true" id="checkboxAuthorization" v-model= row.authorization></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
       <div id="tables">
         <div id="table">
@@ -66,8 +103,21 @@
 
       <div id="buttons">
         <button @click="saveAll"> Guardar </button>
+
         <br>
+        <label>Orden Baan: </label> <input type="text" placeholder="orden baan"/>
+        <br>
+        <label>Tipo</label>
+        <select name="rate" >
+                    <option value="die">Suaje</option>
+                    <option value="engraving">Grabado</option>
+                    </select> 
+        <br>
+        <textarea v-model="notes" placeholder="Observaciones"></textarea>
+        <br>
+        <button @click="addNote">Agregar</button>
       </div>
+
 
       <div id="details">
         <h2 style="color: #3B0EA4; font-size: 20px; font-family: Verdana;">Detalles</h2>
@@ -160,34 +210,19 @@
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic';
-import SalesOrderStatusDetails from '@/components/SalesOrderStatusDetails.vue';
+
 export default {
   name: 'AuthorizationING',
   data() {
     return {
       rows: [
-      {order:'1', orderBaan:'135', client:'0303', suaje:true, grabado:false,  name:'BIMBO', product:'PAPELITO-SUAVE-500',dateOrdered:'2021-03-21', dateRequired:'2021-04-21', datePlaned:'2021-04-22', stock:'4056', units:'1000', autorization:false },          
-      {order:'2', orderBaan:'435', client:'0403', suaje:false, grabado:true,  name:'BARCEL', product:'CAJITA-400',dateOrdered:'2021-06-21', dateRequired:'2021-08-21', datePlaned:'2021-08-20', stock:'2050', units:'3000', autorization:false }          
+      {isSelected: false, order:'1', orderBaan:'135', client:'0303', die:true, engraving:false,  name:'BIMBO', product:'PAPELITO-SUAVE-500',dateOrdered:'2021-03-21', dateRequired:'2021-04-21', datePlaned:'2021-04-22', stock:'4056', units:'1000', authorization:false, notes:'' },          
+      {isSelected: false, order:'2', orderBaan:'435', client:'0403', die:false, engraving:true,  name:'BARCEL', product:'CAJITA-400',dateOrdered:'2021-06-21', dateRequired:'2021-08-21', datePlaned:'2021-08-20', stock:'2050', units:'3000', authorization:false, notes:'Respetar fecha de entrega' }          
     ],
-      
-    soCliente:'',
-    soNoOrden:'',
-    soBaan:'',
-      params: {
-        data: [
-          
-        ],
-        id:[],
-        header: 'row',
-        border: true,
-        stripe: true,
-        showCheck: true,
-        enableSearch: true,
-        sort: [0, 1,2],
-        pagination: true,
-        pageSize: 10,
-        
-      }
+    filter:'',
+    errors:[],
+    notes:'',
+    rowIndex:null
     }
   },
   methods: {
@@ -197,24 +232,45 @@ export default {
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
-      this.params.id=checkedIndexs
+      this.rows.order=checkedIndexs
     },
-    search(){
-      //aqui habra una conexion a backend para guardar la orden
-      this.soCliente='',
-      this.soNoOrden='',
-      this.soBaan=''
+    saveAll(){
+      this.errors.push('Guardando en suaje '+this.rows[0].die+'  '+this.rows[1].die);
+      this.errors.push('Guardando en grabado '+this.rows[0].engraving+'  '+this.rows[1].engraving);
+      this.errors.push('Guardando en autorizacion '+this.rows[0].authorization+'  '+this.rows[1].authorization);
+    },
+    addNote(){
+      //alert('Guardando: '+this.notes+' en '+this.rowIndex);
+      this.rows[this.rowIndex].notes=this.notes;
+      //alert('Saved '+this.rows[this.rowIndex].notes);
+      document.getElementById("notes").hidden=true;
+    },
+    writeNote(index, notesIndex){
+      document.getElementById("notes").removeAttribute("hidden");
+      //alert('Llamado desde '+rowIndex);
+      this.rowIndex=index;
+      this.notes=notesIndex;
     }
   },
-  components: { VueTableDynamic, SalesOrderStatusDetails },
+  components: { VueTableDynamic },
   computed: {
+    filteredRows(){
+    return this.rows.filter(row => {
+      const orders = row.order.toString();
+      const client = row.name.toLowerCase();
+      const baan = row.orderBaan.toString();
+      const searchTerm = this.filter.toLowerCase();
+
+      return orders.includes(searchTerm) || client.includes(searchTerm)|| baan.includes(searchTerm);
+    });
+  },
     "columns": function columns() {
       if (this.rows.length == 0) {
         return [];
       }
       return Object.keys(this.rows[0])
     }
-    },
+    }
 }
 </script>
 
@@ -286,12 +342,12 @@ button:hover{
   margin: 2%;
   font-family: Verdana;
   font-size: 60px;
-  color: #3B0EA4;
+  color: #FFFF;
   text-align: center;
 }
 
 #table{
-  width: 80%;
+  width: 95%;
   margin-left: 10%;
   margin-top: 2%;
 }
