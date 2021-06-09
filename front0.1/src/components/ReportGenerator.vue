@@ -2,7 +2,7 @@
 
   <div id="content">
 
-    <h1 id="header1"> Reporte de Ordenes de Venta </h1>
+    <h1 id="header1"> Generación de Reportes </h1>
 
     <div id="card">
 
@@ -31,14 +31,27 @@
           <br>
 
           <div style="color: #3B0EA4;">
-          <label>- - - Folio Baan - - -</label>
+          <label>- - - Fecha de Factura - - - </label>
           </div>
-          
+
           <br>
           <label>Desde:</label>
-          <input v-model="fromBaan" placeholder="Folio">
+          <datepicker v-model="fromDate" placeholder="Fecha":format="customFormatter"></datepicker>
+          <br>
           <label>Hasta:</label>
-          <input v-model="toBaan" placeholder="Folio">
+          <datepicker v-model="toDate" placeholder="Fecha":format="customFormatter"></datepicker>
+          <br>
+          <br>
+
+          <div style="color: #3B0EA4;">
+          <label>- - - Representante - - -</label>
+          </div>
+
+          <br>
+          <label>Desde:</label>
+          <input  placeholder="No Cliente">
+          <label>Hasta:</label>
+          <input placeholder="No Cliente">
           <br>
           <br>
 
@@ -65,28 +78,21 @@
           <input v-model="toItem" placeholder="No Articulo">
           <br>
         </form>
-
+        <h2 style="text-align:center;">Generar Reportes</h2>
         <div id="buttons">
-          <button @click="findOrders">Crear reporte</button>
+          <a :href="pdfLink" download="download">Pedido vs Surtido</a>
+          <a :href="pdfLink" download="download">Ventas por Unidad</a>
+          <a :href="pdfLink" download="download">Ventas por Representante</a>
+          <a :href="pdfLink" download="download">Ventas por Cliente</a>
+          <a :href="pdfLink" download="download">Ventas por Artículo</a>
+          <a :href="pdfLink" download="download">Ventas por Mes-Año</a>
+          <a :href="pdfLink" download="download">Comparativo de Ventas por Año</a>
         </div>
 
-        <div id="table" >
-
-          <vue-table-dynamic :params="params"
-              @select="onSelect"
-              @selection-change="onSelectionChange"
-              ref="table">
-          </vue-table-dynamic>
-
-          <AllSalesReportDetails :id="params.id"></AllSalesReportDetails>
-          <br>
-
-        </div>
-        
       </div>
     </div>
   </div>
-
+<a
 </template>
 
 <script>
@@ -94,15 +100,16 @@ import VueTableDynamic from 'vue-table-dynamic';
 import AllSalesReportDetails from '@/components/AllSalesReportDetails.vue';
 import Datepicker from 'vuejs-datepicker'
 import moment from 'moment'
-
+import axios from "axios";
 
 
 export default {
-  name: 'AllSalesReport',
+  name: 'ReportGenerator',
 
   data() {
 
     return {
+      pdfLink: require("@/assets/SampleReportModerna.pdf"),
       fromDate:'',
       toDate:'',
       fromBaan:'',
@@ -113,39 +120,12 @@ export default {
       toItem:'',
       errors:[],
 
-      params: {
-
-        data: [
-          ['Orden','Orden Baan' ,'CIL','Nombre','F.Orden','F.Solicitud','F. Def','FACT','CXC','PRE','ING','VB','Baan','BervC','Rep','Artículo','Unidad','Notas'],
-          ["1", "1881", "1991","Sabritas","15-03-19","18-03-19","18-03-19","SI","NO","NO","SI","NO","SI","NO","NO","1991","12","LSL"],
-          ["2", "1882", "2021","Barcel","15-03-19","18-03-19","18-03-19","SI","SI","SI","SI","SI","SI","SI","SI","2020","192","MKL"],
-
-
-        ],
-        id:[],
-        header: 'row',
-        border: true,
-        stripe: true,
-        showCheck: true,
-        enableSearch: true,
-        sort: [0, 1,2],
-        pagination: true,
-        pageSize: 10,
-      },
 
     }
   },
   methods: {
-    onSelect (isChecked, index, data) {
-      console.log('onSelect: ', isChecked, index, data)
-      console.log('Checked Data:', this.$refs.table.getCheckedRowDatas(true))
 
 
-    },
-    onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
-      console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
-      this.params.id=checkedIndexs
-    },
     orderReport(){
         //there will be a method here to establish connection with backend and sign up the articles' id and name, some day....
     },
@@ -211,7 +191,7 @@ export default {
   border-radius: 6px;
   border: transparent;
   background: #f2f2f2;
-  width: 100%; 
+  width: 100%;
   font-family: Verdana;
   font-size: 20px;
 }
@@ -274,6 +254,8 @@ label{
 #buttons{
   width: 100%;
   display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
   align-items: center;
   justify-content: center;
 }
