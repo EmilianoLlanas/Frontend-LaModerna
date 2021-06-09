@@ -16,7 +16,6 @@
     "moment": "^2.29.1",
     "vue": "^2.5.2",
     "vue-router": "^3.0.1",
-    "vue-simple-search-dropdown": "^1.0.1",
     "vue-table-dynamic": "^0.4.4",
     "vuejs-datepicker": "^1.6.2",
     "vuelidate": "^0.7.6",
