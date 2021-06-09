@@ -72,6 +72,8 @@
                 <a @click="CatalogSharedItems"> <div class="element"> Catálogo de Artículos Compartidos </div></a>
                 <a @click="navAuthorizeOrderCxC"> <div class="element"> Autorización de ordenes </div></a>
                 <a @click="navTimeReport"> <div class="element"> Reporte de Tiempo por Departamento </div></a>
+                <a @click="navReportGen"> <div class="element"> Generación de Reportes </div></a>
+
 
               </div>
               <a @click="openDrop"> <div class="element"> Cambiar de Rol </div></a>
@@ -87,6 +89,7 @@
                 <a @click="updateRoles(8)"><div class="element">REA</div></a>
                 <a @click="updateRoles(9)"><div class="element">DIR</div></a>
               </div>
+
             </div>
 
 
@@ -210,6 +213,11 @@ export default {
     navTimeReport(){
       this.source='http://localhost:8080/#/TimeReport';
     },
+
+    navReportGen(){
+      this.source='http://localhost:8080/#/ReportGenerator';
+    }
+
     updateRoles(x){
       switch(x){
         case 0:
@@ -248,6 +256,7 @@ export default {
     openDrop(){
       document.getElementById("myDropdown").style.display = "block";
     },
+
   }
 }
 </script>
