@@ -162,9 +162,9 @@ export default {
 }
 
 img {
-    display: flex;
-    width:100%;
-    height:100%;
+  display: flex;
+  width:100%;
+  height:100%;
 }
 
 #fullpage{
@@ -208,7 +208,7 @@ h3{
 }
 
 #menu-buttons {
-  max-height: 800px;
+  max-height: 80%;
   overflow: scroll;
 }
 
