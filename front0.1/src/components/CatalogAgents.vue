@@ -57,6 +57,8 @@
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic'
+import 'es6-promise/auto'
+import auth from "@/auth"
 export default {
   name: 'CatalogAgents',
   data() {
@@ -65,6 +67,7 @@ export default {
       agId:'',
       rep:'',
       agEst:'',
+      dataTable:'',
       errors:[],
       params: {
         data: [
@@ -143,7 +146,18 @@ export default {
       this.params.data.splice(this.params.deleteData[i], 1)
       }
     },
-    loadAgent(){
+    async loadAgent(){
+      //conexion con Backend
+  // a method here to establish connection with backend and update the table
+   try {
+    console.log(this.$store.getters.token)
+    this.dataTable=((await auth.getAgents(this.$store.getters.token)));
+    console.log(this.dataTable)
+    //this.$router.push("/")
+      } catch (error) {
+        this.error=true;
+       console.log(error);
+    }
         this.agCom='';
         this.agId='';
         this.rep='';
@@ -194,7 +208,7 @@ export default {
   border-radius: 6px;
   border: transparent;
   background: #f2f2f2;
-  width: 100%; 
+  width: 100%;
   font-family: Verdana;
   font-size: 20px;
 }
