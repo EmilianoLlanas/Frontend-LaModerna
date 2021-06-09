@@ -250,6 +250,7 @@ label{
   align-items: center;
   justify-content: center;
 }
+
 #error{
   color: red;
 }
