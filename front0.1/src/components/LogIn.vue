@@ -64,7 +64,10 @@
                 <a @click="ordenesTodas"> <div class="element"> Todas las Órdenes </div></a>
                 <a @click="navConsultSalesOrder"> <div class="element"> Consultar órdenes de venta </div></a>
                 <a @click="CatalogSharedItems"> <div class="element"> Catálogo de Artículos Compartidos </div></a>
-                <a @click="navAuthorizeOrderCxC"> <div class="element"> Autorización de ordenes </div></a>
+                <a @click="navAuthorizeOrderCxC"> <div class="element"> Autorización de órdenes CxC</div></a>
+                <a @click="navAuthorizationING"> <div class="element"> Autorización de órdenes ING </div></a>
+                <a @click="navAuthorizeOrderCST"> <div class="element"> Autorización de órdenes CST </div></a>
+                <a @click="navAuthorizeVTA"> <div class="element"> Autorizacion de órdenes VTA </div></a>
                 <a @click="navTimeReport"> <div class="element"> Reporte de Tiempo por Departamento </div></a>
                 <a @click="navReportGen"> <div class="element"> Generación de Reportes </div></a>
 
