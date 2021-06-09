@@ -180,6 +180,7 @@ export default {
   padding: 10px;
   color: #213485;
 }
+
 .inputForm textarea{
   padding: 10px;
   width: 150%;
@@ -226,6 +227,7 @@ button:hover{
   margin-left: 10%;
   margin-top: 2%;
 }
+
 label{
   font-family: Verdana;
   font-weight: bold;
