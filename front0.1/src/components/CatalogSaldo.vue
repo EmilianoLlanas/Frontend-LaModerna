@@ -235,7 +235,7 @@ button:hover{
   margin: 2%;
   font-family: Verdana;
   font-size: 60px;
-  color: #3B0EA4;
+  color: #FFFF;
   text-align: center;
 }
 

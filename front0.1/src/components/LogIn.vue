@@ -6,36 +6,90 @@
                 <img :src="require('@/assets/logotipo1.jpg')">
             </div>
             <div id="menu-buttons">
+              <div v-if="this.role === 'ADC'" style="margin: 0%; padding: 0%;">
                 <a @click="navCatalogArticles"> <div class="element"> Catálogo de Artículos </div></a>
                 <a @click="navCatalogCompanies"> <div class="element">Catálogo de Compañías </div></a>
-                <a @click="navCatalogPrices"> <div class="element">Catálogo de Precios  </div></a>
-                <a @click="navCatalogClients"> <div class="element">Catálogo de Clientes </div> </a>
-                <a @click="navCaptureOrder"> <div class="element">Captura de Órdenes  </div></a>
-                <a @click="navOrdersInProcess"> <div class="element">Consulta de Órdenes en proceso </div> </a>
-                <a @click="navCatalogAgents"> <div class="element">Catálogo de Agentes  </div></a>
-                <a @click="navCatalogDelivered"> <div class="element">Catálogo de Entregas  </div></a>
-                <a @click="navCatalogFacturas"> <div class="element">Catálogo de Facturas </div> </a>
+                <a @click="navCatalogPrices"> <div class="element">Catálogo de Precios </div></a>
+                <a @click="navCatalogClients"> <div class="element">Catálogo de Clientes </div></a>
+                <a @click="navCatalogAgents"> <div class="element">Catálogo de Agentes </div></a>
+                <a @click="navCatalogDelivered"> <div class="element">Catálogo de Entregas </div></a>
+                <a @click="navCatalogFacturas"> <div class="element">Catálogo de Facturas </div></a>
                 <a @click="navCatalogSaldo"> <div class="element">Catálogo de Saldos  </div></a>
-                <a @click="navCatalogWarehouse"> <div class="element">Catálogo de Almacenes  </div></a>
+                <a @click="navCatalogWarehouse"> <div class="element">Catálogo de Almacenes </div></a>
                 <a @click="navCatalogDeliveryAddresses"> <div class="element">Catálogo de Direcciones de entrega  </div></a>
-                <a @click="navCatalogInventory"> <div class="element">Catálogo de Inventario  </div></a>
-                <a @click="navProcessedOrders"> <div class="element"> Consulta de Órdenes Procesadas  </div></a>
-                <a @click="navOrderStatus"> <div class="element"> Consulta de Estatus de Órdenes  </div></a>
-                <a @click="navAuthorizeDates"> <div class="element">Autorizacion de fechas de entrega  </div></a>
+                <a @click="navCatalogInventory"> <div class="element">Catálogo de Inventario </div></a>
+                <a @click="navConsultSalesOrder"> <div class="element"> Consultar órdenes de venta </div></a>
                 <a @click="navRoles"> <div class="element"> Asignacion de roles </div></a>
                 <a @click="navBackup"> <div class="element"> Generar respaldo </div></a>
-                <a @click="navMenuAge"> <div class="element"> Menu principal de AGE  </div></a>
-                <a @click="navConsultSalesOrder"> <div class="element"> Consultar órdenes de venta </div></a>
-                <a @click="navAuthorizationING"> <div class="element"> Autorización de ING </div></a>
-                <a @click="navAuthorizeVTA"> <div class="element"> Autorizacion de VTA </div></a>
+              </div>
+              <div v-if="this.role === 'AGE'" style="margin: 0%; padding: 0%;">
+                <a @click="navCaptureOrder"> <div class="element"> Captura de Órdenes </div></a>
+                <a @click="navEditOrder"> <div class="element"> Editar Órdenes </div></a>
+                <a @click="navOrdersInProcess"> <div class="element"> Consulta de Órdenes en proceso </div></a>
+                <a @click="navProcessedOrders"> <div class="element"> Consulta de Órdenes Procesadas </div></a>
+                <a @click="navOrderStatus"> <div class="element"> Consulta de Estatus de Órdenes  </div></a>
+                <a @click="navOrderRep"> <div class="element"> Reporte de Órdenes  </div></a>
+              </div>
+              <div v-if="this.role === 'CXC'" style="margin: 0%; padding: 0%;">
                 <a @click="navAuthorizeOrderCxC"> <div class="element"> Autorización de ordenes CxC </div></a>
                 <a @click="navBlock"> <div class="element"> Bloqueo de Clientes </div></a>
-                <a @click="navAuthorizeOrderCST"> <div class="element"> Autorización de ordenes CST </div></a>
-                <a @click="ordenesTodas"> <div class="element"> Todas las Ordenes </div></a>
-                <a @click="sharedItems"> <div class="element"> Artículos Compartidos </div></a>
-                <a @click="CatalogSharedItems"> <div class="element"> Catálogo de Artículos Compartidos </div></a>
-                <a @click="navSearchOrdersperClient"> <div class="element"> Búsqueda de artículo por cliente (ING)</div></a>
+                  <a @click="navConsultSalesOrder"> <div class="element"> Consultar órdenes de venta </div></a>
+                <a @click="navOrderRep"> <div class="element"> Reporte de Órdenes  </div></a>
+              </div>
+              <div v-if="this.role === 'PLN'" style="margin: 0%; padding: 0%;">
+                <a @click="navAuthorizeDates"> <div class="element">Autorizacion de fechas de entrega  </div></a>
                 <a @click="navTimeReport"> <div class="element"> Reporte de Tiempo por Departamento </div></a>
+              </div>
+              <div v-if="this.role === 'ING'" style="margin: 0%; padding: 0%;">
+                <a @click="navAuthorizationING"> <div class="element"> Autorización de ING </div></a>
+                <a @click="navConsultSalesOrder"> <div class="element"> Consultar órdenes de venta </div></a>
+                <a @click="navSearchOrdersperClient"> <div class="element"> Búsqueda de artículo por cliente (ING)</div></a>
+              </div>
+              <div v-if="this.role === 'CST'" style="margin: 0%; padding: 0%;">
+                <a @click="navAuthorizeOrderCST"> <div class="element"> Autorización de ordenes CST </div></a>
+                <a @click="ordenesTodas"> <div class="element"> Todas las Órdenes </div></a>
+                <a @click="navConsultSalesOrder"> <div class="element"> Consultar órdenes de venta </div></a>
+                <a @click="navOrderRep"> <div class="element"> Reporte de Órdenes  </div></a>
+              </div>
+              <div v-if="this.role === 'VTA'" style="margin: 0%; padding: 0%;">
+                <a @click="navAuthorizeVTA"> <div class="element"> Autorizacion de VTA </div></a>
+                <a @click="ordenesTodas"> <div class="element"> Todas las Órdenes </div></a>
+                <a @click="navConsultSalesOrder"> <div class="element"> Consultar órdenes de venta </div></a>
+                <a @click="navOrderRep"> <div class="element"> Reporte de Órdenes  </div></a>
+              </div>
+              <div v-if="this.role === 'EMB'" style="margin: 0%; padding: 0%;">
+                <a @click="ordenesTodas"> <div class="element"> Todas las Órdenes </div></a>
+                <a @click="navConsultSalesOrder"> <div class="element"> Consultar órdenes de venta </div></a>
+                <a @click="navOrderRep"> <div class="element"> Reporte de Órdenes  </div></a>
+              </div>
+              <div v-if="this.role === 'REA'" style="margin: 0%; padding: 0%;">
+                <a @click="sharedItems"> <div class="element"> Artículos Compartidos </div></a>
+              </div>
+              <div v-if="this.role === 'DIR'" style="margin: 0%; padding: 0%;">
+                <a @click="ordenesTodas"> <div class="element"> Todas las Órdenes </div></a>
+                <a @click="navOrderRep"> <div class="element"> Reporte de Órdenes  </div></a>
+                <a @click="navConsultSalesOrder"> <div class="element"> Consultar órdenes de venta </div></a>
+                <a @click="CatalogSharedItems"> <div class="element"> Catálogo de Artículos Compartidos </div></a>
+                <a @click="navAuthorizeOrderCxC"> <div class="element"> Autorización de ordenes </div></a>
+                <a @click="navTimeReport"> <div class="element"> Reporte de Tiempo por Departamento </div></a>
+                <a @click="navReportGen"> <div class="element"> Generación de Reportes </div></a>
+
+
+              </div>
+              <a @click="openDrop"> <div class="element"> Cambiar de Rol </div></a>
+              <div id="myDropdown" style="display:none;">
+                <a @click="updateRoles(0)"><div class="element">ADC</div></a>
+                <a @click="updateRoles(1)"><div class="element">AGE</div></a>
+                <a @click="updateRoles(2)"><div class="element">CXC</div></a>
+                <a @click="updateRoles(3)"><div class="element">PLN</div></a>
+                <a @click="updateRoles(4)"><div class="element">ING</div></a>
+                <a @click="updateRoles(5)"><div class="element">CST</div></a>
+                <a @click="updateRoles(6)"><div class="element">VTA</div></a>
+                <a @click="updateRoles(7)"><div class="element">EMB</div></a>
+                <a @click="updateRoles(8)"><div class="element">REA</div></a>
+                <a @click="updateRoles(9)"><div class="element">DIR</div></a>
+              </div>
+
             </div>
 
 
@@ -54,7 +108,11 @@ export default {
         return {
             dateS: "",
             source:'',
+            role: ""
         }
+    },
+  created: function(){
+      this.role = "ADC"
     },
   methods: {
 
@@ -117,7 +175,9 @@ export default {
     },
     navConsultSalesOrder() {
       this.source='http://localhost:8080/#/ConsultSalesOrders';
-
+    },
+    navOrderRep(){
+      this.source='http://localhost:8080/#/OrderDetails';
     },
       navAuthorizationING() {
       this.source='http://localhost:8080/#/AuthorizationING';
@@ -147,9 +207,56 @@ export default {
     navSearchOrdersperClient(){
       this.source='http://localhost:8080/#/SearchArticlesING';
     },
+    navEditOrder(){
+      this.source='http://localhost:8080/#/OrderEdit';
+    },
     navTimeReport(){
       this.source='http://localhost:8080/#/TimeReport';
-    }
+    },
+
+    navReportGen(){
+      this.source='http://localhost:8080/#/ReportGenerator';
+    },
+
+    updateRoles(x){
+      switch(x){
+        case 0:
+          this.role = "ADC";
+          break;
+        case 1:
+          this.role = "AGE";
+          break;
+        case 2:
+          this.role = "CXC";
+          break;
+        case 3:
+          this.role = "PLN";
+          break;
+        case 4:
+          this.role = "ING";
+          break;
+        case 5:
+          this.role = "CST";
+          break;
+        case 6:
+          this.role = "VTA";
+          break;
+        case 7:
+          this.role = "EMB";
+          break;
+        case 8:
+          this.role = "REA";
+          break;
+        case 9:
+          this.role = "DIR";
+          break;
+      }
+      document.getElementById("myDropdown").style.display = "none";
+    },
+    openDrop(){
+      document.getElementById("myDropdown").style.display = "block";
+    },
+
   }
 }
 </script>
@@ -189,7 +296,7 @@ img {
 #menuhead{
   background: #FFFF;
   padding: 1em;
-  
+
 }
 
 h3{
@@ -208,8 +315,9 @@ h3{
 }
 
 #menu-buttons {
-  max-height: 800px;
+  max-height: 515px;
   overflow: scroll;
+  overflow-x: hidden;
 }
 
 #sidebar .element:hover{

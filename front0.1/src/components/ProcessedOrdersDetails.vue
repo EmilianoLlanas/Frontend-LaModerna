@@ -22,6 +22,7 @@
         <li v-if="i!==0"> Fecha solicitada: {{ordenes[i].fechaSol}} </li>
         <li v-if="i!==0"> Estatus de autorización por área:</li>
         <ul>
+        <br>
         <li v-if="i!==0"> Facturación: <b>{{ordenes[i].facturacion}}</b> </li>
         <li v-if="i!==0"> Cuentas por Cobrar: <b>{{ordenes[i].cxc}}</b> </li>
         <li v-if="i!==0"> Precios: <b>{{ordenes[i].preciosAut}}</b> </li>

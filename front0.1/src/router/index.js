@@ -35,6 +35,7 @@ import AuthorizeVTA from '@/components/AuthorizeVTA'
 import Backup from '@/components/Backup'
 import SearchArticlesperClient from '@/components/SearchArticlesperClient'
 import TimeReport from '@/components/TimeReport'
+import ReportGenerator from '@/components/ReportGenerator'
 
 Vue.use(Router)
 
@@ -224,6 +225,11 @@ export default new Router({
       path: '/TimeReport',
       name: 'TimeReport',
       component: TimeReport
+    },
+    {
+      path: '/ReportGenerator',
+      name: 'ReportGenerator',
+      component: ReportGenerator
     }
   ]
 })
