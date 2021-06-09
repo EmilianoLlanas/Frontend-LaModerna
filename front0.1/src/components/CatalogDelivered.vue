@@ -27,7 +27,7 @@
           <br>
           <label>Fecha</label>
           <br>
-          <datepicker placeholder="Fecha de entrega" v-model="delivDate" :format="customFormatter"></datepicker>
+          <datepicker placeholder="Fecha de entrega" v-model="delivDate" :format="customFormatter" :disabledDates="disabledDates"></datepicker>
         </form>
 
       </div>
@@ -63,6 +63,9 @@ export default {
       delivOrd:'',
       delivCom:'',
       delivDate:'',
+      disabledDates: {
+      to: new Date(Date.now() - 8640000)
+      },
       errors:[],
       params: {
         data: [
@@ -188,7 +191,7 @@ export default {
   border-radius: 6px;
   border: transparent;
   background: #f2f2f2;
-  width: 100%; 
+  width: 100%;
   font-family: Verdana;
   font-size: 20px;
 }
