@@ -7,10 +7,6 @@
     <div id="card">
 
       <div id="cardheader"></div>
-      <div id="buttons">
-        <button @click="signDownArticle"> Dar de baja </button>
-        <button @click="loadArticles"> Actualizar </button>
-      </div>
 
       <div id="table">
         <vue-table-dynamic :params="params"
@@ -19,6 +15,11 @@
           ref="table">
         </vue-table-dynamic>
         <br>
+      </div>
+
+      <div id="buttons">
+        <button @click="signDownArticle"> Dar de baja </button>
+        <button @click="loadArticles"> Actualizar </button>
       </div>
 
     </div>
@@ -150,7 +151,7 @@ button:hover{
   margin: 2%;
   font-family: Verdana;
   font-size: 60px;
-  color: #3B0EA4;
+  color: #FFFF;
   text-align: center;
 }
 

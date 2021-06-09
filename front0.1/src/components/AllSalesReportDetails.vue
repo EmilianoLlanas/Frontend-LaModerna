@@ -37,8 +37,6 @@
           <li v-if="i===0"> DETALLES </li>
         </ul>
 
-        <br>
-
       </div>  
     </div>
   </div>
