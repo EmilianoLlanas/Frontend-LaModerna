@@ -32,6 +32,9 @@
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic'
+import 'es6-promise/auto'
+import auth from "@/auth";
+
 export default {
   name: 'CatalogArticles',
   data() {
@@ -39,6 +42,7 @@ export default {
       aId:'',
       aName:'',
       errors:[],
+      dataTb:'',
       params: {
         data: [
           ['ID', 'Nombre'],
@@ -106,11 +110,20 @@ export default {
 
 
     },
-    loadCompanies(){
-        //there will be a method here to establish connection with backend and load the companies' id and name, some day....
+    async loadCompanies(){
+        // a method here to establish connection with backend and load the companies' id and name
         this.aId='';
         this.aName='';
         alert('Actualizando tabla con Base de datos')
+
+        try {
+        console.log(this.$store.getters.token)
+        this.dataTb=((await auth.getCompanies(this.$store.getters.token)));
+        console.log(this.dataTb)
+        } catch (error) {
+          this.error=true;
+          console.log(error);
+        }
     },
   },
   components: { VueTableDynamic }
