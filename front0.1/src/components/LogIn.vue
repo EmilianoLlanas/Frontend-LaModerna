@@ -3,7 +3,7 @@
    <div id="sidebar">
       <!--<router-view/>-->
             <div id="menuhead">
-                <h3> Menú </h3>
+                <img :src="require('@/assets/logotipo1.jpg')">
             </div>
             <div id="menu-buttons">
                 <a @click="navCatalogArticles"> <div class="element"> Catálogo de Artículos </div></a>
@@ -161,6 +161,12 @@ export default {
   margin: 0;
 }
 
+img {
+    display: flex;
+    width:100%;
+    height:100%;
+}
+
 #fullpage{
   display: flex;
 }
@@ -172,14 +178,18 @@ export default {
 }
 
 #content{
-  background: rgba(33,52,133,0.20);
   width: 100%;
   height: 100vh;
+  background-image: url('fondito.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
 }
 
 #menuhead{
-  background: #3B0EA4;
+  background: #FFFF;
   padding: 1em;
+  
 }
 
 h3{
