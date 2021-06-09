@@ -150,9 +150,9 @@ export default {
       //conexion con Backend
   // a method here to establish connection with backend and update the table
    try {
+    //console.log(this.$store.getters.token)
+    //this.dataTable=((await auth.getAgents(this.$store.getters.token)));
     console.log(this.$store.getters.token)
-    this.dataTable=((await auth.getAgents(this.$store.getters.token)));
-    console.log(this.dataTable)
     //this.$router.push("/")
       } catch (error) {
         this.error=true;

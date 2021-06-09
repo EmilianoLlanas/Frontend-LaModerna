@@ -97,6 +97,7 @@ export default
       if(!this.$v.$invalid){
         try {
         this.token+= ((await auth.login(this.user, this.password)).data.token);
+        this.$store.commit('change',this.token)
         console.log(this.token)
         this.auth=((await auth.authToken(this.token)).data);
         console.log(this.auth)
