@@ -165,6 +165,7 @@ export default {
   font-family: Verdana;
   font-size: 20px;
 }
+
 .inputForm input{
   width: 100%;
   clear: both;
