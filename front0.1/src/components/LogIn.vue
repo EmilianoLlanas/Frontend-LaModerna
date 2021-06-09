@@ -216,7 +216,7 @@ export default {
 
     navReportGen(){
       this.source='http://localhost:8080/#/ReportGenerator';
-    }
+    },
 
     updateRoles(x){
       switch(x){
