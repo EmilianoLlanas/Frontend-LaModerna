@@ -312,7 +312,7 @@ h3{
 }
 
 #menu-buttons {
-  max-height: 515px;
+  max-height: 78%;
   overflow: scroll;
   overflow-x: hidden;
 }
