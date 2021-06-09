@@ -198,7 +198,6 @@ export default {
   font-family: Verdana;
   font-size: 20px;
 }
-
 button{
   margin-top: 0%;
   margin-left: 3%;
@@ -214,11 +213,9 @@ button{
   border: transparent;
   margin-bottom: 40px;
 }
-
 button:hover{
   background-color: rgba(14,44,164,0.30);
 }
-
 #header1{
   margin: 2%;
   font-family: Verdana;
@@ -226,7 +223,6 @@ button:hover{
   color: #FFFF;
   text-align: center;
 }
-
 #table{
   width: 80%;
   margin-left: 10%;
