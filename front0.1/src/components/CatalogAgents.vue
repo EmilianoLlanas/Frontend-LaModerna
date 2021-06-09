@@ -66,6 +66,7 @@ export default {
       rep:'',
       agEst:'',
       errors:[],
+      dataT:[],
       params: {
         data: [
           ['Compañia', 'idAgente', 'Representante','Estatus'],
@@ -143,7 +144,16 @@ export default {
       this.params.data.splice(this.params.deleteData[i], 1)
       }
     },
-    loadAgent(){
+    async loadAgent(){
+      try {
+      console.log(this.$store.getters.token)
+      this.dataT=((await auth.getAgents(this.$store.getters.token)));
+      console.log(this.dataT)
+      } catch (error) {
+        this.error=true;
+        console.log(error);
+      }
+
         this.agCom='';
         this.agId='';
         this.rep='';
@@ -194,7 +204,7 @@ export default {
   border-radius: 6px;
   border: transparent;
   background: #f2f2f2;
-  width: 100%; 
+  width: 100%;
   font-family: Verdana;
   font-size: 20px;
 }
