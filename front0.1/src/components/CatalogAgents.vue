@@ -230,6 +230,7 @@ label{
   font-family: Verdana;
   font-weight: bold;
 }
+
 #card{
   background: #fff;
   width: 80%;
@@ -239,11 +240,13 @@ label{
   box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.14);
   border-radius: 15px;
 }
+
 #cardheader{
   height: 20px;
   width: 100%;
   background: #3B0EA4;
 }
+
 #buttons{
   width: 100%;
   display: flex;
