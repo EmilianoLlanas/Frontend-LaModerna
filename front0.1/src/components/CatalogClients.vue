@@ -7,7 +7,7 @@
     <div id="card">
 
       <div id="cardheader"></div>
- 
+
       <div class="inputForm">
 
         <div id="error">
@@ -39,7 +39,7 @@
         </form>
       </div>
 
-      <div id="buttons"> 
+      <div id="buttons">
         <button @click="signUpClient"> Dar de alta </button>
         <button @click="signDownClient"> Dar de baja </button>
         <button @click="loadClient"> Actualizar </button>
@@ -152,6 +152,7 @@ export default {
     },
     generateReport(){
       //aqui se mandara a llamar la pagina de reportes
+      alert('aqui va la conexion con backend para generar reportes')
     }
   },
   components: { VueTableDynamic }
@@ -197,7 +198,7 @@ export default {
   border-radius: 6px;
   border: transparent;
   background: #f2f2f2;
-  width: 100%; 
+  width: 100%;
   font-family: Verdana;
   font-size: 20px;
 }
