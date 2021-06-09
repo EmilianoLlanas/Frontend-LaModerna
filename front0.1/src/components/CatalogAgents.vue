@@ -48,6 +48,7 @@ export default {
       agEst:'',
       error:false,
       dataTable:'',
+      errors:[],
       params: {
         data: [
           ['Compañia', 'idAgente', 'Representante','Estatus'],
