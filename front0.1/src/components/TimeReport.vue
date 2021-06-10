@@ -2,51 +2,50 @@
 
   <div id="content">
 
-    <h1 id="header1"> Catálogo de Artículos Compartidos </h1>
+    <h1 id="header1"> Reporte de Tiempo por Departamento </h1>
 
     <div id="card">
 
       <div id="cardheader"></div>
 
-      <div id="table">
-        <vue-table-dynamic :params="params"
-          @select="onSelect"
-          @selection-change="onSelectionChange"
-          ref="table">
-        </vue-table-dynamic>
+        <div id="table">
+          <vue-table-dynamic :params="params"
+            @select="onSelect"
+            @selection-change="onSelectionChange"
+            ref="table">
+          </vue-table-dynamic>
+        </div>
+
         <br>
-      </div>
 
-      <div id="buttons">
-        <button @click="signDownArticle"> Dar de baja </button>
-        <button @click="loadArticles"> Actualizar </button>
       </div>
-
     </div>
+
   </div>
 </template>
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic'
 export default {
-  name: 'CatalogSharedArticles',
+  name: 'SearchArticlesperClient',
   data() {
     return {
-      aId:'',
-      aName:'',
-      aDescription:'',
-      errors:[],
+      searchClient:'',
       params: {
         data: [
-          ['Compañía Origen', 'Cliente Origen', 'Artículo', 'Compañía Destino','Cliente Destino'],
+          ['ID','Area','Fecha Alta','Tiempo Autorizado','Tiempo Total'],
+          ["1", "CxC", "2021-03-21 (07:20)","2021-03-21 (10:20)","3:00"],
+          ["2", "VTA", "2021-03-21 (07:20)","2021-03-21 (10:20)","3:00"],
+          ["3", "ING", "2021-03-21 (07:20)","2021-03-21 (10:20)","3:00"],
+          ["4", "PLN", "2021-03-21 (07:20)","2021-03-21 (10:20)","3:00"],
         ],
-        deleteData:[],
+        deleteDate:[],
         header: 'row',
         border: true,
         stripe: true,
         showCheck: true,
         enableSearch: true,
-        sort: [0, 1,2],
+        sort: [0,1],
         pagination: true,
         pageSize: 10,
       }
@@ -59,24 +58,30 @@ export default {
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
-      this.params.deleteData=checkedIndexs
+      this.params.deleteDate=checkedIndexs
     },
-    signDownArticle(){
-        //there will be a method here to establish connection with backend and sign down the articles' id and name, some day....
-        this.aId='';
-        this.aName='';
-        this.aDescription='';
-
-        for (var i = this.params.deleteData.length-1; i>0 ; i--) {
-          this.params.data.splice(this.params.deleteData[i], 1)
+    signUpWare(){
+        if(this.wareCom==''||this.wareUbi=='')
+        {
+          alert('Por favor, llene todos los campos para registrar el almacen')
+        }
+        else
+        {
+          this.params.data.push([this.wareCom, this.wareUbi]);
         }
     },
-    loadArticles(){
-        //there will be a method here to establish connection with backend and update the table, some day....
-        this.aId='';
-        this.aName='';
-        this.aDescription='';
-        alert('Actualizando tabla con Base de datos')
+    signDownWare(){
+        this.wareCom='';
+        this.wareUbi='';
+        console.log(this.params.deleteData.length)
+        for (var i = this.params.deleteData.length-1; i>0 ; i--) {
+        this.params.data.splice(this.params.deleteData[i], 1)
+      }
+    },
+    loadWare(){
+        this.wareCom='';
+        this.wareUbi='';
+        alert("Actualizando informacion...");
     }
   },
   components: { VueTableDynamic }
@@ -108,23 +113,6 @@ export default {
   background: #f2f2f2;
   padding: 10px;
   color: #213485;
-}
-
-.inputForm textarea{
-  padding: 10px;
-  width: 150%;
-  height: 90px;
-  color: #213485;
-  margin-top: 2%;
-  margin-bottom: 0%;
-  font-family: "GOTY0", "GOTY1", "GOTY2", verdana;
-  opacity: 50%;
-  border-radius: 6px;
-  border: transparent;
-  background: #f2f2f2;
-  width: 100%;
-  font-family: Verdana;
-  font-size: 20px;
 }
 
 button{
@@ -187,9 +175,5 @@ label{
   display: flex;
   align-items: center;
   justify-content: center;
-}
-
-#error{
-  color: red;
 }
 </style>
