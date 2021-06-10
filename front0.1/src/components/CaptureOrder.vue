@@ -1,57 +1,42 @@
 <template>
-
-  <div id="content">
-
-    <h1 id="header1"> Captura de Órdenes </h1>
-
-    <div id="card">
-
-      <div id="cardheader"></div>
-
-      <div class="inputForm">
-      <div id="error">
-        <ul>
-          <li v-for="error in errors" v-bind:key="error">{{error}}</li>
-        </ul>
-      </div>
-        <form>
-          <label>Cliente</label>
-          <br>
-          <input v-model="aCliente" placeholder="Cliente">
-          <br>
-          <label>No. de orden</label>
-          <br>
-          <input v-model="aNoOrden" placeholder="No de cliente" disabledDates="disabledDates" type="number">
-          <br>
-          <label>Direccion de entrega</label>
-          <br>
-          <input v-model="aDireccion" placeholder="Direccion de entrega">
-          <br>
-          <label>Observaciones</label>
-          <br>
-          <input v-model="aObservaciones" placeholder="Observaciones de la orden"></textarea>
-          <br>
-          <label>Fecha de Captura</label>
-          <br>
-          <datepicker placeholder="Fecha de entrega" v-model="aFecha" :format="customFormatter" :disabledDates="disabledDates"></datepicker>
-        </form>
-      </div>
-
-      <div id="buttons">
-        <button @click="save"> Guardar </button>
-        <button @click="cancel"> Cancelar </button>
-      </div>
-
-      <div id="table">
-        <vue-table-dynamic :params="params"
-          @select="onSelect"
-          @selection-change="onSelectionChange"
-          ref="table">
-        </vue-table-dynamic>
+    <div id="test">
+    <h1 id="header1"> Captura de ordenes </h1>
+    <div class="inputForm">
+    <form>
+      <label>Cliente</label>
+      <br>
+      <input v-model="aCliente" placeholder="Cliente">
+      <br>
+      <label>No. de orden</label>
+      <br>
+      <input v-model="aNoOrden" placeholder="No de cliente">
+      <br>
+      <label>Fecha de Captura</label>
+      <br>
+      <datepicker placeholder="Fecha de entrega" v-model="aFecha" :format="customFormatter"></datepicker>
+      <br>
+      <label>Direccion de entrega</label>
+      <br>
+      <input v-model="aDireccion" placeholder="Direccion de entrega">
+   </form>
+  </div>
+   <div id="table">
+  <vue-table-dynamic :params="params"
+      @select="onSelect"
+      @selection-change="onSelectionChange"
+      ref="table"></vue-table-dynamic>
+      <form>
+        <label>Observaciones</label>
         <br>
-      </div>
-
-    </div>
+        <textarea v-model="aObservaciones" placeholder="Observaciones de la orden"></textarea>
+        <br>
+        <br>
+      </form>
+  </div>
+  <br>
+  <button @click="save"> Guardar </button>
+  <button @click="cancel"> Cancelar </button>
+  <br>
   </div>
 </template>
 
@@ -68,10 +53,6 @@ export default {
     aFecha:'',
     aDireccion:'',
     aObservaciones:'',
-    disabledDates: {
-          to: new Date(Date.now() - 8640000)
-    },
-    errors:[],
       params: {
         data: [
           ['Articulo','Cantidad','Fecha solicitata'],
@@ -102,24 +83,23 @@ export default {
     },
     save(){
       //aqui habra una conexion a backend para guardar la orden
-      this.errors=[]
       if(this.aCliente && this.aNoOrden && this.aFecha && this.aDireccion && this.aObservaciones){
 
       }else{
         if(!this.aCliente){
-          this.errors.push('campo cliente vacio')
+          alert('campo cliente vacio')
         }
         if(!this.aNoOrden){
-          this.errors.push('campo numero de orden vacio')
+          alert('campo numero de orden vacio')
         }
         if(!this.aFecha){
-          this.errors.push('campo fecha vacio')
+          alert('campo fecha vacio')
         }
         if(!this.aDireccion){
-          this.errors.push('campo Direccion vacio')
+          alert('campo Direccion vacio')
         }
         if(!this.aObservaciones){
-          this.errors.push('campo Observaciones vacio')
+          alert('campo Observaciones vacio')
         }
       }
       this.aCliente='';
@@ -145,34 +125,25 @@ export default {
 </script>
 
 <style scoped>
-.inputForm{
-  width: 90%;
+.inputForm {
+  width: 400px;
   clear: both;
   color: #213485;
   margin: 3%;
-  font-size: 20px;
-  font-family: Verdana;
-  font-size: 20px;
 }
 
-.inputForm input{
+.inputForm  input {
   width: 100%;
   clear: both;
   margin-top: 2%;
   margin-bottom: 5%;
-  height: 50px;
-  font-size: 20px;
   font-family: "GOTY0", "GOTY1", "GOTY2", verdana;
   opacity: 50%;
   border-radius: 6px;
   border: transparent;
-  background: #f2f2f2;
-  padding: 10px;
-  color: #213485;
 }
 
-.inputForm textarea{
-  padding: 10px;
+.inputForm  textarea {
   width: 150%;
   height: 90px;
   color: #213485;
@@ -182,10 +153,19 @@ export default {
   opacity: 50%;
   border-radius: 6px;
   border: transparent;
-  background: #f2f2f2;
-  width: 100%;
-  font-family: Verdana;
-  font-size: 20px;
+}
+
+#test{
+  background-color: rgba(33,52,133,0.20);
+  margin: 1%;
+  color: #3B0EA4;
+  font-family: "GOTY0", "GOTY1", "GOTY2", verdana;
+}
+
+#table{
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 2%;
 }
 
 button{
@@ -198,59 +178,18 @@ button{
   background-color: transparent;
   padding: 5px;
   font-weight: 700;
-  font-size: 24px;
+  font-size: 12px;
   border-radius: 6px;
   border: transparent;
-  margin-bottom: 40px;
 }
 
 button:hover{
-  background-color: rgba(14,44,164,0.30);
+  background-color: rgba(14,44,164,0.30) ;
 }
 
 #header1{
   margin: 2%;
-  font-family: Verdana;
-  font-size: 60px;
-  color: #FFFF;
-  text-align: center;
+  font-size: 30px;
 }
 
-#table{
-  width: 80%;
-  margin-left: 10%;
-  margin-top: 2%;
-}
-
-label{
-  font-family: Verdana;
-  font-weight: bold;
-}
-
-#card{
-  background: #fff;
-  width: 80%;
-  margin: 5em;
-  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.14);
-  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.14);
-  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.14);
-  border-radius: 15px;
-}
-
-#cardheader{
-  height: 20px;
-  width: 100%;
-  background: #3B0EA4;
-}
-
-#buttons{
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-#error{
-  color: red;
-}
 </style>

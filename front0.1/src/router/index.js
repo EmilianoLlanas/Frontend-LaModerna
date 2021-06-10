@@ -13,7 +13,6 @@ import CatalogDelivered from '@/components/CatalogDelivered'
 import CatalogFacturas from '@/components/CatalogFacturas'
 import CatalogSaldo from '@/components/CatalogSaldo'
 import CatalogWarehouse from '@/components/CatalogWarehouse'
-import SharedArticles from '@/components/SharedArticles'
 import CatalogSharedArticles from '@/components/CatalogSharedArticles'
 import RoleAssign from '@/components/RoleAssign'
 import LogInPrincipal from '@/components/LogInPrincipal'
@@ -32,10 +31,7 @@ import AuthorizationING from '@/components/AuthorizationING'
 import BlockClient from '@/components/BlockClient'
 import AuthorizeOrderCST from '@/components/AuthorizeOrderCST'
 import AuthorizeVTA from '@/components/AuthorizeVTA'
-import Backup from '@/components/Backup'
-import SearchArticlesperClient from '@/components/SearchArticlesperClient'
-import TimeReport from '@/components/TimeReport'
-import ReportGenerator from '@/components/ReportGenerator'
+
 
 Vue.use(Router)
 
@@ -120,11 +116,6 @@ export default new Router({
     },
 
     {
-      path: '/SharedArticles',
-      name: 'SharedArticles',
-      component: SharedArticles
-    },
-    {
       path: '/CatalogSharedArticles',
       name: 'CatalogSharedArticles',
       component: CatalogSharedArticles
@@ -171,7 +162,7 @@ export default new Router({
       component: MenuAGE
     },
     {
-      path: '/ConsultSalesOrders',
+      path: '/ConsultSalesOrderes',
       name: 'ConsultSalesOrders',
       component: ConsultSalesOrders
     },
@@ -210,26 +201,6 @@ export default new Router({
       path: '/AuthorizeVTA',
       name: 'AuthorizeVTA',
       component: AuthorizeVTA
-    },
-    {
-      path: '/Backup',
-      name: 'Backup',
-      component: Backup
-    },
-    {
-      path: '/SearchArticlesING',
-      name: 'SearchArticlesperClient',
-      component: SearchArticlesperClient
-    },
-    {
-      path: '/TimeReport',
-      name: 'TimeReport',
-      component: TimeReport
-    },
-    {
-      path: '/ReportGenerator',
-      name: 'ReportGenerator',
-      component: ReportGenerator
     }
   ]
 })
