@@ -69,14 +69,12 @@
 import { required,email } from 'vuelidate/lib/validators'
 import 'es6-promise/auto'
 import auth from "@/auth";
-
-
 export default
 {
   data:()=>({
     user:'',
     password:'',
-    token:'Bearer ',
+  token:'Bearer ',
     auth:'',
     error:false
   }),
@@ -97,7 +95,8 @@ export default
       if(!this.$v.$invalid){
         try {
         this.token+= ((await auth.login(this.user, this.password)).data.token);
-        console.log(this.token)
+        this.$store.commit('change',this.token)
+        console.log(this.$store.getters.token)
         this.auth=((await auth.authToken(this.token)).data);
         console.log(this.auth)
         this.$router.push("/")
@@ -108,19 +107,10 @@ export default
       }
     }
   }
-
-
 }
-
 </script>
 
 <style scoped>
-
-*{
-  padding: 0;
-  margin: 0;
-}
-
 .center{
   display: flex;
   margin-left: 8%;
@@ -128,7 +118,6 @@ export default
   margin-top: auto;
   margin-bottom: auto;
 }
-
 #bottom {
     margin: 5px;
     text-align: center;
@@ -138,23 +127,19 @@ export default
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: 11px;
 }
-
 #errors {
     color: red;
     font-size: 80%;
 }
-
 #myPrincipalDiv {
     display: flex;
     height: 700px;
 }
-
 #content {
   overflow: auto;
   width: 600px;
   background: gray;
 }
-
 #left {
   width: 70%;
   margin: 1px;
@@ -165,13 +150,11 @@ export default
   color: white;
   border-radius: 15px;
 }
-
 img {
     display: flex;
     width:100%;
     height:100%;
 }
-
 #right {
   width: 30%;
   margin: 1px;
@@ -189,10 +172,6 @@ img {
   display:block;
   font-style: italic;
 }
-
 #left  { float:left;  }
 #right { float:right; }
-
-
-
 </style>
