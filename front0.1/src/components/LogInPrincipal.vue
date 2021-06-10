@@ -76,7 +76,7 @@ export default
   data:()=>({
     user:'',
     password:'',
-    token:'Bearer ',
+  token:'Bearer ',
     auth:'',
     error:false
   }),
@@ -97,6 +97,7 @@ export default
       if(!this.$v.$invalid){
         try {
         this.token+= ((await auth.login(this.user, this.password)).data.token);
+        this.$store.commit('change',this.token)
         console.log(this.token)
         this.auth=((await auth.authToken(this.token)).data);
         console.log(this.auth)
@@ -115,12 +116,6 @@ export default
 </script>
 
 <style scoped>
-
-*{
-  padding: 0;
-  margin: 0;
-}
-
 .center{
   display: flex;
   margin-left: 8%;

@@ -1,82 +1,58 @@
 <template>
-
-  <div id="content">
-
+    <div id="test">
     <h1 id="header1"> Catálogo de Precios </h1>
+    <div class="inputForm">
+    <form>
+      <label>Compañia</label>
+      <br>
+      <input v-model="aCompania" placeholder="Compañia">
+      <br>
+      <label>lista de Precios</label>
+      <br>
+      <input v-model="aLista" placeholder="Lista de precios">
+      <br>
+      <label>Articulo</label>
+      <br>
+      <input v-model="aArticulo" placeholder="Articulo">
+      <br>
+      <label>Nivel de Descuento</label>
+      <br>
+      <input v-model="aNivDescuento" placeholder="0%">
+      <label>Cantidad</label>
+      <br>
+      <input v-model="aCantidad" placeholder="Cantidad">
+      <br>
+      <label>Precio</label>
+      <br>
+      <input v-model="aPrecio" placeholder="Precio">
+      <br>
+      <label>Descuento</label>
+      <br>
+      <input v-model="aDescuento" placeholder="0%">
+      <br>
+      <label>Descripcion</label>
+      <br>
+      <input v-model="aDescripcion" placeholder="Descripcion del producto">
+      <br>
+      <label>Fecha de inicio</label>
+      <br>
+      <datepicker placeholder="Fecha de entrega" v-model="aFechaInicio" :format="customFormatter"></datepicker>
+      <br>
+      <label>Fecha de caducidad</label>
+      <br>
+      <datepicker placeholder="Fecha de entrega" v-model="aFechaCaducidad" :format="customFormatter"></datepicker>
+   </form>
+  </div>
+   <button @click="signUpPrice"> Dar de alta </button>
+   <button @click="signDownPrice"> Dar de baja </button>
+   <button @click="loadPrices">Actualizar </button>
+   <button @click="generateReport">Reportes </button>
+   <div id="table" >
+  <vue-table-dynamic :params="params"
+      @select="onSelect"
+      @selection-change="onSelectionChange"
+      ref="table"></vue-table-dynamic>
 
-    <div id="card">
-
-      <div id="cardheader"></div>
-
-      <div class="inputForm">
-
-        <div id="error">
-          <ul>
-            <li v-for="error in errors" v-bind:key="error">{{error}}</li>
-          </ul>
-        </div>
-
-        <form>
-          <label>Compañia</label>
-          <br>
-          <input v-model="aCompania" placeholder="Compañia">
-          <br>
-          <label>Lista de Precios</label>
-          <br>
-          <input v-model="aLista" placeholder="Lista de precios" type="number">
-          <br>
-          <label>Articulo</label>
-          <br>
-          <input v-model="aArticulo" placeholder="Articulo">
-          <br>
-          <label>Nivel de Descuento</label>
-          <br>
-          <input v-model="aNivDescuento" placeholder="0" type="number">
-          <label>Cantidad</label>
-          <br>
-          <input v-model="aCantidad" placeholder="Cantidad" type="number">
-          <br>
-          <label>Precio</label>
-          <br>
-          <input v-model="aPrecio" placeholder="Precio" type="number">
-          <br>
-          <label>Descuento</label>
-          <br>
-          <input v-model="aDescuento" placeholder="0" type="number">
-          <br>
-          <label>Descripcion</label>
-          <br>
-          <input v-model="aDescripcion" placeholder="Descripcion del producto">
-          <br>
-          <label>Fecha de inicio</label>
-          <br>
-          <datepicker placeholder="Fecha de entrega" v-model="aFechaInicio" :format="customFormatter" :disabledDates="disabledDates"></datepicker>
-          <br>
-          <label>Fecha de caducidad</label>
-          <br>
-          <datepicker placeholder="Fecha de entrega" v-model="aFechaCaducidad" :format="customFormatter" :disabledDates="disabledDates"></datepicker>
-          <br>
-          <br>
-        </form>
-      </div>
-
-      <div id="buttons">
-        <button @click="signUpPrice"> Dar de alta </button>
-        <button @click="signDownPrice"> Dar de baja </button>
-        <button @click="loadPrices"> Actualizar </button>
-        <button @click="generateReport"> Reportes </button>
-      </div>
-
-      <div id="table">
-        <vue-table-dynamic :params="params"
-            @select="onSelect"
-            @selection-change="onSelectionChange"
-            ref="table">
-        </vue-table-dynamic>
-        <br>
-      </div>
-
-    </div>
   </div>
   </div>
 </template>
@@ -91,7 +67,7 @@ export default {
   data() {
     return {
       aCompania:'',
-      aLista:0,
+      aLista:'',
       aArticulo:'',
       aNivDescuento:0,
       aCantidad:0,
@@ -100,10 +76,6 @@ export default {
       aDescripcion:'',
       aFechaInicio:'',
       aFechaCaducidad:'',
-      disabledDates: {
-      to: new Date(Date.now() - 8640000)
-      },
-      errors:[],
       params: {
         data: [
           ['Compañia','Lista de precios','Articulo','Nivel de Descuento','Cantidad','Precio','Descuento','Descripción','Fecha de inicio','Fecha de caducidad'],
@@ -133,40 +105,39 @@ export default {
       this.params.deleteData=checkedIndexs
     },
     signUpPrice(){
-        this.errors=[]
         //there will be a method here to establish connection with backend and sign up the articles' id and name, some day....
         if(this.aCompania && this.aLista && this.aArticulo && this.aNivDescuento && this.aCantidad && this.aPrecio && this.aDescuento && this.aDescripcion && this.aFechaInicio && this.aFechaCaducidad){
-          this.params.data.push([this.aCompania, this.aLista, this.aArticulo, this.aNivDescuento, this.aCantidad, this.aPrecio, this.aDescuento, this.aDescripcion, this.aFechaInicio, this.aFechaCaducidad])
+          this.params.data.push([this.aCompania, this.aLista, this.aArticulo, this.aNivDescuento, this.aCantidad, this.aPrecio, this.aDescuento, this.aDescripcion, this.aFechaInicio, this.aFechaCaducidad]) 
         }else{
           if(!this.aCompania){
-            this.errors.push('Campo compañía esta vacio')
+            alert('campo compañía esta vacio')
           }
           if(!this.aLista){
-            this.errors.push('Campo lista esta vacio')
+            alert('campo lista esta vacio')
           }
           if(!this.aArticulo){
-            this.errors.push('Campo articulo esta vacio')
+            alert('campo articulo esta vacio')
           }
           if(!this.aNivDescuento){
-            this.errors.push('Campo nivel de Descuento esta vacio')
+            alert('campo nivel de Descuento esta vacio')
           }
           if(!this.aCantidad){
-            this.errors.push('Campo cantidad esta vacio')
+            alert('campo cantidad esta vacio')
           }
           if(!this.aPrecio){
-            this.errors.push('Campo precio esta vacio')
+            alert('campo precio esta vacio')
           }
           if(!this.aDescuento){
-            this.errors.push('Campo descuento esta vacio')
+            alert('campo descuento esta vacio')
           }
           if(!this.aDescripcion){
-            this.errors.push('Campo descripcion esta vacio')
+            alert('campo descripcion esta vacio')
           }
           if(!this.aFechaInicio){
-            this.errors.push('Campo fecha de inicio esta vacio')
+            alert('campo fecha de inicio esta vacio')
           }
           if(!this.aFechaCaducidad){
-            this.errors.push('Campo fecha de caducidad esta vacio')
+            alert('campo fecha de caducidad esta vacio')
           }
         }
         this.aCompania='';
@@ -202,34 +173,34 @@ export default {
           alert('aqui va la logica de update')
         }else{
           if(!this.aCompania){
-            this.errors.push('campo compañía esta vacio')
+            alert('campo compañía esta vacio')
           }
           if(!this.aLista){
-            this.errors.push('campo lista esta vacio')
+            alert('campo lista esta vacio')
           }
           if(!this.aArticulo){
-            this.errors.push('campo articulo esta vacio')
+            alert('campo articulo esta vacio')
           }
           if(!this.aNivDescuento){
-            this.errors.push('campo nivel de Descuento esta vacio')
+            alert('campo nivel de Descuento esta vacio')
           }
           if(!this.aCantidad){
-            this.errors.push('campo cantidad esta vacio')
+            alert('campo cantidad esta vacio')
           }
           if(!this.aPrecio){
-            this.errors.push('campo precio esta vacio')
+            alert('campo precio esta vacio')
           }
           if(!this.aDescuento){
-            this.errors.push('campo descuento esta vacio')
+            alert('campo descuento esta vacio')
           }
           if(!this.aDescripcion){
-            this.errors.push('campo descripcion esta vacio')
+            alert('campo descripcion esta vacio')
           }
           if(!this.aFechaInicio){
-            this.errors.push('campo fecha de inicio esta vacio')
+            alert('campo fecha de inicio esta vacio')
           }
           if(!this.aFechaCaducidad){
-            this.errors.push('campo fecha de caducidad esta vacio')
+            alert('campo fecha de caducidad esta vacio')
           }
         }
         this.aCompania='';
@@ -256,34 +227,25 @@ export default {
 </script>
 
 <style scoped>
-.inputForm{
-  width: 90%;
+.inputForm {
+  width: 400px;
   clear: both;
   color: #213485;
   margin: 3%;
-  font-size: 20px;
-  font-family: Verdana;
-  font-size: 20px;
 }
 
-.inputForm input{
+.inputForm  input {
   width: 100%;
   clear: both;
   margin-top: 2%;
   margin-bottom: 5%;
-  height: 50px;
-  font-size: 20px;
   font-family: "GOTY0", "GOTY1", "GOTY2", verdana;
   opacity: 50%;
   border-radius: 6px;
   border: transparent;
-  background: #f2f2f2;
-  padding: 10px;
-  color: #213485;
 }
 
-.inputForm textarea{
-  padding: 10px;
+.inputForm  textarea {
   width: 150%;
   height: 90px;
   color: #213485;
@@ -293,10 +255,6 @@ export default {
   opacity: 50%;
   border-radius: 6px;
   border: transparent;
-  background: #f2f2f2;
-  width: 100%;
-  font-family: Verdana;
-  font-size: 20px;
 }
 
 button{
@@ -309,59 +267,30 @@ button{
   background-color: transparent;
   padding: 5px;
   font-weight: 700;
-  font-size: 24px;
+  font-size: 12px;
   border-radius: 6px;
   border: transparent;
-  margin-bottom: 40px;
 }
 
 button:hover{
-  background-color: rgba(14,44,164,0.30);
+  background-color: rgba(14,44,164,0.30) ;
+}
+
+#test{
+  background-color: rgba(33,52,133,0.20);
+  margin: 1%;
+  color: #3B0EA4;
+  font-family: "GOTY0", "GOTY1", "GOTY2", verdana;
 }
 
 #header1{
   margin: 2%;
-  font-family: Verdana;
-  font-size: 60px;
-  color: #FFFF;
-  text-align: center;
+  font-size: 30px;
 }
 
 #table{
   width: 80%;
   margin-left: 10%;
   margin-top: 2%;
-}
-
-label{
-  font-family: Verdana;
-  font-weight: bold;
-}
-
-#card{
-  background: #fff;
-  width: 80%;
-  margin: 5em;
-  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.14);
-  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.14);
-  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.14);
-  border-radius: 15px;
-}
-
-#cardheader{
-  height: 20px;
-  width: 100%;
-  background: #3B0EA4;
-}
-
-#buttons{
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-#error{
-  color: red;
 }
 </style>
