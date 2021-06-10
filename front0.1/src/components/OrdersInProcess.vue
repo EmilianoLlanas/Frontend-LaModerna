@@ -1,30 +1,18 @@
 <template>
+    <div id="test">
+    <h1 id="header1"> Órdenes de venta en proceso </h1>
 
-  <div id="content">
+   <button @click="loadOrders">Actualizar</button>
+   <div id="table" >
 
-    <h1 id="header1"> Órdenes de Venta en Proceso </h1>
+  <vue-table-dynamic :params="params"
+      @select="onSelect"
+      @selection-change="onSelectionChange"
+      ref="table"></vue-table-dynamic>
 
-    <div id="card">
-
-      <div id="cardheader"></div>
-
-      <div id="table" >
-
-        <vue-table-dynamic :params="params"
-          @select="onSelect"
-          @selection-change="onSelectionChange"
-          ref="table">
-        </vue-table-dynamic>
-
-        <!--  <OrderDetails :id="params.id" :cliente="params.cliente"></OrderDetails>-->
-        <OrderDetails :id="params.id"></OrderDetails>
-      </div>
-      
-      <div id="buttons">
-        <button @click="loadOrders"> Actualizar </button>
-      </div>
-
-    </div>
+    <!--  <OrderDetails :id="params.id" :cliente="params.cliente"></OrderDetails>-->
+    <OrderDetails :id="params.id"></OrderDetails>
+  </div>
 
   </div>
 </template>
@@ -88,6 +76,49 @@ export default {
 </script>
 
 <style scoped>
+.inputForm {
+  width: 400px;
+  clear: both;
+  color: #213485;
+  margin: 3%;
+}
+
+.inputForm  input {
+  width: 100%;
+  clear: both;
+  margin-top: 2%;
+  margin-bottom: 5%;
+  font-family: "GOTY0", "GOTY1", "GOTY2", verdana;
+  opacity: 50%;
+  border-radius: 6px;
+  border: transparent;
+}
+
+.inputForm  textarea {
+  width: 150%;
+  height: 90px;
+  color: #213485;
+  margin-top: 2%;
+  margin-bottom: 0%;
+  font-family: "GOTY0", "GOTY1", "GOTY2", verdana;
+  opacity: 50%;
+  border-radius: 6px;
+  border: transparent;
+}
+
+#test{
+  background-color: rgba(33,52,133,0.20);
+  margin: 1%;
+  color: #3B0EA4;
+  font-family: "GOTY0", "GOTY1", "GOTY2", verdana;
+}
+
+#table{
+  width: 90%;
+  margin-left: 3%;
+  margin-top: 2%;
+}
+
 button{
   margin-top: 0%;
   margin-left: 3%;
@@ -98,55 +129,17 @@ button{
   background-color: transparent;
   padding: 5px;
   font-weight: 700;
-  font-size: 24px;
+  font-size: 12px;
   border-radius: 6px;
   border: transparent;
-  margin-bottom: 40px;
 }
 
 button:hover{
-  background-color: rgba(14,44,164,0.30);
+  background-color: rgba(14,44,164,0.30) ;
 }
 
 #header1{
   margin: 2%;
-  font-family: Verdana;
-  font-size: 60px;
-  color: #FFFF;
-  text-align: center;
-}
-
-#table{
-  width: 80%;
-  margin-left: 10%;
-  margin-top: 2%;
-}
-
-label{
-  font-family: Verdana;
-  font-weight: bold;
-}
-
-#card{
-  background: #fff;
-  width: 80%;
-  margin: 5em;
-  -webkit-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.14);
-  -moz-box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.14);
-  box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.14);
-  border-radius: 15px;
-}
-
-#cardheader{
-  height: 20px;
-  width: 100%;
-  background: #3B0EA4;
-}
-
-#buttons{
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  font-size: 30px;
 }
 </style>
