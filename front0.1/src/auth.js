@@ -19,37 +19,5 @@ export default {
 
     return axios.get(ENDPOINT_PATH + "api/me", headers);
 
-  },//method, connects clients/agents
-
-  getAgents(tokn){
-    const headers = {
-      'headers':{
-        'Authorization': tokn
-      }
-    }
-
-    return axios.get(ENDPOINT_PATH+"api/clients/agents",headers)
-
-  },
-  //method, connects Companies
-  getCompanies(tokn){
-    const headers = {
-      'headers':{
-        'Authorization': tokn
-      }
-    }
-    return axios.get(ENDPOINT_PATH+"api/companies",headers)
-
-  },
-  //method, connects Items
-  getItems(tokn){
-    const headers = {
-      'headers':{
-        'Authorization': tokn
-      }
-    }
-    return axios.get(ENDPOINT_PATH+"api/items",headers)
-
   }
-
     };
