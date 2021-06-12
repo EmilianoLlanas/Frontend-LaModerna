@@ -2,36 +2,68 @@
 
   <div id="content">
 
-    <h1 id="header1"> Órdenes de Venta en Proceso </h1>
+    <h1 id="header1"> Modificar Órdenes </h1>
 
     <div id="card">
 
       <div id="cardheader"></div>
 
-      <div id="table" >
+      <div class="inputForm">
 
-        <vue-table-dynamic :params="params"
-          @select="onSelect"
-          @selection-change="onSelectionChange"
-          ref="table">
-        </vue-table-dynamic>
+        <label>Folio</label>
 
-        <!--  <OrderDetails :id="params.id" :cliente="params.cliente"></OrderDetails>-->
-        <OrderDetails :id="params.id"></OrderDetails>
+        <input v-model="aId" placeholder="Folio de orden">
+        <br>
+
+        <div id="buttons">
+          <button @click="editOrders">Editar por Folio</button>
+        </div>
+
+        <div id="editForm" >
+          <label>Cliente</label>
+          <input v-model="aClient" placeholder="Cliente que realiza la orden">
+          <br>
+          <label>Nombre</label>
+          <input v-model="aName" placeholder="Concepto de orden">
+          <br>
+          <label>Fecha Orden</label>
+          <input v-model="aDate" placeholder="Fecha de orden">
+          <br>
+          <label>Artículo</label>
+          <input v-model="aArticle" placeholder="Artículo">
+          <br>
+          <label>Cantidad</label>
+          <input v-model="aAmount" placeholder="Cantidad">
+          <br>
+          <label>Precio</label>
+          <input v-model="aPrice" placeholder="Precio">
+        </div>
+
+        <div id="buttons">
+          <button @click="loadOrders">Actualizar</button>
+        </div>
+
+        <div id="table" >
+          <vue-table-dynamic :params="params"
+            @select="onSelect"
+            @selection-change="onSelectionChange"
+            ref="table">
+          </vue-table-dynamic>
+          <br>
+
+          <!--  <OrderDetails :id="params.id" :cliente="params.cliente"></OrderDetails>-->
+          <OrderDetails :id="params.id"></OrderDetails>
+          <br>
+
+        </div>
       </div>
-      
-      <div id="buttons">
-        <button @click="loadOrders"> Actualizar </button>
-      </div>
-
     </div>
-
   </div>
 </template>
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic';
-import OrderDetails from '@/components/OrderDetails.vue';
+import OrderDetails from '@/components/Orders/OrderDetails.vue';
 
 
 
@@ -81,6 +113,9 @@ export default {
     loadOrders(){
       alert('Actualizando tablas con base de datos')
     },
+    editOrders(){
+      document.getElementById("editForm").style.display = "block";
+    }
 
   },
   components: { VueTableDynamic,OrderDetails }
@@ -88,6 +123,49 @@ export default {
 </script>
 
 <style scoped>
+.inputForm{
+  width: 90%;
+  clear: both;
+  color: #213485;
+  margin: 3%;
+  font-size: 20px;
+  font-family: Verdana;
+  font-size: 20px;
+}
+
+.inputForm input{
+  width: 100%;
+  clear: both;
+  margin-top: 2%;
+  margin-bottom: 5%;
+  height: 50px;
+  font-size: 20px;
+  font-family: "GOTY0", "GOTY1", "GOTY2", verdana;
+  opacity: 50%;
+  border-radius: 6px;
+  border: transparent;
+  background: #f2f2f2;
+  padding: 10px;
+  color: #213485;
+}
+
+.inputForm textarea{
+  padding: 10px;
+  width: 150%;
+  height: 90px;
+  color: #213485;
+  margin-top: 2%;
+  margin-bottom: 0%;
+  font-family: "GOTY0", "GOTY1", "GOTY2", verdana;
+  opacity: 50%;
+  border-radius: 6px;
+  border: transparent;
+  background: #f2f2f2;
+  width: 100%;
+  font-family: Verdana;
+  font-size: 20px;
+}
+
 button{
   margin-top: 0%;
   margin-left: 3%;
@@ -148,5 +226,9 @@ label{
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+#error{
+  color: red;
 }
 </style>
