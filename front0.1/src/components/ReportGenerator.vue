@@ -97,7 +97,7 @@
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic';
-import AllSalesReportDetails from '@/components/AllSalesReportDetails.vue';
+import AllSalesReportDetails from '@/components/Sales/AllSalesReportDetails.vue';
 import Datepicker from 'vuejs-datepicker'
 import moment from 'moment'
 import axios from "axios";

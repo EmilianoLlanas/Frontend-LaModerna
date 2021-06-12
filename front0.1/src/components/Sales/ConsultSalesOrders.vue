@@ -19,11 +19,11 @@
 
           <SalesOrderStatusDetails :id="params.id"></SalesOrderStatusDetails>
           <br>
-          
+
         </div>
 
       </div>
-      
+
     </div>
 
     <br>
@@ -33,7 +33,7 @@
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic';
-import SalesOrderStatusDetails from '@/components/SalesOrderStatusDetails.vue';
+import SalesOrderStatusDetails from '@/components/Orders/SalesOrderStatusDetails.vue';
 export default {
   name: 'ConsultSalesOrders',
   data() {
@@ -74,7 +74,7 @@ export default {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
       this.params.id=checkedIndexs
     }
-    
+
   },
   components: { VueTableDynamic, SalesOrderStatusDetails }
 }

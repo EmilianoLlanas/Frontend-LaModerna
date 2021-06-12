@@ -2,24 +2,26 @@
 
   <div id="content">
 
-    <h1 id="header1"> Órdenes de Venta Procesadas </h1>
+    <h1 id="header1"> Órdenes de Venta en Proceso </h1>
 
     <div id="card">
 
       <div id="cardheader"></div>
 
-      <div id="table">
+      <div id="table" >
+
         <vue-table-dynamic :params="params"
           @select="onSelect"
           @selection-change="onSelectionChange"
           ref="table">
         </vue-table-dynamic>
 
-        <ProcessedOrdersDetails :id="params.id"></ProcessedOrdersDetails>
+        <!--  <OrderDetails :id="params.id" :cliente="params.cliente"></OrderDetails>-->
+        <OrderDetails :id="params.id"></OrderDetails>
       </div>
 
       <div id="buttons">
-        <button @click="loadOrders">Actualizar</button>
+        <button @click="loadOrders"> Actualizar </button>
       </div>
 
     </div>
@@ -29,10 +31,12 @@
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic';
-import ProcessedOrdersDetails from '@/components/ProcessedOrdersDetails.vue';
+import OrderDetails from '@/components/Orders/OrderDetails.vue';
+
+
 
 export default {
-  name: 'ProcessedOrders',
+  name: 'OrdersInProcess',
 
   data() {
 
@@ -71,12 +75,15 @@ export default {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
       this.params.id=checkedIndexs
     },
+    orderReport(){
+        //there will be a method here to establish connection with backend and sign up the articles' id and name, some day....
+    },
     loadOrders(){
-        alert('Actualizando tablas con ERP')
+      alert('Actualizando tablas con base de datos')
     },
 
   },
-  components: { VueTableDynamic,ProcessedOrdersDetails }
+  components: { VueTableDynamic,OrderDetails }
 }
 </script>
 

@@ -33,7 +33,7 @@
           <div style="color: #3B0EA4;">
           <label>- - - Folio Baan - - -</label>
           </div>
-          
+
           <br>
           <label>Desde:</label>
           <input v-model="fromBaan" placeholder="Folio">
@@ -82,7 +82,7 @@
           <br>
 
         </div>
-        
+
       </div>
     </div>
   </div>
@@ -91,7 +91,7 @@
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic';
-import AllSalesReportDetails from '@/components/AllSalesReportDetails.vue';
+import AllSalesReportDetails from '@/components/Sales/AllSalesReportDetails.vue';
 import Datepicker from 'vuejs-datepicker'
 import moment from 'moment'
 
@@ -211,7 +211,7 @@ export default {
   border-radius: 6px;
   border: transparent;
   background: #f2f2f2;
-  width: 100%; 
+  width: 100%;
   font-family: Verdana;
   font-size: 20px;
 }
