@@ -6,6 +6,20 @@
                 <img :src="require('@/assets/logotipo1.jpg')">
             </div>
             <div id="menu-buttons">
+
+              <a @click="openDrop"> <div class="element"> Cambiar de Rol </div></a>
+              <div id="myDropdown" style="display:none;">
+                <a @click="updateRoles(0)"><div class="element">ADC</div></a>
+                <a @click="updateRoles(1)"><div class="element">AGE</div></a>
+                <a @click="updateRoles(2)"><div class="element">CXC</div></a>
+                <a @click="updateRoles(3)"><div class="element">PLN</div></a>
+                <a @click="updateRoles(4)"><div class="element">ING</div></a>
+                <a @click="updateRoles(5)"><div class="element">CST</div></a>
+                <a @click="updateRoles(6)"><div class="element">VTA</div></a>
+                <a @click="updateRoles(7)"><div class="element">EMB</div></a>
+                <a @click="updateRoles(8)"><div class="element">REA</div></a>
+                <a @click="updateRoles(9)"><div class="element">DIR</div></a>
+              </div>
               <div v-if="this.role === 'ADC'" style="margin: 0%; padding: 0%;">
                 <a @click="navCatalogArticles"> <div class="element"> Catálogo de Artículos </div></a>
                 <a @click="navCatalogCompanies"> <div class="element">Catálogo de Compañías </div></a>
@@ -73,26 +87,14 @@
 
 
               </div>
-              <a @click="openDrop"> <div class="element"> Cambiar de Rol </div></a>
-              <div id="myDropdown" style="display:none;">
-                <a @click="updateRoles(0)"><div class="element">ADC</div></a>
-                <a @click="updateRoles(1)"><div class="element">AGE</div></a>
-                <a @click="updateRoles(2)"><div class="element">CXC</div></a>
-                <a @click="updateRoles(3)"><div class="element">PLN</div></a>
-                <a @click="updateRoles(4)"><div class="element">ING</div></a>
-                <a @click="updateRoles(5)"><div class="element">CST</div></a>
-                <a @click="updateRoles(6)"><div class="element">VTA</div></a>
-                <a @click="updateRoles(7)"><div class="element">EMB</div></a>
-                <a @click="updateRoles(8)"><div class="element">REA</div></a>
-                <a @click="updateRoles(9)"><div class="element">DIR</div></a>
-              </div>
+
 
             </div>
 
 
     </div>
    <div id="content">
-     <iframe width="100%" height="100%" :src="this.source"></iframe>
+     <iframe scrolling="auto" width="100%" :src="this.source"></iframe>
    </div>
   </div>
 </template>
@@ -100,6 +102,8 @@
 <script>
 export default {
   name: 'Login',
+  components:{
+  },
 
   data: function() {
         return {
@@ -259,7 +263,11 @@ export default {
 </script>
 
 <style scoped>
-
+iframe {
+  height: 100%;
+  overflow: visible;
+  border: none;
+}
 *{
   padding: 0;
   margin: 0;
@@ -433,4 +441,5 @@ label{
   align-items: center;
   justify-content: center;
 }
+
 </style>
