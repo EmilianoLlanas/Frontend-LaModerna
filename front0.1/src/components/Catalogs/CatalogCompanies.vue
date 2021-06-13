@@ -62,6 +62,7 @@ export default {
       aId:'',
       aName:'',
       responseObject:null,
+      tokn:'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6Implc3N5QGdtYWlsLmNvbSIsImV4cCI6MTYyMzYxNzYwNiwiZW1haWwiOiJqZXNzeUBnbWFpbC5jb20ifQ.g9KDKqYqD911FzGz0D1yRE_3qrA_L6eLZuOSalM9VmA',
       errors:[],
       dataTable:'',
       params: {
@@ -109,12 +110,13 @@ export default {
     async signUpCompany(){
         
         try {
-        this.responseObject= ((await auth.createCompany(this.tokn, this.aId, this.aName)).data);
+        this.responseObject= ((await auth.createCompany(this.$store.getters.token, this.aId, this.aName)).data);
         this.params.data.push([this.responseObject.company_id, this.responseObject.name]);
 
         } catch (error) {
           this.error=true;
           console.log(error);
+          this.errors.push(error);
         }
 
         this.aId='';
@@ -134,7 +136,7 @@ export default {
         //there will be a method here to establish connection with backend and load the companies' id and name, some day....
         try {
           console.log(this.$store.getters.token)
-          this.dataTable=((await auth.getCompanies(this.$store.getters.token)));
+          this.dataTable=((await auth.listCompanies(this.$store.getters.token)));
           console.log(this.dataTable);
           this.aId='';
         this.aName='';
@@ -148,6 +150,7 @@ export default {
          } catch (error) {
            this.error=true;
           console.log(error);
+          this.errors.push(error);
           }
     },
 
