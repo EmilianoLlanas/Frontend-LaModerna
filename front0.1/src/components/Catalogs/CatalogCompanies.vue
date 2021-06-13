@@ -1,8 +1,9 @@
 <template>
-
+  <div id="fullpage">
+      <NavBar></NavBar>
   <div id="content">
 
-    <h1 id="header1"> Bloquear Cliente </h1>
+    <h1 id="header1"> Catálogo de Compañías </h1>
 
     <div id="card">
 
@@ -10,16 +11,28 @@
 
       <div class="inputForm">
 
+        <div id="error">
+          <ul>
+            <li v-for="error in errors" v-bind:key="error">{{error}}</li>
+          </ul>
+        </div>
+
         <form>
-          <label>Cliente</label>
+          <label>ID</label>
           <br>
-          <input v-model="aCliente" placeholder="Cliente">
+          <input v-model="aId" type="number" min="0" placeholder="Identificador de la Compañía">
+          <br>
+          <label>Nombre</label>
+          <br>
+          <input v-model="aName" placeholder="Nombre de la Compañía">
         </form>
 
       </div>
 
       <div id="buttons">
-        <button @click="blockCli"> Bloquear </button>
+      <button @click="checkForm"> Dar de alta </button>
+      <button @click="signDownCompany"> Dar de baja </button>
+      <button @click="loadCompanies"> Actualizar </button>
       </div>
 
       <div id="table">
@@ -33,28 +46,27 @@
 
     </div>
   </div>
+</div>
 </template>
 
 <script>
+import NavBar from '@/components/NavBar.vue';
 import VueTableDynamic from 'vue-table-dynamic'
+import 'es6-promise/auto'
+import auth from "@/auth"
+
 export default {
-  name: 'CatalogClients',
+  name: 'CatalogArticles',
   data() {
     return {
-    aCompania:'',
-    aCliente:'',
-    aNombreA:'',
-    aNombreB:'',
-    aEstatus:'',
+      aId:'',
+      aName:'',
+      responseObject:null,
+      errors:[],
+      dataTable:'',
       params: {
         data: [
-          ['Compañia','Cliente','Nombre A','Nombre B','Estatus'],
-          [0,1,2,3,4],
-          [0,1,2,3,4],
-          [0,1,2,3,4],
-          [0,1,2,3,4],
-          [0,1,2,3,4],
-          [0,1,2,3,4],
+          ['ID', 'Nombre']
         ],
         deleteData:[],
         header: 'row',
@@ -77,47 +89,70 @@ export default {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
       this.params.deleteData=checkedIndexs
     },
-    signUpClient(){
-        //there will be a method here to establish connection with backend and sign up the articles' id and name, some day....
-        if(this.aCompania=='' ||this.aCliente=='' ||this.aNombreA=='' ||this.aNombreB=='' ||this.aEstatus==''){
-          alert('Por favor, llene todos los campos para registrar un Cliente')
-        }else{
-          this.params.data.push([this.aCompania,this.aCliente,this.aNombreA,this.aNombreB,this.aEstatus]);
+    checkForm(){
+        this.errors=[];
+        if(this.aId && this.aName){
+          this.signUpCompany();
+        }
+        else{
+          alert("Por favor, llene todos los campos correctamente para agregar un registro");
+           if(!this.aId)
+          {
+            this.errors.push('Introduce un ID de compañía');
+          }
+          if(!this.aName)
+          {
+            this.errors.push('Introduce el nombre de la compañía');
+          }
+        }
+    },
+    async signUpCompany(){
+        
+        try {
+        this.responseObject= ((await auth.createCompany(this.tokn, this.aId, this.aName)).data);
+        this.params.data.push([this.responseObject.company_id, this.responseObject.name]);
+
+        } catch (error) {
+          this.error=true;
+          console.log(error);
         }
 
-        this.aCompania='';
-        this.aCliente='';
-        this.aNombreA='';
-        this.aNombreB='';
-        this.aEstatus='';
+        this.aId='';
+        this.aName='';
     },
-    signDownClient(){
-        //there will be a method here to establish connection with backend and sign down the articles' id and name, some day....
-        this.aCompania='';
-        this.aCliente='';
-        this.aNombreA='';
-        this.aNombreB='';
-        this.aEstatus='';
+    signDownCompany(){
+        //there will be a method here to establish connection with backend and sign down the companies' id and name, some day....
+        this.aId='';
+        this.aName='';
+
         for (var i = this.params.deleteData.length-1; i>0 ; i--) {
           this.params.data.splice(this.params.deleteData[i], 1)
         }
+
     },
-    loadClient(){
-        //there will be a method here to establish connection with backend and update the table, some day....
-        this.aCompania='';
-        this.aCliente='';
-        this.aNombreA='';
-        this.aNombreB='';
-        this.aEstatus='';
+    async loadCompanies(){
+        //there will be a method here to establish connection with backend and load the companies' id and name, some day....
+        try {
+          console.log(this.$store.getters.token)
+          this.dataTable=((await auth.getCompanies(this.$store.getters.token)));
+          console.log(this.dataTable);
+          this.aId='';
+        this.aName='';
+        this.responseObject= ((await auth.listCompanies(this.tokn)).data);
+        
+        for (var i=0; i<this.responseObject.length;i++)
+        {
+          this.params.data.push([this.responseObject[i].company_id, this.responseObject[i].name]);
+        }
+
+         } catch (error) {
+           this.error=true;
+          console.log(error);
+          }
     },
-    generateReport(){
-      //aqui se mandara a llamar la pagina de reportes
-    },
-    blockCli(){
-      alert("Cliente "+this.aCliente+" ha sido bloqueado");
-    }
+
   },
-  components: { VueTableDynamic }
+  components: { VueTableDynamic,NavBar }
 }
 </script>
 
@@ -160,7 +195,7 @@ export default {
   border-radius: 6px;
   border: transparent;
   background: #f2f2f2;
-  width: 100%; 
+  width: 100%;
   font-family: Verdana;
   font-size: 20px;
 }
@@ -229,5 +264,17 @@ label{
 
 #error{
   color: red;
+}
+#fullpage{
+  display: flex;
+}
+
+#content{
+  width: 100%;
+  height: 100%;
+  background-image: url('~@/components/fondito.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
 }
 </style>

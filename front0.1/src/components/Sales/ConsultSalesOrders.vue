@@ -2,15 +2,13 @@
 
   <div id="content">
 
-    <h1 id="header1"> Buscar artículo por cliente </h1>
+    <h1 id="header1"> Consulta de órdenes de venta</h1>
 
     <div id="card">
 
       <div id="cardheader"></div>
 
-        <div class="inputForm">
-          <label>Cliente</label>
-        </div>
+      <div class="inputForm">
 
         <div id="table">
           <vue-table-dynamic :params="params"
@@ -18,36 +16,50 @@
             @selection-change="onSelectionChange"
             ref="table">
           </vue-table-dynamic>
+
+          <SalesOrderStatusDetails :id="params.id"></SalesOrderStatusDetails>
+          <br>
+
         </div>
 
-        <br>
-
       </div>
+
     </div>
+
+    <br>
 
   </div>
 </template>
 
 <script>
-import VueTableDynamic from 'vue-table-dynamic'
+import VueTableDynamic from 'vue-table-dynamic';
+import SalesOrderStatusDetails from '@/components/Orders/SalesOrderStatusDetails.vue';
 export default {
-  name: 'SearchArticlesperClient',
+  name: 'ConsultSalesOrders',
   data() {
     return {
-      searchClient:'',
+    soCliente:'',
+    soNoOrden:'',
+    soBaan:'',
       params: {
         data: [
-          ['Orden','Orden Baan','Cliente', 'Nombre', 'Fecha de orden', 'Fecha de entrega','Fecha definida', 'Status suaje', 'Status grabado', 'Status ING', 'Articulo', 'Unidad', 'Notas'],
-          ['1','135','0303', 'BIMBO', '2021-03-21', '2021-04-21','2021-04-22', true, 'Status grabado', 'Status ING', 'PAPELITO-SUAVE-500', '1000', 'Requiere solicitud adicional de tinta'],
-          ['2','435','0403', 'BARCEL', '2021-06-21', '2021-08-21','2021-08-20', false, 'Status grabado', 'Status ING','CAJITA-400', '3000', ''],
+          ['Orden','Orden Baan','Cliente', 'Nombre', 'Fecha de orden', 'Fecha de entrega','Fecha definida'],
+          ["1","135","BIMBO",'PAPELITO-SUAVE-500','2021-03-21','2021-04-21','2021-04-22'],
+          ["2","256","BARCEL",'PAPELITO-DURO-800','2021-02-1','2021-05-21','2021-05-22'],
+          ["3","389","TIA ROSA",'ALUMINIO-ARRUGADO-100','2021-04-2','2021-04-21','2021-04-22'],
+          ["4","412","MOLINOS JORGE",'EMPAQUE-AWITADO-1500','2020-12-26','2021-04-21','2021-04-22'],
+          ["5","545","BIMBO",'PAPELITO-SUAVE-500','2021-03-21','2021-04-21','2021-04-22'],
+          ["6","678","BARCEL",'PAPELITO-DURO-800','2021-02-1','2021-04-21','2021-04-22'],
+          ["7","723","TIA ROSA",'ALUMINIO-ARRUGADO-100','2021-04-2','2021-04-21','2021-04-22'],
+          ["8","856","MOLINOS JORGE",'EMPAQUE-AWITADO-1500','2020-12-26','2021-04-21','2021-04-22']
         ],
-        deleteDate:[],
+        id:[],
         header: 'row',
         border: true,
         stripe: true,
         showCheck: true,
         enableSearch: true,
-        sort: [0,1],
+        sort: [0, 1,2],
         pagination: true,
         pageSize: 10,
       }
@@ -60,63 +72,15 @@ export default {
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
-      this.params.deleteDate=checkedIndexs
-    },
-    signUpWare(){
-        if(this.wareCom==''||this.wareUbi=='')
-        {
-          alert('Por favor, llene todos los campos para registrar el almacen')
-        }
-        else
-        {
-          this.params.data.push([this.wareCom, this.wareUbi]);
-        }
-    },
-    signDownWare(){
-        this.wareCom='';
-        this.wareUbi='';
-        console.log(this.params.deleteData.length)
-        for (var i = this.params.deleteData.length-1; i>0 ; i--) {
-        this.params.data.splice(this.params.deleteData[i], 1)
-      }
-    },
-    loadWare(){
-        this.wareCom='';
-        this.wareUbi='';
-        alert("Actualizando informacion...");
+      this.params.id=checkedIndexs
     }
+
   },
-  components: { VueTableDynamic }
+  components: { VueTableDynamic, SalesOrderStatusDetails }
 }
 </script>
 
 <style scoped>
-.inputForm{
-  width: 90%;
-  clear: both;
-  color: #213485;
-  margin: 3%;
-  font-size: 20px;
-  font-family: Verdana;
-  font-size: 20px;
-}
-
-.inputForm input{
-  width: 100%;
-  clear: both;
-  margin-top: 2%;
-  margin-bottom: 5%;
-  height: 50px;
-  font-size: 20px;
-  font-family: "GOTY0", "GOTY1", "GOTY2", verdana;
-  opacity: 50%;
-  border-radius: 6px;
-  border: transparent;
-  background: #f2f2f2;
-  padding: 10px;
-  color: #213485;
-}
-
 button{
   margin-top: 0%;
   margin-left: 3%;

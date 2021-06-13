@@ -2,52 +2,51 @@
 
   <div id="content">
 
-    <h1 id="header1"> Buscar artículo por cliente </h1>
+    <h1 id="header1"> Autorizacion de Ordenes CST </h1>
 
     <div id="card">
 
       <div id="cardheader"></div>
 
-        <div class="inputForm">
-          <label>Cliente</label>
-        </div>
-
-        <div id="table">
-          <vue-table-dynamic :params="params"
-            @select="onSelect"
-            @selection-change="onSelectionChange"
-            ref="table">
-          </vue-table-dynamic>
-        </div>
-
+      <div id="table">
+        <vue-table-dynamic :params="params"
+          @select="onSelect"
+          @selection-change="onSelectionChange"
+          ref="table">
+        </vue-table-dynamic>
         <br>
-
       </div>
-    </div>
 
+      <div id="buttons">
+        <button @click="authOrder"> Autorizar orden </button>
+        <button @click="update">Actualizar </button>
+      </div>
+
+    </div>
   </div>
 </template>
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic'
 export default {
-  name: 'SearchArticlesperClient',
+  name: 'AuthorizeOrderCST',
   data() {
     return {
-      searchClient:'',
+        select:-1,
       params: {
         data: [
-          ['Orden','Orden Baan','Cliente', 'Nombre', 'Fecha de orden', 'Fecha de entrega','Fecha definida', 'Status suaje', 'Status grabado', 'Status ING', 'Articulo', 'Unidad', 'Notas'],
-          ['1','135','0303', 'BIMBO', '2021-03-21', '2021-04-21','2021-04-22', true, 'Status grabado', 'Status ING', 'PAPELITO-SUAVE-500', '1000', 'Requiere solicitud adicional de tinta'],
-          ['2','435','0403', 'BARCEL', '2021-06-21', '2021-08-21','2021-08-20', false, 'Status grabado', 'Status ING','CAJITA-400', '3000', ''],
+          ['ID','Cliente','Fecha','Autorizada'],
+          [1, 'Zara', '1/12/2021','NO'],
+          [2, 'WalMart', '1/12/2021','NO'],
+          [3, 'Soriana', '1/12/2021','NO'],
         ],
-        deleteDate:[],
+        deleteData:[],
         header: 'row',
         border: true,
         stripe: true,
         showCheck: true,
         enableSearch: true,
-        sort: [0,1],
+        sort: [0, 1, 2],
         pagination: true,
         pageSize: 10,
       }
@@ -55,35 +54,23 @@ export default {
   },
   methods: {
     onSelect (isChecked, index, data) {
+      this.select=index;
       console.log('onSelect: ', isChecked, index, data)
       console.log('Checked Data:', this.$refs.table.getCheckedRowDatas(true))
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
-      this.params.deleteDate=checkedIndexs
+      this.params.deleteData=checkedIndexs
     },
-    signUpWare(){
-        if(this.wareCom==''||this.wareUbi=='')
-        {
-          alert('Por favor, llene todos los campos para registrar el almacen')
+    authOrder(){
+        if(this.params.data[this.select][3]=='NO'){
+          this.params.data[this.select][3]='SI'
+          this.params.data.push(this.params.data[this.select])
+          this.params.data.splice(this.select, 1)
         }
-        else
-        {
-          this.params.data.push([this.wareCom, this.wareUbi]);
-        }
-    },
-    signDownWare(){
-        this.wareCom='';
-        this.wareUbi='';
-        console.log(this.params.deleteData.length)
-        for (var i = this.params.deleteData.length-1; i>0 ; i--) {
-        this.params.data.splice(this.params.deleteData[i], 1)
-      }
-    },
-    loadWare(){
-        this.wareCom='';
-        this.wareUbi='';
-        alert("Actualizando informacion...");
+  },
+    update(){
+            alert("Actualizando informacion...");
     }
   },
   components: { VueTableDynamic }
@@ -115,6 +102,23 @@ export default {
   background: #f2f2f2;
   padding: 10px;
   color: #213485;
+}
+
+.inputForm textarea{
+  padding: 10px;
+  width: 150%;
+  height: 90px;
+  color: #213485;
+  margin-top: 2%;
+  margin-bottom: 0%;
+  font-family: "GOTY0", "GOTY1", "GOTY2", verdana;
+  opacity: 50%;
+  border-radius: 6px;
+  border: transparent;
+  background: #f2f2f2;
+  width: 100%; 
+  font-family: Verdana;
+  font-size: 20px;
 }
 
 button{
