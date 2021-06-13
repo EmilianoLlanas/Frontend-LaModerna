@@ -52,6 +52,9 @@
 <script>
 import NavBar from '@/components/NavBar.vue';
 import VueTableDynamic from 'vue-table-dynamic'
+import 'es6-promise/auto'
+import auth from "@/auth"
+
 export default {
   name: 'CatalogArticles',
   data() {
@@ -59,6 +62,7 @@ export default {
       aId:'',
       aName:'',
       errors:[],
+      dataTable:'',
       params: {
         data: [
           ['ID', 'Nombre'],
@@ -126,8 +130,16 @@ export default {
 
 
     },
-    loadCompanies(){
+    async loadCompanies(){
         //there will be a method here to establish connection with backend and load the companies' id and name, some day....
+        try {
+          console.log(this.$store.getters.token)
+          this.dataTable=((await auth.getCompanies(this.$store.getters.token)));
+          console.log(this.dataTable)
+         } catch (error) {
+           this.error=true;
+          console.log(error);
+       }
         this.aId='';
         this.aName='';
         alert('Actualizando tabla con Base de datos')

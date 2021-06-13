@@ -60,6 +60,8 @@
 <script>
 import VueTableDynamic from 'vue-table-dynamic'
 import NavBar from '@/components/NavBar.vue'
+import 'es6-promise/auto'
+import auth from "@/auth"
 export default {
   name: 'CatalogAgents',
   data() {
@@ -69,6 +71,7 @@ export default {
       rep:'',
       agEst:'',
       errors:[],
+      dataTable:'',
       params: {
         data: [
           ['Compañia', 'idAgente', 'Representante','Estatus'],
@@ -146,7 +149,15 @@ export default {
       this.params.data.splice(this.params.deleteData[i], 1)
       }
     },
-    loadAgent(){
+    async loadAgent(){
+      try {
+        console.log(this.$store.getters.token)
+        this.dataTable=((await auth.getAgents(this.$store.getters.token)));
+        console.log(this.dataTable)
+       } catch (error) {
+         this.error=true;
+        console.log(error);
+     }
         this.agCom='';
         this.agId='';
         this.rep='';
