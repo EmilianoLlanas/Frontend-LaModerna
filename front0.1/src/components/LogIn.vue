@@ -1,110 +1,20 @@
 <template>
  <div id="fullpage">
-   <div id="sidebar">
       <!--<router-view/>-->
-            <div id="menuhead">
-                <img :src="require('@/assets/logotipo1.jpg')">
-            </div>
-            <div id="menu-buttons">
-
-              <a @click="openDrop"> <div class="element"> Cambiar de Rol </div></a>
-              <div id="myDropdown" style="display:none;">
-                <a @click="updateRoles(0)"><div class="element">ADC</div></a>
-                <a @click="updateRoles(1)"><div class="element">AGE</div></a>
-                <a @click="updateRoles(2)"><div class="element">CXC</div></a>
-                <a @click="updateRoles(3)"><div class="element">PLN</div></a>
-                <a @click="updateRoles(4)"><div class="element">ING</div></a>
-                <a @click="updateRoles(5)"><div class="element">CST</div></a>
-                <a @click="updateRoles(6)"><div class="element">VTA</div></a>
-                <a @click="updateRoles(7)"><div class="element">EMB</div></a>
-                <a @click="updateRoles(8)"><div class="element">REA</div></a>
-                <a @click="updateRoles(9)"><div class="element">DIR</div></a>
-              </div>
-              <div v-if="this.role === 'ADC'" style="margin: 0%; padding: 0%;">
-                <a @click="navCatalogArticles"> <div class="element"> Catálogo de Artículos </div></a>
-                <a @click="navCatalogCompanies"> <div class="element">Catálogo de Compañías </div></a>
-                <a @click="navCatalogPrices"> <div class="element">Catálogo de Precios </div></a>
-                <a @click="navCatalogClients"> <div class="element">Catálogo de Clientes </div></a>
-                <a @click="navCatalogAgents"> <div class="element">Catálogo de Agentes </div></a>
-                <a @click="navCatalogDelivered"> <div class="element">Catálogo de Entregas </div></a>
-                <a @click="navCatalogFacturas"> <div class="element">Catálogo de Facturas </div></a>
-                <a @click="navCatalogSaldo"> <div class="element">Catálogo de Saldos  </div></a>
-                <a @click="navCatalogWarehouse"> <div class="element">Catálogo de Almacenes </div></a>
-                <a @click="navCatalogDeliveryAddresses"> <div class="element">Catálogo de Direcciones de entrega  </div></a>
-                <a @click="navCatalogInventory"> <div class="element">Catálogo de Inventario </div></a>
-                <a @click="navConsultSalesOrder"> <div class="element"> Consultar órdenes de venta </div></a>
-                <a @click="navRoles"> <div class="element"> Asignacion de roles </div></a>
-                <a @click="navBackup"> <div class="element"> Generar respaldo </div></a>
-              </div>
-              <div v-if="this.role === 'AGE'" style="margin: 0%; padding: 0%;">
-                <a @click="navCaptureOrder"> <div class="element"> Captura de Órdenes </div></a>
-                <a @click="navEditOrder"> <div class="element"> Editar Órdenes </div></a>
-                <a @click="navOrdersInProcess"> <div class="element"> Consulta de Órdenes en proceso </div></a>
-                <a @click="navProcessedOrders"> <div class="element"> Consulta de Órdenes Procesadas </div></a>
-                <a @click="navOrderStatus"> <div class="element"> Consulta de Estatus de Órdenes  </div></a>
-              </div>
-              <div v-if="this.role === 'CXC'" style="margin: 0%; padding: 0%;">
-                <a @click="navAuthorizeOrderCxC"> <div class="element"> Autorización de ordenes CxC </div></a>
-                <a @click="navBlock"> <div class="element"> Bloqueo de Clientes </div></a>
-                <a @click="navConsultSalesOrder"> <div class="element"> Consultar órdenes de venta </div></a>
-              </div>
-              <div v-if="this.role === 'PLN'" style="margin: 0%; padding: 0%;">
-                <a @click="navAuthorizeDates"> <div class="element">Autorizacion de fechas de entrega  </div></a>
-                <a @click="navTimeReport"> <div class="element"> Reporte de Tiempo por Departamento </div></a>
-              </div>
-              <div v-if="this.role === 'ING'" style="margin: 0%; padding: 0%;">
-                <a @click="navAuthorizationING"> <div class="element"> Autorización de ING </div></a>
-                <a @click="navConsultSalesOrder"> <div class="element"> Consultar órdenes de venta </div></a>
-                <a @click="navSearchOrdersperClient"> <div class="element"> Búsqueda de artículo por cliente (ING)</div></a>
-              </div>
-              <div v-if="this.role === 'CST'" style="margin: 0%; padding: 0%;">
-                <a @click="navAuthorizeOrderCST"> <div class="element"> Autorización de ordenes CST </div></a>
-                <a @click="ordenesTodas"> <div class="element"> Todas las Órdenes </div></a>
-                <a @click="navConsultSalesOrder"> <div class="element"> Consultar órdenes de venta </div></a>
-              </div>
-              <div v-if="this.role === 'VTA'" style="margin: 0%; padding: 0%;">
-                <a @click="navAuthorizeVTA"> <div class="element"> Autorizacion de VTA </div></a>
-                <a @click="ordenesTodas"> <div class="element"> Todas las Órdenes </div></a>
-                <a @click="navConsultSalesOrder"> <div class="element"> Consultar órdenes de venta </div></a>
-              </div>
-              <div v-if="this.role === 'EMB'" style="margin: 0%; padding: 0%;">
-                <a @click="ordenesTodas"> <div class="element"> Todas las Órdenes </div></a>
-                <a @click="navConsultSalesOrder"> <div class="element"> Consultar órdenes de venta </div></a>
-              </div>
-              <div v-if="this.role === 'REA'" style="margin: 0%; padding: 0%;">
-                <a @click="sharedItems"> <div class="element"> Artículos Compartidos </div></a>
-              </div>
-              <div v-if="this.role === 'DIR'" style="margin: 0%; padding: 0%;">
-                <a @click="ordenesTodas"> <div class="element"> Todas las Órdenes </div></a>
-                <a @click="navConsultSalesOrder"> <div class="element"> Consultar órdenes de venta </div></a>
-                <a @click="CatalogSharedItems"> <div class="element"> Catálogo de Artículos Compartidos </div></a>
-                <a @click="navAuthorizeOrderCxC"> <div class="element"> Autorización de órdenes CxC</div></a>
-                <a @click="navAuthorizationING"> <div class="element"> Autorización de órdenes ING </div></a>
-                <a @click="navAuthorizeOrderCST"> <div class="element"> Autorización de órdenes CST </div></a>
-                <a @click="navAuthorizeVTA"> <div class="element"> Autorizacion de órdenes VTA </div></a>
-                <a @click="navTimeReport"> <div class="element"> Reporte de Tiempo por Departamento </div></a>
-                <a @click="navReportGen"> <div class="element"> Generación de Reportes </div></a>
-
-
-              </div>
-
-
-            </div>
-
-
-    </div>
+<NavBar></NavBar>
    <div id="content">
      <iframe scrolling="auto" width="100%" :src="this.source"></iframe>
    </div>
   </div>
+
 </template>
 
 <script>
+import NavBar from '@/components/NavBar.vue'
 export default {
   name: 'Login',
   components:{
   },
-
   data: function() {
         return {
             dateS: "",
@@ -116,7 +26,6 @@ export default {
       this.role = "ADC"
     },
   methods: {
-
       navCatalogArticles () {
       this.source='http://localhost:8080/#/CatalogArticles';
     },
@@ -202,7 +111,6 @@ export default {
       this.source='http://localhost:8080/#/SharedArticles';
     },
     CatalogSharedItems() {
-
       this.source='http://localhost:8080/#/CatalogSharedArticles';
     },
     navSearchOrdersperClient(){
@@ -214,11 +122,9 @@ export default {
     navTimeReport(){
       this.source='http://localhost:8080/#/TimeReport';
     },
-
     navReportGen(){
       this.source='http://localhost:8080/#/ReportGenerator';
     },
-
     updateRoles(x){
       switch(x){
         case 0:
@@ -257,9 +163,10 @@ export default {
     openDrop(){
       document.getElementById("myDropdown").style.display = "block";
     },
-
-  }
+  },
+  components: { NavBar }
 }
+
 </script>
 
 <style scoped>
@@ -272,23 +179,19 @@ iframe {
   padding: 0;
   margin: 0;
 }
-
 img {
     display: flex;
     width:100%;
     height:100%;
 }
-
 #fullpage{
   display: flex;
 }
-
 #sidebar{
   background: #f7f7f7;
   height: 100vh;
   width: 22%;
 }
-
 #content{
   width: 100%;
   height: 100vh;
@@ -297,20 +200,16 @@ img {
   background-attachment: fixed;
   background-size: 100% 100%;
 }
-
 #menuhead{
   background: #FFFF;
   padding: 1em;
-
 }
-
 h3{
   text-align: center;
   font-size: 2.4em;
   font-family:  "GOTY0","GOTY1","GOTY2",verdana;
   color: #f7f7f7;
 }
-
 #sidebar div{
   text-align: center;
   padding: 20px;
@@ -318,19 +217,16 @@ h3{
   font-size: 16px;
   font-family:  "GOTY0","GOTY1","GOTY2",verdana;
 }
-
 #menu-buttons {
   max-height: 78%;
   overflow: scroll;
   overflow-x: hidden;
 }
-
 #sidebar .element:hover{
   background: rgba(14,44,164,0.30);
   color: white;
   font-weight: bold;
 }
-
 .inputForm {
   width: 90%;
   clear: both;
@@ -340,7 +236,6 @@ h3{
   font-family: Verdana;
   font-size: 20px;
 }
-
 .inputForm  input {
   width: 100%;
   clear: both;
@@ -355,7 +250,6 @@ h3{
   background: #f2f2f2;
   padding: 10px;
 }
-
 .inputForm  textarea {
   padding: 10px;
   width: 150%;
@@ -372,7 +266,6 @@ h3{
   font-family: Verdana;
   font-size: 20px;
 }
-
 button{
   margin-top: 0%;
   margin-left: 3%;
@@ -388,18 +281,15 @@ button{
   border: transparent;
   margin-bottom: 40px;
 }
-
 button:hover{
   background-color: rgba(14,44,164,0.30) ;
 }
-
 #test{
   background-color: rgba(33,52,133,0.20);
   margin: 1%;
   color: #3B0EA4;
   font-family: "GOTY0", "GOTY1", "GOTY2", verdana;
 }
-
 #header1{
   margin: 2%;
   font-family: Verdana;
@@ -407,18 +297,15 @@ button:hover{
   color: #3B0EA4;
   text-align: center;
 }
-
 #table{
   width: 80%;
   margin-left: 10%;
   margin-top: 2%;
 }
-
 label{
   font-family: Verdana;
   font-weight: bold;
 }
-
 #card{
   background: #fff;
   width: 80%;
@@ -428,18 +315,15 @@ label{
   box-shadow: 10px 10px 5px 0px rgba(0,0,0,0.14);
   border-radius: 15px;
 }
-
 #cardheader{
   height: 20px;
   width: 100%;
   background: #3B0EA4;
 }
-
 #buttons{
   width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
 </style>
