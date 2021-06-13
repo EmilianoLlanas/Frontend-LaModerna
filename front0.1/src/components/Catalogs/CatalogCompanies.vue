@@ -35,6 +35,7 @@
       <button @click="loadCompanies"> Actualizar </button>
       </div>
 
+            
       <div id="table">
         <vue-table-dynamic :params="params"
           @select="onSelect"
@@ -62,7 +63,8 @@ export default {
       aId:'',
       aName:'',
       responseObject:null,
-      tokn:'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6Implc3N5QGdtYWlsLmNvbSIsImV4cCI6MTYyMzYxNzYwNiwiZW1haWwiOiJqZXNzeUBnbWFpbC5jb20ifQ.g9KDKqYqD911FzGz0D1yRE_3qrA_L6eLZuOSalM9VmA',
+      loading:true,
+      //tokn:'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6Implc3N5QGdtYWlsLmNvbSIsImV4cCI6MTYyMzYxNzYwNiwiZW1haWwiOiJqZXNzeUBnbWFpbC5jb20ifQ.g9KDKqYqD911FzGz0D1yRE_3qrA_L6eLZuOSalM9VmA',
       errors:[],
       dataTable:'',
       params: {
@@ -133,18 +135,20 @@ export default {
 
     },
     async loadCompanies(){
-        //there will be a method here to establish connection with backend and load the companies' id and name, some day....
+        
         try {
           console.log(this.$store.getters.token)
-          this.dataTable=((await auth.listCompanies(this.$store.getters.token)));
-          console.log(this.dataTable);
+          //this.dataTable=((await auth.listCompanies(this.$store.getters.token)));
+          //console.log(this.dataTable);
+          this.loading=false;
           this.aId='';
-        this.aName='';
-        this.responseObject= ((await auth.listCompanies(this.tokn)).data);
-        
+          this.aName='';
+          this.responseObject= ((await auth.listCompanies(this.$store.getters.token)).data);
+          console.log(this.responseObject[0].company_id);
         for (var i=0; i<this.responseObject.length;i++)
         {
           this.params.data.push([this.responseObject[i].company_id, this.responseObject[i].name]);
+          //console.log(this.responseObject[i].company_id);
         }
 
          } catch (error) {
@@ -155,6 +159,7 @@ export default {
     },
 
   },
+    
   components: { VueTableDynamic,NavBar }
 }
 </script>
