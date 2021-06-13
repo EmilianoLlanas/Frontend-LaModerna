@@ -29,13 +29,18 @@
 
       </div>
 
+      
       <div id="buttons">
       <button @click="checkForm"> Dar de alta </button>
       <button @click="signDownCompany"> Dar de baja </button>
       <button @click="loadCompanies"> Actualizar </button>
       </div>
 
-            
+      <section v-if="loading">
+      <div v-if="loading">Loading...</div>
+      </section>
+
+      <section v-else>
       <div id="table">
         <vue-table-dynamic :params="params"
           @select="onSelect"
@@ -44,7 +49,7 @@
         </vue-table-dynamic>
         <br>
       </div>
-
+      </section>
     </div>
   </div>
 </div>
@@ -135,7 +140,7 @@ export default {
 
     },
     async loadCompanies(){
-        
+        this.loading=true;
         try {
           console.log(this.$store.getters.token)
           //this.dataTable=((await auth.listCompanies(this.$store.getters.token)));
@@ -144,7 +149,9 @@ export default {
           this.aId='';
           this.aName='';
           this.responseObject= ((await auth.listCompanies(this.$store.getters.token)).data);
-          console.log(this.responseObject[0].company_id);
+          //console.log(this.responseObject[0].company_id);
+
+          this.params.data=['ID', 'Nombre'];
         for (var i=0; i<this.responseObject.length;i++)
         {
           this.params.data.push([this.responseObject[i].company_id, this.responseObject[i].name]);
@@ -159,7 +166,26 @@ export default {
     },
 
   },
-    
+
+  async mounted(){
+        try{
+        this.aId='';
+        this.aName='';
+        this.responseObject= ((await auth.listCompanies(this.$store.getters.token)).data);
+        //console.log('Data found');
+        for (var i=0; i<this.responseObject.length;i++)
+        {
+          this.params.data.push([this.responseObject[i].company_id, this.responseObject[i].name]);
+        }
+        this.loading=false;
+
+        }catch (error) {
+          this.error=true;
+          console.log(error);
+          this.errors.push(error);
+        }
+
+    },
   components: { VueTableDynamic,NavBar }
 }
 </script>
