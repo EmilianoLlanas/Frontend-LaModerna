@@ -96,14 +96,15 @@ export default
       this.$v.$touch();
       if(!this.$v.$invalid){
         try {
-        this.token+= ((await auth.login(this.user, this.password)).data.token);
-        console.log(this.token)
-        this.auth=((await auth.authToken(this.token)).data);
-        console.log(this.auth)
-        this.$router.push("/")
-        } catch (error) {
-          this.error=true;
-          console.log(error);
+          this.token+= ((await auth.login(this.user, this.password)).data.token);
+          this.$store.commit('change',this.token)
+          console.log(this.token)
+          this.auth=((await auth.authToken(this.token)).data);
+          console.log(this.auth)
+          this.$router.push("/")
+          } catch (error) {
+            this.error=true;
+            console.log(error);
         }
       }
     }
@@ -115,6 +116,12 @@ export default
 </script>
 
 <style scoped>
+
+*{
+  padding: 0;
+  margin: 0;
+}
+
 .center{
   display: flex;
   margin-left: 8%;

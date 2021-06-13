@@ -1,8 +1,9 @@
 <template>
-
+<div id="fullpage">
+    <NavBar></NavBar>
   <div id="content">
 
-    <h1 id="header1"> Bloquear Cliente </h1>
+    <h1 id="header1"> Catálogo de Artículos </h1>
 
     <div id="card">
 
@@ -10,16 +11,31 @@
 
       <div class="inputForm">
 
-        <form>
-          <label>Cliente</label>
-          <br>
-          <input v-model="aCliente" placeholder="Cliente">
-        </form>
+        <div id="error">
+          <ul>
+            <li v-for="error in errors" v-bind:key="error">{{error}}</li>
+          </ul>
+        </div>
 
+        <form>
+          <label>ID</label>
+          <br>
+          <input v-model="aId" placeholder="Identificador del artículo">
+          <br>
+          <label>Nombre</label>
+          <br>
+          <input v-model="aName" placeholder="Nombre del artículo">
+          <br>
+          <label>Descripción</label>
+          <br>
+          <textarea v-model="aDescription" placeholder="Descripción del artículo"></textarea>
+        </form>
       </div>
 
       <div id="buttons">
-        <button @click="blockCli"> Bloquear </button>
+        <button @click="signUpArticle"> Dar de alta </button>
+        <button @click="signDownArticle"> Dar de baja </button>
+        <button @click="loadArticles"> Actualizar </button>
       </div>
 
       <div id="table">
@@ -33,28 +49,32 @@
 
     </div>
   </div>
+</div>
 </template>
 
 <script>
-import VueTableDynamic from 'vue-table-dynamic'
+import VueTableDynamic from 'vue-table-dynamic';
+import NavBar from '@/components/NavBar.vue';
+import 'es6-promise/auto'
+import auth from "@/auth"
 export default {
-  name: 'CatalogClients',
+  name: 'CatalogArticles',
   data() {
     return {
-    aCompania:'',
-    aCliente:'',
-    aNombreA:'',
-    aNombreB:'',
-    aEstatus:'',
+      aId:'',
+      aName:'',
+      aDescription:'',
+      errors:[],
+      dataTable:'',
       params: {
         data: [
-          ['Compañia','Cliente','Nombre A','Nombre B','Estatus'],
-          [0,1,2,3,4],
-          [0,1,2,3,4],
-          [0,1,2,3,4],
-          [0,1,2,3,4],
-          [0,1,2,3,4],
-          [0,1,2,3,4],
+          ['ID', 'Nombre','Descripción'],
+          [1, 'b3ba90', 'aab418'],
+          [2, 'ec0b78', 'ba045d'],
+          [3, 'a8c325', 'aab418'],
+          [4, 'a8c325', 'aab418'],
+          [5, 'a8c325', 'aab418'],
+
         ],
         deleteData:[],
         header: 'row',
@@ -77,47 +97,69 @@ export default {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
       this.params.deleteData=checkedIndexs
     },
-    signUpClient(){
-        //there will be a method here to establish connection with backend and sign up the articles' id and name, some day....
-        if(this.aCompania=='' ||this.aCliente=='' ||this.aNombreA=='' ||this.aNombreB=='' ||this.aEstatus==''){
-          alert('Por favor, llene todos los campos para registrar un Cliente')
-        }else{
-          this.params.data.push([this.aCompania,this.aCliente,this.aNombreA,this.aNombreB,this.aEstatus]);
+    checkForm(){
+        this.errors=[];
+        if(this.aId && this.aName && this.aDescription){
+          this.signUpArticle();
         }
-
-        this.aCompania='';
-        this.aCliente='';
-        this.aNombreA='';
-        this.aNombreB='';
-        this.aEstatus='';
+        else{
+          alert("Por favor, llene todos los campos correctamente para agregar un registro");
+           if(!this.aId)
+          {
+            this.errors.push('Introduce un ID de artículo');
+          }
+          if(!this.aName)
+          {
+            this.errors.push('Introduce el nombre del artículo');
+          }
+          if(!this.aDescription)
+          {
+            this.errors.push('Introduce la descripción del artículo');
+          }
+        }
     },
-    signDownClient(){
+    signUpArticle(){
+        //there will be a method here to establish connection with backend and sign up the articles' id and name, some day....
+        if(this.aId==''||this.aName==''||this.aDescription=='')
+        {
+          alert('Por favor, llene todos los campos para registrar inventario')
+        }
+        else
+        {
+          this.params.data.push([this.aId, this.aName,this.aDescription]);
+        }
+        this.aId='';
+        this.aName='';
+        this.aDescription='';
+    },
+    signDownArticle(){
         //there will be a method here to establish connection with backend and sign down the articles' id and name, some day....
-        this.aCompania='';
-        this.aCliente='';
-        this.aNombreA='';
-        this.aNombreB='';
-        this.aEstatus='';
+        this.aId='';
+        this.aName='';
+        this.aDescription='';
+
         for (var i = this.params.deleteData.length-1; i>0 ; i--) {
           this.params.data.splice(this.params.deleteData[i], 1)
         }
     },
-    loadClient(){
+    async loadArticles(){
         //there will be a method here to establish connection with backend and update the table, some day....
-        this.aCompania='';
-        this.aCliente='';
-        this.aNombreA='';
-        this.aNombreB='';
-        this.aEstatus='';
-    },
-    generateReport(){
-      //aqui se mandara a llamar la pagina de reportes
-    },
-    blockCli(){
-      alert("Cliente "+this.aCliente+" ha sido bloqueado");
+        try {
+         console.log(this.$store.getters.token)
+         this.dataTable=((await auth.getItems(this.$store.getters.token)));
+         console.log(this.dataTable)
+       } catch (error) {
+        this.error=true;
+        console.log(error);
+       }
+
+        this.aId='';
+        this.aName='';
+        this.aDescription='';
+        alert('Actualizando tabla con Base de datos')
     }
   },
-  components: { VueTableDynamic }
+  components: { VueTableDynamic,NavBar }
 }
 </script>
 
@@ -160,7 +202,7 @@ export default {
   border-radius: 6px;
   border: transparent;
   background: #f2f2f2;
-  width: 100%; 
+  width: 100%;
   font-family: Verdana;
   font-size: 20px;
 }
@@ -230,4 +272,18 @@ label{
 #error{
   color: red;
 }
+
+#fullpage{
+  display: flex;
+}
+
+#content{
+  width: 100%;
+  height: 100%;
+  background-image: url('~@/components/fondito.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+}
+
 </style>

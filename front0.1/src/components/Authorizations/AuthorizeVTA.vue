@@ -2,50 +2,58 @@
 
   <div id="content">
 
-    <h1 id="header1"> Reporte de Tiempo por Departamento </h1>
+    <h1 id="header1"> Autorizacion VTA </h1>
 
     <div id="card">
 
       <div id="cardheader"></div>
 
-        <div id="table">
-          <vue-table-dynamic :params="params"
-            @select="onSelect"
-            @selection-change="onSelectionChange"
-            ref="table">
-          </vue-table-dynamic>
-        </div>
+      <div id="table">
+        <vue-table-dynamic :params="params"
+          @select="onSelect"
+          @selection-change="onSelectionChange"
+          ref="table">
+        </vue-table-dynamic>
 
         <br>
-
+        
       </div>
-    </div>
 
+      <div id="buttons">
+        <button @click="authOrder"> Autorizar orden </button>
+        <button @click="update"> Actualizar </button>
+      </div>
+
+    </div>
   </div>
 </template>
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic'
 export default {
-  name: 'SearchArticlesperClient',
+  name: 'AuthorizeVTA',
   data() {
     return {
-      searchClient:'',
+      select:-1,
       params: {
         data: [
-          ['ID','Area','Fecha Alta','Tiempo Autorizado','Tiempo Total'],
-          ["1", "CxC", "2021-03-21 (07:20)","2021-03-21 (10:20)","3:00"],
-          ["2", "VTA", "2021-03-21 (07:20)","2021-03-21 (10:20)","3:00"],
-          ["3", "ING", "2021-03-21 (07:20)","2021-03-21 (10:20)","3:00"],
-          ["4", "PLN", "2021-03-21 (07:20)","2021-03-21 (10:20)","3:00"],
+          ['ID','Cliente','Cantidad','Precio','FechaOC','FechaCliente','Autorizada'],
+          [1, 'Zara', '500', '2500', '1/12/2021', '8/12/2021', 'NO'],
+          [2, 'WalMart', '250', '3000', '1/12/2021', '8/12/2021', 'NO'],
+          [3, 'Soriana', '800', '4200', '1/12/2021', '8/12/2021', 'NO'],
         ],
-        deleteDate:[],
+        deleteData:[],
         header: 'row',
         border: true,
         stripe: true,
+        edit:{
+            row: [1, 2],
+            column: [1],
+            cell:[[1,1]]
+        },
         showCheck: true,
         enableSearch: true,
-        sort: [0,1],
+        sort: [0, 1, 2],
         pagination: true,
         pageSize: 10,
       }
@@ -53,35 +61,23 @@ export default {
   },
   methods: {
     onSelect (isChecked, index, data) {
+      this.select=index;
       console.log('onSelect: ', isChecked, index, data)
       console.log('Checked Data:', this.$refs.table.getCheckedRowDatas(true))
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
-      this.params.deleteDate=checkedIndexs
+      this.params.deleteData=checkedIndexs
     },
-    signUpWare(){
-        if(this.wareCom==''||this.wareUbi=='')
-        {
-          alert('Por favor, llene todos los campos para registrar el almacen')
+    authOrder(){
+       if(this.params.data[this.select][6]=='NO'){
+          this.params.data[this.select][6]='SI'
+          this.params.data.push(this.params.data[this.select])
+          this.params.data.splice(this.select, 1)
         }
-        else
-        {
-          this.params.data.push([this.wareCom, this.wareUbi]);
-        }
-    },
-    signDownWare(){
-        this.wareCom='';
-        this.wareUbi='';
-        console.log(this.params.deleteData.length)
-        for (var i = this.params.deleteData.length-1; i>0 ; i--) {
-        this.params.data.splice(this.params.deleteData[i], 1)
-      }
-    },
-    loadWare(){
-        this.wareCom='';
-        this.wareUbi='';
-        alert("Actualizando informacion...");
+  },
+    update(){
+            alert("Actualizando informacion...");
     }
   },
   components: { VueTableDynamic }
@@ -89,32 +85,6 @@ export default {
 </script>
 
 <style scoped>
-.inputForm{
-  width: 90%;
-  clear: both;
-  color: #213485;
-  margin: 3%;
-  font-size: 20px;
-  font-family: Verdana;
-  font-size: 20px;
-}
-
-.inputForm input{
-  width: 100%;
-  clear: both;
-  margin-top: 2%;
-  margin-bottom: 5%;
-  height: 50px;
-  font-size: 20px;
-  font-family: "GOTY0", "GOTY1", "GOTY2", verdana;
-  opacity: 50%;
-  border-radius: 6px;
-  border: transparent;
-  background: #f2f2f2;
-  padding: 10px;
-  color: #213485;
-}
-
 button{
   margin-top: 0%;
   margin-left: 3%;
@@ -175,5 +145,9 @@ label{
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+#error{
+  color: red;
 }
 </style>

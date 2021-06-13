@@ -1,47 +1,71 @@
 <template>
-
+  <div id="fullpage">
+      <NavBar></NavBar>
   <div id="content">
 
-    <h1 id="header1"> Buscar artículo por cliente </h1>
+    <h1 id="header1"> Catálogo de Almacenes </h1>
 
     <div id="card">
 
       <div id="cardheader"></div>
 
-        <div class="inputForm">
-          <label>Cliente</label>
+      <div class="inputForm">
+
+        <div id="error">
+          <ul>
+            <li v-for="error in errors" v-bind:key="error">{{error}}</li>
+          </ul>
         </div>
 
-        <div id="table">
-          <vue-table-dynamic :params="params"
-            @select="onSelect"
-            @selection-change="onSelectionChange"
-            ref="table">
-          </vue-table-dynamic>
-        </div>
-
-        <br>
-
+        <form>
+          <label>Compañia</label>
+          <br>
+          <input v-model="wareCom" placeholder="Compañia">
+          <br>
+          <label>Ubicacion</label>
+          <br>
+          <input v-model="wareUbi" placeholder="Ubicación del almacen">
+        </form>
       </div>
-    </div>
 
+      <div id="buttons">
+        <button @click="checkForm"> Dar de alta </button>
+        <button @click="signDownWare"> Dar de baja </button>
+        <button @click="loadWare"> Actualizar </button>
+      </div>
+
+      <div id="table">
+        <vue-table-dynamic :params="params"
+          @select="onSelect"
+          @selection-change="onSelectionChange"
+          ref="table">
+        </vue-table-dynamic>
+        <br>
+      </div>
+
+    </div>
   </div>
+</div>
 </template>
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic'
+import NavBar from '@/components/NavBar.vue'
 export default {
-  name: 'SearchArticlesperClient',
+  name: 'CatalogWarehouse',
   data() {
     return {
-      searchClient:'',
+      wareCom:'',
+      wareUbi:'',
+      errors:[],
       params: {
         data: [
-          ['Orden','Orden Baan','Cliente', 'Nombre', 'Fecha de orden', 'Fecha de entrega','Fecha definida', 'Status suaje', 'Status grabado', 'Status ING', 'Articulo', 'Unidad', 'Notas'],
-          ['1','135','0303', 'BIMBO', '2021-03-21', '2021-04-21','2021-04-22', true, 'Status grabado', 'Status ING', 'PAPELITO-SUAVE-500', '1000', 'Requiere solicitud adicional de tinta'],
-          ['2','435','0403', 'BARCEL', '2021-06-21', '2021-08-21','2021-08-20', false, 'Status grabado', 'Status ING','CAJITA-400', '3000', ''],
+          ['Compañia', 'Ubicacion'],
+          ['Zara', '1024 norte'],
+          ['Barcel', '244 sur'],
+          ['Totis', '930 este'],
         ],
-        deleteDate:[],
+        deleteData:[],
         header: 'row',
         border: true,
         stripe: true,
@@ -60,7 +84,24 @@ export default {
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
-      this.params.deleteDate=checkedIndexs
+      this.params.deleteData=checkedIndexs
+    },
+    checkForm(){
+      this.errors=[];
+      if(this.wareCom && this.wareUbi){
+        this.signUpWare();
+      }
+      else{
+        alert('Por favor, llene todos los campos para registrar el almacen');
+        if(!this.wareCom)
+        {
+          this.errors.push('Introduce nombre de la Compañia');
+        }
+        if(!this.wareUbi)
+        {
+          this.errors.push('Introudce ubicacion del Almacen');
+        }
+      }
     },
     signUpWare(){
         if(this.wareCom==''||this.wareUbi=='')
@@ -71,6 +112,8 @@ export default {
         {
           this.params.data.push([this.wareCom, this.wareUbi]);
         }
+        this.wareCom='';
+        this.wareUbi='';
     },
     signDownWare(){
         this.wareCom='';
@@ -86,7 +129,7 @@ export default {
         alert("Actualizando informacion...");
     }
   },
-  components: { VueTableDynamic }
+  components: { VueTableDynamic,NavBar }
 }
 </script>
 
@@ -115,6 +158,23 @@ export default {
   background: #f2f2f2;
   padding: 10px;
   color: #213485;
+}
+
+.inputForm textarea{
+  padding: 10px;
+  width: 150%;
+  height: 90px;
+  color: #213485;
+  margin-top: 2%;
+  margin-bottom: 0%;
+  font-family: "GOTY0", "GOTY1", "GOTY2", verdana;
+  opacity: 50%;
+  border-radius: 6px;
+  border: transparent;
+  background: #f2f2f2;
+  width: 100%;
+  font-family: Verdana;
+  font-size: 20px;
 }
 
 button{
@@ -178,4 +238,22 @@ label{
   align-items: center;
   justify-content: center;
 }
+
+#error{
+  color: red;
+}
+
+#fullpage{
+  display: flex;
+}
+
+#content{
+  width: 100%;
+  height: 100%;
+  background-image: url('~@/components/fondito.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+}
+
 </style>

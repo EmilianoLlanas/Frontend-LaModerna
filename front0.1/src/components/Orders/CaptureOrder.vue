@@ -2,24 +2,44 @@
 
   <div id="content">
 
-    <h1 id="header1"> Bloquear Cliente </h1>
+    <h1 id="header1"> Captura de Órdenes </h1>
 
     <div id="card">
 
       <div id="cardheader"></div>
 
       <div class="inputForm">
-
+      <div id="error">
+        <ul>
+          <li v-for="error in errors" v-bind:key="error">{{error}}</li>
+        </ul>
+      </div>
         <form>
           <label>Cliente</label>
           <br>
           <input v-model="aCliente" placeholder="Cliente">
+          <br>
+          <label>No. de orden</label>
+          <br>
+          <input v-model="aNoOrden" placeholder="No de cliente" disabledDates="disabledDates" type="number">
+          <br>
+          <label>Direccion de entrega</label>
+          <br>
+          <input v-model="aDireccion" placeholder="Direccion de entrega">
+          <br>
+          <label>Observaciones</label>
+          <br>
+          <input v-model="aObservaciones" placeholder="Observaciones de la orden"></textarea>
+          <br>
+          <label>Fecha de Captura</label>
+          <br>
+          <datepicker placeholder="Fecha de entrega" v-model="aFecha" :format="customFormatter" :disabledDates="disabledDates"></datepicker>
         </form>
-
       </div>
 
       <div id="buttons">
-        <button @click="blockCli"> Bloquear </button>
+        <button @click="save"> Guardar </button>
+        <button @click="cancel"> Cancelar </button>
       </div>
 
       <div id="table">
@@ -37,26 +57,30 @@
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic'
+import Datepicker from 'vuejs-datepicker'
+import moment from 'moment'
 export default {
-  name: 'CatalogClients',
+  name: 'CaptureOrder',
   data() {
     return {
-    aCompania:'',
     aCliente:'',
-    aNombreA:'',
-    aNombreB:'',
-    aEstatus:'',
+    aNoOrden:'',
+    aFecha:'',
+    aDireccion:'',
+    aObservaciones:'',
+    disabledDates: {
+          to: new Date(Date.now() - 8640000)
+    },
+    errors:[],
       params: {
         data: [
-          ['Compañia','Cliente','Nombre A','Nombre B','Estatus'],
-          [0,1,2,3,4],
-          [0,1,2,3,4],
-          [0,1,2,3,4],
-          [0,1,2,3,4],
-          [0,1,2,3,4],
-          [0,1,2,3,4],
+          ['Articulo','Cantidad','Fecha solicitata'],
+          ['art','100','dd/mm/aa'],
+          ['art','100','dd/mm/aa'],
+          ['art','100','dd/mm/aa'],
+          ['art','100','dd/mm/aa'],
+          ['art','100','dd/mm/aa'],
         ],
-        deleteData:[],
         header: 'row',
         border: true,
         stripe: true,
@@ -75,49 +99,48 @@ export default {
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
-      this.params.deleteData=checkedIndexs
     },
-    signUpClient(){
-        //there will be a method here to establish connection with backend and sign up the articles' id and name, some day....
-        if(this.aCompania=='' ||this.aCliente=='' ||this.aNombreA=='' ||this.aNombreB=='' ||this.aEstatus==''){
-          alert('Por favor, llene todos los campos para registrar un Cliente')
-        }else{
-          this.params.data.push([this.aCompania,this.aCliente,this.aNombreA,this.aNombreB,this.aEstatus]);
-        }
+    save(){
+      //aqui habra una conexion a backend para guardar la orden
+      this.errors=[]
+      if(this.aCliente && this.aNoOrden && this.aFecha && this.aDireccion && this.aObservaciones){
 
-        this.aCompania='';
-        this.aCliente='';
-        this.aNombreA='';
-        this.aNombreB='';
-        this.aEstatus='';
-    },
-    signDownClient(){
-        //there will be a method here to establish connection with backend and sign down the articles' id and name, some day....
-        this.aCompania='';
-        this.aCliente='';
-        this.aNombreA='';
-        this.aNombreB='';
-        this.aEstatus='';
-        for (var i = this.params.deleteData.length-1; i>0 ; i--) {
-          this.params.data.splice(this.params.deleteData[i], 1)
+      }else{
+        if(!this.aCliente){
+          this.errors.push('campo cliente vacio')
         }
+        if(!this.aNoOrden){
+          this.errors.push('campo numero de orden vacio')
+        }
+        if(!this.aFecha){
+          this.errors.push('campo fecha vacio')
+        }
+        if(!this.aDireccion){
+          this.errors.push('campo Direccion vacio')
+        }
+        if(!this.aObservaciones){
+          this.errors.push('campo Observaciones vacio')
+        }
+      }
+      this.aCliente='';
+      this.aNoOrden='';
+      this.aFecha='';
+      this.aDireccion='';
+      this.aObservaciones='';
     },
-    loadClient(){
-        //there will be a method here to establish connection with backend and update the table, some day....
-        this.aCompania='';
-        this.aCliente='';
-        this.aNombreA='';
-        this.aNombreB='';
-        this.aEstatus='';
+    cancel(){
+      //aqui habra una conexion a backend para cancelar la captura
+      this.aCliente='';
+      this.aNoOrden='';
+      this.aFecha='';
+      this.aDireccion='';
+      this.aObservaciones='';
     },
-    generateReport(){
-      //aqui se mandara a llamar la pagina de reportes
-    },
-    blockCli(){
-      alert("Cliente "+this.aCliente+" ha sido bloqueado");
-    }
+    customFormatter(date) {
+     return moment(date).format('YYYY/MM/DD');
+   }
   },
-  components: { VueTableDynamic }
+  components: { VueTableDynamic, Datepicker }
 }
 </script>
 
@@ -160,7 +183,7 @@ export default {
   border-radius: 6px;
   border: transparent;
   background: #f2f2f2;
-  width: 100%; 
+  width: 100%;
   font-family: Verdana;
   font-size: 20px;
 }

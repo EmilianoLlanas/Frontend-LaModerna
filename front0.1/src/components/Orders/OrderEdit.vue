@@ -2,7 +2,7 @@
 
   <div id="content">
 
-    <h1 id="header1"> Bloquear Cliente </h1>
+    <h1 id="header1"> Modificar Órdenes </h1>
 
     <div id="card">
 
@@ -10,53 +10,80 @@
 
       <div class="inputForm">
 
-        <form>
-          <label>Cliente</label>
-          <br>
-          <input v-model="aCliente" placeholder="Cliente">
-        </form>
+        <label>Folio</label>
 
-      </div>
-
-      <div id="buttons">
-        <button @click="blockCli"> Bloquear </button>
-      </div>
-
-      <div id="table">
-        <vue-table-dynamic :params="params"
-          @select="onSelect"
-          @selection-change="onSelectionChange"
-          ref="table">
-        </vue-table-dynamic>
+        <input v-model="aId" placeholder="Folio de orden">
         <br>
-      </div>
 
+        <div id="buttons">
+          <button @click="editOrders">Editar por Folio</button>
+        </div>
+
+        <div id="editForm" >
+          <label>Cliente</label>
+          <input v-model="aClient" placeholder="Cliente que realiza la orden">
+          <br>
+          <label>Nombre</label>
+          <input v-model="aName" placeholder="Concepto de orden">
+          <br>
+          <label>Fecha Orden</label>
+          <input v-model="aDate" placeholder="Fecha de orden">
+          <br>
+          <label>Artículo</label>
+          <input v-model="aArticle" placeholder="Artículo">
+          <br>
+          <label>Cantidad</label>
+          <input v-model="aAmount" placeholder="Cantidad">
+          <br>
+          <label>Precio</label>
+          <input v-model="aPrice" placeholder="Precio">
+        </div>
+
+        <div id="buttons">
+          <button @click="loadOrders">Actualizar</button>
+        </div>
+
+        <div id="table" >
+          <vue-table-dynamic :params="params"
+            @select="onSelect"
+            @selection-change="onSelectionChange"
+            ref="table">
+          </vue-table-dynamic>
+          <br>
+
+          <!--  <OrderDetails :id="params.id" :cliente="params.cliente"></OrderDetails>-->
+          <OrderDetails :id="params.id"></OrderDetails>
+          <br>
+
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import VueTableDynamic from 'vue-table-dynamic'
+import VueTableDynamic from 'vue-table-dynamic';
+import OrderDetails from '@/components/Orders/OrderDetails.vue';
+
+
+
 export default {
-  name: 'CatalogClients',
+  name: 'OrdersInProcess',
+
   data() {
+
     return {
-    aCompania:'',
-    aCliente:'',
-    aNombreA:'',
-    aNombreB:'',
-    aEstatus:'',
+
       params: {
+
         data: [
-          ['Compañia','Cliente','Nombre A','Nombre B','Estatus'],
-          [0,1,2,3,4],
-          [0,1,2,3,4],
-          [0,1,2,3,4],
-          [0,1,2,3,4],
-          [0,1,2,3,4],
-          [0,1,2,3,4],
+          ['ID','Cliente' ,'Nombre','Fecha Orden','Artículo','Cantidad','Precio'],
+          ["1", "BIMBO", "PAPELITO-SUAVE-500 ","2021-03-21","PAPELITO SUAVE","500","$50250.00"],
+          ["2", "BARCEL", "PAPELITO-DURO-800 ","2021-02-1","PAPELITO DURO","800","$63250.00"],
+          ["3", "TIA ROSA", "ALUMINIO-ARRUGADO-100 ","2021-04-2","ALUMINIO ARRUGADO","100","$5050.00"],
+          ["4", "MOLINOS JORGE", "EMPAQUE-AWITADO-1500 ","2020-12-26","EMPAQUE AWITADO","1500","$70950.00"],
         ],
-        deleteData:[],
+        id:[],
         header: 'row',
         border: true,
         stripe: true,
@@ -65,59 +92,33 @@ export default {
         sort: [0, 1,2],
         pagination: true,
         pageSize: 10,
-      }
+      },
+
     }
   },
   methods: {
     onSelect (isChecked, index, data) {
       console.log('onSelect: ', isChecked, index, data)
       console.log('Checked Data:', this.$refs.table.getCheckedRowDatas(true))
+
+
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
-      this.params.deleteData=checkedIndexs
+      this.params.id=checkedIndexs
     },
-    signUpClient(){
+    orderReport(){
         //there will be a method here to establish connection with backend and sign up the articles' id and name, some day....
-        if(this.aCompania=='' ||this.aCliente=='' ||this.aNombreA=='' ||this.aNombreB=='' ||this.aEstatus==''){
-          alert('Por favor, llene todos los campos para registrar un Cliente')
-        }else{
-          this.params.data.push([this.aCompania,this.aCliente,this.aNombreA,this.aNombreB,this.aEstatus]);
-        }
-
-        this.aCompania='';
-        this.aCliente='';
-        this.aNombreA='';
-        this.aNombreB='';
-        this.aEstatus='';
     },
-    signDownClient(){
-        //there will be a method here to establish connection with backend and sign down the articles' id and name, some day....
-        this.aCompania='';
-        this.aCliente='';
-        this.aNombreA='';
-        this.aNombreB='';
-        this.aEstatus='';
-        for (var i = this.params.deleteData.length-1; i>0 ; i--) {
-          this.params.data.splice(this.params.deleteData[i], 1)
-        }
+    loadOrders(){
+      alert('Actualizando tablas con base de datos')
     },
-    loadClient(){
-        //there will be a method here to establish connection with backend and update the table, some day....
-        this.aCompania='';
-        this.aCliente='';
-        this.aNombreA='';
-        this.aNombreB='';
-        this.aEstatus='';
-    },
-    generateReport(){
-      //aqui se mandara a llamar la pagina de reportes
-    },
-    blockCli(){
-      alert("Cliente "+this.aCliente+" ha sido bloqueado");
+    editOrders(){
+      document.getElementById("editForm").style.display = "block";
     }
+
   },
-  components: { VueTableDynamic }
+  components: { VueTableDynamic,OrderDetails }
 }
 </script>
 
@@ -160,7 +161,7 @@ export default {
   border-radius: 6px;
   border: transparent;
   background: #f2f2f2;
-  width: 100%; 
+  width: 100%;
   font-family: Verdana;
   font-size: 20px;
 }

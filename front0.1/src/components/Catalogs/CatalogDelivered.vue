@@ -1,8 +1,9 @@
 <template>
-
+  <div id="fullpage">
+      <NavBar></NavBar>
   <div id="content">
 
-    <h1 id="header1"> Bloquear Cliente </h1>
+    <h1 id="header1"> Catálogo de Entregas </h1>
 
     <div id="card">
 
@@ -10,16 +11,32 @@
 
       <div class="inputForm">
 
+        <div id="error">
+          <ul>
+            <li v-for="error in errors" v-bind:key="error">{{error}}</li>
+          </ul>
+        </div>
+
         <form>
-          <label>Cliente</label>
+          <label>Orden</label>
           <br>
-          <input v-model="aCliente" placeholder="Cliente">
+          <input v-model="delivOrd" placeholder="Número de Orden">
+          <br>
+          <label>Compañia</label>
+          <br>
+          <input v-model="delivCom" placeholder="Compañia">
+          <br>
+          <label>Fecha</label>
+          <br>
+          <datepicker placeholder="Fecha de entrega" v-model="delivDate" :format="customFormatter" :disabledDates="disabledDates"></datepicker>
         </form>
 
       </div>
 
       <div id="buttons">
-        <button @click="blockCli"> Bloquear </button>
+        <button @click="checkForm"> Dar de alta </button>
+        <button @click="signDownDeliver"> Dar de baja </button>
+        <button @click="loadDeliver"> Actualizar </button>
       </div>
 
       <div id="table">
@@ -33,28 +50,32 @@
 
     </div>
   </div>
+</div>
 </template>
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic'
+import Datepicker from 'vuejs-datepicker'
+import moment from 'moment'
+import NavBar from '@/components/NavBar.vue'
+
 export default {
-  name: 'CatalogClients',
+  name: 'CatalogDelivered',
   data() {
     return {
-    aCompania:'',
-    aCliente:'',
-    aNombreA:'',
-    aNombreB:'',
-    aEstatus:'',
+      delivOrd:'',
+      delivCom:'',
+      delivDate:'',
+      disabledDates: {
+      to: new Date(Date.now() - 8640000)
+      },
+      errors:[],
       params: {
         data: [
-          ['Compañia','Cliente','Nombre A','Nombre B','Estatus'],
-          [0,1,2,3,4],
-          [0,1,2,3,4],
-          [0,1,2,3,4],
-          [0,1,2,3,4],
-          [0,1,2,3,4],
-          [0,1,2,3,4],
+          ['Orden', 'Compañia', 'Fecha'],
+          ['1024', 'Zara', '12/02/19'],
+          ['0235', 'Barcel', '01/10/20'],
+          ['0066', 'Totis', '27/08/19'],
         ],
         deleteData:[],
         header: 'row',
@@ -62,7 +83,7 @@ export default {
         stripe: true,
         showCheck: true,
         enableSearch: true,
-        sort: [0, 1,2],
+        sort: [0, 1, 2],
         pagination: true,
         pageSize: 10,
       }
@@ -77,47 +98,60 @@ export default {
       console.log('onSelectionChange: ', checkedDatas, checkedIndexs, checkedNum)
       this.params.deleteData=checkedIndexs
     },
-    signUpClient(){
-        //there will be a method here to establish connection with backend and sign up the articles' id and name, some day....
-        if(this.aCompania=='' ||this.aCliente=='' ||this.aNombreA=='' ||this.aNombreB=='' ||this.aEstatus==''){
-          alert('Por favor, llene todos los campos para registrar un Cliente')
-        }else{
-          this.params.data.push([this.aCompania,this.aCliente,this.aNombreA,this.aNombreB,this.aEstatus]);
+    checkForm(){
+      this.errors=[];
+      if(this.delivOrd && this.delivCom && this.delivDate){
+        this.signUpDeliver();
+      }
+      else{
+        alert('Por favor, llene todos los campos para registrar la entrega')
+        if(!this.delivOrd)
+        {
+          this.errors.push("Introduce numero de Orden");
         }
-
-        this.aCompania='';
-        this.aCliente='';
-        this.aNombreA='';
-        this.aNombreB='';
-        this.aEstatus='';
-    },
-    signDownClient(){
-        //there will be a method here to establish connection with backend and sign down the articles' id and name, some day....
-        this.aCompania='';
-        this.aCliente='';
-        this.aNombreA='';
-        this.aNombreB='';
-        this.aEstatus='';
-        for (var i = this.params.deleteData.length-1; i>0 ; i--) {
-          this.params.data.splice(this.params.deleteData[i], 1)
+        if(!this.delivCom)
+        {
+          this.errors.push("Introduce Compañia");
         }
+        if(!this.delivDate)
+        {
+          this.errors.push("Introduce fecha de Orden");
+        }
+      }
     },
-    loadClient(){
-        //there will be a method here to establish connection with backend and update the table, some day....
-        this.aCompania='';
-        this.aCliente='';
-        this.aNombreA='';
-        this.aNombreB='';
-        this.aEstatus='';
+    signUpDeliver(){
+        if(this.delivOrd==''||this.delivCom==''||this.delivDate=='')
+        {
+          alert('Por favor, llene todos los campos para registrar la entrega')
+        }
+        else
+        {
+          this.params.data.push([this.delivOrd, this.delivCom, this.customFormatter(this.delivDate)]);
+        }
+        this.delivOrd='';
+        this.delivCom='';
+        this.delivDate='';
     },
-    generateReport(){
-      //aqui se mandara a llamar la pagina de reportes
+    signDownDeliver(){
+      this.delivOrd='';
+      this.delivCom='';
+      this.delivDate='';
+      console.log(this.params.deleteData.length)
+      for (var i = this.params.deleteData.length-1; i>0 ; i--) {
+      this.params.data.splice(this.params.deleteData[i], 1)
+      }
     },
-    blockCli(){
-      alert("Cliente "+this.aCliente+" ha sido bloqueado");
-    }
+    loadDeliver(){
+        this.delivOrd='';
+        this.delivCom='';
+        this.delivDate='';
+        alert("Actualizando informacion...");
+    },
+    customFormatter(date) {
+     return moment(date).format('YYYY/MM/DD');
+   }
   },
-  components: { VueTableDynamic }
+  components: { VueTableDynamic,Datepicker,NavBar }
 }
 </script>
 
@@ -160,7 +194,7 @@ export default {
   border-radius: 6px;
   border: transparent;
   background: #f2f2f2;
-  width: 100%; 
+  width: 100%;
   font-family: Verdana;
   font-size: 20px;
 }
@@ -230,4 +264,18 @@ label{
 #error{
   color: red;
 }
+
+#fullpage{
+  display: flex;
+}
+
+#content{
+  width: 100%;
+  height: 100%;
+  background-image: url('~@/components/fondito.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+}
+
 </style>
