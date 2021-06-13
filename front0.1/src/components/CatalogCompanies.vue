@@ -49,13 +49,17 @@
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic'
+import auth from "@/auth";
 export default {
   name: 'CatalogArticles',
   data() {
     return {
       aId:'',
       aName:'',
+      nombreCompania:'',
+      responseObject:null,
       errors:[],
+      tokn:'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6Implc3N5QGdtYWlsLmNvbSIsImV4cCI6MTYyMzUzOTQ2OSwiZW1haWwiOiJqZXNzeUBnbWFpbC5jb20ifQ.7N_CZK7YC6uaiB-GWNRs4ZQFcOz4vz6IqVAeCDloSlM',
       params: {
         data: [
           ['ID', 'Nombre'],
@@ -104,9 +108,23 @@ export default {
           }
         }
     },
-    signUpCompany(){
+    async signUpCompany(){
+        //this.nombreCompania='No se paso';
         //there will be a method here to establish connection with backend and sign up the companies' id and name, some day....
-        this.params.data.push([this.aId, this.aName]);
+        //this.params.data.push([this.aId, this.aName]);
+        
+        try {
+        this.responseObject= ((await auth.createCompany(this.tokn, this.aId, this.aName)).data);
+        //this.nombreCompania=responseObject.company_id;
+        //this.params.data.push([((await auth.createCompany(this.tokn, this.aId, this.aName)).data.company_id), ((await auth.createCompany(this.tokn, this.aId, this.aName)).data.name)]);
+        this.params.data.push([this.responseObject.company_id, this.responseObject.name]);
+        //console.log(this.nombreCompania);
+
+        } catch (error) {
+          this.error=true;
+          console.log(error);
+        }
+
         this.aId='';
         this.aName='';
     },
