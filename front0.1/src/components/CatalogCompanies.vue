@@ -56,19 +56,12 @@ export default {
     return {
       aId:'',
       aName:'',
-      nombreCompania:'',
       responseObject:null,
       errors:[],
       tokn:'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6Implc3N5QGdtYWlsLmNvbSIsImV4cCI6MTYyMzUzOTQ2OSwiZW1haWwiOiJqZXNzeUBnbWFpbC5jb20ifQ.7N_CZK7YC6uaiB-GWNRs4ZQFcOz4vz6IqVAeCDloSlM',
       params: {
         data: [
-          ['ID', 'Nombre'],
-          [1, 'b3ba90'],
-          [2, 'ec0b78'],
-          [3, 'a8c325'],
-          [4, 'a8c325'],
-          [5, 'a8c325']
-
+          ['ID', 'Nombre']
         ],
         deleteData:[],
         header: 'row',
@@ -109,16 +102,10 @@ export default {
         }
     },
     async signUpCompany(){
-        //this.nombreCompania='No se paso';
-        //there will be a method here to establish connection with backend and sign up the companies' id and name, some day....
-        //this.params.data.push([this.aId, this.aName]);
         
         try {
         this.responseObject= ((await auth.createCompany(this.tokn, this.aId, this.aName)).data);
-        //this.nombreCompania=responseObject.company_id;
-        //this.params.data.push([((await auth.createCompany(this.tokn, this.aId, this.aName)).data.company_id), ((await auth.createCompany(this.tokn, this.aId, this.aName)).data.name)]);
         this.params.data.push([this.responseObject.company_id, this.responseObject.name]);
-        //console.log(this.nombreCompania);
 
         } catch (error) {
           this.error=true;
@@ -137,17 +124,27 @@ export default {
           this.params.data.splice(this.params.deleteData[i], 1)
         }
 
-
-
-
     },
-    loadCompanies(){
-        //there will be a method here to establish connection with backend and load the companies' id and name, some day....
+    async loadCompanies(){
+        try{
         this.aId='';
         this.aName='';
-        alert('Actualizando tabla con Base de datos')
+        this.responseObject= ((await auth.listCompanies(this.tokn)).data);
+        
+        for (var i=0; i<this.responseObject.length;i++)
+        {
+          this.params.data.push([this.responseObject[i].company_id, this.responseObject[i].name]);
+        }
+
+        }catch (error) {
+          this.error=true;
+          console.log(error);
+        }
+
     },
+
   },
+
   components: { VueTableDynamic }
 }
 </script>
