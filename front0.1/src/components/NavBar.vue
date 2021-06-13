@@ -31,6 +31,7 @@
                <a @click="navCatalogDeliveryAddresses"> <div class="element">Catálogo de Direcciones de entrega  </div></a>
                <a @click="navCatalogInventory"> <div class="element">Catálogo de Inventario </div></a>
                <a @click="navConsultSalesOrder"> <div class="element"> Consultar órdenes de venta </div></a>
+               <a @click="sharedItems"> <div class="element"> Artículos Compartidos</div></a>
                <a @click="navRoles"> <div class="element"> Asignacion de roles </div></a>
                <a @click="navBackup"> <div class="element"> Generar respaldo </div></a>
              </div>
@@ -40,6 +41,8 @@
                <a @click="navOrdersInProcess"> <div class="element"> Consulta de Órdenes en proceso </div></a>
                <a @click="navProcessedOrders"> <div class="element"> Consulta de Órdenes Procesadas </div></a>
                <a @click="navOrderStatus"> <div class="element"> Consulta de Estatus de Órdenes  </div></a>
+              <a @click="navAllSalesReport"> <div class="element"> Reporte de todas las Órdenes </div></a>
+
              </div>
              <div v-if="this.role === 'CXC'" style="margin: 0%; padding: 0%;">
                <a @click="navAuthorizeOrderCxC"> <div class="element"> Autorización de ordenes CxC </div></a>
@@ -48,6 +51,7 @@
              </div>
              <div v-if="this.role === 'PLN'" style="margin: 0%; padding: 0%;">
                <a @click="navAuthorizeDates"> <div class="element">Autorizacion de fechas de entrega  </div></a>
+               <a @click="navConsultSalesOrder"> <div class="element"> Consultar órdenes de venta </div></a>
                <a @click="navTimeReport"> <div class="element"> Reporte de Tiempo por Departamento </div></a>
              </div>
              <div v-if="this.role === 'ING'" style="margin: 0%; padding: 0%;">
@@ -82,8 +86,8 @@
                <a @click="navAuthorizeVTA"> <div class="element"> Autorizacion de órdenes VTA </div></a>
                <a @click="navTimeReport"> <div class="element"> Reporte de Tiempo por Departamento </div></a>
                <a @click="navReportGen"> <div class="element"> Generación de Reportes </div></a>
-
-
+             </div>
+                 <div v-if="this.role === 'Null'" style="margin: 0%; padding: 0%;">
              </div>
 
 
@@ -108,7 +112,7 @@ export default {
         }
     },
   created: function(){
-      this.role = "ADC"
+      this.role = "Null"
     },
   methods: {
 
@@ -128,7 +132,7 @@ export default {
       this.$router.push({ name:'CaptureOrder' });
     },
       navOrdersInProcess() {
-      this.$router.push({ name:'OrdersInProces' });
+      this.$router.push({ name:'OrdersInProcess' });
     },
       navCatalogAgents() {
       this.$router.push({ name:'CatalogAgents' });
@@ -187,7 +191,7 @@ export default {
     navAuthorizeOrderCST() {
       this.$router.push({ name:'AuthorizeOrderCST' });
     },
-    ordenesTodas() {
+    navAllSalesReport() {
       this.$router.push({ name:'AllSalesReport' });
     },
     sharedItems() {
@@ -241,6 +245,9 @@ export default {
           break;
         case 9:
           this.role = "DIR";
+          break;
+        case 10:
+          this.role = "Null";
           break;
       }
       document.getElementById("myDropdown").style.display = "none";

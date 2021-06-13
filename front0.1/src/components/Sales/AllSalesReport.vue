@@ -1,5 +1,6 @@
 <template>
-
+  <div id="fullpage">
+      <NavBar></NavBar>
   <div id="content">
 
     <h1 id="header1"> Reporte de Ordenes de Venta </h1>
@@ -86,7 +87,7 @@
       </div>
     </div>
   </div>
-
+</div>
 </template>
 
 <script>
@@ -94,7 +95,7 @@ import VueTableDynamic from 'vue-table-dynamic';
 import AllSalesReportDetails from '@/components/Sales/AllSalesReportDetails.vue';
 import Datepicker from 'vuejs-datepicker'
 import moment from 'moment'
-
+import NavBar from '@/components/NavBar.vue';
 
 
 export default {
@@ -168,7 +169,7 @@ export default {
 
   },
 
-  components: { VueTableDynamic,AllSalesReportDetails,Datepicker }
+  components: { VueTableDynamic,AllSalesReportDetails,Datepicker,NavBar }
 }
 </script>
 
@@ -277,4 +278,18 @@ label{
   align-items: center;
   justify-content: center;
 }
+
+#fullpage{
+  display: flex;
+}
+
+#content{
+  width: 100%;
+  height: 100%;
+  background-image: url('~@/components/fondito.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+}
+
 </style>

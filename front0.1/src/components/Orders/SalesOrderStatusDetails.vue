@@ -1,6 +1,6 @@
 <template>
 
-  <div id="content">
+  <div id="cont">
 
     <h1 id="header1"> Detalles </h1>
 
@@ -107,7 +107,7 @@ export default {
   border-radius: 6px;
   border: transparent;
   background: #f2f2f2;
-  width: 100%; 
+  width: 100%;
   font-family: Verdana;
   font-size: 20px;
 }

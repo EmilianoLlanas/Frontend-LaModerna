@@ -1,5 +1,6 @@
 <template>
-
+  <div id="fullpage">
+      <NavBar></NavBar>
   <div id="content">
 
     <h1 id="header1"> Modificar Órdenes </h1>
@@ -59,12 +60,13 @@
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic';
 import OrderDetails from '@/components/Orders/OrderDetails.vue';
-
+import NavBar from '@/components/NavBar.vue';
 
 
 export default {
@@ -118,7 +120,7 @@ export default {
     }
 
   },
-  components: { VueTableDynamic,OrderDetails }
+  components: { VueTableDynamic,OrderDetails,NavBar }
 }
 </script>
 
@@ -230,5 +232,17 @@ label{
 
 #error{
   color: red;
+}
+#fullpage{
+  display: flex;
+}
+
+#content{
+  width: 100%;
+  height: 100%;
+  background-image: url('~@/components/fondito.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
 }
 </style>
