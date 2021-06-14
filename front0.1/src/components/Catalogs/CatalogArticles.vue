@@ -32,6 +32,12 @@
         </form>
       </div>
 
+      <section v-if="loading">
+      <div v-if="loading">Loading...</div>
+      </section>
+
+      <section v-else>
+
       <div id="buttons">
         <button @click="signUpArticle"> Dar de alta </button>
         <button @click="signDownArticle"> Dar de baja </button>
@@ -46,7 +52,7 @@
         </vue-table-dynamic>
         <br>
       </div>
-
+    </section>
     </div>
   </div>
 </div>
@@ -64,17 +70,17 @@ export default {
       aId:'',
       aName:'',
       aDescription:'',
+      aUdVta:'MIL',
+      aAccessKey:'44',
+      aStandarCost:'3.52', 
+      aCompany:'212',
+      responseObject:null,
+      loading:true,
       errors:[],
       dataTable:'',
       params: {
         data: [
           ['ID', 'Nombre','Descripción'],
-          [1, 'b3ba90', 'aab418'],
-          [2, 'ec0b78', 'ba045d'],
-          [3, 'a8c325', 'aab418'],
-          [4, 'a8c325', 'aab418'],
-          [5, 'a8c325', 'aab418'],
-
         ],
         deleteData:[],
         header: 'row',
@@ -118,47 +124,103 @@ export default {
           }
         }
     },
-    signUpArticle(){
-        //there will be a method here to establish connection with backend and sign up the articles' id and name, some day....
+    async signUpArticle(){
+        
         if(this.aId==''||this.aName==''||this.aDescription=='')
         {
           alert('Por favor, llene todos los campos para registrar inventario')
         }
         else
         {
-          this.params.data.push([this.aId, this.aName,this.aDescription]);
+          try {
+            this.responseObject= ((await auth.createItem(this.$store.getters.token, this.aId, this.aDescription, this.aUdVta, this.aAccessKey, this.aStandarCost, this.aCompany)).data);
+            this.params.data.push([this.responseObject.item_id, this.responseObject.company,this.responseObject.description]);
+
+            } catch (error) {
+              this.error=true;
+              console.log(error);
+              this.errors.push(error);
+            }
+          //this.params.data.push([this.aId, this.aName,this.aDescription]);
         }
         this.aId='';
         this.aName='';
         this.aDescription='';
     },
-    signDownArticle(){
-        //there will be a method here to establish connection with backend and sign down the articles' id and name, some day....
-        this.aId='';
-        this.aName='';
-        this.aDescription='';
+    async signDownArticle(){
+        this.errors=[];
+          try{
+          this.responseObject= ((await auth.deleteItem(this.$store.getters.token, this.aId)).data);
+        
 
         for (var i = this.params.deleteData.length-1; i>0 ; i--) {
           this.params.data.splice(this.params.deleteData[i], 1)
         }
+
+        }catch (error) {
+           this.error=true;
+          console.log(error);
+          this.errors.push('No se pudo borrar el artículo: '+ error);
+          }
+
+        this.aId='';
+        this.aName='';
+        this.aDescription='';
     },
     async loadArticles(){
-        //there will be a method here to establish connection with backend and update the table, some day....
+        this.loading=true;
         try {
          console.log(this.$store.getters.token)
-         this.dataTable=((await auth.getItems(this.$store.getters.token)));
-         console.log(this.dataTable)
+         this.responseObject=((await auth.listItems(this.$store.getters.token)).data);
+         //console.log(this.dataTable)
+         this.loading=false;
+         this.params.data=[];
+         this.params.data.push(['ID', 'Nombre','Descripción']);
+        for (var i=0; i<this.responseObject.length;i++)
+        {
+          this.params.data.push([this.responseObject[i].item_id, this.responseObject[i].company, this.responseObject[i].description]);
+          //console.log(this.responseObject[i].item_id);
+        }
        } catch (error) {
         this.error=true;
         console.log(error);
+        this.errors.push(error);
        }
 
         this.aId='';
         this.aName='';
         this.aDescription='';
-        alert('Actualizando tabla con Base de datos')
+        //alert('Actualizando tabla con Base de datos')
     }
   },
+
+  async mounted(){
+        try {
+         console.log(this.$store.getters.token)
+         this.responseObject=((await auth.listItems(this.$store.getters.token)).data);
+         //console.log(this.dataTable)
+         this.loading=false;
+        //console.log('Data found');
+         //this.params.data=['ID', 'Nombre','Descripción'];
+        for (var i=0; i<this.responseObject.length;i++)
+        {
+          //console.log(this.responseObject[i].item_id);
+          this.aId=this.responseObject[i].item_id;
+          this.aName=this.responseObject[i].company;
+          this.aDescription=this.responseObject[i].description;
+          
+          this.params.data.push([this.aId, this.aName, this.aDescription]);
+        }
+       } catch (error) {
+        this.error=true;
+        console.log(error);
+        this.errors.push(error);
+       }
+      this.aId='';
+        this.aName='';
+        this.aDescription='';
+
+    },
   components: { VueTableDynamic,NavBar }
 }
 </script>
