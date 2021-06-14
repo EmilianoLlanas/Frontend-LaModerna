@@ -28,55 +28,61 @@
                <a @click="navCatalogFacturas"> <div class="element">Catálogo de Facturas </div></a>
                <a @click="navCatalogSaldo"> <div class="element">Catálogo de Saldos  </div></a>
                <a @click="navCatalogWarehouse"> <div class="element">Catálogo de Almacenes </div></a>
-               <a @click="navCatalogDeliveryAddresses"> <div class="element">Catálogo de Direcciones de entrega  </div></a>
+               <a @click="navCatalogDeliveryAddresses"> <div class="element">Catálogo de Direcciones de Entrega  </div></a>
                <a @click="navCatalogInventory"> <div class="element">Catálogo de Inventario </div></a>
                <a @click="navConsultSalesOrder"> <div class="element"> Consultar órdenes de venta </div></a>
                <a @click="sharedItems"> <div class="element"> Artículos Compartidos</div></a>
-               <a @click="navRoles"> <div class="element"> Asignacion de roles </div></a>
-               <a @click="navBackup"> <div class="element"> Generar respaldo </div></a>
+               <a @click="navRoles"> <div class="element"> Asignacion de Roles </div></a>
+               <a @click="navBackup"> <div class="element"> Generar Respaldo </div></a>
+
              </div>
              <div v-if="this.role === 'AGE'" style="margin: 0%; padding: 0%;">
                <a @click="navCaptureOrder"> <div class="element"> Captura de Órdenes </div></a>
                <a @click="navEditOrder"> <div class="element"> Editar Órdenes </div></a>
-               <a @click="navOrdersInProcess"> <div class="element"> Consulta de Órdenes en proceso </div></a>
+               <a @click="navOrdersInProcess"> <div class="element"> Consulta de Órdenes en Proceso </div></a>
                <a @click="navProcessedOrders"> <div class="element"> Consulta de Órdenes Procesadas </div></a>
                <a @click="navOrderStatus"> <div class="element"> Consulta de Estatus de Órdenes  </div></a>
-              <a @click="navAllSalesReport"> <div class="element"> Reporte de todas las Órdenes </div></a>
-
+               <a @click="navAllSalesReport"> <div class="element"> Reporte de todas las Órdenes </div></a>
+               <a @click="navTemplates"> <div class="element">Carga de Templates (.csv) </div></a>
              </div>
              <div v-if="this.role === 'CXC'" style="margin: 0%; padding: 0%;">
-               <a @click="navAuthorizeOrderCxC"> <div class="element"> Autorización de ordenes CxC </div></a>
+               <a @click="navAuthorizeOrderCxC"> <div class="element"> Autorización de Órdenes CxC </div></a>
                <a @click="navBlock"> <div class="element"> Bloqueo de Clientes </div></a>
-               <a @click="navConsultSalesOrder"> <div class="element"> Consultar órdenes de venta </div></a>
+               <a @click="navOrderStatus"> <div class="element">Consultar Estatus de Órdenes de Venta</div></a>
              </div>
              <div v-if="this.role === 'PLN'" style="margin: 0%; padding: 0%;">
-               <a @click="navAuthorizeDates"> <div class="element">Autorizacion de fechas de entrega  </div></a>
-               <a @click="navConsultSalesOrder"> <div class="element"> Consultar órdenes de venta </div></a>
+               <a @click="navAuthorizeDates"> <div class="element">Autorizacion de Fechas de Entrega  </div></a>
+               <a @click="navConsultSalesOrder"> <div class="element"> Consultar Órdenes de Venta </div></a>
+               <a @click="navOrderStatus"> <div class="element">Consultar Estatus de Órdenes de Venta</div></a>
                <a @click="navTimeReport"> <div class="element"> Reporte de Tiempo por Departamento </div></a>
              </div>
              <div v-if="this.role === 'ING'" style="margin: 0%; padding: 0%;">
                <a @click="navAuthorizationING"> <div class="element"> Autorización de ING </div></a>
-               <a @click="navConsultSalesOrder"> <div class="element"> Consultar órdenes de venta </div></a>
-               <a @click="navSearchOrdersperClient"> <div class="element"> Búsqueda de artículo por cliente (ING)</div></a>
+               <a @click="navConsultSalesOrder"> <div class="element"> Consultar Órdenes de Venta </div></a>
+               <a @click="navSearchOrdersperClient"> <div class="element"> Búsqueda de Ártículo por Cliente (ING)</div></a>
              </div>
              <div v-if="this.role === 'CST'" style="margin: 0%; padding: 0%;">
-               <a @click="navAuthorizeOrderCST"> <div class="element"> Autorización de ordenes CST </div></a>
+               <a @click="navAuthorizeOrderCST"> <div class="element"> Autorización de Órdenes CST </div></a>
                <a @click="navAllSalesReport"> <div class="element"> Todas las Órdenes </div></a>
                <a @click="navConsultSalesOrder"> <div class="element"> Consultar órdenes de venta </div></a>
              </div>
              <div v-if="this.role === 'VTA'" style="margin: 0%; padding: 0%;">
                <a @click="navAuthorizeVTA"> <div class="element"> Autorizacion de VTA </div></a>
+               <a @click="navAllSalesReport"> <div class="element"> Reporte de todas las Órdenes </div></a>
                <a @click="navAllSalesReport"> <div class="element"> Todas las Órdenes </div></a>
-               <a @click="navConsultSalesOrder"> <div class="element"> Consultar órdenes de venta </div></a>
+               <a @click="navConsultSalesOrder"> <div class="element"> Consultar Órdenes de Venta </div></a>
+               <a @click="navOrderStatus"> <div class="element"> Consulta de Estatus de Órdenes  </div></a>
              </div>
              <div v-if="this.role === 'EMB'" style="margin: 0%; padding: 0%;">
+               <a @click="navAllSalesReport"> <div class="element"> Reporte de todas las Órdenes </div></a>
                <a @click="navAllSalesReport"> <div class="element"> Todas las Órdenes </div></a>
-               <a @click="navConsultSalesOrder"> <div class="element"> Consultar órdenes de venta </div></a>
+               <a @click="navConsultSalesOrder"> <div class="element"> Consultar Órdenes de Venta </div></a>
              </div>
              <div v-if="this.role === 'REA'" style="margin: 0%; padding: 0%;">
                <a @click="sharedItems"> <div class="element"> Artículos Compartidos </div></a>
              </div>
              <div v-if="this.role === 'DIR'" style="margin: 0%; padding: 0%;">
+               <a @click="navAllSalesReport"> <div class="element"> Reporte de todas las Órdenes </div></a>
                <a @click="navAllSalesReport"> <div class="element"> Todas las Órdenes </div></a>
                <a @click="navConsultSalesOrder"> <div class="element"> Consultar órdenes de venta </div></a>
                <a @click="CatalogSharedItems"> <div class="element"> Catálogo de Artículos Compartidos </div></a>
@@ -213,7 +219,9 @@ export default {
     navReportGen(){
       this.$router.push({ name:'ReportGenerator' });
     },
-
+    navTemplates(){
+      this.$router.push({ name:'Templates' });
+    },
     updateRoles(x){
       switch(x){
         case 0:
@@ -268,9 +276,10 @@ export default {
 
 }
 #menu-buttons {
-  max-height: 78%;
+  max-height: 75%;
   overflow: scroll;
   overflow-x: hidden;
+
 }
 
 #sidebar{
@@ -278,9 +287,16 @@ export default {
   height: 100vh;
   width: 22%;
 }
+
+#sidebar .element{
+  height: 45px;
+  font-size: 20px;
+  text-align: center;
+}
+
 #sidebar .element:hover{
   background: rgba(14,44,164,0.30);
-  color: white;
+  color: black;
   font-weight: bold;
 }
 </style>
