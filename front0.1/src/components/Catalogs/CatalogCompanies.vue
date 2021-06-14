@@ -91,6 +91,8 @@ export default {
   methods: {
     onSelect (isChecked, index, data) {
       console.log('onSelect: ', isChecked, index, data)
+      console.log('Id would delete', data[0])
+      //this.aId=data[0]
       console.log('Checked Data:', this.$refs.table.getCheckedRowDatas(true))
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
@@ -129,14 +131,24 @@ export default {
         this.aId='';
         this.aName='';
     },
-    signDownCompany(){
-        //there will be a method here to establish connection with backend and sign down the companies' id and name, some day....
-        this.aId='';
-        this.aName='';
+    async signDownCompany(){
+        this.errors=[];
+          try{
+          this.responseObject= ((await auth.deleteCompany(this.$store.getters.token, this.aId)).data);
+          
+            this.aId='';
+            this.aName='';
 
-        for (var i = this.params.deleteData.length-1; i>0 ; i--) {
-          this.params.data.splice(this.params.deleteData[i], 1)
-        }
+            for (var i = this.params.deleteData.length-1; i>0 ; i--) {
+              this.params.data.splice(this.params.deleteData[i], 1)
+            }
+          
+          }catch (error) {
+           this.error=true;
+          console.log(error);
+          this.errors.push('No se pudo borrar la compañía: '+ error);
+          }
+          
 
     },
     async loadCompanies(){

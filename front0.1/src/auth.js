@@ -47,7 +47,7 @@ export default {
     };
 
 
-    return axios.post(ENDPOINT_PATH + "api/companies", newCompany, {headers: headers});
+    return axios.post(ENDPOINT_PATH + "api/companies", newCompany, headers);
   }, 
 
   listCompanies(tokn)
@@ -89,8 +89,8 @@ export default {
     const headers = {
       'Authorization': tokn
     }
-
-    return axios.delete(ENDPOINT_PATH + "api/companies/"+company_id, headers, company_id); //Revisar en https://stackoverflow.com/questions/51069552/axios-delete-request-with-body-and-headers
+    //console.log('Goes to '+ENDPOINT_PATH + "api/companies/"+company_id)
+    return axios.delete(ENDPOINT_PATH + "api/companies/"+company_id, {headers: headers});//, company_id); //Revisar en https://stackoverflow.com/questions/51069552/axios-delete-request-with-body-and-headers
   },
 
   listItems(tokn)
@@ -121,7 +121,7 @@ export default {
       company:company
     };
 
-    return axios.post(ENDPOINT_PATH + "api/items", newItem, {headers: headers});
+    return axios.post(ENDPOINT_PATH + "api/items", newItem, headers);
 
   },
 
@@ -142,7 +142,7 @@ export default {
       'Authorization': tokn
     }
 
-    return axios.patch(ENDPOINT_PATH + "api/items/"+item_id, {headers:headers});
+    return axios.patch(ENDPOINT_PATH + "api/items/"+item_id, headers);
 
   },
 
@@ -152,7 +152,7 @@ export default {
       'Authorization': tokn
     }
 
-    return axios.delete(ENDPOINT_PATH + "api/items/"+item_id, headers); //Revisar en https://stackoverflow.com/questions/51069552/axios-delete-request-with-body-and-headers
+    return axios.delete(ENDPOINT_PATH + "api/items/"+item_id, {headers: headers}); //Revisar en https://stackoverflow.com/questions/51069552/axios-delete-request-with-body-and-headers
   },
 
   listAgents(tokn)
@@ -205,7 +205,7 @@ export default {
       'Authorization': tokn
     }
 
-    return axios.delete(ENDPOINT_PATH + "api/clients/agents/"+representant, headers); //Revisar en https://stackoverflow.com/questions/51069552/axios-delete-request-with-body-and-headers
+    return axios.delete(ENDPOINT_PATH + "api/clients/agents/"+representant, {headers: headers}); //Revisar en https://stackoverflow.com/questions/51069552/axios-delete-request-with-body-and-headers
   },
 
   deleteBalance(tokn, order_balance)
@@ -214,7 +214,7 @@ export default {
       'Authorization': tokn
     }
 
-    return axios.delete(ENDPOINT_PATH + "api/clients/balance/"+order_balance, headers); //Revisar en https://stackoverflow.com/questions/51069552/axios-delete-request-with-body-and-headers
+    return axios.delete(ENDPOINT_PATH + "api/clients/balance/"+order_balance, {headers: headers}); //Revisar en https://stackoverflow.com/questions/51069552/axios-delete-request-with-body-and-headers
   },
 
   createAgent(tokn, representant, company)
@@ -230,7 +230,7 @@ export default {
       company:company
     };
 
-    return axios.post(ENDPOINT_PATH + "api/clients/agents", newAgent, {headers: headers});
+    return axios.post(ENDPOINT_PATH + "api/clients/agents", newAgent, headers);
 
   },
 
@@ -248,7 +248,7 @@ export default {
       company:company
     };
 
-    return axios.post(ENDPOINT_PATH + "api/clients/balance", newBalance, {headers: headers});
+    return axios.post(ENDPOINT_PATH + "api/clients/balance", newBalance, headers);
   },
 
   updateAgents(tokn, representant)
@@ -259,7 +259,7 @@ export default {
     const newRepresentant ={
       representant:representant
     }
-    return axios.patch(ENDPOINT_PATH + "api/clients/agents/"+representant, newRepresentant, {headers:headers});
+    return axios.patch(ENDPOINT_PATH + "api/clients/agents/"+representant, newRepresentant, headers);
 
   },
 
@@ -272,7 +272,7 @@ export default {
       order_balance:order_balance,
       facture_balance:facture_balance
     }
-    return axios.patch(ENDPOINT_PATH + "api/clients/balance/"+order_balance, newBalance, {headers:headers});
+    return axios.patch(ENDPOINT_PATH + "api/clients/balance/"+order_balance, newBalance, headers);
 
   }
     };
