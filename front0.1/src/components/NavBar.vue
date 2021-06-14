@@ -61,23 +61,23 @@
              </div>
              <div v-if="this.role === 'CST'" style="margin: 0%; padding: 0%;">
                <a @click="navAuthorizeOrderCST"> <div class="element"> Autorización de ordenes CST </div></a>
-               <a @click="ordenesTodas"> <div class="element"> Todas las Órdenes </div></a>
+               <a @click="navAllSalesReport"> <div class="element"> Todas las Órdenes </div></a>
                <a @click="navConsultSalesOrder"> <div class="element"> Consultar órdenes de venta </div></a>
              </div>
              <div v-if="this.role === 'VTA'" style="margin: 0%; padding: 0%;">
                <a @click="navAuthorizeVTA"> <div class="element"> Autorizacion de VTA </div></a>
-               <a @click="ordenesTodas"> <div class="element"> Todas las Órdenes </div></a>
+               <a @click="navAllSalesReport"> <div class="element"> Todas las Órdenes </div></a>
                <a @click="navConsultSalesOrder"> <div class="element"> Consultar órdenes de venta </div></a>
              </div>
              <div v-if="this.role === 'EMB'" style="margin: 0%; padding: 0%;">
-               <a @click="ordenesTodas"> <div class="element"> Todas las Órdenes </div></a>
+               <a @click="navAllSalesReport"> <div class="element"> Todas las Órdenes </div></a>
                <a @click="navConsultSalesOrder"> <div class="element"> Consultar órdenes de venta </div></a>
              </div>
              <div v-if="this.role === 'REA'" style="margin: 0%; padding: 0%;">
                <a @click="sharedItems"> <div class="element"> Artículos Compartidos </div></a>
              </div>
              <div v-if="this.role === 'DIR'" style="margin: 0%; padding: 0%;">
-               <a @click="ordenesTodas"> <div class="element"> Todas las Órdenes </div></a>
+               <a @click="navAllSalesReport"> <div class="element"> Todas las Órdenes </div></a>
                <a @click="navConsultSalesOrder"> <div class="element"> Consultar órdenes de venta </div></a>
                <a @click="CatalogSharedItems"> <div class="element"> Catálogo de Artículos Compartidos </div></a>
                <a @click="navAuthorizeOrderCxC"> <div class="element"> Autorización de órdenes CxC</div></a>
@@ -201,7 +201,7 @@ export default {
       this.$router.push({ name:'CatalogSharedArticles' });
     },
     navSearchOrdersperClient(){
-        this.$router.push({ name:'SearchArticlesING' });
+        this.$router.push({ name:'SearchArticlesperClient' });
     },
     navEditOrder(){
         this.$router.push({ name:'OrderEdit' });
