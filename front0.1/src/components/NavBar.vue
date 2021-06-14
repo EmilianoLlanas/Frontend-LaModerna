@@ -67,7 +67,7 @@
              </div>
              <div v-if="this.role === 'EMB'" style="margin: 0%; padding: 0%;">
                <a @click="ordenesTodas"> <div class="element"> Todas las Órdenes </div></a>
-               <a @click="navConsultSalesOrder"> <div class="element"> Consultar órdenes de venta </div></a>
+               <a @click="navConsultSalesOrdupdateRoleser"> <div class="element"> Consultar órdenes de venta </div></a>
              </div>
              <div v-if="this.role === 'REA'" style="margin: 0%; padding: 0%;">
                <a @click="sharedItems"> <div class="element"> Artículos Compartidos </div></a>
@@ -209,7 +209,6 @@ export default {
     navReportGen(){
       this.$router.push({ name:'ReportGenerator' });
     },
-
     updateRoles(x){
       switch(x){
         case 0:
