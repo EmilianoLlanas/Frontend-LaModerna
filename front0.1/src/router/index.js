@@ -37,7 +37,7 @@ import Backup from '@/components/Backup'
 import SearchArticlesperClient from '@/components/SearchArticlesperClient'
 import TimeReport from '@/components/TimeReport'
 import ReportGenerator from '@/components/ReportGenerator'
-
+import Templates from '@/components/Templates'
 Vue.use(Router)
 
 export default new Router({
@@ -45,7 +45,7 @@ export default new Router({
     {
       path: "/",
       redirect: {
-        name: "LogIn"
+        name: "LogInPrincipal"
       }
     },
     {
@@ -236,6 +236,11 @@ export default new Router({
       path: '/ReportGenerator',
       name: 'ReportGenerator',
       component: ReportGenerator
+    },
+    {
+      path: '/Templates',
+      name: 'Templates',
+      component: Templates
     }
   ]
 })
