@@ -1,5 +1,6 @@
 <template>
-
+  <div id="fullpage">
+      <NavBar></NavBar>
   <div id="content">
 
     <h1 id="header1"> Catálogo de Saldos </h1>
@@ -57,10 +58,12 @@
 
     </div>
   </div>
+</div>
 </template>
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic'
+import NavBar from '@/components/NavBar.vue'
 export default {
   name: 'CatalogSaldo',
   data() {
@@ -163,7 +166,7 @@ export default {
       alert("Actualizando informacion...");
     }
   },
-  components: { VueTableDynamic }
+  components: { VueTableDynamic,NavBar }
 }
 </script>
 
@@ -206,7 +209,7 @@ export default {
   border-radius: 6px;
   border: transparent;
   background: #f2f2f2;
-  width: 100%; 
+  width: 100%;
   font-family: Verdana;
   font-size: 20px;
 }
@@ -276,4 +279,18 @@ label{
 #error{
   color: red;
 }
+
+#fullpage{
+  display: flex;
+}
+
+#content{
+  width: 100%;
+  height: 100%;
+  background-image: url('~@/components/fondito.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+}
+
 </style>

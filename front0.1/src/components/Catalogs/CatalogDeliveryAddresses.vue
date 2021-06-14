@@ -1,7 +1,8 @@
 <template>
-
+  <div id="fullpage">
+      <NavBar></NavBar>
   <div id="content">
-    
+
     <h1 id="header1"> Catálogo de Direcciones de Entrega </h1>
 
     <div id="card">
@@ -19,7 +20,7 @@
         <form>
           <label>Compañía</label>
           <br>
-          <input v-model="addressCom" placeholder="Compañía"> 
+          <input v-model="addressCom" placeholder="Compañía">
           <br>
           <label>Cliente</label>
           <br>
@@ -51,7 +52,7 @@
         </form>
 
       </div>
-      
+
       <div id="buttons">
         <button @click="checkForm"> Dar de alta </button>
         <button @click="signDownAddress"> Dar de baja </button>
@@ -67,12 +68,14 @@
         <br>
       </div>
 
-    </div> 
+    </div>
   </div>
+</div>
 </template>
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic'
+import NavBar from '@/components/NavBar.vue'
 export default {
   name: 'CatalogDeliveryAddresses',
   data() {
@@ -125,38 +128,38 @@ export default {
         }
         else{
           alert("Por favor, llene todos los campos correctamente para agregar un registro");
-           if(!this.addressCom) 
+           if(!this.addressCom)
           {
             this.errors.push('Introduce compañía');
           }
-          if(!this.addressClient) 
+          if(!this.addressClient)
           {
             this.errors.push('Introduce un cliente');
           }
-          if(!this.addressDelivery) 
+          if(!this.addressDelivery)
           {
             this.errors.push('Introduce una dirección');
           }
-          if(!this.addressName) 
+          if(!this.addressName)
           {
             this.errors.push('Introduce un nombre');
-          }        
-          if(!this.addressPostCode) 
+          }
+          if(!this.addressPostCode)
           {
             this.errors.push('Introduce un código postal');
-          }   
-          if(!this.addressRouteCode) 
+          }
+          if(!this.addressRouteCode)
           {
             this.errors.push('Introduce un código de ruta');
-          } 
-          if(!this.addressCountry) 
+          }
+          if(!this.addressCountry)
           {
             this.errors.push('Introduce un país para la dirección');
-          } 
-          if(!this.addressRFC) 
+          }
+          if(!this.addressRFC)
           {
             this.errors.push('Introduce un RFC');
-          } 
+          }
         }
     },
 
@@ -190,18 +193,18 @@ export default {
           this.addressRouteCode='';
           this.addressCountry='';
           this.addressRFC='';
-          
+
           console.log(this.params.deleteData.length)
           for (var i = this.params.deleteData.length-1; i>0 ; i--) {
           this.params.data.splice(this.params.deleteData[i], 1)
-          }        
+          }
     },
     loadAddress(){
         //there will be a method here to establish connection with backend and update the table, some day....
         alert('Cargando catálogo, espere un momento por favor')
     }
   },
-  components: { VueTableDynamic }
+  components: { VueTableDynamic,NavBar }
 }
 </script>
 
@@ -244,7 +247,7 @@ export default {
   border-radius: 6px;
   border: transparent;
   background: #f2f2f2;
-  width: 100%; 
+  width: 100%;
   font-family: Verdana;
   font-size: 20px;
 }
@@ -314,5 +317,18 @@ label{
 #error{
   color: red;
 }
-</style>
 
+#fullpage{
+  display: flex;
+}
+
+#content{
+  width: 100%;
+  height: 100%;
+  background-image: url('~@/components/fondito.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+}
+
+</style>

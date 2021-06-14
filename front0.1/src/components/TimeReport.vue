@@ -1,5 +1,6 @@
 <template>
-
+  <div id="fullpage">
+      <NavBar></NavBar>
   <div id="content">
 
     <h1 id="header1"> Reporte de Tiempo por Departamento </h1>
@@ -22,10 +23,12 @@
     </div>
 
   </div>
+</div>
 </template>
 
 <script>
-import VueTableDynamic from 'vue-table-dynamic'
+import VueTableDynamic from 'vue-table-dynamic';
+import NavBar from '@/components/NavBar.vue';
 export default {
   name: 'SearchArticlesperClient',
   data() {
@@ -84,7 +87,7 @@ export default {
         alert("Actualizando informacion...");
     }
   },
-  components: { VueTableDynamic }
+  components: { VueTableDynamic,NavBar }
 }
 </script>
 
@@ -175,5 +178,18 @@ label{
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+#fullpage{
+  display: flex;
+}
+
+#content{
+  width: 100%;
+  height: 100%;
+  background-image: url('~@/components/fondito.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
 }
 </style>

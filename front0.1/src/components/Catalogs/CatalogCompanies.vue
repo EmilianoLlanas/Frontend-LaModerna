@@ -1,5 +1,6 @@
 <template>
-
+  <div id="fullpage">
+      <NavBar></NavBar>
   <div id="content">
 
     <h1 id="header1"> Catálogo de Compañías </h1>
@@ -9,7 +10,7 @@
       <div id="cardheader"></div>
 
       <div class="inputForm">
-        
+
         <div id="error">
           <ul>
             <li v-for="error in errors" v-bind:key="error">{{error}}</li>
@@ -28,7 +29,7 @@
 
       </div>
 
-      <div id="buttons"> 
+      <div id="buttons">
       <button @click="checkForm"> Dar de alta </button>
       <button @click="signDownCompany"> Dar de baja </button>
       <button @click="loadCompanies"> Actualizar </button>
@@ -41,13 +42,15 @@
           ref="table">
         </vue-table-dynamic>
         <br>
-      </div> 
+      </div>
 
-    </div>  
+    </div>
   </div>
+</div>
 </template>
 
 <script>
+import NavBar from '@/components/NavBar.vue';
 import VueTableDynamic from 'vue-table-dynamic'
 export default {
   name: 'CatalogArticles',
@@ -130,7 +133,7 @@ export default {
         alert('Actualizando tabla con Base de datos')
     },
   },
-  components: { VueTableDynamic }
+  components: { VueTableDynamic,NavBar }
 }
 </script>
 
@@ -173,7 +176,7 @@ export default {
   border-radius: 6px;
   border: transparent;
   background: #f2f2f2;
-  width: 100%; 
+  width: 100%;
   font-family: Verdana;
   font-size: 20px;
 }
@@ -242,5 +245,17 @@ label{
 
 #error{
   color: red;
+}
+#fullpage{
+  display: flex;
+}
+
+#content{
+  width: 100%;
+  height: 100%;
+  background-image: url('~@/components/fondito.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
 }
 </style>

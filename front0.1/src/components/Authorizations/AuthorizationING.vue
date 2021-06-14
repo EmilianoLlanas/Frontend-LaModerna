@@ -1,5 +1,6 @@
 <template>
-
+  <div id="fullpage">
+      <NavBar></NavBar>
   <div id="content">
 
     <h1 id="header1"> Autorización de Ingeniería </h1>
@@ -23,7 +24,7 @@
           <br>
         </form>
         <br>
-                
+
       </div>
 
       <div id="tables">
@@ -126,7 +127,7 @@
           </tbody>
         </table>
       </div>
-                  
+
       <div id="notes" hidden>
         <label style="color: #3B0EA4; font-size: 20px; font-family: Verdana;"> Observaciones </label>
         <div class="inputForm">
@@ -139,7 +140,7 @@
         <select name="rate" >
           <option value="die">Suaje</option>
           <option value="engraving">Grabado</option>
-        </select> 
+        </select>
         </div>
 
         <div class="inputForm">
@@ -155,19 +156,20 @@
     </div>
 
 
-  </div>   
+  </div>
+</div>
 </template>
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic';
-
+import NavBar from '@/components/NavBar.vue';
 export default {
   name: 'AuthorizationING',
   data() {
     return {
       rows: [
-      {isSelected: false, order:'1', orderBaan:'135', client:'0303', die:true, engraving:false,  name:'BIMBO', product:'PAPELITO-SUAVE-500',dateOrdered:'2021-03-21', dateRequired:'2021-04-21', datePlaned:'2021-04-22', stock:'4056', units:'1000', authorization:false, notes:'' },          
-      {isSelected: false, order:'2', orderBaan:'435', client:'0403', die:false, engraving:true,  name:'BARCEL', product:'CAJITA-400',dateOrdered:'2021-06-21', dateRequired:'2021-08-21', datePlaned:'2021-08-20', stock:'2050', units:'3000', authorization:false, notes:'Respetar fecha de entrega' }          
+      {isSelected: false, order:'1', orderBaan:'135', client:'0303', die:true, engraving:false,  name:'BIMBO', product:'PAPELITO-SUAVE-500',dateOrdered:'2021-03-21', dateRequired:'2021-04-21', datePlaned:'2021-04-22', stock:'4056', units:'1000', authorization:false, notes:'' },
+      {isSelected: false, order:'2', orderBaan:'435', client:'0403', die:false, engraving:true,  name:'BARCEL', product:'CAJITA-400',dateOrdered:'2021-06-21', dateRequired:'2021-08-21', datePlaned:'2021-08-20', stock:'2050', units:'3000', authorization:false, notes:'Respetar fecha de entrega' }
     ],
     filter:'',
     errors:[],
@@ -202,7 +204,7 @@ export default {
       this.notes=notesIndex;
     }
   },
-  components: { VueTableDynamic },
+  components: { VueTableDynamic,NavBar },
   computed: {
     filteredRows(){
     return this.rows.filter(row => {
@@ -356,5 +358,16 @@ label{
   margin-right: 5%;
   margin-left: 5%;
 }
+#fullpage{
+  display: flex;
+}
 
+#content{
+  width: 100%;
+  height: 100%;
+  background-image: url('~@/components/fondito.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
+}
 </style>

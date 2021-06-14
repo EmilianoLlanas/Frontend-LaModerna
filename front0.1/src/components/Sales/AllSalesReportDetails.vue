@@ -1,6 +1,6 @@
 <template>
 
-  <div id="content">
+  <div id="cont">
 
     <h1 id="header1"> Reporte de Órdenes </h1>
 

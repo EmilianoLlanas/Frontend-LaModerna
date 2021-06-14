@@ -1,5 +1,6 @@
 <template>
-
+  <div id="fullpage">
+      <NavBar></NavBar>
   <div id="content">
 
     <h1 id="header1"> Artículos Compartidos </h1>
@@ -57,11 +58,13 @@
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic'
 import { required,email } from 'vuelidate/lib/validators'
+import NavBar from '@/components/NavBar.vue';
 export default {
   name: 'SharedArticles',
   data(){
@@ -188,7 +191,7 @@ export default {
 
     }
   },
-  components: { VueTableDynamic }
+  components: { VueTableDynamic,NavBar }
 }
 </script>
 
@@ -320,5 +323,18 @@ label{
 
 #error{
   color: red;
+}
+
+#fullpage{
+  display: flex;
+}
+
+#content{
+  width: 100%;
+  height: 100%;
+  background-image: url('~@/components/fondito.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
 }
 </style>

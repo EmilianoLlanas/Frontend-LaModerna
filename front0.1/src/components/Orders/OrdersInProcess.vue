@@ -1,5 +1,6 @@
 <template>
-
+  <div id="fullpage">
+      <NavBar></NavBar>
   <div id="content">
 
     <h1 id="header1"> Órdenes de Venta en Proceso </h1>
@@ -27,12 +28,13 @@
     </div>
 
   </div>
+</div>
 </template>
 
 <script>
 import VueTableDynamic from 'vue-table-dynamic';
 import OrderDetails from '@/components/Orders/OrderDetails.vue';
-
+import NavBar from '@/components/NavBar.vue';
 
 
 export default {
@@ -83,7 +85,7 @@ export default {
     },
 
   },
-  components: { VueTableDynamic,OrderDetails }
+  components: { VueTableDynamic,OrderDetails,NavBar }
 }
 </script>
 
@@ -148,5 +150,17 @@ label{
   display: flex;
   align-items: center;
   justify-content: center;
+}
+#fullpage{
+  display: flex;
+}
+
+#content{
+  width: 100%;
+  height: 100%;
+  background-image: url('~@/components/fondito.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: 100% 100%;
 }
 </style>
