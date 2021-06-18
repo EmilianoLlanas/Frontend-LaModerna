@@ -29,12 +29,18 @@
 
       </div>
 
+      
       <div id="buttons">
       <button @click="checkForm"> Dar de alta </button>
       <button @click="signDownCompany"> Dar de baja </button>
       <button @click="loadCompanies"> Actualizar </button>
       </div>
 
+      <section v-if="loading">
+      <div v-if="loading">Loading...</div>
+      </section>
+
+      <section v-else>
       <div id="table">
         <vue-table-dynamic :params="params"
           @select="onSelect"
@@ -43,7 +49,7 @@
         </vue-table-dynamic>
         <br>
       </div>
-
+      </section>
     </div>
   </div>
 </div>
@@ -52,22 +58,23 @@
 <script>
 import NavBar from '@/components/NavBar.vue';
 import VueTableDynamic from 'vue-table-dynamic'
+import 'es6-promise/auto'
+import auth from "@/auth"
+
 export default {
   name: 'CatalogArticles',
   data() {
     return {
       aId:'',
       aName:'',
+      responseObject:null,
+      loading:true,
+      //tokn:'Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxLCJ1c2VybmFtZSI6Implc3N5QGdtYWlsLmNvbSIsImV4cCI6MTYyMzYxNzYwNiwiZW1haWwiOiJqZXNzeUBnbWFpbC5jb20ifQ.g9KDKqYqD911FzGz0D1yRE_3qrA_L6eLZuOSalM9VmA',
       errors:[],
+      dataTable:'',
       params: {
         data: [
-          ['ID', 'Nombre'],
-          [1, 'b3ba90'],
-          [2, 'ec0b78'],
-          [3, 'a8c325'],
-          [4, 'a8c325'],
-          [5, 'a8c325']
-
+          ['ID', 'Nombre']
         ],
         deleteData:[],
         header: 'row',
@@ -84,6 +91,8 @@ export default {
   methods: {
     onSelect (isChecked, index, data) {
       console.log('onSelect: ', isChecked, index, data)
+      console.log('Id would delete', data[0])
+      //this.aId=data[0]
       console.log('Checked Data:', this.$refs.table.getCheckedRowDatas(true))
     },
     onSelectionChange (checkedDatas, checkedIndexs, checkedNum) {
@@ -107,32 +116,88 @@ export default {
           }
         }
     },
-    signUpCompany(){
-        //there will be a method here to establish connection with backend and sign up the companies' id and name, some day....
-        this.params.data.push([this.aId, this.aName]);
-        this.aId='';
-        this.aName='';
-    },
-    signDownCompany(){
-        //there will be a method here to establish connection with backend and sign down the companies' id and name, some day....
-        this.aId='';
-        this.aName='';
+    async signUpCompany(){
+        
+        try {
+        this.responseObject= ((await auth.createCompany(this.$store.getters.token, this.aId, this.aName)).data);
+        this.params.data.push([this.responseObject.company_id, this.responseObject.name]);
 
-        for (var i = this.params.deleteData.length-1; i>0 ; i--) {
-          this.params.data.splice(this.params.deleteData[i], 1)
+        } catch (error) {
+          this.error=true;
+          console.log(error);
+          this.errors.push(error);
         }
 
-
-
-
-    },
-    loadCompanies(){
-        //there will be a method here to establish connection with backend and load the companies' id and name, some day....
         this.aId='';
         this.aName='';
-        alert('Actualizando tabla con Base de datos')
     },
+    async signDownCompany(){
+        this.errors=[];
+          try{
+          this.responseObject= ((await auth.deleteCompany(this.$store.getters.token, this.aId)).data);
+          
+            this.aId='';
+            this.aName='';
+
+            for (var i = this.params.deleteData.length-1; i>0 ; i--) {
+              this.params.data.splice(this.params.deleteData[i], 1)
+            }
+          
+          }catch (error) {
+           this.error=true;
+          console.log(error);
+          this.errors.push('No se pudo borrar la compañía: '+ error);
+          }
+          
+
+    },
+    async loadCompanies(){
+        this.loading=true;
+        try {
+          console.log(this.$store.getters.token)
+          //this.dataTable=((await auth.listCompanies(this.$store.getters.token)));
+          //console.log(this.dataTable);
+          this.loading=false;
+          this.aId='';
+          this.aName='';
+          this.responseObject= ((await auth.listCompanies(this.$store.getters.token)).data);
+          //console.log(this.responseObject[0].company_id);
+
+          this.params.data=['ID', 'Nombre'];
+        for (var i=0; i<this.responseObject.length;i++)
+        {
+          this.params.data.push([this.responseObject[i].company_id, this.responseObject[i].name]);
+          //console.log(this.responseObject[i].company_id);
+        }
+
+         } catch (error) {
+           this.error=true;
+          console.log(error);
+          this.errors.push(error);
+          }
+    },
+
   },
+
+  async mounted(){
+        try{
+        this.aId='';
+        this.aName='';
+        this.responseObject= ((await auth.listCompanies(this.$store.getters.token)).data);
+        //console.log('Data found');
+        for (var i=0; i<this.responseObject.length;i++)
+        {
+          this.params.data.push([this.responseObject[i].company_id, this.responseObject[i].name]);
+        }
+        this.loading=false;
+
+        }catch (error) {
+          this.error=true;
+          console.log(error);
+          this.errors.push(error);
+        }
+
+    },
   components: { VueTableDynamic,NavBar }
 }
 </script>

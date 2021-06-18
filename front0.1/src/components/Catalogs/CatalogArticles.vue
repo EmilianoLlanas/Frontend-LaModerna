@@ -55,6 +55,8 @@
 <script>
 import VueTableDynamic from 'vue-table-dynamic';
 import NavBar from '@/components/NavBar.vue';
+import 'es6-promise/auto'
+import auth from "@/auth"
 export default {
   name: 'CatalogArticles',
   data() {
@@ -63,6 +65,7 @@ export default {
       aName:'',
       aDescription:'',
       errors:[],
+      dataTable:'',
       params: {
         data: [
           ['ID', 'Nombre','Descripción'],
@@ -139,8 +142,17 @@ export default {
           this.params.data.splice(this.params.deleteData[i], 1)
         }
     },
-    loadArticles(){
+    async loadArticles(){
         //there will be a method here to establish connection with backend and update the table, some day....
+        try {
+         console.log(this.$store.getters.token)
+         this.dataTable=((await auth.getItems(this.$store.getters.token)));
+         console.log(this.dataTable)
+       } catch (error) {
+        this.error=true;
+        console.log(error);
+       }
+
         this.aId='';
         this.aName='';
         this.aDescription='';
